@@ -1,0 +1,33 @@
+{
+  "auctions" : [
+    {
+      "id": "1",
+      "title": "Sunda Island Tiger",
+      "description": "Big cat",
+      "images": [
+        "https://files.worldwildlife.org/wwfcmsprod/images/30_Hills_Sumatran_tiger_resting_47149/story_full_width/63868cijym_3TigerPhoto.jpg",
+        "https://files.worldwildlife.org/wwfcmsprod/images/Sumatran_Tiger_New_Hero_Image/hero_small/47na1tq1ai_Sumatran_Tiger_Hero.jpg",
+        "https://db637ll7r1kva.cloudfront.net/app/uploads/2022/02/10165750/iStock-1323863855-770x514.jpg"
+      ],
+      "startDate": "javascript datetime",
+      "endDate": "javascript datetime",
+      "startingPrice": 100,
+      "reservePrice": 300,
+      "bid_history": [
+        {
+          "userId": "1",
+          "time": "javascript datetime",
+          "amount": 200
+        }
+      ]
+    }
+  ],
+
+  "users" : [
+    {
+      "id": 1,
+      "username": "Tiger King",
+      "password": "king123"
+    }
+  ]
+}
