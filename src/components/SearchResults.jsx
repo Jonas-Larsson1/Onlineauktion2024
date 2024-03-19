@@ -46,6 +46,7 @@ const SearchResults = () => {
         (<ul>
                 {filteredData.map(auction => (
                     <li key={auction.id}>
+                        {/* <img src={auction.images[0]} /> */}
                         <h3>{auction.title}</h3>
                         <p>{auction.description}</p>
                     </li>

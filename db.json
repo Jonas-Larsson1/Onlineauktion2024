@@ -20,7 +20,102 @@
           "amount": 200
         }
       ]
-    }
+    }, 
+    {
+      "id": "2",
+      "title": "Arctic fox",
+      "description": "The arctic fox is an incredibly hardy animal that can survive frigid Arctic temperatures as low as –58°F in the treeless lands where it makes its home.",
+      "images": [
+        "https://cdn.hswstatic.com/gif/arctic-fox-1.jpg"
+      ],
+      "startDate": "javascript datetime",
+      "endDate": "javascript datetime",
+      "startingPrice": 100,
+      "reservePrice": 300,
+      "bid_history": [
+        {
+          "userId": "1",
+          "time": "javascript datetime",
+          "amount": 200
+        }
+      ]
+    }, 
+    {
+      "id": "3",
+      "title": "Beaver",
+      "description": "Beavers are powerful swimmers that can swim underwater for up to 15 minutes.",
+      "images": [
+        "https://www.nhm.ac.uk/content/dam/nhmwww/discover/record-numbers-of-beavers-introduced-to-the-uk/beaver-crossing-two-column.jpg.thumb.768.768.jpg"
+      ],
+      "startDate": "javascript datetime",
+      "endDate": "javascript datetime",
+      "startingPrice": 100,
+      "reservePrice": 300,
+      "bid_history": [
+        {
+          "userId": "1",
+          "time": "javascript datetime",
+          "amount": 200
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Cheetah",
+      "description": "Fastest mammal on land, the cheetah can reach speeds of 60 or perhaps even 70 miles (97 or 113 kilometers) an hour over short distances.",
+      "images": [
+        "https://cdn.britannica.com/98/152298-050-8E45510A/Cheetah.jpg"
+      ],
+      "startDate": "javascript datetime",
+      "endDate": "javascript datetime",
+      "startingPrice": 100,
+      "reservePrice": 300,
+      "bid_history": [
+        {
+          "userId": "1",
+          "time": "javascript datetime",
+          "amount": 200
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "title": "Chipmunk",
+      "description": "Chipmunks are part of the squirrel family, and while they look similar to their bushy-tailed cousins, chipmunks are actually smaller, with alternating light and dark stripes along their cheeks and backs.",
+      "images": [
+        "https://www.scenichudson.org/wp-content/uploads/2022/08/Chipmunk7_Dana-Montague_DSC_3905.jpg"
+      ],
+      "startDate": "javascript datetime",
+      "endDate": "javascript datetime",
+      "startingPrice": 100,
+      "reservePrice": 300,
+      "bid_history": [
+        {
+          "userId": "1",
+          "time": "javascript datetime",
+          "amount": 200
+        }
+      ]
+    },
+    {
+    "id": "6",
+    "title": "Eastern Cottontail Rabbit",
+    "description": "Eastern cottontails stay mostly hidden during the day but come out at night to eat. They snack on grass and love garden greens like peas and lettuce.",
+    "images": [
+      "https://nhpbs.org/wild/images/easterncottontailusfwlewisGorman.jpg"
+    ],
+    "startDate": "javascript datetime",
+    "endDate": "javascript datetime",
+    "startingPrice": 100,
+    "reservePrice": 300,
+    "bid_history": [
+      {
+        "userId": "1",
+        "time": "javascript datetime",
+        "amount": 200
+      }
+    ]}
+   
   ],
 
   "users" : [
