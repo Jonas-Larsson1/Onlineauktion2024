@@ -12,7 +12,7 @@ export default function Router() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/SecondPage" element={<SecondPage />} />
-        <Route path="/AuctionPage" element={<AuctionPage />} />
+        <Route path="/AuctionPage/:id" element={<AuctionPage />} />
       </Routes>
     </BrowserRouter>
   </>

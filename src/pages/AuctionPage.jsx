@@ -1,26 +1,14 @@
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 
 export default function AuctionPage() {
+  let { id } = useParams()
   const [auction, setAuction] = useState(null)
-
-  // useEffect(() => {
-  //   fetch('api/auctions')
-  //   .then((res) => res.json())
-  //   .then(result => setAuction(result))
-
-  //   //   if (!res.ok) {
-  //   //     throw Error("Could not fetch data")
-  //   //   } else {}
-  //   // })
-    
-  // }, [])
-  
 
   useEffect(() => {
     const getData = async () => {
-      const response = await fetch('api/auctions/1')
+      const response = await fetch(`/api/auctions/${id}`)
       const result = await response.json()
-
       setAuction(result)
     }
 
@@ -30,7 +18,11 @@ export default function AuctionPage() {
   return <>
     <h1>Auction page yo</h1>
     {auction ? 
-      <p>{auction.title}</p>
+      // <imageGallery />
+      <div>
+        <p>{auction.title}</p>
+        <p>{auction.description}</p>
+      </div>
     : 
       <p>404: Auction not found</p>
     }
