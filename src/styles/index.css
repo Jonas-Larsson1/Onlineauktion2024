@@ -1,0 +1,9 @@
+@import './listPage.css';
+
+* {
+    font-family: "Palanquin Dark", sans-serif;
+  }
+  
+  body {
+    background-color: #41B3A3;
+  }

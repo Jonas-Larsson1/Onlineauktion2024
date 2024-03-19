@@ -13,13 +13,36 @@
       "endDate": "javascript datetime",
       "startingPrice": 100,
       "reservePrice": 300,
+      "currentPrice": 200,
       "bid_history": [
         {
           "userId": "1",
           "time": "javascript datetime",
           "amount": 200
         }
-      ]
+      ],
+      "createdBy": "MikeT"
+    },
+    {
+      "id": "2",
+      "title": "Sea Apple",
+      "description": "Big blue thing that doesn't look like an apple....",
+      "images": [
+        "https://fragbox.ca/wp-content/uploads/2021/12/sea-apple1.jpg"
+      ],
+      "startDate": "javascript datetime",
+      "endDate": "javascript datetime",
+      "startingPrice": 20000,
+      "reservePrice": 39000,
+      "currentPrice": 36700,
+      "bid_history": [
+        {
+          "userId": "1",
+          "time": "javascript datetime",
+          "amount": 36700
+        }
+      ],
+      "createdBy": "SeaLover47"
     }
   ],
 
