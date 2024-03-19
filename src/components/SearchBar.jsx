@@ -14,7 +14,7 @@ const SearchBar = () => {
         event.preventDefault();
         setSearchQuery(searchValue) // saves input to searchQuery
         console.log(searchValue);
-        setSearchValue('')
+        setSearchValue('') // cleans up input
     }
 
 

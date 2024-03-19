@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Router from "./components/Router.jsx";
 import SearchBar, {SearchContext} from "./components/SearchBar.jsx";
+import SearchResults from './components/SearchResults.jsx';
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -10,6 +11,7 @@ export default function App() {
       <div className="d-flex flex-column justify-content-center ">
         {/* <Router /> */}
         <SearchBar />
+        <SearchResults/>
       </div>
     </SearchContext.Provider>
   </>)
