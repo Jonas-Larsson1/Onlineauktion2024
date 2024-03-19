@@ -17,20 +17,46 @@ export default function AuctionPage() {
     }
 
     getData()
+
   }, [])
 
   return <>
-    <h1>Auction page yo</h1>
+
     {auction ? 
       <div>
+        <h1>{auction.title}</h1> 
         <ImageGallery auction={auction} />
-        <p>{auction.title}</p>
         <p>{auction.description}</p>
+        <p>Auction start: {formatDateTime(auction.startDate)}</p>
+        <p>Auction end: {formatDateTime(auction.endDate)}</p>
       </div>
+
     : 
       <p>404: Auction not found</p>
     }
-
+    
     <Button variant="success">Place offer</Button>{' '}
+    
   </>
+}
+
+
+function formatDateTime(dateTimeString) {
+  
+  const options = {
+    day: "numeric", 
+    month: "short", 
+    year: "numeric",
+    hour: "numeric",
+    minute: "numeric", 
+    hour12: false, 
+    timeZone: "UTC"
+  };
+ 
+  const formattedDate = new Date(dateTimeString).toLocaleDateString(
+    "sv-SE", 
+    options
+  );
+
+  return formattedDate;
 }

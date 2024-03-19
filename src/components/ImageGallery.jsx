@@ -10,7 +10,7 @@ export default function ImageGallery(props) {
         return (
           <Carousel.Item key={index}>
             <div className="d-flex justify-content-center" >
-              <Image src={image} className="img-fluid rounded" style={{height: "500px", objectFit: "cover"}}/>
+              <Image src={image} className="img-fluid rounded" style={{height: "400px", objectFit: "cover"}}/>
             </div>
           </Carousel.Item>
         )

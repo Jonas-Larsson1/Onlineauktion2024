@@ -9,14 +9,14 @@
         "https://files.worldwildlife.org/wwfcmsprod/images/Sumatran_Tiger_New_Hero_Image/hero_small/47na1tq1ai_Sumatran_Tiger_Hero.jpg",
         "https://db637ll7r1kva.cloudfront.net/app/uploads/2022/02/10165750/iStock-1323863855-770x514.jpg"
       ],
-      "startDate": "javascript datetime",
-      "endDate": "javascript datetime",
+      "startDate": 1710853385121,
+      "endDate": 1710859385121,
       "startingPrice": 100,
       "reservePrice": 300,
       "bid_history": [
         {
           "userId": "1",
-          "time": "javascript datetime",
+          "time": 1710853383121,
           "amount": 200
         }
       ]
