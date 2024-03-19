@@ -27,14 +27,14 @@ const SearchResults = () => {
         // console.log(fetchedData);
         // console.log(searchQuery)
 
-    }, [fetchedData, searchQuery])
+    }, [fetchedData, searchQuery]) // remove when everything starts working
 
     useEffect(() => {
         const filteredAuctions = fetchedData.auctions.filter(item => {
             return item.title.toLowerCase().includes(searchQuery.toLowerCase()) || item.description.toLowerCase().includes(searchQuery.toLowerCase());
-        });
+        }); // checks if searchQuery exists in title or description
         setFilteredData(filteredAuctions);
-        console.log(filteredData.length)
+        // console.log(filteredData.length)
     }, [fetchedData, searchQuery]);
 
 
@@ -53,7 +53,7 @@ const SearchResults = () => {
                 ))}
             
         </ul>)
-        : <p>Nothing found</p>
+        : <h1>Nothing found</h1>
         }
     </>
   )
