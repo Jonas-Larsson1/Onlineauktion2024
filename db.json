@@ -13,11 +13,21 @@
       "endDate": 1710859385121,
       "startingPrice": 100,
       "reservePrice": 300,
-      "bid_history": [
+      "bidHistory": [
         {
           "userId": "1",
           "time": 1710853383121,
           "amount": 200
+        },
+        {
+          "userId": "1",
+          "time": 1710853483121,
+          "amount": 202
+        },
+        {
+          "userId": "1",
+          "time": 1710853583121,
+          "amount": 205
         }
       ]
     }

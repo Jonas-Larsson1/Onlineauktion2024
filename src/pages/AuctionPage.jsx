@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import { Button } from "react-bootstrap"
 
 import ImageGallery from "../components/ImageGallery"
+import BidHistory from "../components/BidHistory"
 
 export default function AuctionPage() {
   let { id } = useParams()
@@ -29,6 +30,7 @@ export default function AuctionPage() {
         <p>{auction.description}</p>
         <p>Auction start: {formatDateTime(auction.startDate)}</p>
         <p>Auction end: {formatDateTime(auction.endDate)}</p>
+        <BidHistory auction={auction} />
       </div>
 
     : 
@@ -41,7 +43,7 @@ export default function AuctionPage() {
 }
 
 
-function formatDateTime(dateTimeString) {
+export function formatDateTime(dateTimeString) {
   
   const options = {
     day: "numeric", 
