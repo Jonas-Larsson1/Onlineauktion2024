@@ -27,7 +27,14 @@
     {
       "id": 1,
       "username": "Tiger King",
-      "password": "king123"
+      "password": "king123",
+      "loggedIn": false
+    },
+    {
+      "id": 3,
+      "username": "bertil",
+      "password": "bertil123",
+      "loggedIn": false
     }
   ]
 }
