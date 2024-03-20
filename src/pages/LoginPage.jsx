@@ -2,18 +2,18 @@ import { useContext, useState } from "react"
 
 
 export default function LoginPage() {
-    const[username, setUsername] = useState('')
-    const[password, setPassword] = useState('')
+    const[usernameInput, setUsernameInput] = useState('')
+    const[passwordInput, setPasswordInput] = useState('')
 
    
-    const handleLogin = async (e) => {
+    const checkForUser = async (e) => {
         e.preventDefault()
         
         try {
           const response = await fetch('api/users');
           const credentials = await response.json();
           console.log('Response from server:', credentials);
-          const user = credentials.map(user => user.username === username && user.password === password);
+          const user = credentials.map(user => user.username === usernameInput && user.password === passwordInput);
           if (user) {
            
             console.log('Login successful');
@@ -33,20 +33,20 @@ export default function LoginPage() {
             <input
               type="text"
               placeholder="username"
-              value = {username}
-              onChange={(e) =>  setUsername(e.target.value)}
+              value = {usernameInput}
+              onChange={(e) =>  setUsernameInput(e.target.value)}
             />
             <br />
             <input
               type="password"
               placeholder="password"
-              value = {password}
-              onChange={(e) => setPassword(e.target.value)}
+              value = {passwordInput}
+              onChange={(e) => setPasswordInput(e.target.value)}
             />
             <br />
           
         <button
-          onClick={handleLogin}></button>
+          onClick={checkForUser}></button>
       </form>
     </>
 }
