@@ -1,65 +1,53 @@
 import { useContext, useState } from "react"
-import { GlobalContext } from "../GlobalContext";
-import { Link } from "react-router-dom";
+
 
 export default function LoginPage() {
-    const[usernameInput, setUsernameInput] = useState('')
-    const[passwordInput, setPasswordInput] = useState('')
-    const [submittedUsername, setSubmittedUsername] = useState("");
-    const [submittedPassword, setSubmittedPassword] = useState("");
+    const[username, setUsername] = useState('')
+    const[password, setPassword] = useState('')
 
-    const updateUsernameValue = (event) => {
-        setUsernameInput(event.target.value);
+   
+    const handleLogin = async (e) => {
+        e.preventDefault()
+        
+        try {
+          const response = await fetch('api/users');
+          const credentials = await response.json();
+          console.log('Response from server:', credentials);
+          const user = credentials.map(user => user.username === username && user.password === password);
+          if (user) {
+           
+            console.log('Login successful');
+          } else {
+            console.log('Invalid username or password');
+          }
+        } catch (error) {
+          console.error('Error logging in:', error);
+        }
       };
-      const updatePasswordValue = (event) => {
-        setPasswordInput(event.target.value);
-      };
-      const { user } = useContext(GlobalContext);
+
+
+
       return <>
           <header>Login</header>
           <form>
             <input
               type="text"
               placeholder="username"
-              onChange={updateUsernameValue}
+              value = {username}
+              onChange={(e) =>  setUsername(e.target.value)}
             />
             <br />
             <input
               type="password"
               placeholder="password"
-              onChange={updatePasswordValue}
+              value = {password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <br />
-            {user
-          ? user.map((user, index) =>
-              checkForUser(submittedUsername, submittedPassword, user) ? 
-                (
-                   <Link key={index} to={"/"}>Logged in!</Link> 
-                
-                )
-               : null
-            )
-          : null}
-
-        <button
-          onClick={(e) => {
-            setSubmittedUsername(usernameInput);
-            setSubmittedPassword(passwordInput);
-            console.log();
-            e.preventDefault()
           
-          }}
-        ></button>
+        <button
+          onClick={handleLogin}></button>
       </form>
     </>
 }
 
-function checkForUser(username, password, user) {
-
-   
-
-  if (user.username === username && user.password === password) {
-    
-    return true
-  }
-}
