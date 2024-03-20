@@ -1,17 +1,21 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
-import HomePage from "../pages/HomePage.jsx"
-import SecondPage from "../pages/SecondPage.jsx"
+import HomePage from "/src/HomePage.jsx";
 import Navbar from "./Navbar.jsx"
+import Footer from "./Footer.jsx"
 
 export default function Router() {
-  return <>
-    <BrowserRouter>
+  return (
+    <BrowserRouter>    <div className="App">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/SecondPage" element={<SecondPage />} />
-      </Routes>
+      <div className="content">
+        <Routes >
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </div>
+    </div>
+    <Footer />
     </BrowserRouter>
-  </>
+
+  );
 }
