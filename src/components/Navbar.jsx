@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { GlobalContext } from "../GlobalContext";
 import Button from "react-bootstrap/esm/Button";
+import "../pages/styles.css"
 
 export default function Navbar() {
   const {loggedIn, setLoggedIn} = useContext(GlobalContext)

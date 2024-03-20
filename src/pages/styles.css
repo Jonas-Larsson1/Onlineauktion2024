@@ -1,0 +1,9 @@
+.logout-btn{
+    all : unset; 
+    color: #007bff;
+    text-decoration: underline;
+
+}
+.logout-btn:hover{
+    color: #0056b3; 
+}

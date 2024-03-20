@@ -6,13 +6,26 @@ function GlobalProvider({children}){
 
    
 
-    const [loggedIn, setLoggedIn] = useState(false)
+    const [loggedIn, setLoggedIn] = useState(() => {
+        return sessionStorage.getItem('loggedIn') === 'true' || false 
+    })
 
+    useEffect(() => {
+        sessionStorage.setItem('loggedIn', loggedIn)
+    }, [loggedIn])
 
+    const login = () => {
+        setLoggedIn(true)
+    }
+
+    const logout = () => {
+        setLoggedIn(false)
+    }
 
     return <GlobalContext.Provider value = {{
      loggedIn,
-     setLoggedIn
+     login,
+     logout
     }}>
         {children}
 

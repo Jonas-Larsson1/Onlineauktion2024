@@ -9,7 +9,7 @@ export default function LoginPage() {
 
     const[usernameInput, setUsernameInput] = useState('')
     const[passwordInput, setPasswordInput] = useState('')
-    const{loggedIn, setLoggedIn} = useContext(GlobalContext)
+    const{ login } = useContext(GlobalContext)
     const navigate = useNavigate()
 
 
@@ -23,9 +23,9 @@ export default function LoginPage() {
           const response = await fetch('api/users');
           const credentials = await response.json();
           console.log('Response from server:', credentials);
-          const user = credentials.find(user => user.username === usernameInput && user.password === passwordInput);
+          const user = credentials.find(user => user.username.toLowerCase() === usernameInput.toLowerCase() && user.password === passwordInput);
           if (user) {
-            setLoggedIn(true)
+            login()
             navigate("/")
           } else {
             console.log('Invalid username or password');
