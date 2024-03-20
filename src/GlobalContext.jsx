@@ -6,12 +6,13 @@ function GlobalProvider({children}){
 
    
 
-    
+    const [loggedIn, setLoggedIn] = useState(false)
 
-   
+
 
     return <GlobalContext.Provider value = {{
-
+     loggedIn,
+     setLoggedIn
     }}>
         {children}
 

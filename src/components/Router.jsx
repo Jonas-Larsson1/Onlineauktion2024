@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 import HomePage from "../pages/HomePage.jsx"
 import SecondPage from "../pages/SecondPage.jsx"
@@ -16,6 +16,7 @@ export default function Router() {
         <Route path="/loginPage" element={<LoginPage />} />
         <Route path="/registerpage" element={<RegisterPage />} />
       </Routes>
+      
     </BrowserRouter>
   </>
 }

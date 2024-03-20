@@ -1,22 +1,32 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { GlobalContext } from "../GlobalContext";
+import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function LoginPage() {
+
     const[usernameInput, setUsernameInput] = useState('')
     const[passwordInput, setPasswordInput] = useState('')
-    const[loggedIn, setLoggedIn] = useState(false)
-   
+    const{loggedIn, setLoggedIn} = useContext(GlobalContext)
+    const navigate = useNavigate()
+
+
     const checkForUser = async (e) => {
-        e.preventDefault()
+        
+      
+      
+      e.preventDefault()
         
         try {
           const response = await fetch('api/users');
           const credentials = await response.json();
           console.log('Response from server:', credentials);
-          const user = credentials.map(user => user.username === usernameInput && user.password === passwordInput);
+          const user = credentials.find(user => user.username === usernameInput && user.password === passwordInput);
           if (user) {
             setLoggedIn(true)
+            navigate("/")
           } else {
             console.log('Invalid username or password');
           }
@@ -25,11 +35,8 @@ export default function LoginPage() {
         }
       };
 
-        if(loggedIn){
-            window.location.href = "/"
-            return null
-        }
 
+       
       return<>
           <header>Login</header>
           <form>
@@ -48,8 +55,8 @@ export default function LoginPage() {
             />
             <br />
           
-        <button
-          onClick={checkForUser}></button>
+        <Button
+          onClick={checkForUser}>Login</Button>
       </form> 
     </>
 }
