@@ -1,10 +1,11 @@
-import { useContext, useState } from "react"
+import { useState } from "react"
+
 
 
 export default function LoginPage() {
     const[usernameInput, setUsernameInput] = useState('')
     const[passwordInput, setPasswordInput] = useState('')
-
+    const[loggedIn, setLoggedIn] = useState(false)
    
     const checkForUser = async (e) => {
         e.preventDefault()
@@ -15,8 +16,7 @@ export default function LoginPage() {
           console.log('Response from server:', credentials);
           const user = credentials.map(user => user.username === usernameInput && user.password === passwordInput);
           if (user) {
-           
-            console.log('Login successful');
+            setLoggedIn(true)
           } else {
             console.log('Invalid username or password');
           }
@@ -25,9 +25,12 @@ export default function LoginPage() {
         }
       };
 
+        if(loggedIn){
+            window.location.href = "/"
+            return null
+        }
 
-
-      return <>
+      return<>
           <header>Login</header>
           <form>
             <input
@@ -47,7 +50,7 @@ export default function LoginPage() {
           
         <button
           onClick={checkForUser}></button>
-      </form>
+      </form> 
     </>
 }
 
