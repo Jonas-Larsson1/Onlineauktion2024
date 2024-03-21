@@ -1,16 +1,22 @@
-import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { GlobalContext } from '../GlobalContext';
+
+import "../pages/styles.css"
 
 const Navbar = () => {
 
-    const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate()
 
+    const [isOpen, setIsOpen] = useState(false);
+    const {loggedIn} = useContext(GlobalContext)
+    const {logout} = useContext(GlobalContext)
     const toggleInputField = () => {
         setIsOpen(!isOpen);
     };
 
 
-    return (
+    return loggedIn ? (
         <nav className="navbar fixed-top border-bottom border-dark" style={{ backgroundColor: "#E27D60" }}>
             <Link className="ms-3" to="/">
                 <img src="/src/assets/petabw.png" alt="petaLogo" height="80px" />
@@ -38,10 +44,16 @@ const Navbar = () => {
                 <Link className="ms-2 text-decoration-none text-secondary" to="/">
                     <img src="/src/assets/account.webp" alt="Account" height="40px" />
                 </Link>
+                <button className="logout-btn" onClick={() => {
+                  logout()
+                  navigate("/")}}>
+                    <img src="/src/assets/logout.webp" className="logout-img" height="40px" />
+                </button>
+
             </div>
 
         </nav>
-    );
+    ) : ""
 }
 
 export default Navbar;

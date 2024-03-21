@@ -1,7 +1,11 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { GlobalContext } from '../GlobalContext';
 
 const Footer = () => {
-    return (
+
+    const {loggedIn} = useContext(GlobalContext)
+    return loggedIn ? (
         <nav className="navbar fixed-bottom border-top border-dark" style={{ backgroundColor: "#E27D60" }}>
             <Link className="mx-3" to="/">
                 <img src="/src/assets/petaicon.png" alt="petaLogo" height="50px" />
@@ -30,7 +34,7 @@ const Footer = () => {
             </div>
 
         </nav>
-    );
+    ) : ""
 }
 
 export default Footer;

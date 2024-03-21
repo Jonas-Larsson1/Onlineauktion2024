@@ -26,7 +26,7 @@ export default function LoginPage() {
           const user = credentials.find(user => user.username.toLowerCase() === usernameInput.toLowerCase() && user.password === passwordInput);
           if (user) {
             login()
-            navigate("/")
+            navigate("/homePage")
           } else {
             console.log('Invalid username or password');
           }

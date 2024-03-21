@@ -1,9 +1,17 @@
+body{
+    background-color: #41B3A3;
+}
 .logout-btn{
     all : unset; 
-    color: #007bff;
-    text-decoration: underline;
+    margin-left: 1rem;
+}
 
+.logout-img:hover{
+    opacity: 80%;
 }
-.logout-btn:hover{
-    color: #0056b3; 
+
+.homepage-content{
+    margin-top: 10rem;
 }
+
+
