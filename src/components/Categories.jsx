@@ -1,7 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { Button } from 'react-bootstrap'
+import {FetchedDataContext} from './SearchResults';
 
 const Categories = () => {
+    const { data } = useContext(FetchedDataContext)
     const [toggle, setToggle] = useState(false)
 
   return (
@@ -11,7 +13,7 @@ const Categories = () => {
        <Button  type="button" className="btn btn-primary btn-block" onClick={() => setToggle(!toggle)}><i className="bi bi-filter"></i></Button>
        </div>
        <div>
-       {toggle ? <div><p>peow</p></div> : null}
+       {toggle ? <div><button onClick={() => console.log(data)}>Click</button></div> : null}
         </div>
     </>
   )

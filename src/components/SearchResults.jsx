@@ -1,10 +1,13 @@
 import React, {useState, useEffect, useContext} from 'react'
 import { SearchContext } from './SearchBar';
 
+const FetchedDataContext = React.createContext(); // global state for fetched data
+
 const SearchResults = () => {
     const {searchQuery } = useContext(SearchContext)
     const [fetchedData, setFetchedData] = useState(null)
     const [filteredData, setFilteredData] = useState([]);
+    const { setData } = useContext(FetchedDataContext)
 
     useEffect(() => {
         fetch('api/auctions/')
@@ -17,6 +20,7 @@ const SearchResults = () => {
             .then (data => {
                 console.log(data);
                 setFetchedData(data)
+                setData(data);
                 
                 
             })
@@ -64,4 +68,6 @@ const SearchResults = () => {
   )
 }
 
-export default SearchResults
+export default SearchResults;
+
+export { FetchedDataContext };
