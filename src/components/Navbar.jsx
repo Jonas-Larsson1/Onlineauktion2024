@@ -21,8 +21,8 @@ const Navbar = () => {
                 <div className="container d-flex">
                     
                     <div className={`collapse ${isOpen ? 'show' : ''}`} id="searchField">
-                        <form className="form-inline">
-                            <input className="form-control border border-dark form-control-lg" type="search" placeholder="Search" aria-label="Search" />
+                        <form className="form-inline ">
+                            <input className="form-control border border-dark form-control-l" type="search" placeholder="Search" aria-label="Search" />
                         </form>
                     </div>
 

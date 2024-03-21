@@ -7,7 +7,7 @@ const Footer = () => {
                 <img src="/src/assets/petaicon.png" alt="petaLogo" height="50px" />
             </Link>
 
-            <span class="fw-bold text-secondary">
+            <span className="fw-bold text-secondary">
             ©Procuring Every Thinkable Animal Auctions 2024
             </span>
 
