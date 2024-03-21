@@ -23,7 +23,7 @@ export default function AuctionPage() {
   return (
     <>
       {auction ? (
-        <div>
+        <div className="m-3">
           <h1>{auction.title}</h1>
           <Row>
             <Col sm={6}>
