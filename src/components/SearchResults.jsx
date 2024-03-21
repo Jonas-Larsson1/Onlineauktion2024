@@ -40,7 +40,6 @@ const SearchResults = () => {
 
   return (
     <>
-        <div>Results</div>
         <div>{searchQuery}</div>
         {filteredData.length !== 0 ?
         (<ul>

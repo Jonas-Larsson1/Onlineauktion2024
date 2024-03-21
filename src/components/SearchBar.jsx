@@ -21,7 +21,6 @@ const SearchBar = () => {
 
   return (
     <>
-    <div>SearchBar</div>
     <form className="d-flex w-75 align-self-center" onSubmit={handleSubmit}>
       <input 
         type="text" 
