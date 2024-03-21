@@ -121,6 +121,26 @@
         }
       ],
       "category": "Rodents"
+    },
+    {
+      "id": "7",
+      "title": "Eastern Cottontail Rabbit",
+      "description": "Eastern cottontails stay mostly hidden during the day but come out at night to eat. They snack on grass and love garden greens like peas and lettuce.",
+      "images": [
+        "https://nhpbs.org/wild/images/easterncottontailusfwlewisGorman.jpg"
+      ],
+      "startDate": "javascript datetime",
+      "endDate": "javascript datetime",
+      "startingPrice": 100,
+      "reservePrice": 300,
+      "bid_history": [
+        {
+          "userId": "1",
+          "time": "javascript datetime",
+          "amount": 200
+        }
+      ],
+      "category": "testCategory"
     }
    
   ],
