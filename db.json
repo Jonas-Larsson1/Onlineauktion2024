@@ -24,13 +24,13 @@
   ],
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "Tiger King",
       "password": "king123",
       "loggedIn": false
     },
     {
-      "id": 3,
+      "id": "3",
       "username": "bertil",
       "password": "bertil123",
       "loggedIn": false
@@ -64,6 +64,16 @@
       "id": "9f27",
       "username": "bertkarlsson",
       "password": "bert123"
+    },
+    {
+      "id": "c288",
+      "username": "test",
+      "password": "testing"
+    },
+    {
+      "id": "b45d",
+      "username": "kungen1",
+      "password": "bästivärlden"
     }
   ]
 }

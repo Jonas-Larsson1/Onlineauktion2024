@@ -8,6 +8,7 @@ export default function LoginPage() {
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const { login } = useContext(GlobalContext);
+  const [error, setError] = useState("");
 
   const checkForUser = async (e) => {
     e.preventDefault();
@@ -17,15 +18,16 @@ export default function LoginPage() {
       const credentials = await response.json();
       console.log("Response from server:", credentials);
       const user = credentials.find(
-        (user) => //Will become true if input = user data
+        (
+          user //Will become true if input = user data
+        ) =>
           user.username.toLowerCase() === usernameInput.toLowerCase() &&
           user.password === passwordInput
       );
       if (user) {
         login(); // set loggedIn to true
-        
       } else {
-        console.log("Invalid username or password");
+        setError("Invalid username or password");
       }
     } catch (error) {
       console.error("Error logging in:", error);
@@ -62,6 +64,7 @@ export default function LoginPage() {
         <Button variant="primary" onClick={checkForUser}>
           Login
         </Button>
+        <div>{error}</div>
         <div>
           <b>OR</b>
         </div>
