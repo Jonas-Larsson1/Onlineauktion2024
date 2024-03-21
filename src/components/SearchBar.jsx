@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react';
 
 const SearchContext = React.createContext();
 
-const SearchBar = () => {
+const SearchBar = ({setCategory}) => {
     const [searchValue, setSearchValue] = useState('');
     const { setSearchQuery } = useContext(SearchContext);
 
@@ -15,6 +15,8 @@ const SearchBar = () => {
         setSearchQuery(searchValue) // saves input to searchQuery
         console.log(searchValue);
         setSearchValue('') // cleans up input
+        setCategory(null)
+
     }
 
 

@@ -57,7 +57,12 @@ const SearchResults = ({category}) => {
         <div>{searchQuery}</div>
         <div>{category}</div>
         {category !== null ? 
-        (fetchedData.map((item, index) => item.category.includes(category) ? <li key={index}><h3>{item.title}</h3><p>{item.description}</p><p>{item.category}</p></li> : console.log(item.category, category) ))
+        (fetchedData.map((item, index) => item.category.includes(category) ? 
+        <li key={index}>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+            <p>{item.category}</p></li> 
+            : console.log(item.category, category)))
         : (filteredData.length !== 0 ?
         (<ul>
                 {filteredData.map(auction => (

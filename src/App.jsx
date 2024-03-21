@@ -18,7 +18,7 @@ export default function App() {
       <div className='d-flex flex-row-reverse'>
       <div className="d-flex flex-column justify-content-space-between w-75 p-2 col-md-auto">
         {/* <Router /> */}
-        <SearchBar />
+        <SearchBar setCategory={setCategory}/>
         <SearchResults category={category}/>
       </div>
       <div className='col-md-auto p-2'>
