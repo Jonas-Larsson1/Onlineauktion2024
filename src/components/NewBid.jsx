@@ -7,6 +7,7 @@ export default function NewBid() {
   const bidHistory = auction.bidHistory
   const [highestBid, setHighestBid] = useState(getHighestBid(bidHistory))
   const [defaultBid, setDefaultBid] = useState(parseInt(highestBid) + 1)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     setHighestBid(getHighestBid(bidHistory))
@@ -41,12 +42,13 @@ export default function NewBid() {
       if (response.ok) {
         setAuction(auction)
         setDefaultBid(parseInt(bidAmount) + 1)
+        setError(false)
       } else {
         // säg åt användaren det gick åt skogen
       }
     } else {
-    // säg åt användaren de måste bida mer för fan
-  }
+      setError(`You need to bid at least: ${defaultBid} or higher`);
+    }
   }
 
   return (
@@ -57,9 +59,12 @@ export default function NewBid() {
           <InputGroup>
             <Form.Control name="amount" type="number" defaultValue={defaultBid}/>
             <Form.Text className="text-muted">
-              You need to bid at least: {defaultBid} or higher
+              {/* You need to bid at least: {defaultBid} or higher */}
             </Form.Text>
           </InputGroup>
+          {error && <div className="alert alert-warning mt-2 mb-0" role="alert">
+            {error}
+          </div>}
         </Form.Group>
       </Row>
       <Row className="mb-3">
