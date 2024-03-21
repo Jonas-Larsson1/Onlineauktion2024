@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import { GlobalContext } from "../GlobalContext"; 
 import ImageGallery from "../components/ImageGallery";
-import BidHistory from "../components/BidHistory";
+import Bidding from "../components/Bidding";
 
 export default function AuctionPage() {
   let { id } = useParams();
@@ -34,7 +34,7 @@ export default function AuctionPage() {
                 <p>{auction.description}</p>
                 <p>Auction start: {formatDateTime(auction.startDate)}</p>
                 <p>Auction end: {formatDateTime(auction.endDate)}</p>
-                <BidHistory auction={auction} />
+                <Bidding/>
               </div>
             </Col>
           </Row>

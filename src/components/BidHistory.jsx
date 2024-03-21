@@ -1,8 +1,13 @@
 import { Table } from 'react-bootstrap'
 import { formatDateTime } from '../pages/AuctionPage'
+import { useContext } from 'react'
+import { GlobalContext } from '../GlobalContext'
 
-export default function BidHistory(props) {
-  const { bidHistory } = props.auction
+export default function BidHistory() {
+  // const { bidHistory } = props.auction
+
+  const { auction } = useContext(GlobalContext)
+  const bidHistory = auction.bidHistory
 
   bidHistory.sort((a, b) => new Date(b.time) - new Date(a.time))
 
