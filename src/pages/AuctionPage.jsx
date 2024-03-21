@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Button, Row, Col } from "react-bootstrap"; 
+import { Row, Col } from "react-bootstrap";
+import { GlobalContext } from "../GlobalContext"; 
 import ImageGallery from "../components/ImageGallery";
 import BidHistory from "../components/BidHistory";
 
 export default function AuctionPage() {
   let { id } = useParams();
-  const [auction, setAuction] = useState(null);
+  // const [auction, setAuction] = useState(null);
+  const { auction, setAuction } = useContext(GlobalContext)
 
   useEffect(() => {
     const getData = async () => {
@@ -40,12 +42,6 @@ export default function AuctionPage() {
       ) : (
         <p>404: Auction not found</p>
       )}
-
-      <Row className="mt-3">
-        <Col>
-          <Button variant="success">Place offer</Button>
-        </Col>
-      </Row>
     </>
   );
 }

@@ -18,6 +18,5 @@ export default function Router() {
     </div>
     <Footer />
     </BrowserRouter>
-
   );
 }
