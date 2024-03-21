@@ -1,5 +1,5 @@
 {
-  "auctions" : [
+  "auctions": [
     {
       "id": "1",
       "title": "Sunda Island Tiger",
@@ -16,8 +16,8 @@
       "bidHistory": [
         {
           "userId": "1",
-          "time": 1710853383121,
-          "amount": 200
+          "time": 1710853583121,
+          "amount": 205
         },
         {
           "userId": "1",
@@ -26,16 +26,20 @@
         },
         {
           "userId": "1",
-          "time": 1710853583121,
-          "amount": 205
+          "time": 1710853383121,
+          "amount": 200
+        },
+        {
+          "userId": 1,
+          "time": 1711019377577,
+          "amount": "209"
         }
       ]
     }
   ],
-
-  "users" : [
+  "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "Tiger King",
       "password": "king123"
     }

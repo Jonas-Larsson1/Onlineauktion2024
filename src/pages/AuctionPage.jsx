@@ -28,12 +28,12 @@ export default function AuctionPage() {
           <Row>
             <Col sm={6}>
               <ImageGallery auction={auction} />
+              <p>{auction.description}</p>
+              <p>Auction start: {formatDateTime(auction.startDate)}</p>
+              <p>Auction end: {formatDateTime(auction.endDate)}</p>
             </Col>
             <Col sm={6}>
               <div>
-                <p>{auction.description}</p>
-                <p>Auction start: {formatDateTime(auction.startDate)}</p>
-                <p>Auction end: {formatDateTime(auction.endDate)}</p>
                 <Bidding/>
               </div>
             </Col>
