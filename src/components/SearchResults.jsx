@@ -3,7 +3,7 @@ import { SearchContext } from './SearchBar';
 
 const FetchedDataContext = React.createContext(); // global state for fetched data
 
-const SearchResults = () => {
+const SearchResults = ({category}) => {
     const {searchQuery } = useContext(SearchContext)
     const [fetchedData, setFetchedData] = useState(null)
     const [filteredData, setFilteredData] = useState([]);
@@ -31,6 +31,7 @@ const SearchResults = () => {
 
     useEffect(() => {
         console.log(fetchedData);
+        console.log(category)
         // console.log(searchQuery)
 
     }, [fetchedData]) // remove when everything starts working
@@ -45,13 +46,19 @@ const SearchResults = () => {
                 );
             });
             setFilteredData(filteredAuctions);
+            console.log(category)
         }
     }, [fetchedData, searchQuery]);
+
+    //let test = fetchedData.map((item) => item.map((i) => i.category == category ? <ul><li><h3>{i.title}</h3><p>{i.description}</p><p>{i.category}</p></li></ul> : null))
 
   return (
     <>
         <div>{searchQuery}</div>
-        {filteredData.length !== 0 ?
+        <div>{category}</div>
+        {category !== null ? 
+        (fetchedData.map((item, index) => item.category.includes(category) ? <li key={index}><h3>{item.title}</h3><p>{item.description}</p><p>{item.category}</p></li> : console.log(item.category, category) ))
+        : (filteredData.length !== 0 ?
         (<ul>
                 {filteredData.map(auction => (
                     <li key={auction.id}>
@@ -63,7 +70,7 @@ const SearchResults = () => {
             
         </ul>)
         : <h1>Nothing found</h1>
-        }
+        )}
     </>
   )
 }
