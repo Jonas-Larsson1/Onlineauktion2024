@@ -1,7 +1,8 @@
 import { useContext, useState } from "react"
 import { GlobalContext } from "../GlobalContext";
 import Button from "react-bootstrap/Button";
-import { useNavigate } from "react-router-dom";
+import Form from 'react-bootstrap/Form';
+import { Link, useNavigate } from "react-router-dom";
 
 
 
@@ -26,7 +27,7 @@ export default function LoginPage() {
           const user = credentials.find(user => user.username.toLowerCase() === usernameInput.toLowerCase() && user.password === passwordInput);
           if (user) {
             login()
-            navigate("/homePage")
+            navigate("/")
           } else {
             console.log('Invalid username or password');
           }
@@ -38,8 +39,32 @@ export default function LoginPage() {
 
        
       return<>
-          <header>Login</header>
-          <form>
+          <Form className='register-form'>
+          <header>Login Page</header>
+
+      <Form.Group className="mb-3" controlId="formUsername">
+        <Form.Label>Username</Form.Label>
+        <Form.Control type="email" placeholder="Enter username" value = {usernameInput}
+              onChange={(e) =>  setUsernameInput(e.target.value)} />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" placeholder="Enter safe password" value = {passwordInput}
+              onChange={(e) => setPasswordInput(e.target.value)} />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formCheckbox">
+        <Form.Check type="checkbox" label="Check me out" />
+      </Form.Group>
+      <Button variant="primary" onClick={checkForUser}>
+        Login
+      </Button>
+      <div><b>OR</b></div>  
+            <Button>
+              <Link className="register-link" to="/registerPage">Register!</Link>  
+              </Button>
+    </Form>
+          {/* <form>
             <input
               type="text"
               placeholder="username"
@@ -57,7 +82,8 @@ export default function LoginPage() {
           
         <Button
           onClick={checkForUser}>Login</Button>
-      </form> 
-    </>
+      </form>  */}
+           
+      </>
 }
 

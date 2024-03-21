@@ -10,8 +10,15 @@ body{
     opacity: 80%;
 }
 
-.homepage-content{
-    margin-top: 10rem;
+
+.register-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+.register-link{
+    color:white;
+}
 

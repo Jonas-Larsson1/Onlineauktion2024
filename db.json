@@ -1,5 +1,5 @@
 {
-  "auctions" : [
+  "auctions": [
     {
       "id": "1",
       "title": "Sunda Island Tiger",
@@ -22,19 +22,38 @@
       ]
     }
   ],
-
-  "users" : [
+  "users": [
     {
       "id": 1,
       "username": "Tiger King",
       "password": "king123",
-      "loggedIn" : false
+      "loggedIn": false
     },
     {
       "id": 3,
       "username": "bertil",
       "password": "bertil123",
-      "loggedIn" : false
+      "loggedIn": false
+    },
+    {
+      "id": "96c4",
+      "username": "test",
+      "password": "test123"
+    },
+    {
+      "id": "6023",
+      "username": "bengan",
+      "password": "bengan123"
+    },
+    {
+      "id": "24c4",
+      "username": "",
+      "password": ""
+    },
+    {
+      "id": "2568",
+      "username": "",
+      "password": ""
     }
   ]
 }
