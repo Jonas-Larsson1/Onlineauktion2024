@@ -45,7 +45,7 @@ const Navbar = () => {
                     <img src="/src/assets/account.webp" alt="Account" height="40px" />
                 </Link>
                 <button className="logout-btn" onClick={() => {
-                  logout()
+                  logout() // set loggedIn to false
                   navigate("/")}}>
                     <img src="/src/assets/logout.webp" className="logout-img" height="40px" />
                 </button>
