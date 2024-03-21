@@ -15,13 +15,13 @@ export default function App() {
   <>
   <FetchedDataContext.Provider value={{data, setData}}>
     <SearchContext.Provider value={{ searchQuery, setSearchQuery }}>
-      <div className='d-flex flex-row-reverse'>
-      <div className="d-flex flex-column justify-content-space-between w-75 p-2 col-md-auto">
+      <div className='d-flex flex-row-reverse w-100 justify-content-between'>
+      <div className="d-flex flex-column p-2 w-75">
         {/* <Router /> */}
         <SearchBar setCategory={setCategory}/>
         <SearchResults category={category}/>
       </div>
-      <div className='col-md-auto p-2'>
+      <div className='col-lg-4 p-2'>
       <Categories setCategory={setCategory}/>
       </div>
       </div>
