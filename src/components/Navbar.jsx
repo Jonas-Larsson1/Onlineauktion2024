@@ -11,7 +11,7 @@ const Navbar = () => {
 
 
     return (
-        <nav className="navbar fixed-top border-bottom border-dark" style={{ backgroundColor: "#E27D60" }}>
+        <nav className="navbar sticky-top border-bottom border-dark" style={{ backgroundColor: "#E27D60" }}>
             <Link className="ms-3" to="/">
                 <img src="/src/assets/petabw.png" alt="petaLogo" height="80px" />
             </Link>
@@ -35,7 +35,7 @@ const Navbar = () => {
                 <Link className="mx-2 text-decoration-none text-secondary" to="/">
                     <img src="/src/assets/help.webp" alt="Help" height="40px" />
                 </Link>
-                <Link className="ms-2 text-decoration-none text-secondary" to="/">
+                <Link className="ms-2 text-decoration-none text-secondary" to="/AccountPage">
                     <img src="/src/assets/account.webp" alt="Account" height="40px" />
                 </Link>
             </div>
