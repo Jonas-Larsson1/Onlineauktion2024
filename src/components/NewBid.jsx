@@ -7,6 +7,7 @@ export default function NewBid() {
   const bidHistory = auction.bidHistory
   const [highestBid, setHighestBid] = useState(getHighestBid(bidHistory))
   const [defaultBid, setDefaultBid] = useState(parseInt(highestBid) + 1)
+  const [currentBid, setCurrentBid] = useState(0)
   const [error, setError] = useState(null)
 
   useEffect(() => {
@@ -14,9 +15,17 @@ export default function NewBid() {
     setDefaultBid(parseInt(highestBid) + 1)
   }, [bidHistory]);
 
+  useEffect(() => {
+    setError(false)
+  }, [currentBid])
+
   function getHighestBid (bidHistory) {
     bidHistory.sort((a, b) => (b.amount) - (a.amount))
     return bidHistory.length > 0 ? bidHistory[0].amount : 0
+  }
+
+  const changeCurrentBid = (event) => {
+    setCurrentBid(event.target.value)
   }
 
   const placeBid = async (event) => {
@@ -57,7 +66,7 @@ export default function NewBid() {
         <Form.Group as={Col} controlId="newBid">
           <Form.Label>Enter bid</Form.Label>
           <InputGroup>
-            <Form.Control name="amount" type="number" defaultValue={defaultBid}/>
+            <Form.Control name="amount" type="number" defaultValue={defaultBid} onInput={changeCurrentBid}/>
             <Form.Text className="text-muted">
               {/* You need to bid at least: {defaultBid} or higher */}
             </Form.Text>
