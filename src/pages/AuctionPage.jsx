@@ -18,7 +18,7 @@ export default function AuctionPage() {
     };
 
     getData();
-  }, [id]);
+  }, [auction]);
 
   return (
     <>

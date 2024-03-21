@@ -3,52 +3,52 @@ import { useContext } from "react";
 import { GlobalContext } from '../GlobalContext'
 
 export default function NewBid() {
+  const { auction, setAuction } = useContext(GlobalContext);
+  const bidHistory = auction.bidHistory;
+  const [highestBid, setHighestBid] = useState(getHighestBid(bidHistory));
+  const [defaultBid, setDefaultBid] = useState(parseInt(highestBid) + 1);
+
+
+  useEffect(() => {
+    setHighestBid(getHighestBid(bidHistory));
+    setDefaultBid(parseInt(highestBid) + 1);
+  }, [bidHistory]);
 
   const getHighestBid = (bidHistory) => {
     bidHistory.sort((a, b) => (b.amount) - (a.amount))
-    return bidHistory[0].amount
+    return bidHistory.length > 0 ? bidHistory[0].amount : 0
   }
 
   const placeBid = async (event) => {
     event.preventDefault(); 
-    const formData = new FormData(event.target);
-    const bidData = {
-      amount: formData.get("amount")
-    };
+    const formData = new FormData(event.target)
+    const bidAmount = formData.get("amount")
+    
+    if (bidAmount > highestBid) {
+      const newBid = {
+        userId: 1, // Måste bytas ut till den aktivt inloggade användaren
+        time: Date.now(),
+        amount: bidAmount
+      }
   
-    if (bidData.amount > highestBid) {
-      // Vi måste kolla om det har kommit in ett högre bud sen sidan först laddades innan vi lägger in det nya budet
-      // const getData = async () => {
-      //   const response = await fetch(`/api/auctions/${auction.id}`);
-      //   const result = await response.json();
-      // }
-      
-      auction.bidHistory.push({
-        "userId": 1, // Måste bytas ut till den aktivt inloggade användaren
-        "time": Date.now(),
-        "amount": bidData.amount
-      })
+      auction.bidHistory.push(newBid)
 
       const response = await fetch(`/api/auctions/${auction.id}`, {
-        method: "put",
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(auction)
       })
 
       if (response.ok) {
-        alert("Det gick bra!")
+        setAuction(auction)
+        setDefaultBid(parseInt(bidAmount) + 1)
       } else {
-        alert("Det gick åt helvete!")
+        // säg åt användaren det gick åt skogen
       }
-      
     } else {
-      alert("va fan")
-    }
+    // säg åt användaren de måste bida mer för fan
   }
-
-  const { auction } = useContext(GlobalContext)
-  const bidHistory = auction.bidHistory
-  let highestBid = getHighestBid(bidHistory)
+  }
 
   return (
     <Form onSubmit={placeBid}>
@@ -56,9 +56,9 @@ export default function NewBid() {
         <Form.Group as={Col} controlId="newBid">
           <Form.Label>Enter bid</Form.Label>
           <InputGroup>
-            <Form.Control name="amount" type="number" defaultValue={highestBid}/>
+            <Form.Control name="amount" type="number" defaultValue={parseInt(highestBid) + 1}/>
             <Form.Text className="text-muted">
-              You need to bid at least: {highestBid} or higher
+              You need to bid at least: {parseInt(highestBid) + 1} or higher
             </Form.Text>
           </InputGroup>
         </Form.Group>
