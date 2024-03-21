@@ -3,11 +3,11 @@ import { SearchContext } from './SearchBar';
 
 const SearchResults = () => {
     const {searchQuery } = useContext(SearchContext)
-    const [fetchedData, setFetchedData] = useState({ auctions: [], users: [] })
+    const [fetchedData, setFetchedData] = useState(null)
     const [filteredData, setFilteredData] = useState([]);
 
     useEffect(() => {
-        fetch('../db.json')
+        fetch('api/auctions/')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Response failed')
@@ -15,7 +15,9 @@ const SearchResults = () => {
                 return response.json();
             })
             .then (data => {
+                console.log(data);
                 setFetchedData(data)
+                
                 
             })
             .catch(error => {
@@ -24,19 +26,23 @@ const SearchResults = () => {
     }, [])
 
     useEffect(() => {
-        // console.log(fetchedData);
+        console.log(fetchedData);
         // console.log(searchQuery)
 
-    }, [fetchedData, searchQuery]) // remove when everything starts working
+    }, [fetchedData]) // remove when everything starts working
 
+    
     useEffect(() => {
-        const filteredAuctions = fetchedData.auctions.filter(item => {
-            return item.title.toLowerCase().includes(searchQuery.toLowerCase()) || item.description.toLowerCase().includes(searchQuery.toLowerCase());
-        }); // checks if searchQuery exists in title or description
-        setFilteredData(filteredAuctions);
-        // console.log(filteredData.length)
+        if (fetchedData) {
+            const filteredAuctions = fetchedData.filter(item => {
+                return (
+                    item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    item.description.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+            });
+            setFilteredData(filteredAuctions);
+        }
     }, [fetchedData, searchQuery]);
-
 
   return (
     <>
