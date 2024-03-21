@@ -6,6 +6,10 @@ body{
     margin-left: 1rem;
 }
 
+.material-symbols-outlined{
+    all: unset;
+}
+
 .logout-img:hover{
     opacity: 80%;
 }
