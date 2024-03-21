@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import React, { useContext, useState } from 'react';
 import { GlobalContext } from '../GlobalContext';
 
@@ -6,7 +6,7 @@ import "../pages/styles.css"
 
 const Navbar = () => {
 
-  const navigate = useNavigate()
+  
 
     const [isOpen, setIsOpen] = useState(false);
     const {loggedIn} = useContext(GlobalContext)
@@ -46,7 +46,7 @@ const Navbar = () => {
                 </Link>
                 <button className="logout-btn" onClick={() => {
                   logout() // set loggedIn to false
-                  navigate("/")}}>
+                  }}>
                     <img src="/src/assets/logout.webp" className="logout-img" height="40px" />
                 </button>
 

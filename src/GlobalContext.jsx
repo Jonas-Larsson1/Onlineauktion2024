@@ -9,7 +9,7 @@ function GlobalProvider({children}){
    
 
     const [loggedIn, setLoggedIn] = useState(() => {
-        return sessionStorage.getItem('loggedIn') === true || false 
+        return sessionStorage.getItem('loggedIn') === 'true' || false 
     }) // Put loggedIn item in session storage with the value true or false
 
     useEffect(() => {

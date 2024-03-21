@@ -2,13 +2,12 @@ import { useContext, useState } from "react";
 import { GlobalContext } from "../GlobalContext";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const { login } = useContext(GlobalContext);
-  const navigate = useNavigate();
 
   const checkForUser = async (e) => {
     e.preventDefault();
@@ -24,7 +23,7 @@ export default function LoginPage() {
       );
       if (user) {
         login(); // set loggedIn to true
-        navigate("/"); // go to homepage
+        
       } else {
         console.log("Invalid username or password");
       }
