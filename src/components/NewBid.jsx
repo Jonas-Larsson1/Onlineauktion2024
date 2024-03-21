@@ -1,20 +1,19 @@
 import { Button, Form, InputGroup, Row, Col } from "react-bootstrap";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from '../GlobalContext'
 
 export default function NewBid() {
-  const { auction, setAuction } = useContext(GlobalContext);
-  const bidHistory = auction.bidHistory;
-  const [highestBid, setHighestBid] = useState(getHighestBid(bidHistory));
-  const [defaultBid, setDefaultBid] = useState(parseInt(highestBid) + 1);
-
+  const { auction, setAuction } = useContext(GlobalContext)
+  const bidHistory = auction.bidHistory
+  const [highestBid, setHighestBid] = useState(getHighestBid(bidHistory))
+  const [defaultBid, setDefaultBid] = useState(parseInt(highestBid) + 1)
 
   useEffect(() => {
-    setHighestBid(getHighestBid(bidHistory));
-    setDefaultBid(parseInt(highestBid) + 1);
+    setHighestBid(getHighestBid(bidHistory))
+    setDefaultBid(parseInt(highestBid) + 1)
   }, [bidHistory]);
 
-  const getHighestBid = (bidHistory) => {
+  function getHighestBid (bidHistory) {
     bidHistory.sort((a, b) => (b.amount) - (a.amount))
     return bidHistory.length > 0 ? bidHistory[0].amount : 0
   }
@@ -56,9 +55,9 @@ export default function NewBid() {
         <Form.Group as={Col} controlId="newBid">
           <Form.Label>Enter bid</Form.Label>
           <InputGroup>
-            <Form.Control name="amount" type="number" defaultValue={parseInt(highestBid) + 1}/>
+            <Form.Control name="amount" type="number" defaultValue={defaultBid}/>
             <Form.Text className="text-muted">
-              You need to bid at least: {parseInt(highestBid) + 1} or higher
+              You need to bid at least: {defaultBid} or higher
             </Form.Text>
           </InputGroup>
         </Form.Group>
