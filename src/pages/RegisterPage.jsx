@@ -1,7 +1,7 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import "./styles.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function RegisterPage() {
@@ -46,6 +46,25 @@ export default function RegisterPage() {
     }
   }
 
+  useEffect(() => {
+    if( newUsername.length < 6){
+      setUsernameWarning("Username too short")
+    } if(newUsername.length > 6){
+      setUsernameWarning("")
+    }
+    if(newUsername.length > 16){
+      setUsernameWarning("Username too long")
+    }
+}, [newUsername])
+
+useEffect(() => {
+  if( newPassword.length < 6){
+    setPasswordWarning("Password too short")
+  } if(newPassword.length > 6){
+    setPasswordWarning("")
+  }
+}, [newPassword])
+
   return (
     <>
       <Form className="register-form">
@@ -78,12 +97,6 @@ export default function RegisterPage() {
             onChange={(e) => {
               setNewUsername(e.target.value);
 
-              newUsername.length < 6
-                ? setUsernameWarning("Username too short")
-                : setUsernameWarning("");
-              newUsername.length > 16
-                ? setUsernameWarning("Username too long")
-                : "";
             }}
           />
           <Form.Text className="text-muted">{usernameWarning}</Form.Text>
@@ -97,10 +110,9 @@ export default function RegisterPage() {
             value={newPassword}
             onChange={(e) => {
               setNewPassword(e.target.value);
-              newPassword.length < 6
-                ? setPasswordWarning("Password too short")
-                : setPasswordWarning("");
             }}
+
+            
           />
           <Form.Text className="text-muted">{passwordWarning}</Form.Text>
         </Form.Group>
