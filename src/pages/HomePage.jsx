@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Alert from 'react-bootstrap/Alert';
 import { GlobalContext } from "../GlobalContext";
-import "./styles.css"
+import "../styles/styles.css"
 
 export default function HomePage() {
   

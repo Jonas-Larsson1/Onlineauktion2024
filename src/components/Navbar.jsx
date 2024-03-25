@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../GlobalContext";
 
-import "../pages/styles.css";
+import "../styles/styles.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

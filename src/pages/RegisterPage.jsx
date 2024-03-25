@@ -1,6 +1,6 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
-import "./styles.css";
+import "../styles/styles.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
