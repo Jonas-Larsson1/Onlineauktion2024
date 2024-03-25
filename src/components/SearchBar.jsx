@@ -13,13 +13,11 @@ const SearchBar = ({setCategory}) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         setSearchQuery(searchValue) // saves input to searchQuery
-        console.log(searchValue);
+        // console.log(searchValue);
         setSearchValue('') // cleans up input
         setCategory(null)
 
     }
-
-
 
   return (
     <>
