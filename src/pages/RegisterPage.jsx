@@ -106,7 +106,7 @@ useEffect(() => {
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
-            placeholder="Enter safe password (atleast 6 characters long)"
+            placeholder="Enter password (atleast 6 characters long)"
             value={newPassword}
             onChange={(e) => {
               setNewPassword(e.target.value);

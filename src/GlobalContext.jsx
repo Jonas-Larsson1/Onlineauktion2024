@@ -6,8 +6,21 @@ const GlobalContext = createContext()
 function GlobalProvider({children}){
 
    
-   
+    const [show, setShow] = useState(() => {
+        return sessionStorage.getItem('showAlert' === 'true' || 'false')
+    }) 
 
+    useEffect(() => {
+        return sessionStorage.setItem('showAlert', show)
+    }, [show])
+
+    const hideAlert = () => {
+        setShow(false)
+    }
+
+    const displayAlert = () => {
+        setShow(true)
+    }
     const [loggedIn, setLoggedIn] = useState(() => {
         return sessionStorage.getItem('loggedIn') === 'true' || false 
     }) // Put loggedIn item in session storage with the value true or false
@@ -27,7 +40,11 @@ function GlobalProvider({children}){
     return <GlobalContext.Provider value = {{
      loggedIn,
      login,
-     logout
+     logout,
+     show,
+     setShow,
+     hideAlert,
+     displayAlert
     }}>
         {children}
 

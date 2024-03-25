@@ -9,6 +9,7 @@ export default function LoginPage() {
   const [passwordInput, setPasswordInput] = useState("");
   const { login } = useContext(GlobalContext);
   const [error, setError] = useState("");
+  const {displayAlert} = useContext(GlobalContext) 
 
   const checkForUser = async (e) => {
     e.preventDefault();
@@ -26,6 +27,8 @@ export default function LoginPage() {
       );
       if (user) {
         login(); // set loggedIn to true
+        displayAlert();
+        
       } else {
         setError("Invalid username or password");
       }
