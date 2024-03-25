@@ -4,7 +4,7 @@ const SearchContext = React.createContext();
 
 const SearchBar = ({setCategory}) => {
   const [searchValue, setSearchValue] = useState('');
-  const { setSearchQuery } = useContext(SearchContext);
+  const {setSearchQuery } = useContext(SearchContext);
 
   const handleChange = (event) => {
       setSearchValue(event.target.value) // gets input

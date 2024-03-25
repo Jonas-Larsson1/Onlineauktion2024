@@ -18,7 +18,7 @@ const SearchPage = () => {
             <SearchResults category={category}/>
           </div>
           <div className='col-lg-4 p-2'>
-            <Categories setCategory={setCategory} setSearchQuery={setSearchQuery}/>
+            <Categories category={category} setCategory={setCategory} setSearchQuery={setSearchQuery}/>
           </div>
         </div>
       </SearchContext.Provider>

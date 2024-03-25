@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import { Button } from 'react-bootstrap'
 import {FetchedDataContext} from './SearchResults';
 
-const Categories = ({setCategory, setSearchQuery}) => {
+const Categories = ({category, setCategory, setSearchQuery}) => {
   const { data } = useContext(FetchedDataContext)
   const [toggle, setToggle] = useState(false)
   const [auctionData, setAuctionData] = useState([])
@@ -15,9 +15,7 @@ const Categories = ({setCategory, setSearchQuery}) => {
 
   // added
   const handleCategoryClick = (category) => {
-    if (!category) {
-      setSearchQuery('')
-    }
+    setSearchQuery('')
     setCategory(category);
     setToggle(false);
     // console.log(category)
@@ -33,9 +31,10 @@ const Categories = ({setCategory, setSearchQuery}) => {
 
   return <>
     <div className="container d-flex flex-row justify-content-between border border-secondary rounded p-2">
-       <h3 className='px-3'>Categories</h3>
+       {category ? <h3 className='px-3'>{category}</h3> : <h3 className='px-3'>Select category</h3>}
        <Button  type="button" className="btn btn-primary btn-block" onClick={() => {setToggle(!toggle), filteredCategories}}><i className="bi bi-filter"></i></Button>
     </div>
+    {/* {category ? <p>Current category: <b>{category}</b> </p> : null} */}
     <div className='p-2'>
       {toggle ? 
         <div className='list-group'>
