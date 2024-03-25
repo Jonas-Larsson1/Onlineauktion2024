@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <nav className="navbar fixed-bottom border-top border-dark" style={{ backgroundColor: "#E27D60" }}>
+        <nav className="navbar border-top border-dark" style={{ backgroundColor: "#E27D60" }}>
             <Link className="mx-3" to="/">
                 <img src="/src/assets/petaicon.png" alt="petaLogo" height="50px" />
             </Link>
