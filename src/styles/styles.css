@@ -1,6 +1,15 @@
 body{
     background-color: #41B3A3;
 }
+
+.navbar-btn {
+    all: unset;
+}
+
+.navbar-btn:hover {
+    opacity: 80%;
+}
+
 .logout-btn{
     all : unset; 
     margin-left: 1rem;
