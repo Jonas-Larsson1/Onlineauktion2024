@@ -28,11 +28,11 @@ export default function RegisterPage() {
         }),
       });
       if (res.ok) {
-        console.log(res);
+        // console.log(res);
         alert("Account registered!");
         navigate("/");
       } else {
-        console.log(res);
+        // console.log(res);
         alert("Something went wrong!");
       }
     } else if (newUsername.length < 6 && newPassword.length < 6) {

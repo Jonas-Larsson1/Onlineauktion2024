@@ -17,7 +17,7 @@ export default function LoginPage() {
     try {
       const response = await fetch("api/users");
       const credentials = await response.json();
-      console.log("Response from server:", credentials);
+      // console.log("Response from server:", credentials);
       const user = credentials.find(
         (
           user //Will become true if input = user data
