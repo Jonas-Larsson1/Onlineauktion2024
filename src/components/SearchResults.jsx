@@ -68,13 +68,13 @@ const SearchResults = ({category}) => {
         : console.log(item.category, category))
     : filteredData.length !== 0 ?
         <div className='d-flex flex-row flex-wrap justify-content-center' style={{width: "auto"}} >
-            {filteredData.map(auction => 
-                <div key={auction.id} className="card m-2" style={{width: "18rem"}}>
-                <img className="card-img-top" src={auction.images[0]} /> 
-                <div className="card-body">
-                    <h3>{auction.title}</h3>
-                    <p>{auction.description}</p>
-                </div>
+            {filteredData.map((auction, index) => 
+                <div key={index} className="card m-2" style={{width: "18rem"}}>
+                    <img className="card-img-top" src={auction.images[0]} /> 
+                    <div className="card-body">
+                        <h3>{auction.title}</h3>
+                        <p>{auction.description}</p>
+                    </div>
                 </div>
             )}
         </div>
