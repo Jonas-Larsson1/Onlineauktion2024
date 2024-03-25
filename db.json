@@ -20,7 +20,7 @@
           "amount": 200
         }
       ],
-      "category": ["All", "Big Cats"]
+      "category": ["Big Cats"]
     },
     {
       "id": "2",
@@ -40,7 +40,7 @@
           "amount": 200
         }
       ],
-      "category": ["All", "Foxes"]
+      "category": ["Foxes"]
     },
     {
       "id": "3",
@@ -60,7 +60,7 @@
           "amount": 200
         }
       ],
-      "category": ["All", "Rodents"]
+      "category": ["Rodents"]
     },
     {
       "id": "4",
@@ -80,7 +80,7 @@
           "amount": 200
         }
       ],
-      "category": ["All", "Big Cats"]
+      "category": ["Big Cats"]
     },
     {
       "id": "5",
@@ -100,7 +100,7 @@
           "amount": 200
         }
       ],
-      "category": ["All", "Rodents"]
+      "category": ["Rodents"]
     },
     {
       "id": "6",
@@ -120,7 +120,7 @@
           "amount": 200
         }
       ],
-      "category": ["All", "Rodents"]
+      "category": ["Rodents"]
     },
     {
       "id": "7",
@@ -140,7 +140,7 @@
           "amount": 200
         }
       ],
-      "category": ["All", "Test"]
+      "category": ["Test"]
     }
    
   ],

@@ -30,16 +30,17 @@ const Categories = ({setCategory}) => {
 
   return <>
     <div className="container d-flex flex-row justify-content-between border border-secondary rounded p-2">
-       <h3 className='px-3'>categories</h3>
+       <h3 className='px-3'>Categories</h3>
        <Button  type="button" className="btn btn-primary btn-block" onClick={() => {setToggle(!toggle), filteredCategories}}><i className="bi bi-filter"></i></Button>
     </div>
     <div className='p-2'>
       {toggle ? 
-      <div className='list-group'>
-        {allCategories.map((cat, index) => 
-          <a key={index} className='list-group-item list-group-item-action' href="#" onClick={() => handleCategoryClick(cat)}>{cat}</a>
-        )}
-      </div> 
+        <div className='list-group'>
+          <a className='list-group-item list-group-item-action' href="#" onClick={() => handleCategoryClick(null)}>Show all</a>
+          {allCategories.map((cat, index) => 
+            <a key={index} className='list-group-item list-group-item-action' href="#" onClick={() => handleCategoryClick(cat)}>{cat}</a>
+          )}
+        </div> 
       : null}
     </div>  
   </>
