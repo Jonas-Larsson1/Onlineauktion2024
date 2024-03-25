@@ -3,9 +3,13 @@ import { useState } from 'react';
 import SearchBar, {SearchContext} from "../components/SearchBar.jsx";
 import SearchResults, {FetchedDataContext} from '../components/SearchResults.jsx';
 import Categories from '../components/Categories.jsx';
+import { useParams } from 'react-router';
 
 const SearchPage = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const {incomingSearchQuery} = useParams()
+
+
+  const [searchQuery, setSearchQuery] = useState(incomingSearchQuery);
   const [data, setData] = useState(null) // result of fetch
   const [category, setCategory] = useState(null);
  

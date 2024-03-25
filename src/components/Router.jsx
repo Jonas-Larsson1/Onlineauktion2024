@@ -14,7 +14,7 @@ export default function Router() {
         <Routes >
           <Route path="/" element={<HomePage />} />
           <Route path="/AuctionPage/:id" element={<AuctionPage />} />
-        <Route path="/SearchPage" element={<SearchPage />} />
+          <Route path="/SearchPage/:incomingSearchQuery" element={<SearchPage />} />
         </Routes>
       </div>
     </div>

@@ -1,14 +1,30 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 
 const Navbar = () => {
+    const navigate = useNavigate()
 
     const [isOpen, setIsOpen] = useState(false);
+    const [searchValue, setSearchValue] = useState('')
 
     const toggleInputField = () => {
         setIsOpen(!isOpen);
     };
 
+    const handleSearchValueChange = (event) => {
+        setSearchValue(event.target.value)
+    }
+
+    const handleNavbarSearch = (event) => {
+        event.preventDefault()
+
+        const formData = new FormData(event.target)
+        const searchQuery = formData.get('searchQuery')
+        
+        setSearchValue('')
+        toggleInputField()
+        navigate(`/searchPage/${searchQuery}`)
+    }
 
     return (
         <nav className="navbar border-bottom border-dark" style={{ backgroundColor: "#E27D60" }}>
@@ -21,8 +37,15 @@ const Navbar = () => {
                 <div className="container d-flex">
                     
                     <div className={`collapse ${isOpen ? 'show' : ''}`} id="searchField">
-                        <form className="form-inline ">
-                            <input className="form-control border border-dark form-control-l" type="search" placeholder="Search" aria-label="Search" />
+                        <form className="form-inline " onSubmit={handleNavbarSearch}>
+                            <input 
+                            className="form-control border border-dark form-control-l" 
+                            type="search" 
+                            placeholder="Search" 
+                            aria-label="Search" 
+                            value={searchValue}
+                            onChange={handleSearchValueChange} 
+                            name="searchQuery" />
                         </form>
                     </div>
 
