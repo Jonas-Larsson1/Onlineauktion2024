@@ -36,7 +36,7 @@ const Categories = ({setCategory}) => {
     <div className='p-2'>
       {toggle ? 
         <div className='list-group'>
-          <a className='list-group-item list-group-item-action' href="#" onClick={() => handleCategoryClick(null)}>Show all</a>
+          <a className='list-group-item list-group-item-action' href="#" onClick={() => handleCategoryClick(null)}><b>Show all</b></a>
           {allCategories.map((cat, index) => 
             <a key={index} className='list-group-item list-group-item-action' href="#" onClick={() => handleCategoryClick(cat)}>{cat}</a>
           )}
