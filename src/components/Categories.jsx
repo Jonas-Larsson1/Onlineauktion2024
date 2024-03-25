@@ -30,7 +30,7 @@ const Categories = ({category, setCategory, setSearchQuery}) => {
     : [];
 
   return <>
-    <div className="container d-flex flex-row justify-content-between border border-secondary rounded p-2">
+    <div className="container d-flex flex-row justify-content-between border border-secondary rounded p-2 ">
        {category ? <h3 className='px-3'>{category}</h3> : <h3 className='px-3'>Select category</h3>}
        <Button  type="button" className="btn btn-primary btn-block" onClick={() => {setToggle(!toggle), filteredCategories}}><i className="bi bi-filter"></i></Button>
     </div>

@@ -51,7 +51,6 @@ const SearchResults = ({category}) => {
     }, [fetchedData, searchQuery, category])
     
   return (<>
-    {console.log("query:", searchQuery)}
     {searchQuery ? <p>You are searching for: <b>{searchQuery}</b> </p> : null}
     {filteredData ? filteredData.map((item, index) => (
         category === null || item.category.includes(category) ?  
