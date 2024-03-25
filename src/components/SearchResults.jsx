@@ -53,17 +53,21 @@ const SearchResults = ({category}) => {
   return (<>
     {searchQuery ? <p>You are searching for: <b>{searchQuery}</b> </p> : null}
     {filteredData ? filteredData.map((item, index) => (
-        category === null || item.category.includes(category) ?  
-            <div className='d-flex flex-row flex-wrap justify-content-center' style={{width: "auto"}} >
-                <div key={index} className="card m-2" style={{width: "18rem"}}>
-                    <img className="card-img-top" src={item.images[0]}/>
-                    <div className="card-body">
-                        <h3>{item.title}</h3>
-                        <p>{item.description}</p>
-                        <p>{item.category[1]}</p>
-                    </div>
-                </div> 
-            </div>
+        category === null || item.category.includes(category) ?
+                <div className='d-flex flex-row flex-wrap justify-content-center' style={{width: "auto"}} >
+                    <div key={index} className="card m-2" style={{width: "18rem"}}>
+                        <a href={`/AuctionPage/${item.id}`}>
+                            <img className="card-img-top" src={item.images[0]}/>
+                        </a>
+                        <div className="card-body">
+                            <a href={`/AuctionPage/${item.id}`}>
+                                <h3>{item.title}</h3>
+                            </a>  
+                            <p>{item.description}</p>
+                            <p>{item.category[1]}</p>
+                        </div>
+                    </div> 
+                </div>
         : null))
     : null
     }</>)

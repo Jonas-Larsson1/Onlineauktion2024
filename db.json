@@ -99,8 +99,8 @@
       "images": [
         "https://cdn.hswstatic.com/gif/arctic-fox-1.jpg"
       ],
-      "startDate": "javascript datetime",
-      "endDate": "javascript datetime",
+      "startDate": 1710853383121,
+      "endDate": 1710843383121,
       "startingPrice": 100,
       "reservePrice": 300,
       "bid_history": [
@@ -119,8 +119,8 @@
       "images": [
         "https://www.nhm.ac.uk/content/dam/nhmwww/discover/record-numbers-of-beavers-introduced-to-the-uk/beaver-crossing-two-column.jpg.thumb.768.768.jpg"
       ],
-      "startDate": "javascript datetime",
-      "endDate": "javascript datetime",
+      "startDate": 1710843383121,
+      "endDate": 1710843373121,
       "startingPrice": 100,
       "reservePrice": 300,
       "bid_history": [
