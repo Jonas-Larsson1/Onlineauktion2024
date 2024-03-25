@@ -54,8 +54,8 @@ const SearchResults = ({category}) => {
     {searchQuery ? <p>You are searching for: <b>{searchQuery}</b> </p> : null}
     {filteredData ? filteredData.map((item, index) => (
         category === null || item.category.includes(category) ?
-                <div className='d-flex flex-row flex-wrap justify-content-center' style={{width: "auto"}} >
-                    <div key={index} className="card m-2" style={{width: "18rem"}}>
+                <div key={index} className='d-flex flex-row flex-wrap justify-content-center' style={{width: "auto"}} >
+                    <div className="card m-2" style={{width: "18rem"}}>
                         <a href={`/AuctionPage/${item.id}`}>
                             <img className="card-img-top" src={item.images[0]}/>
                         </a>
