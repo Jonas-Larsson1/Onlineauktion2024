@@ -12,6 +12,7 @@ export default function Router() {
       <div className="content">
         <Routes >
           <Route path="/" element={<HomePage />} />
+          <Route path="/auctions" element={<ListPage />} />
         </Routes>
       </div>
     </div>
