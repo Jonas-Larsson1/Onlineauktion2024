@@ -21,6 +21,7 @@ export default function Router() {
               <div className="content">
                 <Routes>
                   <Route path="/" element={<HomePage />} />
+                  <Route path="/AuctionPage/:id" element={<AuctionPage />} />
                   {/* Alla andra paths när man är inloggad hamnar här */}
                 </Routes>
               </div>

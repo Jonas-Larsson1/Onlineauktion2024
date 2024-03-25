@@ -1,8 +1,8 @@
-import { useContext } from "react";
+
 import { GlobalContext, GlobalProvider } from "./GlobalContext.jsx";
 import { GlobalProvider } from "./GlobalContext.jsx";
 import Router from "./components/Router.jsx";
-import LoginPage from "./pages/LoginPage.jsx";
+
 
 import './styles/index.css'
 

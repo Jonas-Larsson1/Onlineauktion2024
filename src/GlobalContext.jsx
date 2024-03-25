@@ -1,9 +1,11 @@
 import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 
 const GlobalContext = createContext()
 
 function GlobalProvider({children}){
+
+    const [auction, setAuction] = useState(null)
 
    
     const [show, setShow] = useState(() => {
@@ -44,7 +46,9 @@ function GlobalProvider({children}){
      show,
      setShow,
      hideAlert,
-     displayAlert
+     displayAlert,
+     auction, 
+     setAuction,
     }}>
         {children}
 
@@ -53,23 +57,4 @@ function GlobalProvider({children}){
 
 }
 
-export {GlobalContext, GlobalProvider}import { createContext, useState } from "react";
-
-const GlobalContext = createContext();
-
-const GlobalProvider = ({children}) => {
-
-  const [auction, setAuction] = useState(null)
-
-  return ( 
-    <GlobalContext.Provider 
-      value={{
-        auction, 
-        setAuction,
-      }}>
-      {children}
-    </GlobalContext.Provider>
-   );
-}
- 
 export {GlobalContext, GlobalProvider}
