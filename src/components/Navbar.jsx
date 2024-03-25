@@ -1,17 +1,34 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../GlobalContext";
 
 import "../styles/styles.css";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { loggedIn } = useContext(GlobalContext);
-  const { logout } = useContext(GlobalContext);
+    const navigate = useNavigate()
+    const [isOpen, setIsOpen] = useState(false);
+    const [searchValue, setSearchValue] = useState('')
+    const { loggedIn } = useContext(GlobalContext);
+    const { logout } = useContext(GlobalContext);
+
   const toggleInputField = () => {
     setIsOpen(!isOpen);
   };
 
+    const handleSearchValueChange = (event) => {
+        setSearchValue(event.target.value)
+    }
+
+    const handleNavbarSearch = (event) => {
+        event.preventDefault()
+
+        const formData = new FormData(event.target)
+        const searchQuery = formData.get('searchQuery')
+        
+        setSearchValue('')
+        toggleInputField()
+        navigate(`/searchPage/${searchQuery}`)
+    }
   return loggedIn ? (
     <nav
       className="navbar sticky-top border-bottom border-dark"
@@ -21,18 +38,22 @@ const Navbar = () => {
         <img src="/src/assets/petabw.png" alt="petaLogo" height="80px" />
       </Link>
 
-      <div className="links fw-bold mx-5 text-decoration-none d-flex p-2">
-        <div className="container d-flex">
-          <div className={`collapse ${isOpen ? "show" : ""}`} id="searchField">
-            <form className="form-inline ">
-              <input
-                className="form-control border border-dark form-control-l"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-            </form>
-          </div>
+            <div className="links fw-bold mx-5 text-decoration-none d-flex p-2">
+
+                <div className="container d-flex">
+                    
+                    <div className={`collapse ${isOpen ? 'show' : ''}`} id="searchField">
+                        <form className="form-inline " onSubmit={handleNavbarSearch}>
+                            <input 
+                            className="form-control border border-dark form-control-l" 
+                            type="search" 
+                            placeholder="Search" 
+                            aria-label="Search" 
+                            value={searchValue}
+                            onChange={handleSearchValueChange} 
+                            name="searchQuery" />
+                        </form>
+                    </div>
 
           <img
             className="ms-5"

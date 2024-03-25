@@ -14,7 +14,6 @@ export default function HomePage() {
   return loggedIn ? <>
   <div className="homepage-content">
     <h1>Home!</h1>
-    {console.log(loggedIn)}
     <Button>Hej på dej</Button>
     {
         show ? 
