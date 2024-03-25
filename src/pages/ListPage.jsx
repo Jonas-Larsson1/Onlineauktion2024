@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 
 import ListCard from "../components/ListItem.jsx"
+import "../styles/listPage.css"
 
 export default function ListPage() {
   const [list, setList] = useState([]);

@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 
 import AuctionPage from "../pages/AuctionPage.jsx"
-import HomePage from "../pages/HomePage.jsx";
+// import HomePage from "../pages/HomePage.jsx";
 import Navbar from "./Navbar.jsx";
 import LoginPage from "../pages/LoginPage.jsx";
 import RegisterPage from "../pages/RegisterPage.jsx";
@@ -25,7 +25,7 @@ export default function Router() {
               <Navbar />
               <div className="content">
                 <Routes>
-                  <Route path="/" element={<HomePage />} />
+                  <Route path="/" element={<ListPage />} />
                   <Route path="/AuctionPage/:id" element={<AuctionPage />} />
                   <Route path="/SearchPage/:incomingSearchQuery" element={<SearchPage />} />
                   {/* Alla andra paths när man är inloggad hamnar här */}

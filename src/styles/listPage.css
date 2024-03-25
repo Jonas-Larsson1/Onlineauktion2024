@@ -1,3 +1,9 @@
+
+.row {
+    margin-top: 2rem;
+    row-gap: 2rem;
+}
+
 h3 {
     font-size: 20px;
     font-weight: bold;

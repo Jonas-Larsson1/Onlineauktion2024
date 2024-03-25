@@ -1,4 +1,4 @@
-import { Button, Card, ListGroup } from "react-bootstrap";
+import { Card, ListGroup } from "react-bootstrap";
 
 const ListCard = ({ item }) => {
   return (
@@ -7,13 +7,14 @@ const ListCard = ({ item }) => {
           <Card.Img variant="top" src={item.images[0]} style={{ height: "14rem" }} />
           <Card.Body>
             <Card.Title>{item.title}</Card.Title>
-            <Card.Text>{item.description}</Card.Text>
-            <ListGroup>
-                <ListGroup.Item><h3>Seller: </h3>{item.createdBy}</ListGroup.Item>
-                <ListGroup.Item><h3>Price: </h3>{item.currentPrice}</ListGroup.Item>
-            </ListGroup>
-            <br />
-            <Button variant="primary">View</Button>
+            <Card.Text style={{ height: "8rem" }}>{item.description}</Card.Text>
+          </Card.Body>
+          <ListGroup className="list-group list-group-flush">
+            <ListGroup.Item>Current bid: {item.currentPrice}</ListGroup.Item>
+            <ListGroup.Item>Bid ends: {item.endDate}</ListGroup.Item>
+          </ListGroup>
+          <Card.Body className="text-center">
+            <a href="#" class="btn btn-primary w-75">View</a>
           </Card.Body>
         </Card>
     </>
