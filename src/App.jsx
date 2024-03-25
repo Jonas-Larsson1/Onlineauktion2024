@@ -1,6 +1,5 @@
 
 import { GlobalContext, GlobalProvider } from "./GlobalContext.jsx";
-import { GlobalProvider } from "./GlobalContext.jsx";
 import Router from "./components/Router.jsx";
 
 
