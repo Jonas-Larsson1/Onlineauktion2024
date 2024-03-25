@@ -1,5 +1,5 @@
 {
-  "auctions" : [
+  "auctions": [
     {
       "id": "1",
       "title": "Sunda Island Tiger",
@@ -9,15 +9,85 @@
         "https://files.worldwildlife.org/wwfcmsprod/images/Sumatran_Tiger_New_Hero_Image/hero_small/47na1tq1ai_Sumatran_Tiger_Hero.jpg",
         "https://db637ll7r1kva.cloudfront.net/app/uploads/2022/02/10165750/iStock-1323863855-770x514.jpg"
       ],
-      "startDate": "javascript datetime",
-      "endDate": "javascript datetime",
+      "startDate": 1710853385121,
+      "endDate": 1710859385121,
       "startingPrice": 100,
       "reservePrice": 300,
-      "bid_history": [
+      "bidHistory": [
+        {
+          "userId": 1,
+          "time": 1711028300691,
+          "amount": "226"
+        },
+        {
+          "userId": 1,
+          "time": 1711027975536,
+          "amount": "225"
+        },
+        {
+          "userId": 1,
+          "time": 1711027930291,
+          "amount": "222"
+        },
+        {
+          "userId": 1,
+          "time": 1711027138943,
+          "amount": "216"
+        },
+        {
+          "userId": 1,
+          "time": 1711024943260,
+          "amount": "215"
+        },
+        {
+          "userId": 1,
+          "time": 1711024900634,
+          "amount": "214"
+        },
+        {
+          "userId": 1,
+          "time": 1711024872308,
+          "amount": "213"
+        },
+        {
+          "userId": 1,
+          "time": 1711024300683,
+          "amount": "212"
+        },
+        {
+          "userId": 1,
+          "time": 1711024116598,
+          "amount": "211"
+        },
+        {
+          "userId": 1,
+          "time": 1711023891819,
+          "amount": "210"
+        },
+        {
+          "userId": 1,
+          "time": 1711019377577,
+          "amount": "209"
+        },
         {
           "userId": "1",
-          "time": "javascript datetime",
+          "time": 1710853583121,
+          "amount": 205
+        },
+        {
+          "userId": "1",
+          "time": 1710853483121,
+          "amount": 202
+        },
+        {
+          "userId": "1",
+          "time": 1710853383121,
           "amount": 200
+        },
+        {
+          "userId": 1,
+          "time": 1711029035938,
+          "amount": "228"
         }
       ],
       "category": ["Big Cats"]
@@ -144,10 +214,9 @@
     }
    
   ],
-
-  "users" : [
+  "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "Tiger King",
       "password": "king123"
     }
