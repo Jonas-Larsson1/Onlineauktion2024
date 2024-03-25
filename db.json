@@ -16,6 +16,11 @@
       "bidHistory": [
         {
           "userId": 1,
+          "time": 1711029035938,
+          "amount": "228"
+        },
+        {
+          "userId": 1,
           "time": 1711028300691,
           "amount": "226"
         },
@@ -86,8 +91,8 @@
         },
         {
           "userId": 1,
-          "time": 1711029035938,
-          "amount": "228"
+          "time": 1711361653298,
+          "amount": "230"
         }
       ],
       "category": ["Big Cats"]
@@ -218,7 +223,54 @@
     {
       "id": "1",
       "username": "Tiger King",
-      "password": "king123"
+      "password": "king123",
+      "loggedIn": false
+    },
+    {
+      "id": "3",
+      "username": "bertil",
+      "password": "bertil123",
+      "loggedIn": false
+    },
+    {
+      "id": "96c4",
+      "username": "test",
+      "password": "test123"
+    },
+    {
+      "id": "6023",
+      "username": "bengan",
+      "password": "bengan123"
+    },
+    {
+      "id": "24c4",
+      "username": "",
+      "password": ""
+    },
+    {
+      "id": "2568",
+      "username": "",
+      "password": ""
+    },
+    {
+      "id": "7268",
+      "username": "lenakarlsson",
+      "password": "lena123"
+    },
+    {
+      "id": "9f27",
+      "username": "bertkarlsson",
+      "password": "bert123"
+    },
+    {
+      "id": "c288",
+      "username": "test",
+      "password": "testing"
+    },
+    {
+      "id": "b45d",
+      "username": "kungen1",
+      "password": "bästivärlden"
     }
   ]
 }
