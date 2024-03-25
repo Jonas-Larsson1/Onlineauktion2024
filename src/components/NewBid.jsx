@@ -1,9 +1,10 @@
 import { Button, Form, InputGroup, Row, Col } from "react-bootstrap";
 import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from '../GlobalContext'
+import AddToWatchList from "./AddToWatchList";
 
 export default function NewBid() {
-  const { auction, setAuction } = useContext(GlobalContext)
+  const { auction, setAuction, loggedIn } = useContext(GlobalContext)
   const bidHistory = auction.bidHistory
   const [highestBid, setHighestBid] = useState(getHighestBid(bidHistory))
   const [defaultBid, setDefaultBid] = useState(parseInt(highestBid) + 1)
@@ -35,7 +36,7 @@ export default function NewBid() {
     
     if (bidAmount > highestBid) {
       const newBid = {
-        userId: 1, // Måste bytas ut till den aktivt inloggade användaren
+        userId: loggedIn, 
         time: Date.now(),
         amount: bidAmount
       }
@@ -60,7 +61,7 @@ export default function NewBid() {
     }
   }
 
-  return (
+  return <>
     <Form onSubmit={placeBid}>
       <Row className="mb-3">
         <Form.Group as={Col} controlId="newBid">
@@ -81,12 +82,9 @@ export default function NewBid() {
           <Button variant="info" type="submit" className="me-2 btn-lg">
             Place bid
           </Button>
-
-          <Button variant="secondary" className="btn-sm">
-            Add to watchlist
-          </Button>
         </Col>
       </Row>
     </Form>
-  );
+    <AddToWatchList />
+  </>
 }
