@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import { Button } from 'react-bootstrap'
 import {FetchedDataContext} from './SearchResults';
 
-const Categories = ({setCategory}) => {
+const Categories = ({setCategory, setSearchQuery}) => {
   const { data } = useContext(FetchedDataContext)
   const [toggle, setToggle] = useState(false)
   const [auctionData, setAuctionData] = useState([])
@@ -15,6 +15,9 @@ const Categories = ({setCategory}) => {
 
   // added
   const handleCategoryClick = (category) => {
+    if (!category) {
+      setSearchQuery('')
+    }
     setCategory(category);
     setToggle(false);
     // console.log(category)

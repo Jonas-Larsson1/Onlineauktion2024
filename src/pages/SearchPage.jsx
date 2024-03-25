@@ -9,23 +9,21 @@ const SearchPage = () => {
   const [data, setData] = useState(null) // result of fetch
   const [category, setCategory] = useState(null);
  
-  return (
-    <>
+  return <>
     <FetchedDataContext.Provider value={{data, setData}}>
       <SearchContext.Provider value={{ searchQuery, setSearchQuery }}>
         <div className='d-flex flex-row-reverse w-100 justify-content-between'>
-        <div className="d-flex flex-column p-2 w-75">
-          {/* <Router /> */}
-          <SearchBar setCategory={setCategory}/>
-          <SearchResults category={category}/>
-        </div>
-        <div className='col-lg-4 p-2'>
-        <Categories setCategory={setCategory}/>
-        </div>
+          <div className="d-flex flex-column p-2 w-75">
+            <SearchBar setCategory={setCategory}/>
+            <SearchResults category={category}/>
+          </div>
+          <div className='col-lg-4 p-2'>
+            <Categories setCategory={setCategory} setSearchQuery={setSearchQuery}/>
+          </div>
         </div>
       </SearchContext.Provider>
-      </FetchedDataContext.Provider>
-    </>)
+    </FetchedDataContext.Provider>
+  </>
 }
 
 export default SearchPage
