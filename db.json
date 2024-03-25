@@ -15,6 +15,11 @@
       "reservePrice": 300,
       "bidHistory": [
         {
+          "userId": "3",
+          "time": 1711378270407,
+          "amount": "230"
+        },
+        {
           "userId": 1,
           "time": 1711377443496,
           "amount": "229"
@@ -96,8 +101,8 @@
         },
         {
           "userId": "3",
-          "time": 1711378270407,
-          "amount": "230"
+          "time": 1711379956046,
+          "amount": "231"
         }
       ],
       "category": [
@@ -164,6 +169,11 @@
           "userId": "1",
           "time": 1711028300691,
           "amount": "200"
+        },
+        {
+          "userId": "3",
+          "time": 1711378682268,
+          "amount": "201"
         }
       ],
       "category": [
@@ -248,9 +258,7 @@
       "id": "3",
       "username": "bertil",
       "password": "bertil123",
-      "savedAuctions": [
-        "1"
-      ]
+      "savedAuctions": []
     },
     {
       "id": "96c4",

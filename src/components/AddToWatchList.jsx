@@ -5,6 +5,7 @@ import { useContext, useState, useEffect } from "react"
 export default function AddToWatchList () {
   const { auction, loggedIn } = useContext(GlobalContext)
   const [ user, setUser ] = useState()
+  const [ savedByUser, setSavedByUser  ] = useState(false)
 
   useEffect(() => {
     const getData = async () => {
@@ -14,13 +15,31 @@ export default function AddToWatchList () {
       setUser(result);
     };
 
+
     getData();
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      if (user.savedAuctions.includes(auction.id)) {
+        setSavedByUser(true)
+      }
+    }
+  }, [user, savedByUser])
 
   const addToWatchList = async (event) => {
     event.preventDefault()
 
-    user.savedAuctions.push(auction.id)
+    if (!user.savedAuctions.includes(auction.id)) {
+      user.savedAuctions.push(auction.id)
+      setSavedByUser(true)
+      
+    } else {
+      const savedAuctionIndex = user.savedAuctions.indexOf(auction.id)
+      user.savedAuctions.splice(savedAuctionIndex, 1)
+      setSavedByUser(false)
+    }
+    
 
     const response = await fetch(`/api/users/${loggedIn}`, {
       method: "PUT",
@@ -38,7 +57,7 @@ export default function AddToWatchList () {
   return <>
     <Form onSubmit={addToWatchList}>
       <Button type="submit" variant="secondary" className="btn-sm">
-        Add to watchlist
+        {!savedByUser ? "Add to your saved auctions" : "Remove from your saved auctions"}
       </Button>
     </Form>
   </>
