@@ -1,12 +1,14 @@
 
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-import AuctionPage from "../pages/AuctionPage.jsx";
-import HomePage from "../pages/HomePage.jsx";
+
+import AuctionPage from "../pages/AuctionPage.jsx"
+// import HomePage from "../pages/HomePage.jsx";
+import ListPage from "../pages/ListPage.jsx";
 import Navbar from "./Navbar.jsx";
 import LoginPage from "../pages/LoginPage.jsx";
 import RegisterPage from "../pages/RegisterPage.jsx";
-import SearchPage from "../pages/SearchPage.jsx";
+import SearchPage from "../pages/SearchPage.jsx"
 import Footer from "./Footer.jsx";
 import { useContext } from "react";
 import { GlobalContext } from "../GlobalContext.jsx";
@@ -25,7 +27,7 @@ export default function Router() {
               <Navbar />
               <div className="content">
                 <Routes>
-                  <Route path="/" element={<HomePage />} />
+                  <Route path="/" element={<ListPage />} />
                   <Route path="/AuctionPage/:id" element={<AuctionPage />} />
                   <Route
                     path="/SearchPage/:incomingSearchQuery"

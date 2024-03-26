@@ -3,7 +3,7 @@
     {
       "id": "1",
       "title": "Sunda Island Tiger",
-      "description": "Big cat",
+      "description": "The Sunda Island tiger is a subspecies of Panthera tigris, not a whole species by itself. This means their genes are a little different from those of tigers from other places.",
       "images": [
         "https://files.worldwildlife.org/wwfcmsprod/images/30_Hills_Sumatran_tiger_resting_47149/story_full_width/63868cijym_3TigerPhoto.jpg",
         "https://files.worldwildlife.org/wwfcmsprod/images/Sumatran_Tiger_New_Hero_Image/hero_small/47na1tq1ai_Sumatran_Tiger_Hero.jpg",
@@ -87,17 +87,17 @@
         {
           "userId": "1",
           "time": 1710853583121,
-          "amount": 205
+          "amount": "205"
         },
         {
           "userId": "1",
           "time": 1710853483121,
-          "amount": 202
+          "amount": "202"
         },
         {
           "userId": "1",
           "time": 1710853383121,
-          "amount": 200
+          "amount": "200"
         },
         {
           "userId": "3",
@@ -134,7 +134,7 @@
     {
       "id": "3",
       "title": "Beaver",
-      "description": "Beavers are powerful swimmers that can swim underwater for up to 15 minutes.",
+      "description": "Beavers are powerful swimmers that can swim underwater for up to 15 minutes. They are famously busy, and they turn their talents to reengineering the landscape as few other animals can.",
       "images": [
         "https://www.nhm.ac.uk/content/dam/nhmwww/discover/record-numbers-of-beavers-introduced-to-the-uk/beaver-crossing-two-column.jpg.thumb.768.768.jpg"
       ],
