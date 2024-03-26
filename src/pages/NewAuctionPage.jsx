@@ -64,6 +64,32 @@ const NewAuctionPage = () => {
             </div>
           </div>
         </div>
+        <div className='row'>
+          <div className="col">
+            <div className='input-group mt-2'>
+            <span class="input-group-text" >€</span>
+              <input  
+            type="text"
+            // value={searchValue} 
+            // onChange={handleChange} 
+            className="form-control"
+            placeholder="Start Price"
+            aria-label="Start Price" />
+            </div>
+          </div>
+          <div className="col">
+            <div className='input-group mt-2'>
+            <span class="input-group-text" >€</span>
+              <input  
+            type="text"
+            // value={searchValue} 
+            // onChange={handleChange} 
+            className="form-control"
+            placeholder="Reserved Price"
+            aria-label="Reserved Price" />
+            </div>
+          </div>
+        </div>
       </div>
     </form>
   )
