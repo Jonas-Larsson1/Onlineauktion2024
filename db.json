@@ -72,17 +72,17 @@
         {
           "userId": "1",
           "time": 1710853583121,
-          "amount": 205
+          "amount": "205"
         },
         {
           "userId": "1",
           "time": 1710853483121,
-          "amount": 202
+          "amount": "202"
         },
         {
           "userId": "1",
           "time": 1710853383121,
-          "amount": 200
+          "amount": "200"
         },
         {
           "userId": 1,

@@ -5,6 +5,12 @@
 }
 
 h3 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
+}
+
+.list-group-item {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
 }
