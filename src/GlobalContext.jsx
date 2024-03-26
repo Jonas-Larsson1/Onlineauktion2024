@@ -6,7 +6,6 @@ const GlobalContext = createContext()
 function GlobalProvider({children}){
 
     const [auction, setAuction] = useState(null)
-
    
     const [show, setShow] = useState(() => {
         return sessionStorage.getItem('showAlert' === 'true' || 'false')
@@ -24,15 +23,15 @@ function GlobalProvider({children}){
         setShow(true)
     }
     const [loggedIn, setLoggedIn] = useState(() => {
-        return sessionStorage.getItem('loggedIn') === 'true' || false 
+        return sessionStorage.getItem('loggedIn')
     }) // Put loggedIn item in session storage with the value true or false
 
     useEffect(() => {
         sessionStorage.setItem('loggedIn', loggedIn)
     }, [loggedIn]) // Update loggedIn item everytime loggedIn state changes
 
-    const login = () => {
-        setLoggedIn(true)
+    const login = (userId) => {
+        setLoggedIn(userId)
     }
 
     const logout = () => {

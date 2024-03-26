@@ -26,7 +26,7 @@ export default function LoginPage() {
           user.password === passwordInput
       );
       if (user) {
-        login(); // set loggedIn to true
+        login(user.id); // set loggedIn to true
         displayAlert();
         
       } else {
