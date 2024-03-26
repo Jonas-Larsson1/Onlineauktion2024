@@ -13,6 +13,7 @@ export default function AccountPage() {
 
     const currentDate = new Date();
 
+    // Hämtar inloggade användaren
     useEffect(() => {
         const getUserData = async () => {
             const response = await fetch(`http://localhost:3000/users/${loggedInId}`);
@@ -23,21 +24,23 @@ export default function AccountPage() {
         getUserData();
     }, [loggedInId]);
 
+    // Hämtar auktioner där inloggade användaren har lagt ett bud
     useEffect(() => {
         const getBidsData = async () => {
             const response = await fetch(`http://localhost:3000/auctions/`);
             const result = await response.json();
-
+            
 
             const userBids = []
 
-            // console.log("result:", result)
             for (let i = 0; i < result.length; i++) {
                 let currentBid = result[i]
                 let userPlacedBid = false
+                const auctionEndDate = new Date(currentBid.endDate);
 
                 for (let j = 0; j < currentBid.bidHistory.length; j++) {
                     let currentBidding = currentBid.bidHistory[j]
+                                        
 
                     if (currentBidding.userId === userId) {
                         userPlacedBid = true
@@ -45,10 +48,11 @@ export default function AccountPage() {
                     }
                 }
 
-                if (userPlacedBid) {
+                if (userPlacedBid && auctionEndDate > currentDate) {
                     userBids.push(currentBid)
                 }
             }
+
 
             setBids(userBids)
         };
@@ -56,23 +60,22 @@ export default function AccountPage() {
         getBidsData();
     }, [userId]);
 
-
+    // Hämtar auktioner där inloggade användaren har startat en auktion
     useEffect(() => {
         const getAuctionData = async () => {
             const response = await fetch(`http://localhost:3000/auctions/`);
             const result = await response.json();
-            // setAuctions(result);
 
             const userOngoingAuctions = [];
             const userClosedAuctions = [];
 
-            // console.log("result:", result)
             for (let i = 0; i < result.length; i++) {
                 let currentAuction = result[i]
 
                 if (currentAuction.sellerId === userId) {
-                    const auctionEndDate = new Date(currentAuction.endDate); 
+                    const auctionEndDate = new Date(currentAuction.endDate);
 
+                    // Kollar om datumet på endDate har passerat
                     if (auctionEndDate > currentDate) {
                         userOngoingAuctions.push(currentAuction);
                     } else {
@@ -98,7 +101,7 @@ export default function AccountPage() {
                     <p>404</p>
                 )}
 
-                <div className="d-flex justify-content-center mt-5">
+                <div className="d-flex justify-content-center mt-5 pb-5">
                     <StyleCard>
                         <div className="d-flex flex-column">
                             <h5 className="fst-italic fw-bold d-flex justify-content-center">Your ongoing bids.</h5>
@@ -106,8 +109,13 @@ export default function AccountPage() {
                                 <div key={index} className="m-3 pt-5 ">
                                     <h4 className="fw-bold">{bid.title}</h4>
                                     <Row>
-                                        <Col sm={6}>
-                                            <p>{bid.description}</p>
+                                        <Col m={6}>
+                                            <p>Auction start: {formatDateTime(bid.startDate)}</p>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col m={6}>
+                                            <p>Auction end: {formatDateTime(bid.endDate)}</p>
                                         </Col>
                                     </Row>
                                 </div>)) : <p>Ain't no auction here, Mr. Auctioneer.</p>}
@@ -116,13 +124,18 @@ export default function AccountPage() {
 
                     <StyleCard>
                         <div className="d-flex flex-column">
-                        <h5 className="fst-italic fw-bold d-flex justify-content-center">Your ongoing auctions.</h5>
+                            <h5 className="fst-italic fw-bold d-flex justify-content-center">Your ongoing auctions.</h5>
                             {ongoingAuctions ? ongoingAuctions.map((ongoingAuctions, index) => (
                                 <div key={index} className="m-3 pt-5 ">
                                     <h4 className="fw-bold">{ongoingAuctions.title}</h4>
                                     <Row>
-                                        <Col sm={6}>
-                                            <p>{ongoingAuctions.description}</p>
+                                        <Col m={6}>
+                                            <p>Auction start: {formatDateTime(ongoingAuctions.startDate)}</p>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col m={6}>
+                                            <p>Auction end: {formatDateTime(ongoingAuctions.endDate)}</p>
                                         </Col>
                                     </Row>
                                 </div>)) : <p>Ain't no auction here, Mr. Auctioneer.</p>}
@@ -131,13 +144,18 @@ export default function AccountPage() {
 
                     <StyleCard>
                         <div className="d-flex flex-column">
-                        <h5 className="fst-italic fw-bold d-flex justify-content-center">Your closed auctions.</h5>
+                            <h5 className="fst-italic fw-bold d-flex justify-content-center">Your closed auctions.</h5>
                             {closedAuctions ? closedAuctions.map((closedAuctions, index) => (
                                 <div key={index} className="m-3 pt-5 ">
                                     <h4 className="fw-bold">{closedAuctions.title}</h4>
                                     <Row>
-                                        <Col sm={6}>
-                                            <p>{closedAuctions.description}</p>
+                                        <Col m={6}>
+                                            <p>Auction start: {formatDateTime(closedAuctions.startDate)}</p>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col m={6}>
+                                            <p>Auction end: {formatDateTime(closedAuctions.endDate)}</p>
                                         </Col>
                                     </Row>
                                 </div>)) : <p>Ain't no auction here, Mr. Auctioneer.</p>}
