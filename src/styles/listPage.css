@@ -1,0 +1,16 @@
+
+.row {
+    margin: 2rem 0;
+    row-gap: 2rem;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.list-group-item {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
