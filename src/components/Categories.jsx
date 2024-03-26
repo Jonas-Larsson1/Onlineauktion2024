@@ -48,4 +48,5 @@ const Categories = ({category, setCategory, setSearchQuery}) => {
   </>
 }
 
-export default Categories
+export default Categories;
+// export { allCategories };

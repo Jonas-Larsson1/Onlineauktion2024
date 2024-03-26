@@ -4,6 +4,7 @@ import SearchBar, {SearchContext} from "../components/SearchBar.jsx";
 import SearchResults, {FetchedDataContext} from '../components/SearchResults.jsx';
 import Categories from '../components/Categories.jsx';
 import { useParams } from 'react-router';
+import AuctionPage from './AuctionPage.jsx';
 
 const SearchPage = () => {
   const {incomingSearchQuery} = useParams()
