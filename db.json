@@ -90,7 +90,9 @@
           "amount": "228"
         }
       ],
-      "category": ["Big Cats"]
+      "category": [
+        "Big Cats"
+      ]
     },
     {
       "id": "2",
@@ -110,7 +112,9 @@
           "amount": "200"
         }
       ],
-      "category": ["Foxes"]
+      "category": [
+        "Foxes"
+      ]
     },
     {
       "id": "3",
@@ -130,7 +134,9 @@
           "amount": "200"
         }
       ],
-      "category": ["Rodents"]
+      "category": [
+        "Rodents"
+      ]
     },
     {
       "id": "4",
@@ -150,7 +156,9 @@
           "amount": "200"
         }
       ],
-      "category": ["Big Cats"]
+      "category": [
+        "Big Cats"
+      ]
     },
     {
       "id": "5",
@@ -170,7 +178,9 @@
           "amount": "200"
         }
       ],
-      "category": ["Rodents"]
+      "category": [
+        "Rodents"
+      ]
     },
     {
       "id": "6",
@@ -190,7 +200,9 @@
           "amount": "200"
         }
       ],
-      "category": ["Rodents"]
+      "category": [
+        "Rodents"
+      ]
     },
     {
       "id": "7",
@@ -210,9 +222,10 @@
           "amount": "200"
         }
       ],
-      "category": ["Test"]
+      "category": [
+        "Test"
+      ]
     }
-   
   ],
   "users": [
     {
@@ -254,6 +267,11 @@
       "id": "b45d",
       "username": "kungen1",
       "password": "bästivärlden"
+    },
+    {
+      "id": "08c5",
+      "username": "hoube14",
+      "password": "Polisen34"
     }
   ]
 }
