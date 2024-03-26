@@ -19,7 +19,7 @@ const ListCard = ({ item }) => {
             <ListGroup.Item><h3>Bid ends:</h3> {formatDateTime(item.endDate)}</ListGroup.Item>
           </ListGroup>
           <Card.Body className="text-center">
-            <a href={`/AuctionPage/${item.id}`} className="btn btn-primary w-75">View</a>
+            <a href={`/AuctionPage/${item.id}`} className="btn btn-primary w-100">View</a>
           </Card.Body>
         </Card>
     </>
