@@ -1,15 +1,29 @@
 import { Card, ListGroup } from "react-bootstrap";
 import { formatDateTime } from "../pages/AuctionPage";
 
-
 const ListCard = ({ item }) => {
   
   item.bidHistory.sort((a, b) => new Date(b.time) - new Date(a.time))
+
+  const statusBadge = () => {
+    const hasSurpassedTime = () => {
+      return Date.now() > item.endDate;
+    };
+
+    const badgeColor = hasSurpassedTime() ? 
+    <span className={`position-absolute translate-middle top-0 start-50 p-2 badge bg-danger fs-6`}> Finished </span> 
+    : <span className={`position-absolute translate-middle top-0 start-50 p-2 badge bg-success fs-6`}> Ongoing </span>
   
+    return badgeColor;
+}
+
   return (
     <>
         <Card style={{ width: "22rem", height: "36rem" }}>
-          <Card.Img variant="top" src={item.images[0]} style={{ height: "13rem" }} />
+          <div>
+            <Card.Img variant="top" src={item.images[0]} style={{ height: "13rem" }} />
+            {statusBadge()}
+          </div>
           <Card.Body>
             <Card.Title>{item.title}</Card.Title>
             <Card.Text style={{ height: "8rem" }}>{item.description}</Card.Text>
