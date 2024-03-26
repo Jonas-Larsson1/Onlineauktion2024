@@ -68,7 +68,9 @@ const Navbar = () => {
           <img src="/src/assets/help.webp" alt="Help" height="40px" />
         </button>
         <button className="navbar-btn ms-2 text-decoration-none text-secondary" >
+        <Link to="/AccountPage">
           <img src="/src/assets/account.webp" alt="Account" height="40px" />
+          </Link>
         </button>
         <button
           className="logout-btn"
