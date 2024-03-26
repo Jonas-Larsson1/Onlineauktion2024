@@ -1,16 +1,16 @@
 
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-
-import AuctionPage from "../pages/AuctionPage.jsx"
+import AuctionPage from "../pages/AuctionPage.jsx";
 import HomePage from "../pages/HomePage.jsx";
 import Navbar from "./Navbar.jsx";
 import LoginPage from "../pages/LoginPage.jsx";
 import RegisterPage from "../pages/RegisterPage.jsx";
-import SearchPage from "../pages/SearchPage.jsx"
+import SearchPage from "../pages/SearchPage.jsx";
 import Footer from "./Footer.jsx";
 import { useContext } from "react";
 import { GlobalContext } from "../GlobalContext.jsx";
+import AboutPage from "../pages/AboutPage.jsx";
 
 export default function Router() {
   const { loggedIn } = useContext(GlobalContext);
@@ -19,6 +19,7 @@ export default function Router() {
     <>
       <BrowserRouter>
         <div className="App">
+          {!loggedIn && <Navigate to='/' /> }
           {loggedIn ? (
             <div>
               <Navbar />
@@ -26,7 +27,11 @@ export default function Router() {
                 <Routes>
                   <Route path="/" element={<HomePage />} />
                   <Route path="/AuctionPage/:id" element={<AuctionPage />} />
-                  <Route path="/SearchPage/:incomingSearchQuery" element={<SearchPage />} />
+                  <Route
+                    path="/SearchPage/:incomingSearchQuery"
+                    element={<SearchPage />}
+                  />
+                  <Route path="/AboutPage" element={<AboutPage />} />
                   {/* Alla andra paths när man är inloggad hamnar här */}
                 </Routes>
               </div>
