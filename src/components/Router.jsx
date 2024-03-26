@@ -9,6 +9,7 @@ import LoginPage from "../pages/LoginPage.jsx";
 import RegisterPage from "../pages/RegisterPage.jsx";
 import SearchPage from "../pages/SearchPage.jsx"
 import Footer from "./Footer.jsx";
+import AccountPage from "../pages/AccountPage.jsx";
 import { useContext } from "react";
 import { GlobalContext } from "../GlobalContext.jsx";
 
@@ -26,6 +27,7 @@ export default function Router() {
                 <Routes>
                   <Route path="/" element={<HomePage />} />
                   <Route path="/AuctionPage/:id" element={<AuctionPage />} />
+                  <Route path="/AccountPage/" element={<AccountPage />} />
                   <Route path="/SearchPage/:incomingSearchQuery" element={<SearchPage />} />
                   {/* Alla andra paths när man är inloggad hamnar här */}
                 </Routes>

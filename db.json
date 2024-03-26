@@ -11,7 +11,7 @@
         "https://db637ll7r1kva.cloudfront.net/app/uploads/2022/02/10165750/iStock-1323863855-770x514.jpg"
       ],
       "startDate": 1710853385121,
-      "endDate": 1710859385121,
+      "endDate": 1720859385121,
       "startingPrice": 100,
       "reservePrice": 300,
       "bidHistory": [
@@ -90,15 +90,177 @@
           "time": 1711029035938,
           "amount": "228"
         }
-      ]
-    }
-  ],
-
-  "users" : [
+      ],
+      "category": ["Big Cats"]
+    },
     {
-      "id": 1,
+      "id": "2",
+      "sellerId": 2,
+      "title": "Arctic Fox",
+      "description": "The arctic fox is an incredibly hardy animal that can survive frigid Arctic temperatures as low as –58°F in the treeless lands where it makes its home.",
+      "images": [
+        "https://cdn.hswstatic.com/gif/arctic-fox-1.jpg"
+      ],
+      "startDate": 1710853383121,
+      "endDate": 1710843383121,
+      "startingPrice": 100,
+      "reservePrice": 300,
+      "bidHistory": [
+        {
+          "userId": "1",
+          "time": 1711028300691,
+          "amount": "200"
+        }
+      ],
+      "category": ["Foxes"]
+    },
+    {
+      "id": "3",
+      "sellerId": 1,
+      "title": "Beaver",
+      "description": "Beavers are powerful swimmers that can swim underwater for up to 15 minutes.",
+      "images": [
+        "https://www.nhm.ac.uk/content/dam/nhmwww/discover/record-numbers-of-beavers-introduced-to-the-uk/beaver-crossing-two-column.jpg.thumb.768.768.jpg"
+      ],
+      "startDate": 1710843383121,
+      "endDate": 1710843373121,
+      "startingPrice": 100,
+      "reservePrice": 300,
+      "bidHistory": [
+        {
+          "userId": "1",
+          "time": 1711028300691,
+          "amount": "200"
+        }
+      ],
+      "category": ["Rodents"]
+    },
+    {
+      "id": "4",
+      "sellerId": 2,
+      "title": "Cheetah",
+      "description": "Fastest mammal on land, the cheetah can reach speeds of 60 or perhaps even 70 miles (97 or 113 kilometers) an hour over short distances.",
+      "images": [
+        "https://cdn.britannica.com/98/152298-050-8E45510A/Cheetah.jpg"
+      ],
+      "startDate": 1710853383121,
+      "endDate": 1710843383121,
+      "startingPrice": 100,
+      "reservePrice": 300,
+      "bidHistory": [
+        {
+          "userId": "1",
+          "time": 1711028300691,
+          "amount": "200"
+        }
+      ],
+      "category": ["Big Cats"]
+    },
+    {
+      "id": "5",
+      "sellerId": 1,
+      "title": "Chipmunk",
+      "description": "Chipmunks are part of the squirrel family, and while they look similar to their bushy-tailed cousins, chipmunks are actually smaller, with alternating light and dark stripes along their cheeks and backs.",
+      "images": [
+        "https://www.scenichudson.org/wp-content/uploads/2022/08/Chipmunk7_Dana-Montague_DSC_3905.jpg"
+      ],
+      "startDate": 1710843383121,
+      "endDate": 1710843373121,
+      "startingPrice": 100,
+      "reservePrice": 300,
+      "bidHistory": [
+        {
+          "userId": "1",
+          "time": 1711028300691,
+          "amount": "200"
+        }
+      ],
+      "category": ["Rodents"]
+    },
+    {
+      "id": "6",
+      "sellerId": 2,
+      "title": "Eastern Cottontail Rabbit",
+      "description": "Eastern cottontails stay mostly hidden during the day but come out at night to eat. They snack on grass and love garden greens like peas and lettuce.",
+      "images": [
+        "https://nhpbs.org/wild/images/easterncottontailusfwlewisGorman.jpg"
+      ],
+      "startDate": 1710843383121,
+      "endDate": 1710843373121,
+      "startingPrice": 100,
+      "reservePrice": 300,
+      "bidHistory": [
+        {
+          "userId": "1",
+          "time": 1711028300691,
+          "amount": "200"
+        }
+      ],
+      "category": ["Rodents"]
+    },
+    {
+      "id": "7",
+      "sellerId": 1,
+      "title": "Category Test",
+      "description": "This is a test category.",
+      "images": [
+        "https://example.com/image.jpg"
+      ],
+      "startDate": 1710843383121,
+      "endDate": 1710843373121,
+      "startingPrice": 100,
+      "reservePrice": 300,
+      "bidHistory": [
+        {
+          "userId": "1",
+          "time": 1711028300691,
+          "amount": "200"
+        }
+      ],
+      "category": ["Test"]
+    }
+   
+  ],
+  "users": [
+    {
+      "id": "1",
       "username": "Tiger King",
       "password": "king123"
+    },
+    {
+      "id": "3",
+      "username": "bertil",
+      "password": "bertil123"
+    },
+    {
+      "id": "96c4",
+      "username": "test",
+      "password": "test123"
+    },
+    {
+      "id": "6023",
+      "username": "bengan",
+      "password": "bengan123"
+    },
+    {
+      "id": "7268",
+      "username": "lenakarlsson",
+      "password": "lena123"
+    },
+    {
+      "id": "9f27",
+      "username": "bertkarlsson",
+      "password": "bert123"
+    },
+    {
+      "id": "c288",
+      "username": "test",
+      "password": "testing"
+    },
+    {
+      "id": "b45d",
+      "username": "kungen1",
+      "password": "bästivärlden"
     }
   ]
 }
