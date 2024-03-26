@@ -16,6 +16,11 @@
       "bidHistory": [
         {
           "userId": 1,
+          "time": 1711029035938,
+          "amount": "228"
+        },
+        {
+          "userId": 1,
           "time": 1711028300691,
           "amount": "226"
         },
@@ -86,11 +91,13 @@
         },
         {
           "userId": 1,
-          "time": 1711029035938,
-          "amount": "228"
+          "time": 1711447105440,
+          "amount": "229"
         }
       ],
-      "category": ["Big Cats"]
+      "category": [
+        "Big Cats"
+      ]
     },
     {
       "id": "2",
@@ -110,7 +117,9 @@
           "amount": "200"
         }
       ],
-      "category": ["Foxes"]
+      "category": [
+        "Foxes"
+      ]
     },
     {
       "id": "3",
@@ -130,7 +139,9 @@
           "amount": "200"
         }
       ],
-      "category": ["Rodents"]
+      "category": [
+        "Rodents"
+      ]
     },
     {
       "id": "4",
@@ -150,7 +161,9 @@
           "amount": "200"
         }
       ],
-      "category": ["Big Cats"]
+      "category": [
+        "Big Cats"
+      ]
     },
     {
       "id": "5",
@@ -170,7 +183,9 @@
           "amount": "200"
         }
       ],
-      "category": ["Rodents"]
+      "category": [
+        "Rodents"
+      ]
     },
     {
       "id": "6",
@@ -190,7 +205,9 @@
           "amount": "200"
         }
       ],
-      "category": ["Rodents"]
+      "category": [
+        "Rodents"
+      ]
     },
     {
       "id": "7",
@@ -210,9 +227,10 @@
           "amount": "200"
         }
       ],
-      "category": ["Test"]
+      "category": [
+        "Test"
+      ]
     }
-   
   ],
   "users": [
     {
@@ -254,6 +272,11 @@
       "id": "b45d",
       "username": "kungen1",
       "password": "bästivärlden"
+    },
+    {
+      "id": "0cf8",
+      "username": "pollytesting",
+      "password": "pollytesting"
     }
   ]
 }

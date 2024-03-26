@@ -11,6 +11,7 @@ import SearchPage from "../pages/SearchPage.jsx"
 import Footer from "./Footer.jsx";
 import { useContext } from "react";
 import { GlobalContext } from "../GlobalContext.jsx";
+import NewAuctionPage from "../pages/NewAuctionPage.jsx";
 
 export default function Router() {
   const { loggedIn } = useContext(GlobalContext);
@@ -27,6 +28,7 @@ export default function Router() {
                   <Route path="/" element={<HomePage />} />
                   <Route path="/AuctionPage/:id" element={<AuctionPage />} />
                   <Route path="/SearchPage/:incomingSearchQuery" element={<SearchPage />} />
+                  <Route path="/NewAuction" element={<NewAuctionPage />}/>
                   {/* Alla andra paths när man är inloggad hamnar här */}
                 </Routes>
               </div>

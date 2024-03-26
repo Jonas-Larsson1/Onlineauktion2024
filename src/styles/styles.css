@@ -44,3 +44,13 @@ body{
     color:white;
 }
 
+.custom-date-picker {
+    position: relative;
+  }
+  
+  /* Add scrollbar to the date picker calendar */
+  .react-datepicker__month-container {
+    max-height: 200px; /* Adjust the maximum height as needed */
+    overflow-y: auto;
+  }
+  
