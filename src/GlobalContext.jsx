@@ -1,10 +1,13 @@
 import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const GlobalContext = createContext()
 
 function GlobalProvider({children}){
 
     const [auction, setAuction] = useState(null)
+
+   
    
     const [show, setShow] = useState(() => {
         return sessionStorage.getItem('showAlert' === 'true' || 'false')
@@ -22,7 +25,7 @@ function GlobalProvider({children}){
         setShow(true)
     }
     const [loggedIn, setLoggedIn] = useState(() => {
-        return sessionStorage.getItem('loggedIn')
+        return sessionStorage.getItem('loggedIn' === 'true' || false)
     }) // Put loggedIn item in session storage with the value true or false
 
     useEffect(() => {

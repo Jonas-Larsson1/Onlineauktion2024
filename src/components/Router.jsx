@@ -17,9 +17,8 @@ export default function Router() {
 
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter> 
         <div className="App">
-          {!loggedIn && <Navigate to='/' /> }
           {loggedIn ? (
             <div>
               <Navbar />

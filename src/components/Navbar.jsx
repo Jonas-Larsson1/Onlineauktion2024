@@ -12,6 +12,8 @@ const Navbar = () => {
   const { loggedIn } = useContext(GlobalContext);
   const { logout } = useContext(GlobalContext);
 
+  
+
   const toggleInputField = () => {
     setIsOpen(!isOpen);
   };
@@ -83,6 +85,7 @@ const Navbar = () => {
           className="logout-btn"
           onClick={() => {
             logout(); // set loggedIn to false
+            navigate("/")
           }}
         >
           <img
