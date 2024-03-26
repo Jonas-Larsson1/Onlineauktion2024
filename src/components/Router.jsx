@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import AuctionPage from "../pages/AuctionPage.jsx";
 import HomePage from "../pages/HomePage.jsx";
@@ -18,6 +19,7 @@ export default function Router() {
     <>
       <BrowserRouter>
         <div className="App">
+          {!loggedIn && <Navigate to='/' /> }
           {loggedIn ? (
             <div>
               <Navbar />
