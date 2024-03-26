@@ -39,11 +39,11 @@ export default function AboutPage() {
           </Col>
           <Col sm={5}>
             <img
-              className="rounded float-right h-75"
-              src="https://upload.wikimedia.org/wikipedia/commons/c/c6/Claes_Ralamb.jpg"
+              className="rounded float-right h-75 w-75"
+              src="/src/assets/guy.jpg"
               alt=""
             />
-            <p>Baron Claes Petasson year 1670</p>
+            <p>Baron Claes Petasson year 1674 on opening night</p>
           </Col>
         </Row>
       </div>
