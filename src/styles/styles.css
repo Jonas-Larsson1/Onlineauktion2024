@@ -1,0 +1,46 @@
+body{
+    background-color: #41B3A3;
+}
+
+.navbar-btn {
+    all: unset;
+}
+
+.navbar-btn:hover {
+    opacity: 80%;
+}
+
+.logout-btn{
+    all : unset; 
+    margin-left: 1rem;
+}
+
+.material-symbols-outlined{
+    all: unset;
+}
+
+.logout-img:hover{
+    opacity: 80%;
+}
+
+.alert{
+    width:50%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20rem;
+    position: absolute;
+    align-items:center;
+}
+
+
+.register-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.register-link{
+    color:white;
+}
+
