@@ -16,6 +16,21 @@
       "reservePrice": 300,
       "bidHistory": [
         {
+          "userId": "3",
+          "time": 1711378270407,
+          "amount": "230"
+        },
+        {
+          "userId": 1,
+          "time": 1711377443496,
+          "amount": "229"
+        },
+        {
+          "userId": 1,
+          "time": 1711029035938,
+          "amount": "228"
+        },
+        {
           "userId": 1,
           "time": 1711028300691,
           "amount": "226"
@@ -86,12 +101,14 @@
           "amount": 200
         },
         {
-          "userId": 1,
-          "time": 1711029035938,
-          "amount": "228"
+          "userId": "3",
+          "time": 1711379956046,
+          "amount": "231"
         }
       ],
-      "category": ["Big Cats"]
+      "category": [
+        "Big Cats"
+      ]
     },
     {
       "id": "2",
@@ -112,7 +129,9 @@
           "amount": "200"
         }
       ],
-      "category": ["Foxes"]
+      "category": [
+        "Foxes"
+      ]
     },
     {
       "id": "3",
@@ -133,7 +152,9 @@
           "amount": "200"
         }
       ],
-      "category": ["Rodents"]
+      "category": [
+        "Rodents"
+      ]
     },
     {
       "id": "4",
@@ -152,9 +173,16 @@
           "userId": "1",
           "time": 1711028300691,
           "amount": "200"
+        },
+        {
+          "userId": "3",
+          "time": 1711378682268,
+          "amount": "201"
         }
       ],
-      "category": ["Big Cats"]
+      "category": [
+        "Big Cats"
+      ]
     },
     {
       "id": "5",
@@ -175,7 +203,9 @@
           "amount": "200"
         }
       ],
-      "category": ["Rodents"]
+      "category": [
+        "Rodents"
+      ]
     },
     {
       "id": "6",
@@ -196,7 +226,9 @@
           "amount": "200"
         }
       ],
-      "category": ["Rodents"]
+      "category": [
+        "Rodents"
+      ]
     },
     {
       "id": "7",
@@ -217,20 +249,23 @@
           "amount": "200"
         }
       ],
-      "category": ["Test"]
+      "category": [
+        "Test"
+      ]
     }
-   
   ],
   "users": [
     {
       "id": "1",
       "username": "Tiger King",
-      "password": "king123"
+      "password": "king123",
+      "savedAuctions": []
     },
     {
       "id": "3",
       "username": "bertil",
-      "password": "bertil123"
+      "password": "bertil123",
+      "savedAuctions": []
     },
     {
       "id": "96c4",
@@ -261,6 +296,11 @@
       "id": "b45d",
       "username": "kungen1",
       "password": "bästivärlden"
+    },
+    {
+      "id": "08c5",
+      "username": "hoube14",
+      "password": "Polisen34"
     }
   ]
 }
