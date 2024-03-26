@@ -6,7 +6,7 @@ const Footer = () => {
   const { loggedIn } = useContext(GlobalContext);
   return loggedIn ? (
     <nav
-      className="navbar fixed-bottom border-top border-dark"
+      className="navbar border-top border-dark"
       style={{ backgroundColor: "#E27D60" }}
     >
       <Link className="mx-3" to="/">

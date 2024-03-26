@@ -2,7 +2,7 @@
   "auctions": [
     {
       "id": "1",
-      "sellerId": 1,
+      "sellerId": "1",
       "title": "Sunda Island Tiger",
       "description": "Big cat",
       "images": [
@@ -95,7 +95,7 @@
     },
     {
       "id": "2",
-      "sellerId": 2,
+      "sellerId": "2",
       "title": "Arctic Fox",
       "description": "The arctic fox is an incredibly hardy animal that can survive frigid Arctic temperatures as low as –58°F in the treeless lands where it makes its home.",
       "images": [
@@ -116,7 +116,7 @@
     },
     {
       "id": "3",
-      "sellerId": 1,
+      "sellerId": "1",
       "title": "Beaver",
       "description": "Beavers are powerful swimmers that can swim underwater for up to 15 minutes.",
       "images": [
@@ -137,7 +137,7 @@
     },
     {
       "id": "4",
-      "sellerId": 2,
+      "sellerId": "2",
       "title": "Cheetah",
       "description": "Fastest mammal on land, the cheetah can reach speeds of 60 or perhaps even 70 miles (97 or 113 kilometers) an hour over short distances.",
       "images": [
@@ -158,7 +158,7 @@
     },
     {
       "id": "5",
-      "sellerId": 1,
+      "sellerId":"1",
       "title": "Chipmunk",
       "description": "Chipmunks are part of the squirrel family, and while they look similar to their bushy-tailed cousins, chipmunks are actually smaller, with alternating light and dark stripes along their cheeks and backs.",
       "images": [
@@ -179,7 +179,7 @@
     },
     {
       "id": "6",
-      "sellerId": 2,
+      "sellerId": "2",
       "title": "Eastern Cottontail Rabbit",
       "description": "Eastern cottontails stay mostly hidden during the day but come out at night to eat. They snack on grass and love garden greens like peas and lettuce.",
       "images": [
@@ -200,7 +200,7 @@
     },
     {
       "id": "7",
-      "sellerId": 1,
+      "sellerId": "1",
       "title": "Category Test",
       "description": "This is a test category.",
       "images": [
