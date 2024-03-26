@@ -48,9 +48,8 @@ body{
     position: relative;
   }
   
-  /* Add scrollbar to the date picker calendar */
-  .react-datepicker__month-container {
-    max-height: 200px; /* Adjust the maximum height as needed */
+.react-datepicker__month-container {
+    max-height: 200px; 
     overflow-y: auto;
-  }
-  
+}
+
