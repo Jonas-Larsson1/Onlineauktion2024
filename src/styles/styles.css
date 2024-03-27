@@ -15,6 +15,10 @@ body{
     margin-left: 1rem;
 }
 
+.account-img{
+    width: 20rem;
+}
+
 .material-symbols-outlined{
     all: unset;
 }
@@ -44,3 +48,7 @@ body{
     color:white;
 }
 
+a {
+    color: black;
+    text-decoration: none;
+}
