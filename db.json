@@ -232,6 +232,73 @@
       "category": [
         "Test"
       ]
+    },
+    {
+      "id": "d463",
+      "sellerId": "3",
+      "images": [
+        "https://media.wwf.se/uploads/2018/12/panda_medium_ww191377-768x514.jpg"
+      ],
+      "title": "test",
+      "description": "test",
+      "startDate": "2024-03-26T23:00:00.000Z",
+      "endDate": "2024-03-29T23:00:00.000Z",
+      "startingPrice": "20",
+      "reservePrice": "30",
+      "category": [
+        "Bear"
+      ]
+    },
+    {
+      "id": "9b8d",
+      "sellerId": "3",
+      "images": [
+        "https://media.wwf.se/uploads/2018/12/panda_medium_ww191377-768x514.jpg"
+      ],
+      "title": "panda",
+      "description": "söt panda ",
+      "startDate": "2024-03-26T23:00:00.000Z",
+      "endDate": "2024-03-27T23:00:00.000Z",
+      "startingPrice": "20",
+      "reservePrice": "30",
+      "category": [
+        "Bear"
+      ]
+    },
+    {
+      "id": "db04",
+      "sellerId": "3",
+      "images": [
+        "https://media.wwf.se/uploads/2018/12/panda_medium_ww191377-768x514.jpg"
+      ],
+      "title": "panda",
+      "description": "söt panda",
+      "startDate": "2024-03-27T23:00:00.000Z",
+      "endDate": "2024-03-29T23:00:00.000Z",
+      "startingPrice": "50",
+      "reservePrice": "8",
+      "category": [
+        "Bear"
+      ]
+    },
+    {
+      "id": "3a16",
+      "sellerId": "3",
+      "images": [
+        "https://media.wwf.se/uploads/2018/12/panda_medium_ww191377-768x514.jpg"
+      ],
+      "title": "panda",
+      "description": "panda",
+      "startDate": "2024-03-27T23:00:00.000Z",
+      "endDate": "2024-03-28T23:00:00.000Z",
+      "startingPrice": "30",
+      "reservePrice": "30",
+      "category": [
+        "Bear"
+      ],
+      "bidHistory": [
+        {}
+      ]
     }
   ],
   "users": [

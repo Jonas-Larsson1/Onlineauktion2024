@@ -1,8 +1,6 @@
 // TO DO
 
-// post data to dn on submit
 // go to homepage on submit
-// check that submitted auction-item exists on homepage (among other items)
 // navbar-footer problem
 
 
@@ -15,6 +13,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { GlobalContext } from '../GlobalContext';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -28,13 +27,14 @@ const NewAuctionPage = () => {
   const [data, setData] = useState(null)
   const [mainTitle, setMainTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [imageInput, setImageInput] = useState('')
+  const [imageInput, setImageInput] = useState([''])
   const [startPrice, setStartPrice] = useState('')
   const [reservedPrice, setReservedPrice] = useState('')
   const {loggedIn} = useContext(GlobalContext)
 
+  const navigate = useNavigate()
 
-  console.log(data)
+  
   useEffect(() => {
     const getData = async () => {
       const response = await fetch('/api/auctions')
@@ -49,39 +49,43 @@ const NewAuctionPage = () => {
   async function postNewAuction(e){
     e.preventDefault()
     
-    
-    
-    const res = await fetch("/api/auctions", {
+    if(imageInput[0].length >= 1 && mainTitle.length > 3 && description.length > 3 && startDate != null && 
+      endDate != null && startPrice.length > 0 && reservedPrice.length > 0 && title[0].length >= 1){
 
+        
+        const res = await fetch("/api/auctions", {
+          
       method: "POST",
       headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          sellerId : loggedIn,
-          images: imageInput,
-          title: mainTitle,
-          description: description,
-          startDate: startDate,
-          endDate: endDate,
-          startingPrice: startPrice,
-          reservePrice: reservedPrice
-
+      body: JSON.stringify({
+        sellerId : loggedIn,
+        images: [imageInput],
+        title: mainTitle,
+        description: description,
+        startDate: startDate,
+        endDate: endDate,
+        startingPrice: startPrice,
+        reservePrice: reservedPrice,
+        category: [title],
+        bidHistory : [{}]
+      })
     })
-  })
-  if(res.ok){
-    console.log(res)
-  }else{
-    console.log("något fick fel")
+    if(res.ok){
+      console.log(res)
+      navigate("/")
+    }else{
+      console.log("något fick fel")
+    }
+  } else{
+    alert("too short")
+   
   }
- 
+    
   }
 
   const existingCategories = []
 
 
-
-  useEffect(() => {
-    console.log(data)
-  }, [data])
 
   let filtered = data ? data.map((item) => item.category.map(i => existingCategories.includes(i) ? null : existingCategories.push(i)
   )) : null
