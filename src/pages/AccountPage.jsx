@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import StyleCard from "../components/StyleCard";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Table } from "react-bootstrap";
 import { GlobalContext } from "../GlobalContext";
 import { Link } from "react-router-dom";
 
@@ -112,24 +112,30 @@ export default function AccountPage() {
                             {bids ? bids.map((bid, index) => (
                                 <div key={index} className="m-3 pt-5 ">
                                     <Link to={`/AuctionPage/${bid.id}`}>
-                                        <img src={bid.images[0]} className="account-img border" />
+                                        <div className="d-flex justify-content-center">
+                                            <img src={bid.images[0]} className="account-img border" style={{ height: "13rem" }} />
+                                        </div>
                                         <h4 className="fw-bold d-flex justify-content-center">{bid.title}</h4>
                                     </Link>
-                                    <Row>
-                                        <Col m={6}>
-                                            <p>Highest bid: {bid.bidHistory[0].amount}€</p>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col m={6}>
-                                            <p>Auction start: {formatDateTime(bid.startDate)}</p>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col m={6}>
-                                            <p>Auction end: {formatDateTime(bid.endDate)}</p>
-                                        </Col>
-                                    </Row>
+
+                                    <Table striped bordered hover variant="dark" size="sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Highest bid</th>
+                                                <th>Auction start</th>
+                                                <th>Auction end</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr key={index}>
+                                                <td>{bid.bidHistory[0].amount}€</td>
+                                                <td>{formatDateTime(bid.startDate)}</td>
+                                                <td> {formatDateTime(bid.endDate)}</td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
+
+
                                 </div>)) : <p>Ain't no auction here, Mr. Auctioneer.</p>}
                         </div>
                     </StyleCard>
@@ -140,24 +146,27 @@ export default function AccountPage() {
                             {ongoingAuctions ? ongoingAuctions.map((ongoingAuctions, index) => (
                                 <div key={index} className="m-3 pt-5 ">
                                     <Link to={`/AuctionPage/${ongoingAuctions.id}`}>
-                                        <img src={ongoingAuctions.images[0]} className="account-img border" />
+                                        <div className="d-flex justify-content-center">
+                                            <img src={ongoingAuctions.images[0]} className="account-img border" style={{ height: "13rem" }} />
+                                        </div>
                                         <h4 className="fw-bold d-flex justify-content-center">{ongoingAuctions.title}</h4>
                                     </Link>
-                                    <Row>
-                                        <Col m={6}>
-                                            <p>Highest bid: {ongoingAuctions.bidHistory[0].amount}€</p>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col m={6}>
-                                            <p>Auction start: {formatDateTime(ongoingAuctions.startDate)}</p>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col m={6}>
-                                            <p>Auction end: {formatDateTime(ongoingAuctions.endDate)}</p>
-                                        </Col>
-                                    </Row>
+                                    <Table striped bordered hover variant="dark" size="sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Highest bid</th>
+                                                <th>Auction start</th>
+                                                <th>Auction end</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr key={index}>
+                                                <td>{ongoingAuctions.bidHistory[0].amount}€</td>
+                                                <td>{formatDateTime(ongoingAuctions.startDate)}</td>
+                                                <td> {formatDateTime(ongoingAuctions.endDate)}</td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
                                 </div>)) : <p>Ain't no auction here, Mr. Auctioneer.</p>}
                         </div>
                     </StyleCard>
@@ -168,24 +177,27 @@ export default function AccountPage() {
                             {closedAuctions ? closedAuctions.map((closedAuctions, index) => (
                                 <div key={index} className="m-3 pt-5 ">
                                     <Link to={`/AuctionPage/${closedAuctions.id}`}>
-                                        <img src={closedAuctions.images[0]} className="account-img border" />
+                                        <div className="d-flex justify-content-center">
+                                            <img src={closedAuctions.images[0]} className="account-img border" style={{ height: "13rem" }} />
+                                        </div>
                                         <h4 className="fw-bold d-flex justify-content-center">{closedAuctions.title}</h4>
                                     </Link>
-                                    <Row>
-                                        <Col m={6}>
-                                            <p>Winning bid: {closedAuctions.bidHistory[0].amount}€</p>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col m={6}>
-                                            <p>Auction start: {formatDateTime(closedAuctions.startDate)}</p>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col m={6}>
-                                            <p>Auction end: {formatDateTime(closedAuctions.endDate)}</p>
-                                        </Col>
-                                    </Row>
+                                    <Table striped bordered hover variant="dark" size="sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Winning bid</th>
+                                                <th>Auction start</th>
+                                                <th>Auction end</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr key={index}>
+                                                <td>{closedAuctions.bidHistory[0].amount}€</td>
+                                                <td>{formatDateTime(closedAuctions.startDate)}</td>
+                                                <td> {formatDateTime(closedAuctions.endDate)}</td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
                                 </div>)) : <p>Ain't no auction here, Mr. Auctioneer.</p>}
                         </div>
                     </StyleCard>
