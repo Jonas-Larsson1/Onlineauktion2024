@@ -106,20 +106,16 @@
           "amount": "231"
         }
       ],
-      "category": [
-        "Big Cats"
-      ]
+      "category": ["Big Cats"]
     },
     {
       "id": "2",
       "sellerId": "2",
       "title": "Arctic Fox",
       "description": "The arctic fox is an incredibly hardy animal that can survive frigid Arctic temperatures as low as –58°F in the treeless lands where it makes its home.",
-      "images": [
-        "https://cdn.hswstatic.com/gif/arctic-fox-1.jpg"
-      ],
+      "images": ["https://cdn.hswstatic.com/gif/arctic-fox-1.jpg"],
       "startDate": 1710853383121,
-      "endDate": 1710843383121,
+      "endDate": 1713843383121,
       "startingPrice": 100,
       "reservePrice": 300,
       "bidHistory": [
@@ -129,9 +125,7 @@
           "amount": "200"
         }
       ],
-      "category": [
-        "Foxes"
-      ]
+      "category": ["Foxes"]
     },
     {
       "id": "3",
@@ -157,9 +151,7 @@
           "amount": "201"
         }
       ],
-      "category": [
-        "Rodents"
-      ]
+      "category": ["Rodents"]
     },
     {
       "id": "4",
@@ -185,13 +177,11 @@
           "amount": "201"
         }
       ],
-      "category": [
-        "Big Cats"
-      ]
+      "category": ["Big Cats"]
     },
     {
       "id": "5",
-      "sellerId":"1",
+      "sellerId": "1",
       "title": "Chipmunk",
       "description": "Chipmunks are part of the squirrel family, and while they look similar to their bushy-tailed cousins, chipmunks are actually smaller, with alternating light and dark stripes along their cheeks and backs.",
       "images": [
@@ -208,9 +198,7 @@
           "amount": "200"
         }
       ],
-      "category": [
-        "Rodents"
-      ]
+      "category": ["Rodents"]
     },
     {
       "id": "6",
@@ -231,18 +219,14 @@
           "amount": "200"
         }
       ],
-      "category": [
-        "Rodents"
-      ]
+      "category": ["Rodents"]
     },
     {
       "id": "7",
       "sellerId": "1",
       "title": "Category Test",
       "description": "This is a test category.",
-      "images": [
-        "https://example.com/image.jpg"
-      ],
+      "images": ["https://example.com/image.jpg"],
       "startDate": 1710843383121,
       "endDate": 1710843373121,
       "startingPrice": 100,
@@ -254,9 +238,7 @@
           "amount": "200"
         }
       ],
-      "category": [
-        "Test"
-      ]
+      "category": ["Test"]
     }
   ],
   "users": [
