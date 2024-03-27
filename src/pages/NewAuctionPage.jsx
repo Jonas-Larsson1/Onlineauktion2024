@@ -1,5 +1,5 @@
 // TO DO
-// add image
+
 // post data to dn on submit
 // go to homepage on submit
 // check that submitted auction-item exists on homepage (among other items)
@@ -66,6 +66,13 @@ const NewAuctionPage = () => {
     <form className='w-100 d-flex justify-content-center align-items-center m-3'>
       <div className='d-flex flex-column' style={{width:"30%"}}>
         <div className='d-flex flex-column'>
+          <input             
+            type="text"
+            // value={searchValue} 
+            // onChange={handleChange} 
+            className="form-control mb-2"
+            placeholder="Link to your image"
+            aria-label="Link to your image" />
           <input
             type="text"
             // value={searchValue} 
