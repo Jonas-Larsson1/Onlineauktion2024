@@ -4,6 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import AuctionPage from "../pages/AuctionPage.jsx"
 // import HomePage from "../pages/HomePage.jsx";
+import ListPage from "../pages/ListPage.jsx";
 import Navbar from "./Navbar.jsx";
 import LoginPage from "../pages/LoginPage.jsx";
 import RegisterPage from "../pages/RegisterPage.jsx";

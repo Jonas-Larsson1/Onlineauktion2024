@@ -113,7 +113,7 @@ export default function AccountPage() {
                                 <div key={index} className="m-3 pt-5 ">
                                     <Link to={`/AuctionPage/${bid.id}`}>
                                         <img src={bid.images[0]} className="account-img border" />
-                                        <h4 className="fw-bold">{bid.title}</h4>
+                                        <h4 className="fw-bold d-flex justify-content-center">{bid.title}</h4>
                                     </Link>
                                     <Row>
                                         <Col m={6}>
@@ -141,7 +141,7 @@ export default function AccountPage() {
                                 <div key={index} className="m-3 pt-5 ">
                                     <Link to={`/AuctionPage/${ongoingAuctions.id}`}>
                                         <img src={ongoingAuctions.images[0]} className="account-img border" />
-                                        <h4 className="fw-bold">{ongoingAuctions.title}</h4>
+                                        <h4 className="fw-bold d-flex justify-content-center">{ongoingAuctions.title}</h4>
                                     </Link>
                                     <Row>
                                         <Col m={6}>
@@ -169,7 +169,7 @@ export default function AccountPage() {
                                 <div key={index} className="m-3 pt-5 ">
                                     <Link to={`/AuctionPage/${closedAuctions.id}`}>
                                         <img src={closedAuctions.images[0]} className="account-img border" />
-                                        <h4 className="fw-bold">{closedAuctions.title}</h4>
+                                        <h4 className="fw-bold d-flex justify-content-center">{closedAuctions.title}</h4>
                                     </Link>
                                     <Row>
                                         <Col m={6}>
