@@ -2,6 +2,7 @@
   "auctions": [
     {
       "id": "1",
+      "sellerId": "1",
       "title": "Sunda Island Tiger",
       "description": "Big cat",
       "images": [
@@ -101,6 +102,7 @@
     },
     {
       "id": "2",
+      "sellerId": 2,
       "title": "Arctic Fox",
       "description": "The arctic fox is an incredibly hardy animal that can survive frigid Arctic temperatures as low as –58°F in the treeless lands where it makes its home.",
       "images": [

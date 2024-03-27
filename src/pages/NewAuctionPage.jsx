@@ -11,9 +11,10 @@
 // data fetch
 
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { GlobalContext } from '../GlobalContext';
 
 
 
@@ -25,9 +26,15 @@ const NewAuctionPage = () => {
   const [title, setTitle] = useState('');
   const [customCategory, setCustomCategory] = useState('');
   const [data, setData] = useState(null)
+  const [mainTitle, setMainTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [imageInput, setImageInput] = useState('')
+  const [startPrice, setStartPrice] = useState('')
+  const [reservedPrice, setReservedPrice] = useState('')
+  const {loggedIn} = useContext(GlobalContext)
 
-  const existingCategories = []
 
+  console.log(data)
   useEffect(() => {
     const getData = async () => {
       const response = await fetch('/api/auctions')
@@ -38,6 +45,39 @@ const NewAuctionPage = () => {
     getData()
 
   }, [])
+
+  async function postNewAuction(e){
+    e.preventDefault()
+    
+    
+    
+    const res = await fetch("/api/auctions", {
+
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sellerId : loggedIn,
+          images: imageInput,
+          title: mainTitle,
+          description: description,
+          startDate: startDate,
+          endDate: endDate,
+          startingPrice: startPrice,
+          reservePrice: reservedPrice
+
+    })
+  })
+  if(res.ok){
+    console.log(res)
+  }else{
+    console.log("något fick fel")
+  }
+ 
+  }
+
+  const existingCategories = []
+
+
 
   useEffect(() => {
     console.log(data)
@@ -68,22 +108,22 @@ const NewAuctionPage = () => {
         <div className='d-flex flex-column'>
           <input             
             type="text"
-            // value={searchValue} 
-            // onChange={handleChange} 
+            value={imageInput} 
+            onChange={(e) => {setImageInput(e.target.value)}} 
             className="form-control mb-2"
             placeholder="Link to your image"
             aria-label="Link to your image" />
           <input
             type="text"
-            // value={searchValue} 
-            // onChange={handleChange} 
+            value={mainTitle} 
+            onChange={(e) => {setMainTitle(e.target.value)}} 
             className="form-control mb-2"
             placeholder="Title"
             aria-label="Title" />
           <input
             type="text"
-            // value={searchValue} 
-            // onChange={handleChange} 
+            value={description} 
+            onChange={(e) => {setDescription(e.target.value)}} 
             className="form-control mb-2"
             placeholder="Description"
             aria-label="Description" />
@@ -126,8 +166,8 @@ const NewAuctionPage = () => {
               <span className="input-group-text" >€</span>
               <input
                 type="text"
-                // value={searchValue} 
-                // onChange={handleChange} 
+                value={startPrice} 
+                onChange={(e) => {setStartPrice(e.target.value)}} 
                 className="form-control"
                 placeholder="Start Price"
                 aria-label="Start Price" />
@@ -138,8 +178,8 @@ const NewAuctionPage = () => {
               <span className="input-group-text" >€</span>
               <input
                 type="text"
-                // value={searchValue} 
-                // onChange={handleChange} 
+                value={reservedPrice} 
+                onChange={(e) => {setReservedPrice(e.target.value)}} 
                 className="form-control"
                 placeholder="Reserved Price"
                 aria-label="Reserved Price" />
@@ -158,7 +198,7 @@ const NewAuctionPage = () => {
         <a key={index} className='list-group-item list-group-item-action text-center' href="#" onClick={() => {setDropdownOpen(false), setTitle(cat)}}>{cat}</a>
         )}<input type='text' placeholder='Add custom category' value={customCategory}
         onChange={(e) => setCustomCategory(e.target.value)} onKeyDown={handleKeyPress}/></div> : null}
-        <button className="btn btn-primary mt-3 w-75 align-self-center">Submit</button>
+        <button className="btn btn-primary mt-3 w-75 align-self-center" onClick={postNewAuction}>Submit</button>
       </div>
     </form>
   )
