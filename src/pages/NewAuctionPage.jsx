@@ -1,5 +1,5 @@
 // TO DO
-// add image --- input med en länk
+
 // post data to dn on submit
 // go to homepage on submit
 // check that submitted auction-item exists on homepage (among other items)
