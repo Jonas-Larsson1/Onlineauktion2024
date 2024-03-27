@@ -1,4 +1,4 @@
-import { Table, Button, Container, Row, Col } from "react-bootstrap";
+import { Table, Button, Container, Row, Col, ToggleButton } from "react-bootstrap";
 import { formatDateTime } from "../pages/AuctionPage";
 import { useContext, useState } from "react";
 import { GlobalContext } from "../GlobalContext";
@@ -13,14 +13,15 @@ export default function LimitBidHistory() {
   const [buttonText, setButtonText] = useState("Show more bids");
   const [showAllBids, setShowAllBids] = useState(false);
 
-  function ShowMoreBids() {
-    if (showAllBids) {
+  function ShowMoreBids(event) {
+    if (!showAllBids) {
       setBidsToShow(bidHistory);
-      setButtonText("Hide bids");
+      setButtonText("Show less bids");
     } else {
       setButtonText("Show more bids");
       setBidsToShow(bidHistory.slice(0, 5));
     }
+    event.currentTarget.checked
     setShowAllBids(!showAllBids);
   }
 
@@ -28,9 +29,9 @@ export default function LimitBidHistory() {
     <Container>
       <Row className="justify-content-end mb-2">
         <Col xs={12} md={6} lg={4} className="text-end">
-          <Button variant="light" size="sm" onClick={ShowMoreBids}>
+          <ToggleButton variant="light" type="checkbox" size="sm" checked={showAllBids} onClick={(event) => ShowMoreBids(event)}>
             {buttonText}
-          </Button>
+          </ToggleButton>
         </Col>
       </Row>
       <Row>
