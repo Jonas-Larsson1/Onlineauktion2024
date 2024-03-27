@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import { GlobalContext } from "../GlobalContext"; 
+import { useEffect, useState } from "react";
 import ListCard from "../components/ListItem.jsx"
 import "../styles/listPage.css"
 
@@ -16,16 +15,27 @@ export default function ListPage() {
         console.error("Error fetching data:", error);
       }
     };
-
+      
     getData();
   }, []);
 
+  if (list.length > 0 && list[0].hasOwnProperty("bidHistory")) {
+    list.sort((a, b) => b.bidHistory.length - a.bidHistory.length);
+  }
+  
   return (
     <>
+      <div className="container-xxl">
+        <div className="row row-cols-1 row-cols-md-3 g-4">
+           <div className="col-md-4" key="0">
+            {list.length > 0 && list[0].hasOwnProperty("bidHistory") && <ListCard item={list[0]} />}
+          </div>
+        </div>
+      </div>
       <div className="container">
-        <div className="row">
-          {list.map((item, index) => (
-            <div className="col-md-4" key={index}>
+        <div className="row row-cols-1 row-cols-md-3 g-4">
+          {list.slice(1).map((item, index) => (
+            <div className="col-md-4" key={index + 1}>
               <ListCard item={item} />
             </div>
           ))}

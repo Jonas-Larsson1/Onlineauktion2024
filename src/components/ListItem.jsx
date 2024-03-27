@@ -15,7 +15,8 @@ const ListCard = ({ item }) => {
     : <span className={`position-absolute translate-middle top-0 start-50 p-2 badge bg-success fs-6`}> Ongoing </span>
   
     return badgeColor;
-}
+  }
+  
 
   return (
     <>
