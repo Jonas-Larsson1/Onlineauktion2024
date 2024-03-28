@@ -325,6 +325,17 @@
       "id": "0cf8",
       "username": "pollytesting",
       "password": "pollytesting"
+    },
+    {
+      "id": "d548",
+      "username": "foxyfox",
+      "password": "fox123"
+    },
+    {
+      "id": "01c1",
+      "username": "flyingfox",
+      "password": "foxing1",
+      "savedAuctions": []
     }
   ]
 }

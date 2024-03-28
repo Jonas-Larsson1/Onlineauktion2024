@@ -57,3 +57,7 @@ body{
     overflow-y: auto;
 }
 
+a{
+    text-decoration: none;
+    color:black;
+}
