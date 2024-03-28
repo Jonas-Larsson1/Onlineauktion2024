@@ -11,6 +11,10 @@ export default function BidHistory() {
 
   bidHistory.sort((a, b) => new Date(b.time) - new Date(a.time))
 
+  const myfunction = () => {
+    
+  }
+
   return <>
     <Table striped bordered hover variant="dark" size="sm">
       <thead>

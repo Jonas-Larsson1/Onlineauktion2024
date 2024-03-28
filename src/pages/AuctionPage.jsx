@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Row, Col } from "react-bootstrap";
-import { GlobalContext } from "../GlobalContext"; 
+import { Row, Col, Card } from "react-bootstrap";
+import { GlobalContext } from "../GlobalContext";
 import ImageGallery from "../components/ImageGallery";
 import Bidding from "../components/Bidding";
 
 export default function AuctionPage() {
   let { id } = useParams();
   // const [auction, setAuction] = useState(null);
-  const { auction, setAuction } = useContext(GlobalContext)
+  const { auction, setAuction } = useContext(GlobalContext);
 
   useEffect(() => {
     const getData = async () => {
@@ -18,7 +18,7 @@ export default function AuctionPage() {
     };
 
     getData();
-  }, [auction]);
+  }, []);
 
   return (
     <>
@@ -27,14 +27,26 @@ export default function AuctionPage() {
           <h1>{auction.title}</h1>
           <Row>
             <Col sm={6}>
-              <ImageGallery auction={auction} />
-              <p>{auction.description}</p>
-              <p>Auction start: {formatDateTime(auction.startDate)}</p>
-              <p>Auction end: {formatDateTime(auction.endDate)}</p>
+              <Card data-bs-theme="dark">
+                <Card.Body>
+                  <ImageGallery auction={auction} />
+                  <Card.Title>{auction.title}</Card.Title>
+                  <Card.Text>{auction.description}</Card.Text>
+                  <Card border="light" style={{ padding: "1rem" }}>
+                    Auction duration:{" "}
+                    <b>
+                      {formatDateTime(auction.startDate)}
+                      &nbsp; - &nbsp;
+                      {formatDateTime(auction.endDate)}
+                    </b>
+                    <br />
+                  </Card>
+                </Card.Body>
+              </Card>
             </Col>
             <Col sm={6}>
               <div>
-                <Bidding/>
+                <Bidding />
               </div>
             </Col>
           </Row>
@@ -54,7 +66,7 @@ export function formatDateTime(dateTimeString) {
     hour: "numeric",
     minute: "numeric",
     hour12: false,
-    timeZone: "UTC"
+    timeZone: "UTC",
   };
 
   const formattedDate = new Date(dateTimeString).toLocaleDateString(
