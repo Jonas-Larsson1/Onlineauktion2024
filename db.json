@@ -3,7 +3,6 @@
     {
       "id": "1",
       "sellerId": "1",
-      "sellerId": "1",
       "title": "Sunda Island Tiger",
       "description": "The Sunda Island tiger is a subspecies of Panthera tigris, not a whole species by itself. This means their genes are a little different from those of tigers from other places.",
       "images": [
@@ -116,7 +115,9 @@
       "sellerId": "2",
       "title": "Arctic Fox",
       "description": "The arctic fox is an incredibly hardy animal that can survive frigid Arctic temperatures as low as –58°F in the treeless lands where it makes its home.",
-      "images": ["https://cdn.hswstatic.com/gif/arctic-fox-1.jpg"],
+      "images": [
+        "https://cdn.hswstatic.com/gif/arctic-fox-1.jpg"
+      ],
       "startDate": 1710853383121,
       "endDate": 1713843383121,
       "startingPrice": 100,
@@ -239,7 +240,9 @@
       "sellerId": "1",
       "title": "Category Test",
       "description": "This is a test category.",
-      "images": ["https://example.com/image.jpg"],
+      "images": [
+        "https://example.com/image.jpg"
+      ],
       "startDate": 1710843383121,
       "endDate": 1710843373121,
       "startingPrice": 100,
@@ -256,67 +259,19 @@
       ]
     },
     {
-      "id": "d463",
+      "id": "b220",
       "sellerId": "3",
       "images": [
-        "https://media.wwf.se/uploads/2018/12/panda_medium_ww191377-768x514.jpg"
+        "https://i.natgeofe.com/k/1db1b816-aa92-434e-994f-d3298c9f58f8/fennec-fox-hole_square.jpg"
       ],
-      "title": "test",
-      "description": "test",
-      "startDate": "2024-03-26T23:00:00.000Z",
+      "title": "fennec fox",
+      "description": "sandy fox",
+      "startDate": "2024-03-27T23:00:00.000Z",
       "endDate": "2024-03-29T23:00:00.000Z",
       "startingPrice": "20",
       "reservePrice": "30",
       "category": [
-        "Bear"
-      ]
-    },
-    {
-      "id": "9b8d",
-      "sellerId": "3",
-      "images": [
-        "https://media.wwf.se/uploads/2018/12/panda_medium_ww191377-768x514.jpg"
-      ],
-      "title": "panda",
-      "description": "söt panda ",
-      "startDate": "2024-03-26T23:00:00.000Z",
-      "endDate": "2024-03-27T23:00:00.000Z",
-      "startingPrice": "20",
-      "reservePrice": "30",
-      "category": [
-        "Bear"
-      ]
-    },
-    {
-      "id": "db04",
-      "sellerId": "3",
-      "images": [
-        "https://media.wwf.se/uploads/2018/12/panda_medium_ww191377-768x514.jpg"
-      ],
-      "title": "panda",
-      "description": "söt panda",
-      "startDate": "2024-03-27T23:00:00.000Z",
-      "endDate": "2024-03-29T23:00:00.000Z",
-      "startingPrice": "50",
-      "reservePrice": "8",
-      "category": [
-        "Bear"
-      ]
-    },
-    {
-      "id": "3a16",
-      "sellerId": "3",
-      "images": [
-        "https://media.wwf.se/uploads/2018/12/panda_medium_ww191377-768x514.jpg"
-      ],
-      "title": "panda",
-      "description": "panda",
-      "startDate": "2024-03-27T23:00:00.000Z",
-      "endDate": "2024-03-28T23:00:00.000Z",
-      "startingPrice": "30",
-      "reservePrice": "30",
-      "category": [
-        "Bear"
+        "Foxes"
       ],
       "bidHistory": [
         {}
