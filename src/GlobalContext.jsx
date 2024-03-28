@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 
-
 const GlobalContext = createContext()
 
 function GlobalProvider({children}){
@@ -22,13 +21,18 @@ function GlobalProvider({children}){
     const displayAlert = () => {
         setShow(true)
     }
+    
     const [loggedIn, setLoggedIn] = useState(() => {
-        return sessionStorage.getItem('loggedIn')
-    }) // Put loggedIn item in session storage with the value true or false
+        if (sessionStorage.getItem('loggedIn') === "false" || sessionStorage.getItem('loggedIn') === false || sessionStorage.getItem('loggedIn') === "null" || sessionStorage.getItem('loggedIn') === null) {
+            return false
+        } else {
+            return sessionStorage.getItem('loggedIn')
+        }
+    }) 
 
     useEffect(() => {
         sessionStorage.setItem('loggedIn', loggedIn)
-    }, [loggedIn]) // Update loggedIn item everytime loggedIn state changes
+    }, [loggedIn]) 
 
     const login = (userId) => {
         setLoggedIn(userId)

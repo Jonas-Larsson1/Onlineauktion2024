@@ -66,11 +66,22 @@ const Navbar = () => {
           <img src="/src/assets/sell.png" alt="Sell" height="40px" />
         </Link>
         </button>
-        <button className="navbar-btn mx-2 text-decoration-none text-secondary" >
-          <img src="/src/assets/help.webp" alt="Help" height="40px" />
-        </button>
+
+        <Link to={"/AboutPage"}>
+          <button className="navbar-btn mx-2 text-decoration-none text-secondary">
+            <img
+              src="/src/assets/info_sign-512.png"
+              href=""
+              alt="Help"
+              height="40px"
+            />
+          </button>
+        </Link>
+
         <button className="navbar-btn ms-2 text-decoration-none text-secondary" >
+        <Link to="/AccountPage">
           <img src="/src/assets/account.webp" alt="Account" height="40px" />
+          </Link>
         </button>
         <button
           className="logout-btn"

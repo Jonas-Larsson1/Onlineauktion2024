@@ -3,18 +3,29 @@
     {
       "id": "1",
       "sellerId": "1",
+      "sellerId": "1",
       "title": "Sunda Island Tiger",
-      "description": "Big cat",
+      "description": "The Sunda Island tiger is a subspecies of Panthera tigris, not a whole species by itself. This means their genes are a little different from those of tigers from other places.",
       "images": [
         "https://files.worldwildlife.org/wwfcmsprod/images/30_Hills_Sumatran_tiger_resting_47149/story_full_width/63868cijym_3TigerPhoto.jpg",
         "https://files.worldwildlife.org/wwfcmsprod/images/Sumatran_Tiger_New_Hero_Image/hero_small/47na1tq1ai_Sumatran_Tiger_Hero.jpg",
         "https://db637ll7r1kva.cloudfront.net/app/uploads/2022/02/10165750/iStock-1323863855-770x514.jpg"
       ],
       "startDate": 1710853385121,
-      "endDate": 1710859385121,
+      "endDate": 1720859385121,
       "startingPrice": 100,
       "reservePrice": 300,
       "bidHistory": [
+        {
+          "userId": "3",
+          "time": 1711378270407,
+          "amount": "230"
+        },
+        {
+          "userId": 1,
+          "time": 1711377443496,
+          "amount": "229"
+        },
         {
           "userId": 1,
           "time": 1711029035938,
@@ -78,22 +89,22 @@
         {
           "userId": "1",
           "time": 1710853583121,
-          "amount": 205
+          "amount": "205"
         },
         {
           "userId": "1",
           "time": 1710853483121,
-          "amount": 202
+          "amount": "202"
         },
         {
           "userId": "1",
           "time": 1710853383121,
-          "amount": 200
+          "amount": "200"
         },
         {
-          "userId": 1,
-          "time": 1711447105440,
-          "amount": "229"
+          "userId": "3",
+          "time": 1711379956046,
+          "amount": "231"
         }
       ],
       "category": [
@@ -102,14 +113,12 @@
     },
     {
       "id": "2",
-      "sellerId": 2,
+      "sellerId": "2",
       "title": "Arctic Fox",
       "description": "The arctic fox is an incredibly hardy animal that can survive frigid Arctic temperatures as low as –58°F in the treeless lands where it makes its home.",
-      "images": [
-        "https://cdn.hswstatic.com/gif/arctic-fox-1.jpg"
-      ],
+      "images": ["https://cdn.hswstatic.com/gif/arctic-fox-1.jpg"],
       "startDate": 1710853383121,
-      "endDate": 1710843383121,
+      "endDate": 1713843383121,
       "startingPrice": 100,
       "reservePrice": 300,
       "bidHistory": [
@@ -125,8 +134,9 @@
     },
     {
       "id": "3",
+      "sellerId": "1",
       "title": "Beaver",
-      "description": "Beavers are powerful swimmers that can swim underwater for up to 15 minutes.",
+      "description": "Beavers are powerful swimmers that can swim underwater for up to 15 minutes. They are famously busy, and they turn their talents to reengineering the landscape as few other animals can.",
       "images": [
         "https://www.nhm.ac.uk/content/dam/nhmwww/discover/record-numbers-of-beavers-introduced-to-the-uk/beaver-crossing-two-column.jpg.thumb.768.768.jpg"
       ],
@@ -139,6 +149,11 @@
           "userId": "1",
           "time": 1711028300691,
           "amount": "200"
+        },
+        {
+          "userId": "3",
+          "time": 1711535955044,
+          "amount": "201"
         }
       ],
       "category": [
@@ -147,6 +162,7 @@
     },
     {
       "id": "4",
+      "sellerId": "2",
       "title": "Cheetah",
       "description": "Fastest mammal on land, the cheetah can reach speeds of 60 or perhaps even 70 miles (97 or 113 kilometers) an hour over short distances.",
       "images": [
@@ -161,6 +177,11 @@
           "userId": "1",
           "time": 1711028300691,
           "amount": "200"
+        },
+        {
+          "userId": "3",
+          "time": 1711378682268,
+          "amount": "201"
         }
       ],
       "category": [
@@ -169,6 +190,7 @@
     },
     {
       "id": "5",
+      "sellerId": "1",
       "title": "Chipmunk",
       "description": "Chipmunks are part of the squirrel family, and while they look similar to their bushy-tailed cousins, chipmunks are actually smaller, with alternating light and dark stripes along their cheeks and backs.",
       "images": [
@@ -191,6 +213,7 @@
     },
     {
       "id": "6",
+      "sellerId": "2",
       "title": "Eastern Cottontail Rabbit",
       "description": "Eastern cottontails stay mostly hidden during the day but come out at night to eat. They snack on grass and love garden greens like peas and lettuce.",
       "images": [
@@ -213,11 +236,10 @@
     },
     {
       "id": "7",
+      "sellerId": "1",
       "title": "Category Test",
       "description": "This is a test category.",
-      "images": [
-        "https://example.com/image.jpg"
-      ],
+      "images": ["https://example.com/image.jpg"],
       "startDate": 1710843383121,
       "endDate": 1710843373121,
       "startingPrice": 100,
@@ -305,12 +327,14 @@
     {
       "id": "1",
       "username": "Tiger King",
-      "password": "king123"
+      "password": "king123",
+      "savedAuctions": []
     },
     {
       "id": "3",
       "username": "bertil",
-      "password": "bertil123"
+      "password": "bertil123",
+      "savedAuctions": []
     },
     {
       "id": "96c4",
