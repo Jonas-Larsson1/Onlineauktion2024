@@ -87,6 +87,7 @@ const Navbar = () => {
           className="logout-btn"
           onClick={() => {
             logout(); // set loggedIn to false
+            navigate("/")
           }}
         >
           <img

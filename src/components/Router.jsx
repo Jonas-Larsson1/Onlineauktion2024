@@ -23,7 +23,6 @@ export default function Router() {
     <>
       <BrowserRouter>
         <div className="App">
-          {!loggedIn && <Navigate to='/' /> }
           {loggedIn ? (
             <div>
               <Navbar />
