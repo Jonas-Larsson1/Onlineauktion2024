@@ -43,7 +43,7 @@ const SearchResults = ({category}) => {
                 return (
                     item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                     item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    item.category.includes(category)
+                    item.category.some(cat => cat.toLowerCase().includes(searchQuery.toLowerCase()))
                     );
                 });
             setFilteredData(filteredAuctions);
