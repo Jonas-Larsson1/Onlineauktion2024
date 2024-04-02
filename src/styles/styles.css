@@ -32,8 +32,8 @@ body{
     display: flex;
     flex-direction: column;
     margin-left: 20rem;
-    position: absolute;
     align-items:center;
+   
 }
 
 

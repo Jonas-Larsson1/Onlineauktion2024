@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ListCard from "../components/ListItem.jsx"
 import "../styles/listPage.css"
+import { GlobalContext } from "../GlobalContext.jsx";
+import { Alert, Button } from "react-bootstrap";
 
 export default function ListPage() {
   const [list, setList] = useState([]);
+  const {show, setShow} = useContext(GlobalContext)
+  const {hideAlert} = useContext(GlobalContext)
 
   useEffect(() => {
     const getData = async () => {
@@ -25,6 +29,23 @@ export default function ListPage() {
   
   return (
     <>
+     
+     {
+        show ? 
+      <Alert show={show} variant="success" className="alert">
+        <Alert.Heading>Welcome to the exclusive online auction site <em>Peta!</em></Alert.Heading>
+        <p>
+          Happy bidding!
+        </p>
+        <hr />
+          <Button onClick={() => hideAlert()} variant="outline-success">
+            Close me
+          </Button>
+        
+      </Alert>
+       : ""
+    }
+    
       <div className="container pb-4 border-bottom border-dark">
         <div className="d-flex justify-content-center">
            <div className="col-md-4 p-2" key="0">
