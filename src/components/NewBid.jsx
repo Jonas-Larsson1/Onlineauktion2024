@@ -4,7 +4,12 @@ import { GlobalContext } from '../GlobalContext'
 
 export default function NewBid() {
   const { auction, setAuction, loggedIn } = useContext(GlobalContext)
-  const bidHistory = auction.bidHistory
+  let bidHistory = auction.bidHistory
+
+  if (bidHistory.length === 0 || Object.keys(bidHistory[0]).length === 0) {
+    bidHistory = [{amount: auction.startingPrice}]
+  }
+
   const [highestBid, setHighestBid] = useState(getHighestBid(bidHistory))
   const [defaultBid, setDefaultBid] = useState(parseInt(highestBid) + 1)
   const [currentBid, setCurrentBid] = useState(defaultBid)

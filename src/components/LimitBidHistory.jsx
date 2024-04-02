@@ -5,7 +5,15 @@ import { GlobalContext } from "../GlobalContext";
 
 export default function LimitBidHistory() {
   const { auction } = useContext(GlobalContext);
-  const bidHistory = auction.bidHistory;
+  let bidHistory = auction.bidHistory;
+
+  if (bidHistory.length === 0 || Object.keys(bidHistory[0]).length === 0) {
+    bidHistory = [{
+      time: auction.startDate,
+      userId: "Auction start" , 
+      amount: auction.startingPrice
+    }]
+  }
 
   bidHistory.sort((a, b) => new Date(b.time) - new Date(a.time));
 
