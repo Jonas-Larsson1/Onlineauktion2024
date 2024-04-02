@@ -1,14 +1,13 @@
 import { Button, Form, InputGroup, Row, Col, Badge } from "react-bootstrap";
 import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from '../GlobalContext'
-import AddToWatchList from "./AddToWatchList";
 
 export default function NewBid() {
   const { auction, setAuction, loggedIn } = useContext(GlobalContext)
   const bidHistory = auction.bidHistory
   const [highestBid, setHighestBid] = useState(getHighestBid(bidHistory))
   const [defaultBid, setDefaultBid] = useState(parseInt(highestBid) + 1)
-  const [currentBid, setCurrentBid] = useState(0)
+  const [currentBid, setCurrentBid] = useState(defaultBid)
   const [error, setError] = useState(null)
 
   useEffect(() => {
@@ -17,7 +16,11 @@ export default function NewBid() {
   }, [bidHistory]);
 
   useEffect(() => {
-    setError(false)
+    if (currentBid < defaultBid) {
+      setError("Bid too low")
+    } else {
+      setError(false)
+    }
   }, [currentBid])
 
   function getHighestBid (bidHistory) {
@@ -57,7 +60,8 @@ export default function NewBid() {
         // säg åt användaren det gick åt skogen
       }
     } else {
-      setError(`You need to bid at least: ${defaultBid} or higher`);
+      setError("Bid too low")
+      // setError(`You need to bid at least: ${defaultBid} or higher`);
     }
   }
 
@@ -69,18 +73,16 @@ export default function NewBid() {
             {/* <Form.Label>Enter bid</Form.Label> */}
             <InputGroup>
               <Form.Control name="amount" type="number" defaultValue={defaultBid} onInput={changeCurrentBid}/>
-              <Form.Text className="text-muted">
-                {/* You need to bid at least: {defaultBid} or higher */}
-              </Form.Text>
             </InputGroup>
-            {error && <div className="alert alert-warning mt-2 mb-0 w-50" role="alert">
-              {error}
-            </div>}
+              <Form.Text className="text-muted">
+                You need to bid at least: {defaultBid} or higher
+              </Form.Text>
+
           </Form.Group>
 
           <Col>
-            <Button variant="success" type="submit" className="me-2 btn-lg">
-              Place bid
+            <Button variant="success" type="submit" className="me-2 btn-lg" disabled={!!error}>
+              {error ? error : "Place bid"}
             </Button>
           </Col>
         </Row>
