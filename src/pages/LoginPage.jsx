@@ -9,7 +9,7 @@ export default function LoginPage() {
   const [passwordInput, setPasswordInput] = useState("");
   const { login } = useContext(GlobalContext);
   const [error, setError] = useState("");
-  const {displayAlert} = useContext(GlobalContext) 
+  const { displayAlert } = useContext(GlobalContext);
 
   const checkForUser = async (e) => {
     e.preventDefault();
@@ -28,7 +28,6 @@ export default function LoginPage() {
       if (user) {
         login(user.id); // set loggedIn to true
         displayAlert();
-        
       } else {
         setError("Invalid username or password");
       }
@@ -47,7 +46,7 @@ export default function LoginPage() {
           <Form.Control
             type="email"
             placeholder="Enter username"
-            value={usernameInput}
+            value={usernameInput} // The value that is submitted
             onChange={(e) => setUsernameInput(e.target.value)}
           />
         </Form.Group>
@@ -77,25 +76,6 @@ export default function LoginPage() {
           </Link>
         </Button>
       </Form>
-      {/* <form>
-            <input
-              type="text"
-              placeholder="username"
-              value = {usernameInput}
-              onChange={(e) =>  setUsernameInput(e.target.value)}
-            />
-            <br />
-            <input
-              type="password"
-              placeholder="password"
-              value = {passwordInput}
-              onChange={(e) => setPasswordInput(e.target.value)}
-            />
-            <br />
-          
-        <Button
-          onClick={checkForUser}>Login</Button>
-      </form>  */}
     </>
   );
 }

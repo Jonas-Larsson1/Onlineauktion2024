@@ -15,6 +15,7 @@ export default function RegisterPage() {
     e.preventDefault();
 
     if (
+      // posts user to database if username and password meets requirements
       newUsername.length < 17 &&
       newUsername.length > 5 &&
       newPassword.length > 5
@@ -25,15 +26,13 @@ export default function RegisterPage() {
         body: JSON.stringify({
           username: newUsername,
           password: newPassword,
-          savedAuctions: []
+          savedAuctions: [],
         }),
       });
       if (res.ok) {
-        // console.log(res);
         alert("Account registered!");
-        navigate("/");
+        navigate("/"); // navigates home after registration
       } else {
-        // console.log(res);
         alert("Something went wrong!");
       }
     } else if (newUsername.length < 6 && newPassword.length < 6) {
@@ -48,23 +47,25 @@ export default function RegisterPage() {
   }
 
   useEffect(() => {
-    if( newUsername.length < 6){
-      setUsernameWarning("Username too short")
-    } if(newUsername.length > 6){
-      setUsernameWarning("")
+    if (newUsername.length < 6) {
+      setUsernameWarning("Username too short");
     }
-    if(newUsername.length > 16){
-      setUsernameWarning("Username too long")
+    if (newUsername.length > 6) {
+      setUsernameWarning("");
     }
-}, [newUsername])
+    if (newUsername.length > 16) {
+      setUsernameWarning("Username too long");
+    }
+  }, [newUsername]); // listens to username input to give warning when requierments not met
 
-useEffect(() => {
-  if( newPassword.length < 6){
-    setPasswordWarning("Password too short")
-  } if(newPassword.length > 6){
-    setPasswordWarning("")
-  }
-}, [newPassword])
+  useEffect(() => {
+    if (newPassword.length < 6) {
+      setPasswordWarning("Password too short");
+    }
+    if (newPassword.length > 6) {
+      setPasswordWarning("");
+    }
+  }, [newPassword]);
 
   return (
     <>
@@ -96,8 +97,7 @@ useEffect(() => {
             placeholder="Enter username(6-16 characters)"
             value={newUsername}
             onChange={(e) => {
-              setNewUsername(e.target.value);
-
+              setNewUsername(e.target.value); // uses target value property to update NewUsername value
             }}
           />
           <Form.Text className="text-muted">{usernameWarning}</Form.Text>
@@ -112,8 +112,6 @@ useEffect(() => {
             onChange={(e) => {
               setNewPassword(e.target.value);
             }}
-
-            
           />
           <Form.Text className="text-muted">{passwordWarning}</Form.Text>
         </Form.Group>
