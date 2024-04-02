@@ -3,15 +3,15 @@ import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from '../GlobalContext'
 
 export default function NewBid(props) {
-  const { loggedIn, setAuction } = useContext(GlobalContext)
-  const { auction } = props
+  const { loggedIn } = useContext(GlobalContext)
+  const { auction, updateAuction } = props
 
   let bidHistory = auction.bidHistory
 
   const [highestBid, setHighestBid] = useState(getHighestBid(bidHistory))
   const [defaultBid, setDefaultBid] = useState(parseInt(highestBid) + 1)
   const [currentBid, setCurrentBid] = useState(null)
-  const [error, setError] = useState("Enter a bid")
+  const [error, setError] = useState()
 
   useEffect(() => {
     setHighestBid(getHighestBid(bidHistory))
@@ -19,7 +19,6 @@ export default function NewBid(props) {
   }, [bidHistory]);
 
   useEffect(() => {
-    console.log("hej")
     if (currentBid === null) {
       setError("Enter a bid") 
     } else if (currentBid <= highestBid) {
@@ -59,9 +58,10 @@ export default function NewBid(props) {
       })
 
       if (response.ok) {
-        setAuction(auction)
+        updateAuction(auction)
         setDefaultBid(parseInt(bidAmount) + 1)
         setError(false)
+        window.location.reload();
       } else {
         // säg åt användaren det gick åt skogen
       }
@@ -78,7 +78,7 @@ export default function NewBid(props) {
           <Form.Group as={Col} controlId="newBid">
             {/* <Form.Label>Enter bid</Form.Label> */}
             <InputGroup>
-              <Form.Control name="amount" type="number" placeholder="Enter a bid" onInput={changeCurrentBid}/>
+              <Form.Control name="amount" type="number" placeholder="0" onInput={changeCurrentBid}/>
             </InputGroup>
             <Form.Text className="text-muted">
               Miniumum bid: {defaultBid}

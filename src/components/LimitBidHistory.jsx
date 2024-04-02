@@ -1,14 +1,12 @@
 import { Table, Button, Container, Row, Col, ToggleButton } from "react-bootstrap";
 import { formatDateTime } from "../pages/AuctionPage";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../GlobalContext";
 
 export default function LimitBidHistory(props) {
   // const { auction } = useContext(GlobalContext);
   const { auction } = props
-
   let bidHistory = auction.bidHistory;
-
   bidHistory.sort((a, b) => new Date(b.time) - new Date(a.time));
 
   const [bidsToShow, setBidsToShow] = useState(bidHistory.slice(0, 5));
@@ -27,6 +25,7 @@ export default function LimitBidHistory(props) {
     setShowAllBids(!showAllBids);
   }
 
+  console.log("bidhistory rendered")
   return (
     <>
       <Row className="justify-content-end mb-2">

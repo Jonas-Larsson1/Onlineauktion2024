@@ -15,7 +15,36 @@
       "startingPrice": 100,
       "reservePrice": 300,
       "bidHistory": [
-        {}
+        {
+          "userId": "3",
+          "time": 1712047353064,
+          "amount": 108
+        },
+        {
+          "userId": "3",
+          "time": 1712047173723,
+          "amount": 106
+        },
+        {
+          "userId": "3",
+          "time": 1712046649526,
+          "amount": 103
+        },
+        {
+          "userId": "3",
+          "time": 1712046391713,
+          "amount": 102
+        },
+        {
+          "time": 1710853385121,
+          "userId": "Auction start",
+          "amount": 100
+        },
+        {
+          "userId": "3",
+          "time": 1712047389036,
+          "amount": 110
+        }
       ],
       "category": [
         "Big Cats"
@@ -63,14 +92,94 @@
       "reservePrice": 300,
       "bidHistory": [
         {
+          "userId": "3",
+          "time": 1712048894433,
+          "amount": 230
+        },
+        {
+          "userId": "3",
+          "time": 1712048854514,
+          "amount": 229
+        },
+        {
+          "userId": "3",
+          "time": 1712048833153,
+          "amount": 228
+        },
+        {
+          "userId": "3",
+          "time": 1712048652685,
+          "amount": 223
+        },
+        {
+          "userId": "3",
+          "time": 1712048623350,
+          "amount": 222
+        },
+        {
+          "userId": "3",
+          "time": 1712048593296,
+          "amount": 221
+        },
+        {
+          "userId": "3",
+          "time": 1712048377171,
+          "amount": 220
+        },
+        {
+          "userId": "3",
+          "time": 1712048345477,
+          "amount": 218
+        },
+        {
+          "userId": "3",
+          "time": 1712048246355,
+          "amount": 215
+        },
+        {
+          "userId": "3",
+          "time": 1712048229212,
+          "amount": 213
+        },
+        {
+          "userId": "3",
+          "time": 1712048223820,
+          "amount": 211
+        },
+        {
+          "userId": "3",
+          "time": 1712048071581,
+          "amount": 209
+        },
+        {
+          "userId": "3",
+          "time": 1712047891806,
+          "amount": 207
+        },
+        {
+          "userId": "3",
+          "time": 1712047570374,
+          "amount": 206
+        },
+        {
+          "userId": "3",
+          "time": 1712047533326,
+          "amount": 204
+        },
+        {
+          "userId": "3",
+          "time": 1711535955044,
+          "amount": 201
+        },
+        {
           "userId": "1",
           "time": 1711028300691,
           "amount": 200
         },
         {
           "userId": "3",
-          "time": 1711535955044,
-          "amount": 201
+          "time": 1712049123061,
+          "amount": 231
         }
       ],
       "category": [
@@ -214,7 +323,11 @@
       "id": "3",
       "username": "bertil",
       "password": "bertil123",
-      "savedAuctions": []
+      "savedAuctions": [
+        "b220",
+        "2",
+        "1"
+      ]
     },
     {
       "id": "96c4",

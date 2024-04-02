@@ -2,8 +2,9 @@ import { Button, Form } from "react-bootstrap"
 import { GlobalContext } from "../GlobalContext"
 import { useContext, useState, useEffect } from "react"
 
-export default function AddToWatchList () {
-  const { auction, loggedIn } = useContext(GlobalContext)
+export default function AddToWatchList (props) {
+  const { auction } = props
+  const { loggedIn } = useContext(GlobalContext)
   const [ user, setUser ] = useState()
   const [ savedByUser, setSavedByUser  ] = useState(false)
 

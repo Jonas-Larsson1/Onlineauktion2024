@@ -4,7 +4,7 @@ const GlobalContext = createContext()
 
 function GlobalProvider({children}){
 
-    const [auction, setAuction] = useState(null)
+    // const [auction, setAuction] = useState(null)
    
     const [show, setShow] = useState(() => {
         return sessionStorage.getItem('showAlert' === 'true' || 'false')
@@ -50,8 +50,8 @@ function GlobalProvider({children}){
      setShow,
      hideAlert,
      displayAlert,
-     auction, 
-     setAuction,
+    //  auction, 
+    //  setAuction,
     }}>
         {children}
 

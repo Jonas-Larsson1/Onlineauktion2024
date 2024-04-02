@@ -8,8 +8,13 @@ import AddToWatchList from "../components/AddToWatchList";
 
 export default function AuctionPage() {
   let { id } = useParams();
-  // const [auction, setAuction] = useState(null);
-  const { auction, setAuction } = useContext(GlobalContext);
+  const [auction, setAuction] = useState(null);
+  // const { auction, setAuction } = useContext(GlobalContext);
+
+  const updateAuction = (updatedAuction) => {
+    console.log("auction updated")
+    setAuction({...updatedAuction})
+  }
 
   useEffect(() => {
     const getData = async () => {
@@ -31,6 +36,7 @@ export default function AuctionPage() {
 
   }, []);
 
+  console.log("auctionpage rendered")
   return (
     <>
       {auction ? (
@@ -52,13 +58,13 @@ export default function AuctionPage() {
                       </b>
                       <br />
                     </Card>
-                  <AddToWatchList/>
+                  <AddToWatchList auction={auction}/>
                 </Card.Body>
               </Card>
             </Col>
             <Col sm={6}>
               <div>
-                <Bidding auction={auction} />
+                <Bidding auction={auction} updateAuction={updateAuction} />
               </div>
             </Col>
           </Row>
