@@ -1,15 +1,13 @@
-import { Table, Button, Container, Row, Col, ToggleButton } from "react-bootstrap";
+import { Table, Row, Col, ToggleButton } from "react-bootstrap";
 import { formatDateTime } from "../pages/AuctionPage";
-import { useContext, useEffect, useState } from "react";
-import { GlobalContext } from "../GlobalContext";
+import { useEffect, useState } from "react";
 
 export default function LimitBidHistory(props) {
   // const { auction } = useContext(GlobalContext);
   const { auction } = props
   let bidHistory = auction.bidHistory;
-  bidHistory.sort((a, b) => new Date(b.time) - new Date(a.time));
 
-  const [bidsToShow, setBidsToShow] = useState(bidHistory.slice(0, 5));
+  const [bidsToShow, setBidsToShow] = useState(null);
   const [buttonText, setButtonText] = useState("Show more bids");
   const [showAllBids, setShowAllBids] = useState(false);
 
@@ -25,7 +23,11 @@ export default function LimitBidHistory(props) {
     setShowAllBids(!showAllBids);
   }
 
-  console.log("bidhistory rendered")
+  useEffect(() => {
+    bidHistory.sort((a, b) => new Date(b.time) - new Date(a.time))
+    setBidsToShow(bidHistory.slice(0, 5))
+  }, [auction])
+
   return (
     <>
       <Row className="justify-content-end mb-2">
@@ -44,13 +46,16 @@ export default function LimitBidHistory(props) {
               </tr>
             </thead>
             <tbody>
-              {bidsToShow.map((bid, index) => (
+              {bidsToShow ? bidsToShow.map((bid, index) => (
                 <tr key={index}>
                   <td>{formatDateTime(bid.time)}</td>
                   <td>{bid.userId}</td>
                   <td>{bid.amount}</td>
                 </tr>
-              ))}
+              ))
+            : <tr>
+                <td>Loading...</td>
+              </tr>}
             </tbody>
           </Table>
         </Col>

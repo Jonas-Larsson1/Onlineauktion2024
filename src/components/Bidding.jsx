@@ -4,7 +4,6 @@ import LimitBidHistory from "./LimitBidHistory";
 export default function Bidding(props) {
   const { auction, updateAuction} = props
 
-  console.log("bidding rendered")
   return (
     <>
       <div className="border rounded" style={{ background: "#C38D9E" }}>

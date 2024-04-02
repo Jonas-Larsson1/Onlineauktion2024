@@ -61,7 +61,7 @@ export default function NewBid(props) {
         updateAuction(auction)
         setDefaultBid(parseInt(bidAmount) + 1)
         setError(false)
-        window.location.reload();
+        // window.location.reload();
       } else {
         // säg åt användaren det gick åt skogen
       }

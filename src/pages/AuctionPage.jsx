@@ -12,7 +12,6 @@ export default function AuctionPage() {
   // const { auction, setAuction } = useContext(GlobalContext);
 
   const updateAuction = (updatedAuction) => {
-    console.log("auction updated")
     setAuction({...updatedAuction})
   }
 
@@ -36,7 +35,6 @@ export default function AuctionPage() {
 
   }, []);
 
-  console.log("auctionpage rendered")
   return (
     <>
       {auction ? (
