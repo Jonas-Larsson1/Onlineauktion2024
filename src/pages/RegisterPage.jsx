@@ -25,6 +25,7 @@ export default function RegisterPage() {
         body: JSON.stringify({
           username: newUsername,
           password: newPassword,
+          savedAuctions: []
         }),
       });
       if (res.ok) {

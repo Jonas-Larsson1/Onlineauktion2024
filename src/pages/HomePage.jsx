@@ -18,7 +18,7 @@ export default function HomePage() {
     {
         show ? 
       <Alert show={show} variant="success" className="alert">
-        <Alert.Heading>Welcome to the exclusive auctioNEXT!</Alert.Heading>
+        <Alert.Heading>Welcome to the exclusive online auction site <em>Peta!</em></Alert.Heading>
         <p>
           Happy bidding!
         </p>
