@@ -292,46 +292,6 @@
       "savedAuctions": []
     },
     {
-      "id": "96c4",
-      "username": "test",
-      "password": "test123"
-    },
-    {
-      "id": "6023",
-      "username": "bengan",
-      "password": "bengan123"
-    },
-    {
-      "id": "7268",
-      "username": "lenakarlsson",
-      "password": "lena123"
-    },
-    {
-      "id": "9f27",
-      "username": "bertkarlsson",
-      "password": "bert123"
-    },
-    {
-      "id": "c288",
-      "username": "test",
-      "password": "testing"
-    },
-    {
-      "id": "b45d",
-      "username": "kungen1",
-      "password": "bästivärlden"
-    },
-    {
-      "id": "0cf8",
-      "username": "pollytesting",
-      "password": "pollytesting"
-    },
-    {
-      "id": "d548",
-      "username": "foxyfox",
-      "password": "fox123"
-    },
-    {
       "id": "01c1",
       "username": "flyingfox",
       "password": "foxing1",
@@ -340,24 +300,6 @@
     {
       "id": "2982",
       "username": "foxyfox",
-      "password": "foxingfox",
-      "savedAuctions": []
-    },
-    {
-      "id": "8c87",
-      "username": "flyingfox",
-      "password": "foxingfox",
-      "savedAuctions": []
-    },
-    {
-      "id": "47ed",
-      "username": "flyingfox",
-      "password": "foxingfox",
-      "savedAuctions": []
-    },
-    {
-      "id": "eb41",
-      "username": "flyingfox",
       "password": "foxingfox",
       "savedAuctions": []
     }
