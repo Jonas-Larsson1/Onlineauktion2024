@@ -1,4 +1,4 @@
-import { Button, Form, InputGroup, Row, Col } from "react-bootstrap";
+import { Button, Form, InputGroup, Row, Col, Badge } from "react-bootstrap";
 import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from '../GlobalContext'
 import AddToWatchList from "./AddToWatchList";
@@ -61,30 +61,37 @@ export default function NewBid() {
     }
   }
 
-  return <>
-    <Form onSubmit={placeBid}>
-      <Row className="mb-3">
-        <Form.Group as={Col} controlId="newBid">
-          <Form.Label>Enter bid</Form.Label>
-          <InputGroup>
-            <Form.Control name="amount" type="number" defaultValue={defaultBid} onInput={changeCurrentBid}/>
-            <Form.Text className="text-muted">
-              {/* You need to bid at least: {defaultBid} or higher */}
-            </Form.Text>
-          </InputGroup>
-          {error && <div className="alert alert-warning mt-2 mb-0" role="alert">
-            {error}
-          </div>}
-        </Form.Group>
-      </Row>
-      <Row className="mb-3">
-        <Col>
-          <Button variant="info" type="submit" className="me-2 btn-lg">
-            Place bid
-          </Button>
-        </Col>
-      </Row>
-    </Form>
-    <AddToWatchList />
-  </>
+  return (
+    <>
+      <Form onSubmit={placeBid}>
+        <Row className="mb-3">
+          <Form.Group as={Col} controlId="newBid">
+            {/* <Form.Label>Enter bid</Form.Label> */}
+            <InputGroup>
+              <Form.Control name="amount" type="number" defaultValue={defaultBid} onInput={changeCurrentBid}/>
+              <Form.Text className="text-muted">
+                {/* You need to bid at least: {defaultBid} or higher */}
+              </Form.Text>
+            </InputGroup>
+            {error && <div className="alert alert-warning mt-2 mb-0 w-50" role="alert">
+              {error}
+            </div>}
+          </Form.Group>
+
+          <Col>
+            <Badge bg="danger" className="text-dark p-2 mt-2">Starting price: {auction.startingPrice}</Badge>
+            <Badge bg="warning"className="text-dark p-2 mx-2">Reserve price: {auction.reservePrice}</Badge>
+          </Col>
+        </Row>
+        <Row className="mb-3">
+          <Col>
+            <Button variant="info" type="submit" className="me-2 btn-lg">
+              Place bid
+            </Button>
+          </Col>
+        </Row>
+      </Form>
+      <AddToWatchList />
+    </>
+  );
 }
