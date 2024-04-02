@@ -3,7 +3,6 @@ import { formatDateTime } from "../pages/AuctionPage";
 import { useEffect, useState } from "react";
 
 export default function LimitBidHistory(props) {
-  // const { auction } = useContext(GlobalContext);
   const { auction } = props
   let bidHistory = auction.bidHistory;
 

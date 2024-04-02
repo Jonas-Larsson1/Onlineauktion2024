@@ -16,7 +16,6 @@ export default function AddToWatchList (props) {
       setUser(result);
     };
 
-
     getData();
   }, []);
 
@@ -41,7 +40,6 @@ export default function AddToWatchList (props) {
       setSavedByUser(false)
     }
     
-
     const response = await fetch(`/api/users/${loggedIn}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },

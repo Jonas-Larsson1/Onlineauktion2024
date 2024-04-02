@@ -1,21 +1,8 @@
-// TO DO
-
-// go to homepage on submit
-// navbar-footer problem
-
-
-
-// TEKNISKA SKULDER
-// data fetch
-
-
 import React, { useState, useEffect, useContext } from 'react'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { GlobalContext } from '../GlobalContext';
 import { useNavigate } from 'react-router-dom';
-
-
 
 const NewAuctionPage = () => {
 
@@ -30,11 +17,11 @@ const NewAuctionPage = () => {
   const [imageInput, setImageInput] = useState([''])
   const [startPrice, setStartPrice] = useState('')
   const [reservedPrice, setReservedPrice] = useState('')
+
   const {loggedIn} = useContext(GlobalContext)
 
   const navigate = useNavigate()
 
-  
   useEffect(() => {
     const getData = async () => {
       const response = await fetch('/api/auctions')
