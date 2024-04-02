@@ -37,9 +37,11 @@ export default function LimitBidHistory() {
     <>
       <Row className="justify-content-end mb-2">
         <Col>
-          <ToggleButton className="" variant="secondary" type="checkbox" size="sm" checked={showAllBids} onClick={(event) => ShowMoreBids(event)}>
-            {buttonText}
-          </ToggleButton>
+          {bidHistory.length > 5 ? 
+            <ToggleButton className="" variant="secondary" type="checkbox" size="sm" checked={showAllBids} onClick={(event) => ShowMoreBids(event)}>
+              {buttonText}
+            </ToggleButton>
+          : null}
           <Table striped bordered hover variant="dark" size="sm">
             <thead>
               <tr>
