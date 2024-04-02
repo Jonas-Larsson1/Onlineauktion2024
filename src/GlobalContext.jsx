@@ -3,12 +3,10 @@ import { createContext, useEffect, useState } from "react";
 const GlobalContext = createContext();
 
 function GlobalProvider({children}){
-
-    // const [auction, setAuction] = useState(null)
    
-    const [show, setShow] = useState(() => {
-        return sessionStorage.getItem('showAlert' === 'true' || 'false')
-    }) 
+  const [show, setShow] = useState(() => {
+      return sessionStorage.getItem('showAlert' === 'true' || 'false')
+  }) 
 
   useEffect(() => {
     return sessionStorage.setItem("showAlert", show);

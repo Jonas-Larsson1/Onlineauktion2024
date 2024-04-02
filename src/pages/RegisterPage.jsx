@@ -7,21 +7,21 @@ import { useNavigate } from "react-router-dom";
 export default function RegisterPage() {
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const navigate = useNavigate();
   const [usernameWarning, setUsernameWarning] = useState("");
   const [passwordWarning, setPasswordWarning] = useState("");
   const [usernameTaken, setUsernameTaken] = useState(null);
-  
 
-  async function checkForExistingAccounts(newUsername){
+  const navigate = useNavigate();
+
+  async function checkForExistingAccounts(newUsername) {
     const res = await fetch("api/users")
     const result = await res.json()
 
-    for(let i = 0; i < result.length; i++){
-        let user = result[i]
-        if(newUsername === user.username){
-            setUsernameTaken(true)
-        }else(setUsernameTaken(false))
+    for (let i = 0; i < result.length; i++) {
+      let user = result[i]
+      if (newUsername === user.username) {
+        setUsernameTaken(true)
+      } else (setUsernameTaken(false))
     }
 
   }
@@ -30,7 +30,7 @@ export default function RegisterPage() {
 
   async function registerUser(e) {
     e.preventDefault();
-   
+
     if (
       // posts user to database if username and password meets requirements
       newUsername.length < 17 &&
@@ -53,7 +53,7 @@ export default function RegisterPage() {
       } else {
         alert("Something went wrong!");
       }
-      
+
     } else if (newUsername.length < 6 && newPassword.length < 6) {
       alert("username & password is too short");
     } else if (newUsername.length < 6) {
@@ -62,7 +62,7 @@ export default function RegisterPage() {
       alert("username is too long");
     } else if (newPassword.length < 6) {
       alert("password is too short");
-    } else if (usernameTaken){
+    } else if (usernameTaken) {
       alert("username taken")
     }
   }
@@ -90,61 +90,59 @@ export default function RegisterPage() {
     }
   }, [newPassword]);
 
-  return (
-    <>
-      <Form className="register-form">
-        <header>Register</header>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+  return (<>
+    <Form className="register-form">
+      <header>Register</header>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      />
+      <button
+        className="material-symbols-outlined"
+        onClick={() => navigate("/")}
+      >
+        arrow_back
+      </button>
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control type="email" placeholder="Example@email.com" />
+        <Form.Text className="text-muted">
+          We'll never share your email with anyone else.
+        </Form.Text>
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicUsername">
+        <Form.Label>Username</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter username(6-16 characters)"
+          value={newUsername}
+          onChange={(e) => {
+            setNewUsername(e.target.value); // uses target value property to update NewUsername value
+          }}
         />
-        <button
-          className="material-symbols-outlined"
-          onClick={() => navigate("/")}
-        >
-          arrow_back
-        </button>
+        <Form.Text className="text-muted">{usernameWarning}</Form.Text>
+      </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Example@email.com" />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicUsername">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter username(6-16 characters)"
-            value={newUsername}
-            onChange={(e) => {
-              setNewUsername(e.target.value); // uses target value property to update NewUsername value
-            }}
-          />
-          <Form.Text className="text-muted">{usernameWarning}</Form.Text>
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Enter password (atleast 6 characters long)"
-            value={newPassword}
-            onChange={(e) => {
-              setNewPassword(e.target.value);
-            }}
-          />
-          <Form.Text className="text-muted">{passwordWarning}</Form.Text>
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
-        <Button variant="primary" onClick={registerUser}>
-          Submit
-        </Button>
-      </Form>
-    </>
-  );
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Enter password (atleast 6 characters long)"
+          value={newPassword}
+          onChange={(e) => {
+            setNewPassword(e.target.value);
+          }}
+        />
+        <Form.Text className="text-muted">{passwordWarning}</Form.Text>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicCheckbox">
+        <Form.Check type="checkbox" label="Check me out" />
+      </Form.Group>
+      <Button variant="primary" onClick={registerUser}>
+        Submit
+      </Button>
+    </Form>
+  </>);
 }
