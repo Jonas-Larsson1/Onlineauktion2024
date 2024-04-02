@@ -27,11 +27,8 @@ export default function ListPage() {
     list.sort((a, b) => b.bidHistory.length - a.bidHistory.length);
   }
   
-  return (
-    <>
-     
-     {
-        show ? 
+  return (<>
+    {show ? 
       <Alert show={show} variant="success" className="alert">
         <Alert.Heading>Welcome to the exclusive online auction site <em>Peta!</em></Alert.Heading>
         <p>
@@ -41,30 +38,27 @@ export default function ListPage() {
           <Button onClick={() => hideAlert()} variant="outline-success">
             Close me
           </Button>
-        
       </Alert>
-       : ""
-    }
-    
-      <div className="container pb-4 border-bottom border-dark">
-        <div className="d-flex justify-content-center">
-           <div className="col-md-4 p-2" key="0">
-            <div>
-              <h2 className="fs-1 ms-2 pb-3 text text-danger">Beast of the week!</h2>
-              {list.length > 0 && list[0].hasOwnProperty("bidHistory") && <ListCard item={list[0]} />}
-            </div>
+    : "" }
+
+    <div className="container pb-4 border-bottom border-dark">
+      <div className="d-flex justify-content-center">
+          <div className="col-md-4 p-2" key="0">
+          <div>
+            <h2 className="fs-1 ms-2 pb-3 text text-danger">Beast of the week!</h2>
+            {list.length > 0 && list[0].hasOwnProperty("bidHistory") && <ListCard item={list[0]} />}
           </div>
         </div>
       </div>
-      <div className="container">
-        <div className="row row-cols-1 row-cols-md-3 g-4">
-          {list.slice(1).map((item, index) => (
-            <div className="col-md-4" key={index + 1}>
-              <ListCard item={item} />
-            </div>
-          ))}
-        </div>
+    </div>
+    <div className="container">
+      <div className="row row-cols-1 row-cols-md-3 g-4">
+        {list.slice(1).map((item, index) => (
+          <div className="col-md-4" key={index + 1}>
+            <ListCard item={item} />
+          </div>
+        ))}
       </div>
-    </>
-  );
+    </div>
+  </>);
 }
