@@ -47,22 +47,17 @@ function GlobalProvider({children}){
     setLoggedIn(false);
   };
 
-    return <GlobalContext.Provider value = {{
-     loggedIn,
-     login,
-     logout,
-     show,
-     setShow,
-     hideAlert,
-     displayAlert,
-    //  auction, 
-    //  setAuction,
+  return <GlobalContext.Provider value = {{
+      loggedIn,
+      login,
+      logout,
+      show,
+      setShow,
+      hideAlert,
+      displayAlert,
     }}>
-        {children}
-
-
-    </GlobalContext.Provider>
-  );
+    {children}
+  </GlobalContext.Provider>
 }
 
 export { GlobalContext, GlobalProvider };
