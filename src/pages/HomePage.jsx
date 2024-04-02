@@ -12,24 +12,24 @@ export default function HomePage() {
 
   
   return loggedIn ? <>
-  <div className="homepage-content">
-    <h1>Home!</h1>
-    <Button>Hej på dej</Button>
-    {
-        show ? 
-      <Alert show={show} variant="success" className="alert">
-        <Alert.Heading>Welcome to the exclusive online auction site <em>Peta!</em></Alert.Heading>
-        <p>
-          Happy bidding!
-        </p>
-        <hr />
+    <div className="homepage-content">
+      <h1>Home!</h1>
+      <Button>Hej på dej</Button>
+      {show ? 
+        <Alert show={show} variant="success" className="alert">
+          <Alert.Heading>Welcome to the exclusive online auction site 
+            <em>Peta!</em>
+          </Alert.Heading>
+          <p>
+            Happy bidding!
+          </p>
+          <hr />
           <Button onClick={() => hideAlert()} variant="outline-success">
             Close me
           </Button>
-        
-      </Alert> : ""
-    }
-  </div>   
-    </> : ""
- 
+        </Alert> 
+      : ""}
+    </div>   
+  </> : ""
+
 }
