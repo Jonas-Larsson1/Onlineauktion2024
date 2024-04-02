@@ -17,6 +17,31 @@
       "bidHistory": [
         {
           "userId": "3",
+          "time": 1712043435768,
+          "amount": "236"
+        },
+        {
+          "userId": "3",
+          "time": 1712043248477,
+          "amount": "235"
+        },
+        {
+          "userId": "3",
+          "time": 1712042639253,
+          "amount": "234"
+        },
+        {
+          "userId": "3",
+          "time": 1712042585186,
+          "amount": "233"
+        },
+        {
+          "userId": "3",
+          "time": 1712039763552,
+          "amount": "232"
+        },
+        {
+          "userId": "3",
           "time": 1711379956046,
           "amount": "231"
         },
@@ -107,8 +132,8 @@
         },
         {
           "userId": "3",
-          "time": 1712039763552,
-          "amount": "232"
+          "time": 1712043499830,
+          "amount": "237"
         }
       ],
       "category": [
@@ -279,7 +304,16 @@
         "Foxes"
       ],
       "bidHistory": [
-        {}
+        {
+          "time": "2024-03-27T23:00:00.000Z",
+          "userId": "Auction start",
+          "amount": "20"
+        },
+        {
+          "userId": "3",
+          "time": 1712043431541,
+          "amount": "21"
+        }
       ]
     }
   ],

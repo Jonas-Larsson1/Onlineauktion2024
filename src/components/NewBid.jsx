@@ -2,8 +2,10 @@ import { Button, Form, InputGroup, Row, Col, Badge } from "react-bootstrap";
 import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from '../GlobalContext'
 
-export default function NewBid() {
-  const { auction, setAuction, loggedIn } = useContext(GlobalContext)
+export default function NewBid(props) {
+  const { loggedIn, setAuction } = useContext(GlobalContext)
+  const { auction } = props
+
   let bidHistory = auction.bidHistory
 
   if (bidHistory.length === 0 || Object.keys(bidHistory[0]).length === 0) {
@@ -79,12 +81,10 @@ export default function NewBid() {
             <InputGroup>
               <Form.Control name="amount" type="number" defaultValue={defaultBid} onInput={changeCurrentBid}/>
             </InputGroup>
-              <Form.Text className="text-muted">
-                You need to bid at least: {defaultBid} or higher
-              </Form.Text>
-
+            <Form.Text className="text-muted">
+              You need to bid at least: {defaultBid} or higher
+            </Form.Text>
           </Form.Group>
-
           <Col>
             <Button variant="success" type="submit" className="me-2 btn-lg" disabled={!!error}>
               {error ? error : "Place bid"}
@@ -98,7 +98,6 @@ export default function NewBid() {
           </Col>
         </Row>
       </Form>
-
     </>
   );
 }

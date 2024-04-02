@@ -15,10 +15,20 @@ export default function AuctionPage() {
     const getData = async () => {
       const response = await fetch(`/api/auctions/${id}`);
       const result = await response.json();
+
+      if (result.bidHistory.length === 0 || Object.keys(result.bidHistory[0]).length === 0) {
+        result.bidHistory = [{
+          time: result.startDate,
+          userId: "Auction start" , 
+          amount: result.startingPrice
+        }]
+      }
+
       setAuction(result);
     };
 
     getData();
+
   }, []);
 
   return (
@@ -33,24 +43,22 @@ export default function AuctionPage() {
                   <ImageGallery auction={auction} />
                   <Card.Title>{auction.title}</Card.Title>
                   <Card.Text>{auction.description}</Card.Text>
-
-
-                  <Card className="my-3" border="light" style={{ padding: "1rem" }}>
-                    Auction duration:{" "}
-                    <b>
-                      {formatDateTime(auction.startDate)}
-                      &nbsp; - &nbsp;
-                      {formatDateTime(auction.endDate)}
-                    </b>
-                    <br />
-                  </Card>
+                    <Card className="my-3" border="light" style={{ padding: "1rem" }}>
+                      Auction duration:{" "}
+                      <b>
+                        {formatDateTime(auction.startDate)}
+                        &nbsp; - &nbsp;
+                        {formatDateTime(auction.endDate)}
+                      </b>
+                      <br />
+                    </Card>
                   <AddToWatchList/>
                 </Card.Body>
               </Card>
             </Col>
             <Col sm={6}>
               <div>
-                <Bidding />
+                <Bidding auction={auction} />
               </div>
             </Col>
           </Row>

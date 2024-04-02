@@ -3,17 +3,11 @@ import { formatDateTime } from "../pages/AuctionPage";
 import { useContext, useState } from "react";
 import { GlobalContext } from "../GlobalContext";
 
-export default function LimitBidHistory() {
-  const { auction } = useContext(GlobalContext);
-  let bidHistory = auction.bidHistory;
+export default function LimitBidHistory(props) {
+  // const { auction } = useContext(GlobalContext);
+  const { auction } = props
 
-  if (bidHistory.length === 0 || Object.keys(bidHistory[0]).length === 0) {
-    bidHistory = [{
-      time: auction.startDate,
-      userId: "Auction start" , 
-      amount: auction.startingPrice
-    }]
-  }
+  let bidHistory = auction.bidHistory;
 
   bidHistory.sort((a, b) => new Date(b.time) - new Date(a.time));
 
