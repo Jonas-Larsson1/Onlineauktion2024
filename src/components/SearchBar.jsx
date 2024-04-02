@@ -3,8 +3,8 @@ import React, {useState, useContext} from 'react';
 const SearchContext = React.createContext();
 
 const SearchBar = ({setCategory}) => {
-  const [searchValue, setSearchValue] = useState('');
-  const {setSearchQuery } = useContext(SearchContext);
+  const [searchValue, setSearchValue] = useState(''); // holds input
+  const {setSearchQuery } = useContext(SearchContext); // accessing setSearchQuery  from SearchContext
 
   const handleChange = (event) => {
       setSearchValue(event.target.value) // gets input
@@ -14,8 +14,7 @@ const SearchBar = ({setCategory}) => {
       event.preventDefault();
       setSearchQuery(searchValue) // saves input to searchQuery
       setSearchValue('') // cleans up input
-      setCategory(null)
-
+      setCategory(null) // reset category
   }
 
   return (<>
