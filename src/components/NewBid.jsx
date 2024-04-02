@@ -79,19 +79,19 @@ export default function NewBid() {
           </Form.Group>
 
           <Col>
-            <Badge bg="danger" className="text-dark p-2 mt-2">Starting price: {auction.startingPrice}</Badge>
-            <Badge bg="warning"className="text-dark p-2 mx-2">Reserve price: {auction.reservePrice}</Badge>
-          </Col>
-        </Row>
-        <Row className="mb-3">
-          <Col>
-            <Button variant="info" type="submit" className="me-2 btn-lg">
+            <Button variant="success" type="submit" className="me-2 btn-lg">
               Place bid
             </Button>
           </Col>
         </Row>
+        <Row className="mb-3">
+          <Col>
+            <Badge bg="light" className="text-dark p-2">Starting price: {auction.startingPrice}</Badge>
+            <Badge bg="dark"className=" p-2 mx-2">Reserve price: {auction.reservePrice}</Badge>
+          </Col>
+        </Row>
       </Form>
-      <AddToWatchList />
+
     </>
   );
 }

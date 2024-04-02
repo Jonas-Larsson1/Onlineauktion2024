@@ -26,16 +26,12 @@ export default function LimitBidHistory() {
   }
 
   return (
-    <Container>
+    <>
       <Row className="justify-content-end mb-2">
-        <Col xs={12} md={6} lg={4} className="text-end">
-          <ToggleButton variant="light" type="checkbox" size="sm" checked={showAllBids} onClick={(event) => ShowMoreBids(event)}>
+        <Col>
+          <ToggleButton className="" variant="secondary" type="checkbox" size="sm" checked={showAllBids} onClick={(event) => ShowMoreBids(event)}>
             {buttonText}
           </ToggleButton>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
           <Table striped bordered hover variant="dark" size="sm">
             <thead>
               <tr>
@@ -56,6 +52,6 @@ export default function LimitBidHistory() {
           </Table>
         </Col>
       </Row>
-    </Container>
+    </>
   );
 }
