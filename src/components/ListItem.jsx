@@ -1,23 +1,29 @@
 import { Card, ListGroup } from "react-bootstrap";
 import { formatDateTime } from "../pages/AuctionPage";
 
+// Define a functional component ListCard that accepts an item as a prop.
 const ListCard = ({ item }) => {
   
-  item.bidHistory.sort((a, b) => new Date(b.time) - new Date(a.time))
+  // Sort the bid history of the item in descending order by time.
+  item.bidHistory.sort((a, b) => new Date(b.time) - new Date(a.time));
 
+  // Define a function to determine and return a status badge based on the auction's end date.
   const statusBadge = () => {
+
+    // Helper function to check if the current date is past the item's end date.
     const hasSurpassedTime = () => {
       return Date.now() > item.endDate;
     };
 
+    // Conditionally render a badge indicating whether the auction is finished or ongoing.
     const badgeColor = hasSurpassedTime() ? 
     <span className={`position-absolute translate-middle top-0 start-50 p-2 badge bg-danger fs-6`}> Finished </span> 
-    : <span className={`position-absolute translate-middle top-0 start-50 p-2 badge bg-success fs-6`}> Ongoing </span>
+    : <span className={`position-absolute translate-middle top-0 start-50 p-2 badge bg-success fs-6`}> Ongoing </span>;
   
     return badgeColor;
-  }
-  
+  };
 
+  // Render the card component with item details.
   return (
     <>
         <Card style={{ width: "22rem", height: "36rem" }}>
