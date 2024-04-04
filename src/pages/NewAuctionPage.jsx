@@ -9,7 +9,7 @@ const NewAuctionPage = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState(''); // dynamic title in categories
   const [customCategory, setCustomCategory] = useState('');
   const [data, setData] = useState(null)
   const [mainTitle, setMainTitle] = useState('')
@@ -18,7 +18,7 @@ const NewAuctionPage = () => {
   const [startPrice, setStartPrice] = useState('')
   const [reservedPrice, setReservedPrice] = useState('')
 
-  const {loggedIn} = useContext(GlobalContext)
+  const {loggedIn} = useContext(GlobalContext) 
 
   const navigate = useNavigate()
 
@@ -33,9 +33,11 @@ const NewAuctionPage = () => {
 
   }, [])
 
+  // posts to db
   async function postNewAuction(e){
     e.preventDefault()
     
+    // validation checks
     if(imageInput[0].length >= 1 && 
       mainTitle.length > 3 && 
       description.length > 3 && 
@@ -65,7 +67,7 @@ const NewAuctionPage = () => {
 
       if (res.ok) {
         console.log(res)
-        navigate("/")
+        navigate("/") // navigates to home page
       } else {
         console.log("något fick fel")
       }
@@ -74,7 +76,7 @@ const NewAuctionPage = () => {
     } 
   }
 
-  const existingCategories = []
+  const existingCategories = [] // will hold categories after mapping
 
   let filtered = data ? data.map((item) => 
     item.category.map(i => 
@@ -91,6 +93,7 @@ const NewAuctionPage = () => {
     setEndDate(date);
   };
 
+  // handles input in custom category
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       setTitle(customCategory);

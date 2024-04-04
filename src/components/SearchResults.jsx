@@ -21,6 +21,7 @@ const SearchResults = ({ category }) => {
 
   }, [])
 
+  // filter fetchedData based on search query
   useEffect(() => {
     if (fetchedData) {
       const filteredAuctions = fetchedData.filter(item => {
@@ -30,7 +31,7 @@ const SearchResults = ({ category }) => {
           item.category.some(cat => cat.toLowerCase().includes(searchQuery.toLowerCase()))
         );
       });
-      setFilteredData(filteredAuctions);
+      setFilteredData(filteredAuctions); // holds results of filtering 
     }
   }, [fetchedData, searchQuery, category])
 
