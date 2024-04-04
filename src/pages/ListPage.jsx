@@ -3,6 +3,7 @@ import ListCard from "../components/ListItem.jsx"
 import "../styles/listPage.css"
 import { GlobalContext } from "../GlobalContext.jsx";
 import { Alert, Button } from "react-bootstrap";
+import StyleCard from "../components/StyleCard.jsx";
 
 export default function ListPage() {
   const [list, setList] = useState([]);
@@ -66,9 +67,9 @@ export default function ListPage() {
     <div className="container">
       <div className="row row-cols-1 row-cols-md-3 g-4">
         {list.slice(1).map((item, index) => (
-          <div className="col-md-4" key={index + 1}>
-            <ListCard item={item} />
-          </div>
+            <StyleCard>
+              <ListCard item={item} />
+            </StyleCard>
         ))}
       </div>
     </div>

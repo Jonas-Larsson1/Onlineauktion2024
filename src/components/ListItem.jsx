@@ -25,7 +25,9 @@ const ListCard = ({ item }) => {
       </div>
       <Card.Body>
         <Card.Title>{item.title}</Card.Title>
-        <Card.Text style={{ height: "8rem" }}>{item.description}</Card.Text>
+        <Card.Text style={{ height: "8rem", overflow: "hidden", textOverflow: "ellipsis" }}>
+          {item.description.length > 100 ? `${item.description.substring(0, 100)}...` : item.description}
+        </Card.Text>
       </Card.Body>
       <ListGroup className="list-group list-group-flush">
         <ListGroup.Item>
