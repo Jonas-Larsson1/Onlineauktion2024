@@ -65,8 +65,8 @@ export default function AccountPage() {
 
     // Printing out info
     return (<>
-        <div className="mt-5">
-            <Link className="mx-5" to="/AccountPage">
+        <div className="d-flex justify-content-center align-items-center mt-5 border rounded mx-5" style={{ width: "70px", height: "70px", background: "#C38D9E" }}>
+            <Link to="/AccountPage">
                 <img src="/src/assets/goback.png" alt="Go back" height="50px" />
             </Link>
         </div>
