@@ -15,8 +15,9 @@ const NewAuctionPage = () => {
   const [mainTitle, setMainTitle] = useState('')
   const [description, setDescription] = useState('')
   const [imageInput, setImageInput] = useState([''])
-  const [startPrice, setStartPrice] = useState('')
-  const [reservedPrice, setReservedPrice] = useState('')
+  const [startPrice, setStartPrice] = useState(0)
+  const [reservedPrice, setReservedPrice] = useState(0)
+  const [disabled, setDisabled] = useState(true)
 
   const {loggedIn} = useContext(GlobalContext) 
 
@@ -214,7 +215,7 @@ const NewAuctionPage = () => {
         {dropdownOpen ? <div className='list-group w-75 align-self-center'>
           {existingCategories.map((cat, index) => 
             <a key={index} className='list-group-item list-group-item-action text-center' href="#" onClick={() => {
-              setDropdownOpen(false), setTitle(cat)}}>{cat}</a>
+              setDropdownOpen(false), setTitle(cat), setDisabled(!disabled)}} >{cat}</a>
           )}
           
           <input 
@@ -227,7 +228,7 @@ const NewAuctionPage = () => {
           </div> 
         : null}
 
-        <button className="btn btn-primary mt-3 w-75 align-self-center" onClick={postNewAuction}>
+        <button className="btn btn-primary mt-3 w-75 align-self-center" onClick={postNewAuction} disabled={disabled}>
           Submit
         </button>
       </div>
