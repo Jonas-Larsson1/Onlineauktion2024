@@ -20,7 +20,7 @@ const ListCard = ({ item }) => {
   return (<>
     <Card style={{ width: "22rem", height: "38rem" }}>
       <div>
-        <Card.Img variant="top" src={item.images[0]} style={{ height: "13rem" }} />
+        <Card.Img variant="top" className="img-fluid rounded" src={item.images[0]} style={{ height: "13rem", objectFit: "cover" }} />
         {statusBadge()}
       </div>
       <Card.Body>
