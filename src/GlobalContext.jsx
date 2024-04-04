@@ -1,13 +1,12 @@
 import { createContext, useEffect, useState } from "react";
+import { redirect } from "react-router";
 
 const GlobalContext = createContext();
 
-function GlobalProvider({children}){
-   
+function GlobalProvider({ children }) {
   const [show, setShow] = useState(() => {
-      return sessionStorage.getItem('showAlert' === 'true' || 'false')
-  }) 
-
+    return sessionStorage.getItem("showAlert" === "true" || "false");
+  });
 
   useEffect(() => {
     return sessionStorage.setItem("showAlert", show);
@@ -28,7 +27,8 @@ function GlobalProvider({children}){
       sessionStorage.getItem("loggedIn") === "null" ||
       sessionStorage.getItem("loggedIn") === null
     ) {
-      return false; // returns false if logged in becomes false or null
+      redirect("/LoginPage"); // returns false if logged in becomes false or null
+      return false
     } else {
       return sessionStorage.getItem("loggedIn"); // otherwise the value wont change
     }
@@ -46,17 +46,21 @@ function GlobalProvider({children}){
     setLoggedIn(false);
   };
 
-  return <GlobalContext.Provider value = {{
-      loggedIn,
-      login,
-      logout,
-      show,
-      setShow,
-      hideAlert,
-      displayAlert,
-    }}>
-    {children}
-  </GlobalContext.Provider>
+  return (
+    <GlobalContext.Provider
+      value={{
+        loggedIn,
+        login,
+        logout,
+        show,
+        setShow,
+        hideAlert,
+        displayAlert,
+      }}
+    >
+      {children}
+    </GlobalContext.Provider>
+  );
 }
 
 export { GlobalContext, GlobalProvider };
