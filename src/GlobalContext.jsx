@@ -8,6 +8,7 @@ function GlobalProvider({children}){
       return sessionStorage.getItem('showAlert' === 'true' || 'false')
   }) 
 
+
   useEffect(() => {
     return sessionStorage.setItem("showAlert", show);
   }, [show]);

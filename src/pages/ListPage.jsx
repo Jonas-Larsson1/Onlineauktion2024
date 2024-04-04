@@ -8,6 +8,18 @@ export default function ListPage() {
   const [list, setList] = useState([]);
   const {show, setShow} = useContext(GlobalContext)
   const {hideAlert} = useContext(GlobalContext)
+  const [user, setUser] = useState(null)
+  const {loggedIn} = useContext(GlobalContext)
+
+  useEffect(() => {
+    const getUserData = async () => {
+      const response = await fetch(`http://localhost:3000/users/${loggedIn}`);
+      const result = await response.json();
+      setUser(result);
+    };
+
+    getUserData();
+  }, []);
 
   useEffect(() => {
     const getData = async () => {
@@ -28,18 +40,18 @@ export default function ListPage() {
   }
   
   return (<>
-    {show ? 
+    {user ? 
       <Alert show={show} variant="success" className="alert">
-        <Alert.Heading>Welcome to the exclusive online auction site <em>Peta!</em></Alert.Heading>
+        <Alert.Heading>Welcome to the exclusive online auction site <em>Peta</em>, {user.username} !</Alert.Heading>
         <p>
           Happy bidding!
         </p>
         <hr />
-          <Button onClick={() => hideAlert()} variant="outline-success">
+        <Button onClick={() => hideAlert()} variant="outline-success">
             Close me
           </Button>
       </Alert>
-    : "" }
+      : "" }
 
     <div className="container pb-4 border-bottom border-dark">
       <div className="d-flex justify-content-center">

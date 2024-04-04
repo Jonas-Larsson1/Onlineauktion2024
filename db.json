@@ -64,14 +64,19 @@
       "reservePrice": 300,
       "bidHistory": [
         {
+          "userId": "3",
+          "time": 1712045808677,
+          "amount": 227
+        },
+        {
           "userId": "1",
           "time": 1711028300691,
           "amount": 200
         },
         {
-          "userId": "3",
-          "time": 1712045808677,
-          "amount": 227
+          "userId": "7b6d",
+          "time": 1712061916914,
+          "amount": 229
         }
       ],
       "category": [
@@ -380,6 +385,34 @@
           "amount": 21
         }
       ]
+    },
+    {
+      "id": "1800",
+      "sellerId": "7b6d",
+      "images": [
+        "https://upload.wikimedia.org/wikipedia/commons/1/15/20070818-0001-strolling_reindeer_cropped.jpg"
+      ],
+      "title": "Raindeer",
+      "description": "Insane Raindeer",
+      "startDate": "2024-04-01T22:00:00.000Z",
+      "endDate": "2024-04-17T22:00:00.000Z",
+      "startingPrice": "100",
+      "reservePrice": "500",
+      "category": [
+        "Hjortdjur"
+      ],
+      "bidHistory": [
+        {
+          "time": "2024-04-01T22:00:00.000Z",
+          "userId": "Auction start",
+          "amount": "100"
+        },
+        {
+          "userId": "7b6d",
+          "time": 1712062339459,
+          "amount": 200
+        }
+      ]
     }
   ],
   "users": [
@@ -410,6 +443,14 @@
       "username": "foxyfox",
       "password": "foxingfox",
       "savedAuctions": []
+    },
+    {
+      "id": "7b6d",
+      "username": "testgöran",
+      "password": "göran123",
+      "savedAuctions": [
+        "2"
+      ]
     }
   ]
 }

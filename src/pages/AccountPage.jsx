@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export default function AccountPage() {
   const { loggedIn } = useContext(GlobalContext)
 
-  const [user, setUser] = useState(null);
+  const {user, setUser} = useState(null);
   const [bids, setBids] = useState(null);
   const [ongoingAuctions, setOngoingAuctions] = useState(null);
   const [closedAuctions, setClosedAuctions] = useState(null);
