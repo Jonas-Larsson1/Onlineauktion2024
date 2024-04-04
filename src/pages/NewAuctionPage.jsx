@@ -100,6 +100,7 @@ const NewAuctionPage = () => {
       setTitle(customCategory);
       setDropdownOpen(false);
       setCustomCategory('');
+      setDisabled(!disabled)
     }
   };
 
