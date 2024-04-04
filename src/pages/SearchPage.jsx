@@ -7,15 +7,16 @@ import { useParams } from 'react-router';
 
 
 const SearchPage = () => {
-  const {incomingSearchQuery} = useParams()
+  const {incomingSearchQuery} = useParams() // search query from URL
 
-
-  const [searchQuery, setSearchQuery] = useState(incomingSearchQuery);
+  const [searchQuery, setSearchQuery] = useState(incomingSearchQuery); // input in search bar
   const [data, setData] = useState(null) // result of fetch
   const [category, setCategory] = useState(null);
  
   return <>
-    <FetchedDataContext.Provider value={{data, setData}}>
+  {/* access to fetched data */}
+    <FetchedDataContext.Provider value={{data, setData}}> 
+    {/* access to seqrch query from search bar */}
       <SearchContext.Provider value={{ searchQuery, setSearchQuery }}>
         <div className='d-flex flex-row-reverse w-100 justify-content-between'>
           <div className="d-flex flex-column p-2 w-75">

@@ -2,12 +2,12 @@ import { createContext, useEffect, useState } from "react";
 
 const GlobalContext = createContext();
 
-function GlobalProvider({ children }) {
-  const [auction, setAuction] = useState(null);
-
+function GlobalProvider({children}){
+   
   const [show, setShow] = useState(() => {
-    return sessionStorage.getItem("showAlert" === "true" || "false");
-  });
+      return sessionStorage.getItem('showAlert' === 'true' || 'false')
+  }) 
+
 
   useEffect(() => {
     return sessionStorage.setItem("showAlert", show);
@@ -46,23 +46,17 @@ function GlobalProvider({ children }) {
     setLoggedIn(false);
   };
 
-  return (
-    <GlobalContext.Provider
-      value={{
-        loggedIn,
-        login,
-        logout,
-        show,
-        setShow,
-        hideAlert,
-        displayAlert,
-        auction,
-        setAuction,
-      }}
-    >
-      {children}
-    </GlobalContext.Provider>
-  );
+  return <GlobalContext.Provider value = {{
+      loggedIn,
+      login,
+      logout,
+      show,
+      setShow,
+      hideAlert,
+      displayAlert,
+    }}>
+    {children}
+  </GlobalContext.Provider>
 }
 
 export { GlobalContext, GlobalProvider };

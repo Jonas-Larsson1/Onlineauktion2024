@@ -3,42 +3,46 @@ import { Button } from 'react-bootstrap'
 import {FetchedDataContext} from './SearchResults';
 
 const Categories = ({category, setCategory, setSearchQuery}) => {
-  const { data } = useContext(FetchedDataContext)
-  const [toggle, setToggle] = useState(false)
-  const [auctionData, setAuctionData] = useState([])
+  const { data } = useContext(FetchedDataContext) // global data
 
-  const allCategories = []
+  const [toggle, setToggle] = useState(false) // toggle for category filter
+  const [auctionData, setAuctionData] = useState([]) // holds auction data
+
+  const allCategories = [] // will hold existing categories after mapping
 
   useEffect(() => {
-    setAuctionData(data);
+    setAuctionData(data); // updating auctionData with fetched data
   }, [data]);
 
-  // added
   const handleCategoryClick = (category) => {
-    setSearchQuery('')
+    setSearchQuery('') // resets search query
     setCategory(category);
-    setToggle(false);
-    // console.log(category)
+    setToggle(false); // closes menu with categories
   };
   
   const filteredCategories = auctionData ? 
     auctionData.map((item) => 
       item.category.map(i => 
-        allCategories.includes(i) ? null : allCategories.push(i)
+        allCategories.includes(i) ? null : allCategories.push(i) // checks if category of item exists in allCategories, if not - category will be appended, if yes - cat will be skipped
       )
     ) 
-    : [];
+  : [];
 
   return <>
     <div className="container d-flex flex-row justify-content-between border border-secondary rounded p-2 ">
-       {category ? <h3 className='px-3'>{category}</h3> : <h3 className='px-3'>Select category</h3>}
-       <Button  type="button" className="btn btn-primary btn-block" onClick={() => {setToggle(!toggle), filteredCategories}}><i className="bi bi-filter"></i></Button>
+      {category ? <h3 className='px-3'>{category}</h3> 
+        : <h3 className='px-3'>Select category</h3>}
+      <Button type="button" className="btn btn-primary btn-block" onClick={() => {setToggle(!toggle), filteredCategories}}>
+        <i className="bi bi-filter"></i>
+      </Button>
     </div>
-    {/* {category ? <p>Current category: <b>{category}</b> </p> : null} */}
     <div className='p-2'>
       {toggle ? 
         <div className='list-group'>
-          <a className='list-group-item list-group-item-action' href="#" onClick={() => handleCategoryClick(null)}><b>Show all</b></a>
+          <a className='list-group-item list-group-item-action' href="#" onClick={() => handleCategoryClick(null)}>
+            <b>Show all</b>
+          </a>
+          {/* renders each category */}
           {allCategories.map((cat, index) => 
             <a key={index} className='list-group-item list-group-item-action' href="#" onClick={() => handleCategoryClick(cat)}>{cat}</a>
           )}
@@ -49,4 +53,3 @@ const Categories = ({category, setCategory, setSearchQuery}) => {
 }
 
 export default Categories;
-// export { allCategories };

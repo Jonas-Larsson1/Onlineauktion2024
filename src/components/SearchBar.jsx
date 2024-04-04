@@ -3,8 +3,8 @@ import React, {useState, useContext} from 'react';
 const SearchContext = React.createContext();
 
 const SearchBar = ({setCategory}) => {
-  const [searchValue, setSearchValue] = useState('');
-  const {setSearchQuery } = useContext(SearchContext);
+  const [searchValue, setSearchValue] = useState(''); // holds input
+  const {setSearchQuery } = useContext(SearchContext); // accessing setSearchQuery  from SearchContext
 
   const handleChange = (event) => {
       setSearchValue(event.target.value) // gets input
@@ -13,14 +13,11 @@ const SearchBar = ({setCategory}) => {
   const handleSubmit = (event) => {
       event.preventDefault();
       setSearchQuery(searchValue) // saves input to searchQuery
-      // console.log(searchValue);
       setSearchValue('') // cleans up input
-      setCategory(null)
-
+      setCategory(null) // reset category
   }
 
-  return (
-    <>
+  return (<>
     <form className="d-flex w-75 align-self-center" onSubmit={handleSubmit}>
       <input 
         type="text" 
@@ -31,8 +28,7 @@ const SearchBar = ({setCategory}) => {
         aria-label="Search" 
       />
     </form>
-    </>
-  )
+  </>)
 }
 
 export default SearchBar;
