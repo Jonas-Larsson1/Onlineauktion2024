@@ -9,7 +9,6 @@ import { useParams } from 'react-router';
 const SearchPage = () => {
   const {incomingSearchQuery} = useParams()
 
-
   const [searchQuery, setSearchQuery] = useState(incomingSearchQuery);
   const [data, setData] = useState(null) // result of fetch
   const [category, setCategory] = useState(null);

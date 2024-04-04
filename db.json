@@ -11,99 +11,39 @@
         "https://db637ll7r1kva.cloudfront.net/app/uploads/2022/02/10165750/iStock-1323863855-770x514.jpg"
       ],
       "startDate": 1710853385121,
-      "endDate": 1720859385121,
+      "endDate": 1730859385121,
       "startingPrice": 100,
       "reservePrice": 300,
       "bidHistory": [
         {
           "userId": "3",
-          "time": 1711378270407,
-          "amount": "230"
-        },
-        {
-          "userId": 1,
-          "time": 1711377443496,
-          "amount": "229"
-        },
-        {
-          "userId": 1,
-          "time": 1711029035938,
-          "amount": "228"
-        },
-        {
-          "userId": 1,
-          "time": 1711028300691,
-          "amount": "226"
-        },
-        {
-          "userId": 1,
-          "time": 1711027975536,
-          "amount": "225"
-        },
-        {
-          "userId": 1,
-          "time": 1711027930291,
-          "amount": "222"
-        },
-        {
-          "userId": 1,
-          "time": 1711027138943,
-          "amount": "216"
-        },
-        {
-          "userId": 1,
-          "time": 1711024943260,
-          "amount": "215"
-        },
-        {
-          "userId": 1,
-          "time": 1711024900634,
-          "amount": "214"
-        },
-        {
-          "userId": 1,
-          "time": 1711024872308,
-          "amount": "213"
-        },
-        {
-          "userId": 1,
-          "time": 1711024300683,
-          "amount": "212"
-        },
-        {
-          "userId": 1,
-          "time": 1711024116598,
-          "amount": "211"
-        },
-        {
-          "userId": 1,
-          "time": 1711023891819,
-          "amount": "210"
-        },
-        {
-          "userId": 1,
-          "time": 1711019377577,
-          "amount": "209"
-        },
-        {
-          "userId": "1",
-          "time": 1710853583121,
-          "amount": "205"
-        },
-        {
-          "userId": "1",
-          "time": 1710853483121,
-          "amount": "202"
-        },
-        {
-          "userId": "1",
-          "time": 1710853383121,
-          "amount": "200"
+          "time": 1712047353064,
+          "amount": 108
         },
         {
           "userId": "3",
-          "time": 1711379956046,
-          "amount": "231"
+          "time": 1712047173723,
+          "amount": 106
+        },
+        {
+          "userId": "3",
+          "time": 1712046649526,
+          "amount": 103
+        },
+        {
+          "userId": "3",
+          "time": 1712046391713,
+          "amount": 102
+        },
+        {
+          "time": 1710853385121,
+          "userId": "Auction start",
+          "amount": 100
+        },
+        {
+          "userId": "3",
+          "time": 1712047389036,
+          "amount": 110
         }
       ],
       "category": [
@@ -126,7 +66,12 @@
         {
           "userId": "1",
           "time": 1711028300691,
-          "amount": "200"
+          "amount": 200
+        },
+        {
+          "userId": "3",
+          "time": 1712045808677,
+          "amount": 227
         }
       ],
       "category": [
@@ -147,14 +92,164 @@
       "reservePrice": 300,
       "bidHistory": [
         {
-          "userId": "1",
-          "time": 1711028300691,
-          "amount": "200"
+          "userId": "3",
+          "time": 1712050369072,
+          "amount": 268
+        },
+        {
+          "userId": "3",
+          "time": 1712050201188,
+          "amount": 266
+        },
+        {
+          "userId": "3",
+          "time": 1712050176420,
+          "amount": 254
+        },
+        {
+          "userId": "3",
+          "time": 1712050012037,
+          "amount": 242
+        },
+        {
+          "userId": "3",
+          "time": 1712049851314,
+          "amount": 241
+        },
+        {
+          "userId": "3",
+          "time": 1712049758262,
+          "amount": 240
+        },
+        {
+          "userId": "3",
+          "time": 1712049710955,
+          "amount": 239
+        },
+        {
+          "userId": "3",
+          "time": 1712049625417,
+          "amount": 238
+        },
+        {
+          "userId": "3",
+          "time": 1712049622589,
+          "amount": 236
+        },
+        {
+          "userId": "3",
+          "time": 1712049603629,
+          "amount": 235
+        },
+        {
+          "userId": "3",
+          "time": 1712049362845,
+          "amount": 234
+        },
+        {
+          "userId": "3",
+          "time": 1712049351128,
+          "amount": 233
+        },
+        {
+          "userId": "3",
+          "time": 1712049335886,
+          "amount": 232
+        },
+        {
+          "userId": "3",
+          "time": 1712049123061,
+          "amount": 231
+        },
+        {
+          "userId": "3",
+          "time": 1712048894433,
+          "amount": 230
+        },
+        {
+          "userId": "3",
+          "time": 1712048854514,
+          "amount": 229
+        },
+        {
+          "userId": "3",
+          "time": 1712048833153,
+          "amount": 228
+        },
+        {
+          "userId": "3",
+          "time": 1712048652685,
+          "amount": 223
+        },
+        {
+          "userId": "3",
+          "time": 1712048623350,
+          "amount": 222
+        },
+        {
+          "userId": "3",
+          "time": 1712048593296,
+          "amount": 221
+        },
+        {
+          "userId": "3",
+          "time": 1712048377171,
+          "amount": 220
+        },
+        {
+          "userId": "3",
+          "time": 1712048345477,
+          "amount": 218
+        },
+        {
+          "userId": "3",
+          "time": 1712048246355,
+          "amount": 215
+        },
+        {
+          "userId": "3",
+          "time": 1712048229212,
+          "amount": 213
+        },
+        {
+          "userId": "3",
+          "time": 1712048223820,
+          "amount": 211
+        },
+        {
+          "userId": "3",
+          "time": 1712048071581,
+          "amount": 209
+        },
+        {
+          "userId": "3",
+          "time": 1712047891806,
+          "amount": 207
+        },
+        {
+          "userId": "3",
+          "time": 1712047570374,
+          "amount": 206
+        },
+        {
+          "userId": "3",
+          "time": 1712047533326,
+          "amount": 204
         },
         {
           "userId": "3",
           "time": 1711535955044,
-          "amount": "201"
+          "amount": 201
+        },
+        {
+          "userId": "1",
+          "time": 1711028300691,
+          "amount": 200
+        },
+        {
+          "userId": "3",
+          "time": 1712050388380,
+          "amount": 270
         }
       ],
       "category": [
@@ -177,12 +272,12 @@
         {
           "userId": "1",
           "time": 1711028300691,
-          "amount": "200"
+          "amount": 200
         },
         {
           "userId": "3",
           "time": 1711378682268,
-          "amount": "201"
+          "amount": 201
         }
       ],
       "category": [
@@ -205,7 +300,7 @@
         {
           "userId": "1",
           "time": 1711028300691,
-          "amount": "200"
+          "amount": 200
         }
       ],
       "category": [
@@ -228,7 +323,7 @@
         {
           "userId": "1",
           "time": 1711028300691,
-          "amount": "200"
+          "amount": 200
         }
       ],
       "category": [
@@ -244,14 +339,14 @@
         "https://example.com/image.jpg"
       ],
       "startDate": 1710843383121,
-      "endDate": 1710843373121,
+      "endDate": 1721473678054,
       "startingPrice": 100,
       "reservePrice": 300,
       "bidHistory": [
         {
           "userId": "1",
           "time": 1711028300691,
-          "amount": "200"
+          "amount": 200
         }
       ],
       "category": [
@@ -268,13 +363,22 @@
       "description": "sandy fox",
       "startDate": "2024-03-27T23:00:00.000Z",
       "endDate": "2024-03-29T23:00:00.000Z",
-      "startingPrice": "20",
-      "reservePrice": "30",
+      "startingPrice": 20,
+      "reservePrice": 3,
       "category": [
         "Foxes"
       ],
       "bidHistory": [
-        {}
+        {
+          "time": "2024-03-27T23:00:00.000Z",
+          "userId": "Auction start",
+          "amount": 20
+        },
+        {
+          "userId": "3",
+          "time": 1712043431541,
+          "amount": 21
+        }
       ]
     }
   ],
@@ -289,42 +393,23 @@
       "id": "3",
       "username": "bertil",
       "password": "bertil123",
+      "savedAuctions": [
+        "b220",
+        "2",
+        "1"
+      ]
+    },
+    {
+      "id": "01c1",
+      "username": "flyingfox",
+      "password": "foxing1",
       "savedAuctions": []
     },
     {
-      "id": "96c4",
-      "username": "test",
-      "password": "test123"
-    },
-    {
-      "id": "6023",
-      "username": "bengan",
-      "password": "bengan123"
-    },
-    {
-      "id": "7268",
-      "username": "lenakarlsson",
-      "password": "lena123"
-    },
-    {
-      "id": "9f27",
-      "username": "bertkarlsson",
-      "password": "bert123"
-    },
-    {
-      "id": "c288",
-      "username": "test",
-      "password": "testing"
-    },
-    {
-      "id": "b45d",
-      "username": "kungen1",
-      "password": "bästivärlden"
-    },
-    {
-      "id": "0cf8",
-      "username": "pollytesting",
-      "password": "pollytesting"
+      "id": "2982",
+      "username": "foxyfox",
+      "password": "foxingfox",
+      "savedAuctions": []
     }
   ]
 }

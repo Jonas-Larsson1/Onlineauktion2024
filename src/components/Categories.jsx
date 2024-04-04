@@ -4,6 +4,7 @@ import {FetchedDataContext} from './SearchResults';
 
 const Categories = ({category, setCategory, setSearchQuery}) => {
   const { data } = useContext(FetchedDataContext)
+
   const [toggle, setToggle] = useState(false)
   const [auctionData, setAuctionData] = useState([])
 
@@ -18,7 +19,6 @@ const Categories = ({category, setCategory, setSearchQuery}) => {
     setSearchQuery('')
     setCategory(category);
     setToggle(false);
-    // console.log(category)
   };
   
   const filteredCategories = auctionData ? 
@@ -27,18 +27,22 @@ const Categories = ({category, setCategory, setSearchQuery}) => {
         allCategories.includes(i) ? null : allCategories.push(i)
       )
     ) 
-    : [];
+  : [];
 
   return <>
     <div className="container d-flex flex-row justify-content-between border border-secondary rounded p-2 ">
-       {category ? <h3 className='px-3'>{category}</h3> : <h3 className='px-3'>Select category</h3>}
-       <Button  type="button" className="btn btn-primary btn-block" onClick={() => {setToggle(!toggle), filteredCategories}}><i className="bi bi-filter"></i></Button>
+      {category ? <h3 className='px-3'>{category}</h3> 
+        : <h3 className='px-3'>Select category</h3>}
+      <Button type="button" className="btn btn-primary btn-block" onClick={() => {setToggle(!toggle), filteredCategories}}>
+        <i className="bi bi-filter"></i>
+      </Button>
     </div>
-    {/* {category ? <p>Current category: <b>{category}</b> </p> : null} */}
     <div className='p-2'>
       {toggle ? 
         <div className='list-group'>
-          <a className='list-group-item list-group-item-action' href="#" onClick={() => handleCategoryClick(null)}><b>Show all</b></a>
+          <a className='list-group-item list-group-item-action' href="#" onClick={() => handleCategoryClick(null)}>
+            <b>Show all</b>
+          </a>
           {allCategories.map((cat, index) => 
             <a key={index} className='list-group-item list-group-item-action' href="#" onClick={() => handleCategoryClick(cat)}>{cat}</a>
           )}

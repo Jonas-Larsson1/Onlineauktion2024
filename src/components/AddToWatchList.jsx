@@ -2,8 +2,9 @@ import { Button, Form } from "react-bootstrap"
 import { GlobalContext } from "../GlobalContext"
 import { useContext, useState, useEffect } from "react"
 
-export default function AddToWatchList () {
-  const { auction, loggedIn } = useContext(GlobalContext)
+export default function AddToWatchList (props) {
+  const { auction } = props
+  const { loggedIn } = useContext(GlobalContext)
   const [ user, setUser ] = useState()
   const [ savedByUser, setSavedByUser  ] = useState(false)
 
@@ -14,7 +15,6 @@ export default function AddToWatchList () {
 
       setUser(result);
     };
-
 
     getData();
   }, []);
@@ -40,7 +40,6 @@ export default function AddToWatchList () {
       setSavedByUser(false)
     }
     
-
     const response = await fetch(`/api/users/${loggedIn}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },

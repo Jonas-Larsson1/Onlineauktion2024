@@ -1,12 +1,14 @@
 import NewBid from "./NewBid";
 import LimitBidHistory from "./LimitBidHistory";
 
-export default function Bidding() {
+export default function Bidding(props) {
+  const { auction, updateAuction} = props
+
   return (
     <>
-      <div className="p-2 border rounded" style={{ background: "#C38D9E" }}>
-        <NewBid />
-        <LimitBidHistory />
+      <div className="border rounded" style={{ background: "#C38D9E" }}>
+        <NewBid auction={auction} updateAuction={updateAuction}/>
+        <LimitBidHistory auction={auction} />
       </div>
     </>
   );

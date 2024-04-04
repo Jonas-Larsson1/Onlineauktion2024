@@ -3,13 +3,16 @@ import { GlobalContext } from "../GlobalContext";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
+import { Alert } from "react-bootstrap";
 
 export default function LoginPage() {
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
-  const { login } = useContext(GlobalContext);
   const [error, setError] = useState("");
-  const {displayAlert} = useContext(GlobalContext) 
+
+  const { login } = useContext(GlobalContext);
+  const { displayAlert } = useContext(GlobalContext);
+  const { showLogoutAlert } = useContext(GlobalContext);
 
   const checkForUser = async (e) => {
     e.preventDefault();
@@ -17,18 +20,15 @@ export default function LoginPage() {
     try {
       const response = await fetch("api/users");
       const credentials = await response.json();
-      // console.log("Response from server:", credentials);
       const user = credentials.find(
-        (
-          user //Will become true if input = user data
-        ) =>
+        (user) =>
           user.username.toLowerCase() === usernameInput.toLowerCase() &&
           user.password === passwordInput
       );
+
       if (user) {
         login(user.id); // set loggedIn to true
         displayAlert();
-        
       } else {
         setError("Invalid username or password");
       }
@@ -47,7 +47,7 @@ export default function LoginPage() {
           <Form.Control
             type="email"
             placeholder="Enter username"
-            value={usernameInput}
+            value={usernameInput} // The value that is submitted
             onChange={(e) => setUsernameInput(e.target.value)}
           />
         </Form.Group>
@@ -61,41 +61,44 @@ export default function LoginPage() {
             onChange={(e) => setPasswordInput(e.target.value)}
           />
         </Form.Group>
+
         <Form.Group className="mb-3" controlId="formCheckbox">
           <Form.Check type="checkbox" label="Check me out" />
         </Form.Group>
+
         <Button variant="primary" onClick={checkForUser}>
           Login
         </Button>
+
         <div>{error}</div>
         <div>
           <b>OR</b>
         </div>
+
         <Button>
           <Link className="register-link" to="/registerPage">
             Register!
           </Link>
         </Button>
+        {showLogoutAlert ? (
+         
+          <Alert
+            className= "logout-alert"
+            severity="info"
+          >
+           <em>
+             Goodbye, you are now logged out! 
+            </em>
+            <div>
+              <img src="https://i.gifer.com/origin/46/4657cbcfc0a6ae147ce2cf48fb05a671_w200.gif" className="bye"/>
+             <img src="https://gifdb.com/images/high/blushing-hug-emoji-3oiog8j560s1blzu.gif" className="bye"/>
+              <img src="https://media.tenor.com/tNUmI0dD6VEAAAAj/despair.gif" className="bye" />
+              </div>
+          </Alert> 
+        ) : (
+          ""
+        )}
       </Form>
-      {/* <form>
-            <input
-              type="text"
-              placeholder="username"
-              value = {usernameInput}
-              onChange={(e) =>  setUsernameInput(e.target.value)}
-            />
-            <br />
-            <input
-              type="password"
-              placeholder="password"
-              value = {passwordInput}
-              onChange={(e) => setPasswordInput(e.target.value)}
-            />
-            <br />
-          
-        <Button
-          onClick={checkForUser}>Login</Button>
-      </form>  */}
     </>
   );
 }
