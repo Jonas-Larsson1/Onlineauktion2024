@@ -366,8 +366,8 @@
       ],
       "title": "fennec fox",
       "description": "sandy fox",
-      "startDate": "2024-03-27T23:00:00.000Z",
-      "endDate": "2024-03-29T23:00:00.000Z",
+      "startDate": 1721273678054,
+      "endDate": 1711473678054,
       "startingPrice": 20,
       "reservePrice": 3,
       "category": [
