@@ -18,14 +18,16 @@ const ListCard = ({ item }) => {
   }
   
   return (<>
-    <Card style={{ width: "22rem", height: "36rem" }}>
+    <Card style={{ width: "22rem", height: "38rem" }}>
       <div>
         <Card.Img variant="top" src={item.images[0]} style={{ height: "13rem" }} />
         {statusBadge()}
       </div>
       <Card.Body>
         <Card.Title>{item.title}</Card.Title>
-        <Card.Text style={{ height: "8rem" }}>{item.description}</Card.Text>
+        <Card.Text style={{ height: "8rem", overflow: "hidden", textOverflow: "ellipsis" }}>
+          {item.description.length > 125 ? `${item.description.substring(0, 125)}...` : item.description}
+        </Card.Text>
       </Card.Body>
       <ListGroup className="list-group list-group-flush">
         <ListGroup.Item>
@@ -36,7 +38,7 @@ const ListCard = ({ item }) => {
         </ListGroup.Item>
       </ListGroup>
       <Card.Body className="text-center">
-        <a href={`/AuctionPage/${item.id}`} className="btn btn-primary w-100">View</a>
+        <a href={`/AuctionPage/${item.id}`} className="btn btn-primary w-100 position-absolute start-0 bottom-0">View</a>
       </Card.Body>
     </Card>
   </>);

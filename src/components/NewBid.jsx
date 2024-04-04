@@ -73,7 +73,7 @@ export default function NewBid(props) {
       <Row className="mb-3">
         <Form.Group as={Col} controlId="newBid">
           <InputGroup>
-            <Form.Control name="amount" type="number" value={currentBid ? currentBid : 0} onInput={changeCurrentBid}/>
+          <Form.Control name="amount" type="number" placeholder={0} value={currentBid ? currentBid : ' '} onInput={changeCurrentBid}/>
           </InputGroup>
           <Form.Text className="text-muted">
             Miniumum bid: {defaultBid}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import StyleCard from "../components/StyleCard";
+import ListCard from "../components/ListItem";
 import { Row, Col, Table } from "react-bootstrap";
 import { GlobalContext } from "../GlobalContext";
 import { Link } from "react-router-dom";
@@ -110,95 +111,33 @@ export default function AccountPage() {
           <div className="d-flex flex-column">
             <h5 className="fst-italic fw-bold d-flex justify-content-center">Your ongoing bids.</h5>
             {bids ? bids.map((bid, index) => (
-              <div key={index} className="m-3 pt-5 ">
-                <Link to={`/AuctionPage/${bid.id}`}>
-                  <div className="d-flex justify-content-center">
-                    <img src={bid.images[0]} className="account-img border" style={{ height: "13rem" }} />
-                  </div>
-                  <h4 className="fw-bold d-flex justify-content-center">{bid.title}</h4>
-                </Link>
-
-                <Table striped bordered hover variant="dark" size="sm">
-                  <thead>
-                    <tr>
-                      <th>Highest bid</th>
-                      <th>Auction start</th>
-                      <th>Auction end</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr key={index}>
-                      <td>{bid.bidHistory[0].amount}€</td>
-                      <td>{formatDateTime(bid.startDate)}</td>
-                      <td> {formatDateTime(bid.endDate)}</td>
-                    </tr>
-                  </tbody>
-                </Table>
-
-
-              </div>)) : <p>Ain't no auction here, Mr. Auctioneer.</p>}
+              <div className="mt-5">
+                <ListCard item={bid}></ListCard>
+              </div>
+            ))
+            : <p>Ain't no auction here, Mr. Auctioneer.</p>}
           </div>
         </StyleCard>
 
         <StyleCard>
           <div className="d-flex flex-column">
             <h5 className="fst-italic fw-bold d-flex justify-content-center">Your ongoing auctions.</h5>
-            {ongoingAuctions ? ongoingAuctions.map((ongoingAuctions, index) => (
-              <div key={index} className="m-3 pt-5 ">
-                <Link to={`/AuctionPage/${ongoingAuctions.id}`}>
-                  <div className="d-flex justify-content-center">
-                    <img src={ongoingAuctions.images[0]} className="account-img border" style={{ height: "13rem" }} />
-                  </div>
-                  <h4 className="fw-bold d-flex justify-content-center">{ongoingAuctions.title}</h4>
-                </Link>
-                <Table striped bordered hover variant="dark" size="sm">
-                  <thead>
-                    <tr>
-                      <th>Highest bid</th>
-                      <th>Auction start</th>
-                      <th>Auction end</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr key={index}>
-                      <td>{ongoingAuctions.bidHistory[0].amount}€</td>
-                      <td>{formatDateTime(ongoingAuctions.startDate)}</td>
-                      <td> {formatDateTime(ongoingAuctions.endDate)}</td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </div>)) : <p>Ain't no auction here, Mr. Auctioneer.</p>}
+            {ongoingAuctions ? ongoingAuctions.map((ongoingAuction, index) => (
+              <div className="mt-5">
+                <ListCard item={ongoingAuction}></ListCard>
+              </div>
+              )) : <p>Ain't no auction here, Mr. Auctioneer.</p>}
           </div>
         </StyleCard>
 
         <StyleCard>
           <div className="d-flex flex-column">
             <h5 className="fst-italic fw-bold d-flex justify-content-center">Your closed auctions.</h5>
-            {closedAuctions ? closedAuctions.map((closedAuctions, index) => (
-              <div key={index} className="m-3 pt-5 ">
-                <Link to={`/AuctionPage/${closedAuctions.id}`}>
-                  <div className="d-flex justify-content-center">
-                    <img src={closedAuctions.images[0]} className="account-img border" style={{ height: "13rem" }} />
-                  </div>
-                  <h4 className="fw-bold d-flex justify-content-center">{closedAuctions.title}</h4>
-                </Link>
-                <Table striped bordered hover variant="dark" size="sm">
-                  <thead>
-                    <tr>
-                      <th>Winning bid</th>
-                      <th>Auction start</th>
-                      <th>Auction end</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr key={index}>
-                      <td>{closedAuctions.bidHistory[0].amount}€</td>
-                      <td>{formatDateTime(closedAuctions.startDate)}</td>
-                      <td> {formatDateTime(closedAuctions.endDate)}</td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </div>)) : <p>Ain't no auction here, Mr. Auctioneer.</p>}
+            {closedAuctions ? closedAuctions.map((closedAuction, index) => (
+              <div className="mt-5">
+                <ListCard item={closedAuction}></ListCard>
+              </div>
+              )) : <p>Ain't no auction here, Mr. Auctioneer.</p>}
           </div>
         </StyleCard>
       </div>
