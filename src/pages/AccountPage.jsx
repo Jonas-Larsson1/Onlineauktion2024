@@ -50,13 +50,14 @@ export default function AccountPage() {
 
           if (currentBidding.userId === loggedIn) {
             userPlacedBid = true
-            break
+            break;
           }
         }
 
         if (userPlacedBid && auctionEndDate > currentDate) {
           currentBid.bidHistory = sortBids(currentBid.bidHistory)
           userBids.push(currentBid)
+          break;
         }
       }
       setBids(userBids)
@@ -84,9 +85,11 @@ export default function AccountPage() {
           if (auctionEndDate > currentDate) {
             currentAuction.bidHistory = sortBids(currentAuction.bidHistory)
             userOngoingAuctions.push(currentAuction);
+
           } else {
             currentAuction.bidHistory = sortBids(currentAuction.bidHistory)
             userClosedAuctions.push(currentAuction);
+            break;
           }
         }
       }
@@ -101,7 +104,13 @@ export default function AccountPage() {
   return (<>
     <div className="pt-5" style={{ backgroundColor: "#41B3A3", minHeight: '100vh' }}>
       {user ? (
-        <StyleCard><h4 className="fst-italic fw-bold">Welcome back, {user.username}.</h4></StyleCard>
+
+        <div className="d-flex justify-content-center" style={{ width: '100%' }}>
+          <div className="w-25">
+            <StyleCard><h4 className="fst-italic fw-bold">Welcome back, {user.username}.</h4></StyleCard>
+          </div>
+        </div>
+        
       ) : (
         <p>404</p>
       )}
@@ -113,9 +122,18 @@ export default function AccountPage() {
             {bids ? bids.map((bid, index) => (
               <div className="mt-5">
                 <ListCard item={bid}></ListCard>
+
+                <div className="d-flex justify-content-center mt-5">
+                  <h4>View more</h4>
+                  <Link className="ms-3" to="/AccountPage/OngoingBids">
+                    <img src="/src/assets/more.png" alt="View more" height="40px" />
+                  </Link>
+
+                </div>
               </div>
+
             ))
-            : <p>Ain't no auction here, Mr. Auctioneer.</p>}
+              : <p>Ain't no auction here, Mr. Auctioneer.</p>}
           </div>
         </StyleCard>
 
@@ -125,8 +143,16 @@ export default function AccountPage() {
             {ongoingAuctions ? ongoingAuctions.map((ongoingAuction, index) => (
               <div className="mt-5">
                 <ListCard item={ongoingAuction}></ListCard>
+
+                <div className="d-flex justify-content-center mt-5">
+                  <h4>View more</h4>
+                  <Link className="ms-3" to="/AccountPage/OngoingAuctions">
+                    <img src="/src/assets/more.png" alt="View more" height="40px" />
+                  </Link>
+
+                </div>
               </div>
-              )) : <p>Ain't no auction here, Mr. Auctioneer.</p>}
+            )) : <p>Ain't no auction here, Mr. Auctioneer.</p>}
           </div>
         </StyleCard>
 
@@ -136,8 +162,16 @@ export default function AccountPage() {
             {closedAuctions ? closedAuctions.map((closedAuction, index) => (
               <div className="mt-5">
                 <ListCard item={closedAuction}></ListCard>
+
+                <div className="d-flex justify-content-center mt-5">
+                  <h4>View more</h4>
+                  <Link className="ms-3" to="/AccountPage/ClosedAuctions">
+                    <img src="/src/assets/more.png" alt="View more" height="40px" />
+                  </Link>
+
+                </div>
               </div>
-              )) : <p>Ain't no auction here, Mr. Auctioneer.</p>}
+            )) : <p>Ain't no auction here, Mr. Auctioneer.</p>}
           </div>
         </StyleCard>
       </div>

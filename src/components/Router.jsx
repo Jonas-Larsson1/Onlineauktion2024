@@ -12,6 +12,9 @@ import SearchPage from "../pages/SearchPage.jsx"
 import AccountPage from "../pages/AccountPage.jsx";
 import NewAuctionPage from "../pages/NewAuctionPage.jsx";
 import AboutPage from "../pages/AboutPage.jsx";
+import AccountPageOngoingBids from "../pages/AccountPageOngoingBids.jsx";
+import AccountPageOngoingAuctions  from "../pages/AccountPageOngoingAuctions.jsx";
+import AccountPageClosedAuctions from "../pages/AccountPageClosedAuctions.jsx";
 
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
@@ -30,6 +33,9 @@ export default function Router() {
                 <Route path="/" element={<ListPage />} />
                 <Route path="/AuctionPage/:id" element={<AuctionPage />} />
                 <Route path="/AccountPage/" element={<AccountPage />} />
+                <Route path="/AccountPage/OngoingBids" element={<AccountPageOngoingBids />} />
+                <Route path="/AccountPage/OngoingAuctions" element={<AccountPageOngoingAuctions />} />
+                <Route path="/AccountPage/ClosedAuctions" element={<AccountPageClosedAuctions />} />
                 <Route
                   path="/SearchPage/:incomingSearchQuery"
                   element={<SearchPage />}
