@@ -137,9 +137,9 @@ export default function RegisterPage() {
         />
         <Form.Text className="text-muted">{passwordWarning}</Form.Text>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
+      {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
         <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
+      </Form.Group> */}
       <Button variant="primary" onClick={registerUser}>
         Submit
       </Button>

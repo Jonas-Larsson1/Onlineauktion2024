@@ -59,9 +59,9 @@ export default function LoginPage() {
         />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formCheckbox">
+      {/* <Form.Group className="mb-3" controlId="formCheckbox">
         <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
+      </Form.Group> */}
 
       <Button variant="primary" onClick={checkForUser}>
         Login
