@@ -9,7 +9,7 @@ const Navbar = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [searchValue, setSearchValue] = useState('')
-
+  const {setShowLogoutAlert} = useContext(GlobalContext)
   const { loggedIn } = useContext(GlobalContext);
   const { logout } = useContext(GlobalContext);
 
@@ -91,6 +91,7 @@ const Navbar = () => {
           onClick={() => {
             logout(); // set loggedIn to false
             navigate("/")
+            setShowLogoutAlert(true)
           }}>
 
           <img

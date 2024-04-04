@@ -3,6 +3,8 @@ import { createContext, useEffect, useState } from "react";
 const GlobalContext = createContext();
 
 function GlobalProvider({children}){
+
+    const[showLogoutAlert, setShowLogoutAlert] = useState(null)
    
   const [show, setShow] = useState(() => {
       return sessionStorage.getItem('showAlert' === 'true' || 'false')
@@ -53,6 +55,8 @@ function GlobalProvider({children}){
       setShow,
       hideAlert,
       displayAlert,
+      showLogoutAlert,
+      setShowLogoutAlert
     }}>
     {children}
   </GlobalContext.Provider>
