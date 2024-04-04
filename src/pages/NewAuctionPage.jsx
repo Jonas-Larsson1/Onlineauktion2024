@@ -14,6 +14,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { GlobalContext } from '../GlobalContext';
 import { useNavigate } from 'react-router-dom';
+import { Alert } from 'react-bootstrap';
 
 
 
@@ -30,6 +31,7 @@ const NewAuctionPage = () => {
   const [imageInput, setImageInput] = useState([''])
   const [startPrice, setStartPrice] = useState('')
   const [reservedPrice, setReservedPrice] = useState('')
+  const [warning, setWarning] = useState('')
   const {loggedIn} = useContext(GlobalContext)
 
   const navigate = useNavigate()
@@ -49,7 +51,7 @@ const NewAuctionPage = () => {
   async function postNewAuction(e){
     e.preventDefault()
     
-    if(imageInput[0].length >= 1 && mainTitle.length > 3 && description.length > 3 && startDate != null && 
+    if(imageInput[0].length >= 1 && mainTitle.length > 2 && description.length > 3 && startDate != null && 
       endDate != null && startPrice.length > 0 && reservedPrice.length > 0 && title[0].length >= 1){
 
         
@@ -76,11 +78,34 @@ const NewAuctionPage = () => {
     }else{
       console.log("något fick fel")
     }
-  } else{
-    alert("too short")
+  } else if(imageInput[0].length < 1){
+    setWarning("You need atleast one image")
    
   }
-    
+   else if(imageInput[0].length < 1){
+    setWarning("You need atleast one image")
+  } else if(mainTitle.length < 2){
+    setWarning("You atleast two characters as title")
+   
+  
+  } else if(description.length < 1){
+    setWarning("You need atleast three characters in description")
+   
+  
+  } else if(startDate === null ){
+    setWarning("You need to put start date of auction")
+   
+  
+  } else if(endDate === null ){
+    setWarning("You need to put start date of auction")
+
+  } else if(startPrice.length < 1 ){
+    setWarning("You need to put a starting price")
+  }else if(reservedPrice.length < 1 ){
+    setWarning("You need to put a reserved price")
+  }else{
+    setWarning("You need to choose a category")
+  }
   }
 
   const existingCategories = []
@@ -106,10 +131,15 @@ const NewAuctionPage = () => {
     }
   };
 
-  return (
+  return <>
+    
+   <Alert className='' severity="info">
+  {warning}
+</Alert>
     <form className='w-100 d-flex justify-content-center align-items-center m-3'>
       <div className='d-flex flex-column' style={{width:"30%"}}>
         <div className='d-flex flex-column'>
+         
           <input             
             type="text"
             value={imageInput} 
@@ -205,7 +235,8 @@ const NewAuctionPage = () => {
         <button className="btn btn-primary mt-3 w-75 align-self-center" onClick={postNewAuction}>Submit</button>
       </div>
     </form>
-  )
+                </>
+  
 }
 
 export default NewAuctionPage
