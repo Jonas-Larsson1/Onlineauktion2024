@@ -15,13 +15,18 @@ const NewAuctionPage = () => {
   const [data, setData] = useState(null)
   const [mainTitle, setMainTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [imageInput, setImageInput] = useState([''])
+  const [firstImage, setFirstImage] = useState("")
+  const [secondImage, setSecondImage] = useState("")
+  const [thirdImage, setThirdImage] = useState("")
+  const allImages = [firstImage, secondImage,thirdImage ]
   const [startPrice, setStartPrice] = useState('')
   const [reservedPrice, setReservedPrice] = useState('')
+  const [showAlert, setShowAlert] = useState(false)
 
   const [warning, setWarning] = useState('')
   const {loggedIn} = useContext(GlobalContext)
 
+  console.log(allImages)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -38,7 +43,7 @@ const NewAuctionPage = () => {
   async function postNewAuction(e){
     e.preventDefault()
     
-    if(imageInput[0].length >= 1 && mainTitle.length > 2 && description.length > 3 && startDate != null && 
+    if(allImages[0].length >= 1 && mainTitle.length > 2 && description.length > 3 && startDate != null && 
       endDate != null && startPrice.length > 0 && reservedPrice.length > 0 && title[0].length >= 1){
 
         const res = await fetch("/api/auctions", {
@@ -47,7 +52,7 @@ const NewAuctionPage = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         sellerId : loggedIn,
-        images: [imageInput],
+        images: allImages,
         title: mainTitle,
         description: description,
         startDate: startDate,
@@ -64,33 +69,37 @@ const NewAuctionPage = () => {
     }else{
       console.log("något fick fel")
     }
-  } else if(imageInput[0].length < 1){
+  } else if(allImages[0].length < 1){
     setWarning("You need atleast one image")
-   
+    setShowAlert(true)
   }
-   else if(imageInput[0].length < 1){
+   else if(allImages[0].length < 1){
     setWarning("You need atleast one image")
+    setShowAlert(true)
   } else if(mainTitle.length < 2){
     setWarning("You atleast two characters as title")
-   
+    setShowAlert(true)
   
   } else if(description.length < 1){
     setWarning("You need atleast three characters in description")
-   
+    setShowAlert(true)
   
   } else if(startDate === null ){
-    setWarning("You need to put start date of auction")
-   
+    setWarning("You need to put startdate of auction")
+    setShowAlert(true)
   
   } else if(endDate === null ){
-    setWarning("You need to put start date of auction")
-
+    setWarning("You need to put enddate of auction")
+    setShowAlert(true)
   } else if(startPrice.length < 1 ){
     setWarning("You need to put a starting price")
+    setShowAlert(true)
   }else if(reservedPrice.length < 1 ){
     setWarning("You need to put a reserved price")
+    setShowAlert(true)
   }else{
     setWarning("You need to choose a category")
+    setShowAlert(true)
   }
   }
 
@@ -120,18 +129,36 @@ const NewAuctionPage = () => {
   };
 
   return <>
-    
-   <Alert className='' severity="info">
-  {warning}
-</Alert>
+    {
+        showAlert ?
+        <Alert className="warning-alert"variant="danger" onClose={() => setShowAlert(false)} dismissible>
+        <Alert.Heading> {warning}</Alert.Heading>
+      </Alert>
+ : ""
+  }
     <form className='w-100 d-flex justify-content-center align-items-center m-3'>
       <div className='d-flex flex-column' style={{width:"30%"}}>
         <div className='d-flex flex-column'>
          
+      
           <input             
             type="text"
-            value={imageInput} 
-            onChange={(e) => {setImageInput(e.target.value)}} 
+            value={firstImage} 
+            onChange={(e) => {setFirstImage(e.target.value)}} 
+            className="form-control mb-2"
+            placeholder="Link to your image"
+            aria-label="Link to your image" />
+          <input             
+            type="text"
+            value={secondImage} 
+            onChange={(e) => {setSecondImage(e.target.value)}} 
+            className="form-control mb-2"
+            placeholder="Link to your image"
+            aria-label="Link to your image" />
+          <input             
+            type="text"
+            value={thirdImage} 
+            onChange={(e) => {setThirdImage(e.target.value)}} 
             className="form-control mb-2"
             placeholder="Link to your image"
             aria-label="Link to your image" />

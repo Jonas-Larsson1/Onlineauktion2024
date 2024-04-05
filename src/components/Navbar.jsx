@@ -13,6 +13,7 @@ const Navbar = () => {
   const { loggedIn } = useContext(GlobalContext);
   const { logout } = useContext(GlobalContext);
 
+
   const toggleInputField = () => {
     setIsOpen(!isOpen);
   };
@@ -92,6 +93,7 @@ const Navbar = () => {
             logout(); // set loggedIn to false
             navigate("/")
             setShowLogoutAlert(true)
+          
           }}>
 
           <img

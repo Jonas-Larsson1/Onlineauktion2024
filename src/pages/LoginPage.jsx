@@ -10,10 +10,13 @@ export default function LoginPage() {
   const [passwordInput, setPasswordInput] = useState("");
   const [error, setError] = useState("");
 
+
   const { login } = useContext(GlobalContext);
   const { displayAlert } = useContext(GlobalContext);
   const { showLogoutAlert } = useContext(GlobalContext);
 
+
+ 
   const checkForUser = async (e) => {
     e.preventDefault();
 
@@ -29,6 +32,7 @@ export default function LoginPage() {
       if (user) {
         login(user.id); // set loggedIn to true
         displayAlert();
+  
       } else {
         setError("Invalid username or password");
       }
@@ -74,7 +78,8 @@ export default function LoginPage() {
         <div>
           <b>OR</b>
         </div>
-
+        
+      
         <Button>
           <Link className="register-link" to="/registerPage">
             Register!
@@ -89,11 +94,7 @@ export default function LoginPage() {
            <em>
              Goodbye, you are now logged out! 
             </em>
-            <div>
-              <img src="https://i.gifer.com/origin/46/4657cbcfc0a6ae147ce2cf48fb05a671_w200.gif" className="bye"/>
-             <img src="https://gifdb.com/images/high/blushing-hug-emoji-3oiog8j560s1blzu.gif" className="bye"/>
-              <img src="https://media.tenor.com/tNUmI0dD6VEAAAAj/despair.gif" className="bye" />
-              </div>
+        
           </Alert> 
         ) : (
           ""

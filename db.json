@@ -380,6 +380,46 @@
           "amount": 21
         }
       ]
+    },
+    {
+      "id": "1025",
+      "sellerId": "3",
+      "images": [
+        "test"
+      ],
+      "title": "test",
+      "description": "test",
+      "startDate": "2024-04-04T22:00:00.000Z",
+      "endDate": "2024-04-07T22:00:00.000Z",
+      "startingPrice": "20",
+      "reservePrice": "20",
+      "category": [
+        "Big Cats"
+      ],
+      "bidHistory": [
+        {}
+      ]
+    },
+    {
+      "id": "5dbb",
+      "sellerId": "3",
+      "images": [
+        "https://www.potawatomizoo.org/wp-content/uploads/2022/08/prince-gordon.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/d/dc/Pyxicephalus_adspersus_2zz.jpg",
+        "https://cdn.britannica.com/45/179145-050-51295E7A/African-bullfrog-South-Africa.jpg"
+      ],
+      "title": "Bullfrog",
+      "description": "skippidy frog",
+      "startDate": "2024-04-04T22:00:00.000Z",
+      "endDate": "2024-04-05T22:00:00.000Z",
+      "startingPrice": "20",
+      "reservePrice": "30",
+      "category": [
+        "Amphibians"
+      ],
+      "bidHistory": [
+        {}
+      ]
     }
   ],
   "users": [
