@@ -18,12 +18,14 @@ const SearchPage = () => {
     <FetchedDataContext.Provider value={{data, setData}}> 
     {/* access to seqrch query from search bar */}
       <SearchContext.Provider value={{ searchQuery, setSearchQuery }}>
-        <div className='d-flex flex-row-reverse w-100 justify-content-between'>
-          <div className="d-flex flex-column p-2 w-75">
+        <div className='d-flex flex-row-reverse justify-content-between'>
+          <div className="d-flex flex-column p-2" style={{width:"70%"}}>
             <SearchBar setCategory={setCategory}/>
+            <div className='d-flex flex-column align-items-center'>
             <SearchResults category={category}/>
+            </div>
           </div>
-          <div className='col-lg-4 p-2'>
+          <div className='col-lg-3 p-2'>
             <Categories category={category} setCategory={setCategory} setSearchQuery={setSearchQuery}/>
           </div>
         </div>

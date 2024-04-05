@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { SearchContext } from './SearchBar';
+import ListCard from './ListItem';
+import StyleCard from './StyleCard';
 
 const FetchedDataContext = React.createContext(); // global state for fetched data
 
@@ -36,11 +38,12 @@ const SearchResults = ({ category }) => {
   }, [fetchedData, searchQuery, category])
 
   return (<>
-    {searchQuery ? <p>You are searching for: <b>{searchQuery}</b> </p> : null}
+    {searchQuery ? <p className='align-self-start mx-4'>You are searching for: <b>{searchQuery}</b> </p> : null}
+    <div style={{border:"2px solid red", width:"90%"}} className='d-flex flex-row flex-wrap justify-content-between'>
     {filteredData ? filteredData.map((item, index) => (
       category === null || item.category.includes(category) ?
-        <div key={index} className='d-flex flex-row flex-wrap justify-content-center' style={{ width: "auto" }} >
-          <div className="card m-2" style={{ width: "18rem" }}>
+        <div key={index} className='d-flex flex-row flex-wrap m-2' style={{border: "2px solid pink"}}>
+          {/* <div className="card m-2" style={{ width: "18rem" }}>
             <a href={`/AuctionPage/${item.id}`}>
               <img className="card-img-top" src={item.images[0]} />
             </a>
@@ -50,11 +53,14 @@ const SearchResults = ({ category }) => {
               </a>
               <p>{item.description}</p>
               <p>{item.category[1]}</p>
-            </div>
-          </div>
+            </div> */}
+          {/* </div> */}
+            <StyleCard>
+          <ListCard item={item}/>
+          </StyleCard>
         </div>
       : null))
-    : null}
+    : null}</div>
   </>)
 }
 
