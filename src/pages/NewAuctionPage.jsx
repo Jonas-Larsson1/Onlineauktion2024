@@ -20,6 +20,7 @@ const NewAuctionPage = () => {
   const [showAlert, setShowAlert] = useState(false);
 
   const [warning, setWarning] = useState("");
+  const [disabled, setDisabled] = useState(true)
   const { loggedIn } = useContext(GlobalContext);
 
   console.log(allImages);
@@ -40,8 +41,38 @@ const NewAuctionPage = () => {
     getData();
   }, []);
 
-  async function postNewAuction(e) {
-    e.preventDefault();
+
+  // posts to db
+  async function postNewAuction(e){
+    e.preventDefault()
+    
+    // validation checks
+    // if(imageInput[0].length >= 1 && 
+    //   mainTitle.length > 3 && 
+    //   description.length > 3 && 
+    //   startDate != null && 
+    //   endDate != null && 
+    //   startPrice.length > 0 && 
+    //   reservedPrice.length > 0 && 
+    //   title[0].length >= 1) {
+
+    //     const res = await fetch("/api/auctions", {
+          
+    //       method: "POST",
+    //       headers: { "Content-Type": "application/json" },
+    //       body: JSON.stringify({
+    //         sellerId : loggedIn,
+    //         images: [imageInput],
+    //         title: mainTitle,
+    //         description: description,
+    //         startDate: startDate,
+    //         endDate: endDate,
+    //         startingPrice: startPrice,
+    //         reservePrice: reservedPrice,
+    //         category: [title],
+    //         bidHistory : [{}]
+    //       })
+    //     })
 
     if (
       allImages[0].length >= 1 &&
@@ -70,7 +101,8 @@ const NewAuctionPage = () => {
         }),
       });
       if (res.ok) {
-        navigate("/");
+        console.log(res)
+        navigate("/") // navigates to home page
       } else {
         setWarning("Something went wrong");
         setShowAlert(true);
@@ -105,7 +137,7 @@ const NewAuctionPage = () => {
     }
   }
 
-  const existingCategories = [];
+  const existingCategories = [] // will hold categories after mapping
 
   let filtered = data
     ? data.map((item) =>
@@ -123,11 +155,13 @@ const NewAuctionPage = () => {
     setEndDate(date);
   };
 
+  // handles input in custom category
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       setTitle(customCategory);
       setDropdownOpen(false);
-      setCustomCategory("");
+      setCustomCategory('');
+      setDisabled(!disabled)
     }
   };
 
@@ -261,7 +295,7 @@ const NewAuctionPage = () => {
               {title == "" ? "Categories" : title}
             </button>
           </div>
-          {dropdownOpen ? (
+          {/* {dropdownOpen ? (
             <div className="list-group w-75 align-self-center">
               {existingCategories.map((cat, index) => (
                 <a
@@ -284,18 +318,38 @@ const NewAuctionPage = () => {
                 onKeyDown={handleKeyPress}
               />
             </div>
-          ) : null}
+          ) : null} */}
 
-          <button
+          {/* <button
             className="btn btn-primary mt-3 w-75 align-self-center"
             onClick={postNewAuction}
           >
             Submit
-          </button>
-        </div>
-      </form>
-    </>
-  );
-};
+          </button> */}
+        {/* </div> */}
+        {dropdownOpen ? <div className='list-group w-75 align-self-center'>
+          {existingCategories.map((cat, index) => 
+            <a key={index} className='list-group-item list-group-item-action text-center' href="#" onClick={() => {
+              setDropdownOpen(false), setTitle(cat), setDisabled(!disabled)}} >{cat}</a>
+          )}
+          
+          <input 
+            type='text' 
+            placeholder='Add custom category' 
+            value={customCategory}
+            onChange={(e) => setCustomCategory(e.target.value)} 
+            onKeyDown={handleKeyPress}/>
 
-export default NewAuctionPage;
+          </div> 
+        : null}
+
+        <button className="btn btn-primary mt-3 w-75 align-self-center" onClick={postNewAuction} disabled={disabled}>
+          Submit
+        </button>
+      </div>
+    </form>
+    </>
+  )
+}
+
+export default NewAuctionPage

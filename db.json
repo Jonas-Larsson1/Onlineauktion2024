@@ -64,14 +64,19 @@
       "reservePrice": 300,
       "bidHistory": [
         {
+          "userId": "3",
+          "time": 1712045808677,
+          "amount": 227
+        },
+        {
           "userId": "1",
           "time": 1711028300691,
           "amount": 200
         },
         {
-          "userId": "3",
-          "time": 1712045808677,
-          "amount": 227
+          "userId": "7b6d",
+          "time": 1712061916914,
+          "amount": 229
         }
       ],
       "category": [
@@ -361,8 +366,8 @@
       ],
       "title": "fennec fox",
       "description": "sandy fox",
-      "startDate": "2024-03-27T23:00:00.000Z",
-      "endDate": "2024-03-29T23:00:00.000Z",
+      "startDate": 1721273678054,
+      "endDate": 1711473678054,
       "startingPrice": 20,
       "reservePrice": 3,
       "category": [
@@ -382,17 +387,111 @@
       ]
     },
     {
-      "id": "1025",
+      "id": "1800",
+      "sellerId": "7b6d",
+      "images": [
+        "https://upload.wikimedia.org/wikipedia/commons/1/15/20070818-0001-strolling_reindeer_cropped.jpg"
+      ],
+      "title": "Raindeer",
+      "description": "Insane Raindeer",
+      "startDate": "2024-04-01T22:00:00.000Z",
+      "endDate": "2024-04-17T22:00:00.000Z",
+      "startingPrice": "100",
+      "reservePrice": "500",
+      "category": [
+        "Hjortdjur"
+      ],
+      "bidHistory": [
+        {
+          "time": "2024-04-01T22:00:00.000Z",
+          "userId": "Auction start",
+          "amount": "100"
+        },
+        {
+          "userId": "7b6d",
+          "time": 1712062339459,
+          "amount": 200
+        }
+      ]
+    },
+    {
+      "id": "141a",
       "sellerId": "3",
       "images": [
-        "test"
+        "https://th.bing.com/th/id/OIP.Wl_q05Di0lKiQ4noYsDIRgHaEo?rs=1&pid=ImgDetMain"
       ],
-      "title": "test",
+      "title": "testing",
       "description": "test",
-      "startDate": "2024-04-04T22:00:00.000Z",
-      "endDate": "2024-04-07T22:00:00.000Z",
-      "startingPrice": "20",
-      "reservePrice": "20",
+      "startDate": "2024-04-11T22:00:00.000Z",
+      "endDate": "2024-04-16T22:00:00.000Z",
+      "startingPrice": "200",
+      "reservePrice": "300",
+      "category": [
+        "Foxes"
+      ],
+      "bidHistory": [
+        {}
+      ]
+    },
+    {
+      "id": "9989",
+      "sellerId": "3",
+      "images": [
+        "peopeoe"
+      ],
+      "title": "epoirwpdf",
+      "description": "dskfjs",
+      "startDate": "2024-04-09T22:00:00.000Z",
+      "endDate": "2024-04-25T22:00:00.000Z",
+      "startingPrice": "300",
+      "reservePrice": "350",
+      "category": [
+        "Foxes"
+      ],
+      "bidHistory": [
+        {
+          "time": "2024-04-09T22:00:00.000Z",
+          "userId": "Auction start",
+          "amount": "300"
+        },
+        {
+          "userId": "3",
+          "time": 1712231106718,
+          "amount": 301
+        }
+      ]
+    },
+    {
+      "id": "53f8",
+      "sellerId": "3",
+      "images": [
+        "dfjshdkfdjs"
+      ],
+      "title": "efwlk",
+      "description": "rtetre",
+      "startDate": "2024-04-18T22:00:00.000Z",
+      "endDate": "2024-04-23T22:00:00.000Z",
+      "startingPrice": "150",
+      "reservePrice": "200",
+      "category": [
+        "Foxes"
+      ],
+      "bidHistory": [
+        {}
+      ]
+    },
+    {
+      "id": "9299",
+      "sellerId": "3",
+      "images": [
+        "https://i.pinimg.com/originals/2a/a6/18/2aa618854fa2179b694a5dc1323e0170.jpg"
+      ],
+      "title": "bird",
+      "description": "birdie bird",
+      "startDate": "2024-04-09T22:00:00.000Z",
+      "endDate": "2024-04-24T22:00:00.000Z",
+      "startingPrice": "120",
+      "reservePrice": "200",
       "category": [
         "Big Cats"
       ],
@@ -441,6 +540,27 @@
       "bidHistory": [
         {}
       ]
+    },
+    {
+      "id": "89db",
+      "sellerId": "3",
+      "images": [
+        "https://th.bing.com/th/id/OIP.3NWhkjUqu8seDlFfI8IirwHaGf?rs=1&pid=ImgDetMain",
+        "",
+        ""
+      ],
+      "title": "Hjort",
+      "description": "Hjortdjur",
+      "startDate": "2024-04-16T22:00:00.000Z",
+      "endDate": "2024-04-26T22:00:00.000Z",
+      "startingPrice": "300",
+      "reservePrice": "350",
+      "category": [
+        "Hjortdjur"
+      ],
+      "bidHistory": [
+        {}
+      ]
     }
   ],
   "users": [
@@ -448,7 +568,9 @@
       "id": "1",
       "username": "Tiger King",
       "password": "king123",
-      "savedAuctions": []
+      "savedAuctions": [
+        "2"
+      ]
     },
     {
       "id": "3",
@@ -457,7 +579,8 @@
       "savedAuctions": [
         "b220",
         "2",
-        "1"
+        "1",
+        "3"
       ]
     },
     {
@@ -471,6 +594,14 @@
       "username": "foxyfox",
       "password": "foxingfox",
       "savedAuctions": []
+    },
+    {
+      "id": "7b6d",
+      "username": "testgöran",
+      "password": "göran123",
+      "savedAuctions": [
+        "2"
+      ]
     }
   ]
 }
