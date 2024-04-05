@@ -161,7 +161,7 @@ const NewAuctionPage = () => {
       setTitle(customCategory);
       setDropdownOpen(false);
       setCustomCategory('');
-      setDisabled(!disabled)
+      setDisabled(false)
     }
   };
 
@@ -330,7 +330,7 @@ const NewAuctionPage = () => {
         {dropdownOpen ? <div className='list-group w-75 align-self-center'>
           {existingCategories.map((cat, index) => 
             <a key={index} className='list-group-item list-group-item-action text-center' href="#" onClick={() => {
-              setDropdownOpen(false), setTitle(cat), setDisabled(!disabled)}} >{cat}</a>
+              setDropdownOpen(false), setTitle(cat), setDisabled(false)}} >{cat}</a>
           )}
           
           <input 
