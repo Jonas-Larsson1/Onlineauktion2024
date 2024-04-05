@@ -17,6 +17,11 @@
       "bidHistory": [
         {
           "userId": "3",
+          "time": 1712047389036,
+          "amount": 110
+        },
+        {
+          "userId": "3",
           "time": 1712047353064,
           "amount": 108
         },
@@ -41,9 +46,9 @@
           "amount": 100
         },
         {
-          "userId": "3",
-          "time": 1712047389036,
-          "amount": 110
+          "userId": "1",
+          "time": 1712317065001,
+          "amount": 300
         }
       ],
       "category": [
@@ -96,6 +101,11 @@
       "startingPrice": 100,
       "reservePrice": 300,
       "bidHistory": [
+        {
+          "userId": "3",
+          "time": 1712050388380,
+          "amount": 270
+        },
         {
           "userId": "3",
           "time": 1712050369072,
@@ -252,9 +262,9 @@
           "amount": 200
         },
         {
-          "userId": "3",
-          "time": 1712050388380,
-          "amount": 270
+          "userId": "1",
+          "time": 1712317082521,
+          "amount": 300
         }
       ],
       "category": [
