@@ -15,10 +15,7 @@ const NewAuctionPage = () => {
   const [data, setData] = useState(null)
   const [mainTitle, setMainTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [firstImage, setFirstImage] = useState("")
-  const [secondImage, setSecondImage] = useState("")
-  const [thirdImage, setThirdImage] = useState("")
-  const allImages = [firstImage, secondImage,thirdImage ]
+  const [allImages, setAllImages] = useState(['', '', ''])
   const [startPrice, setStartPrice] = useState('')
   const [reservedPrice, setReservedPrice] = useState('')
   const [showAlert, setShowAlert] = useState(false)
@@ -26,8 +23,16 @@ const NewAuctionPage = () => {
   const [warning, setWarning] = useState('')
   const {loggedIn} = useContext(GlobalContext)
 
+
+
   console.log(allImages)
   const navigate = useNavigate()
+
+  const onImageInput = (index, value) => {
+      const imageInput = [...allImages]
+      imageInput[index] = value
+      setAllImages(imageInput)
+  }
 
   useEffect(() => {
     const getData = async () => {
@@ -141,27 +146,16 @@ const NewAuctionPage = () => {
         <div className='d-flex flex-column'>
          
       
-          <input             
-            type="text"
-            value={firstImage} 
-            onChange={(e) => {setFirstImage(e.target.value)}} 
-            className="form-control mb-2"
-            placeholder="Link to your image"
-            aria-label="Link to your image" />
-          <input             
-            type="text"
-            value={secondImage} 
-            onChange={(e) => {setSecondImage(e.target.value)}} 
-            className="form-control mb-2"
-            placeholder="Link to your image"
-            aria-label="Link to your image" />
-          <input             
-            type="text"
-            value={thirdImage} 
-            onChange={(e) => {setThirdImage(e.target.value)}} 
-            className="form-control mb-2"
-            placeholder="Link to your image"
-            aria-label="Link to your image" />
+        {allImages.map((image, index) => (
+        <input
+          key={index}
+          type="text"
+          value={image}
+          className="form-control mb-2"
+          onChange={(e) => onImageInput(index, e.target.value)}
+          placeholder="Link to your image"
+        />
+      ))}
 
           <input
             type="text"
