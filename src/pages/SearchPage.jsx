@@ -1,18 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import SearchBar, {SearchContext} from "../components/SearchBar.jsx";
 import SearchResults, {FetchedDataContext} from '../components/SearchResults.jsx';
 import Categories from '../components/Categories.jsx';
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router-dom'; 
 
 
 const SearchPage = () => {
+  const navigate = useNavigate();
   const {incomingSearchQuery} = useParams() // search query from URL
 
   const [searchQuery, setSearchQuery] = useState(incomingSearchQuery); // input in search bar
   const [data, setData] = useState(null) // result of fetch
   const [category, setCategory] = useState(null);
  
+  // useEffect(() => {
+  //   setSearchQuery(incomingSearchQuery);
+  // }, [incomingSearchQuery]);
+
+  // useEffect(() => {
+  //   navigate(`/SearchPage/${searchQuery}`);
+  // }, [searchQuery, navigate]);
+
   return <>
   {/* access to fetched data */}
     <FetchedDataContext.Provider value={{data, setData}}> 

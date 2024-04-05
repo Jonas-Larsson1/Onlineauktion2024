@@ -18,6 +18,7 @@ const Categories = ({category, setCategory, setSearchQuery}) => {
     setSearchQuery('') // resets search query
     setCategory(category);
     setToggle(false); // closes menu with categories
+    
   };
   
   const filteredCategories = auctionData ? 
