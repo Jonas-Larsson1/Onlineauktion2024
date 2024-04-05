@@ -1,13 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import StyleCard from "../components/StyleCard";
 import ListCard from "../components/ListItem";
-import { Row, Col, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { GlobalContext } from "../GlobalContext";
 import { Link } from "react-router-dom";
 
 export default function AccountPage() {
   const { loggedIn } = useContext(GlobalContext)
-
   const [user, setUser] = useState(null);
   const [bids, setBids] = useState(null);
   const [ongoingAuctions, setOngoingAuctions] = useState(null);
@@ -20,7 +19,7 @@ export default function AccountPage() {
     return bidHistory
   }
 
-  // Hämtar inloggade användaren
+  // Fetches the logged in user
   useEffect(() => {
     const getUserData = async () => {
       const response = await fetch(`http://localhost:3000/users/${loggedIn}`);
@@ -32,7 +31,7 @@ export default function AccountPage() {
   }, []);
 
 
-  // Hämtar auktioner där inloggade användaren har lagt ett bud
+  // Fetches auctions where logged in user has placed a bid
   useEffect(() => {
     const getBidsData = async () => {
       const response = await fetch(`http://localhost:3000/auctions/`);
@@ -66,7 +65,7 @@ export default function AccountPage() {
     getBidsData();
   }, [user]);
 
-  // Hämtar auktioner där inloggade användaren har startat en auktion
+  // Fetches auctions that logged in user has started
   useEffect(() => {
     const getAuctionData = async () => {
       const response = await fetch(`http://localhost:3000/auctions/`);
@@ -81,7 +80,7 @@ export default function AccountPage() {
         if (currentAuction.sellerId === loggedIn) {
           const auctionEndDate = new Date(currentAuction.endDate);
 
-          // Kollar om datumet på endDate har passerat
+          // Checks if the end date of the auctions has passed
           if (auctionEndDate > currentDate) {
             currentAuction.bidHistory = sortBids(currentAuction.bidHistory)
             userOngoingAuctions.push(currentAuction);
@@ -98,6 +97,7 @@ export default function AccountPage() {
     getAuctionData();
   }, [user]);
 
+  // Printing out info
   return (<>
     <div className="pt-5" style={{ backgroundColor: "#41B3A3", minHeight: '100vh' }}>
       {user ? (

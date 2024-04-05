@@ -524,7 +524,9 @@
       "id": "1",
       "username": "Tiger King",
       "password": "king123",
-      "savedAuctions": []
+      "savedAuctions": [
+        "2"
+      ]
     },
     {
       "id": "3",
