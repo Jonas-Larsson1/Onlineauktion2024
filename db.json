@@ -413,6 +413,25 @@
           "amount": 200
         }
       ]
+    },
+    {
+      "id": "5fd3",
+      "sellerId": "3",
+      "images": [
+        "https://media.wired.com/photos/593261cab8eb31692072f129/master/pass/85120553.jpg"
+      ],
+      "title": "Testing",
+      "description": "Testing",
+      "startDate": "2024-04-10T22:00:00.000Z",
+      "endDate": "2024-04-23T22:00:00.000Z",
+      "startingPrice": "100",
+      "reservePrice": "200",
+      "category": [
+        "Foxes"
+      ],
+      "bidHistory": [
+        {}
+      ]
     }
   ],
   "users": [
