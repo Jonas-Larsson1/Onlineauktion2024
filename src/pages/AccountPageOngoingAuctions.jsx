@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import StyleCard from "../components/StyleCard";
 import ListCard from "../components/ListItem";
 import { GlobalContext } from "../GlobalContext";
-import { Link } from "react-router-dom";
+import BackButton from "../components/BackButton";
 
 
 export default function AccountPage() {
@@ -36,7 +36,6 @@ export default function AccountPage() {
             const result = await response.json();
 
             const userOngoingAuctions = [];
-            const userClosedAuctions = [];
 
             for (let i = 0; i < result.length; i++) {
                 let currentAuction = result[i]
@@ -48,14 +47,10 @@ export default function AccountPage() {
                     if (auctionEndDate > currentDate) {
                         currentAuction.bidHistory = sortBids(currentAuction.bidHistory)
                         userOngoingAuctions.push(currentAuction);
-                    } else {
-                        currentAuction.bidHistory = sortBids(currentAuction.bidHistory)
-                        userClosedAuctions.push(currentAuction);
-                    }
+                    } 
                 }
             }
             setOngoingAuctions(userOngoingAuctions);
-            setClosedAuctions(userClosedAuctions);
         };
 
         getAuctionData();
@@ -63,11 +58,8 @@ export default function AccountPage() {
 
     // Printing out info
     return (<>
-        <div className="d-flex justify-content-center align-items-center mt-5 border rounded mx-5" style={{ width: "70px", height: "70px", background: "#C38D9E" }}>
-            <Link to="/AccountPage">
-                <img src="/src/assets/goback.png" alt="Go back" height="50px" />
-            </Link>
-        </div>
+        
+        <BackButton/>
 
         <div style={{ backgroundColor: "#41B3A3", minHeight: '100vh' }}>
 

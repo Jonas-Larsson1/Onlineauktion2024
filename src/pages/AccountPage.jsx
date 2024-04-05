@@ -22,7 +22,7 @@ export default function AccountPage() {
   function sortSaves(savedAuctions) {
     savedAuctions.sort((a, b) => b.amount - a.amount);
     return savedAuctions;
-}
+  }
 
   // Fetches the logged in user
   useEffect(() => {
@@ -105,41 +105,47 @@ export default function AccountPage() {
     getAuctionData();
   }, [user]);
 
-    // Fetches auctions that logged in user has saved
-    useEffect(() => {
-      const getSavedData = async () => {
+  // Fetches auctions that logged in user has saved
+  useEffect(() => {
+    const getSavedData = async () => {
 
-          const response = await fetch(`http://localhost:3000/auctions/`);
-          const result = await response.json();
+      const response = await fetch(`http://localhost:3000/auctions/`);
+      const result = await response.json();
 
-          const userSavedAuctions = [];
+      const userSavedAuctions = [];
 
-          for (let i = 0; i < result.length; i++) {
-              let user = result[i];
-              let userHasSaved = false;
-              const auctionEndDate = new Date(user.endDate);
+      for (let i = 0; i < result.length; i++) {
+        let user = result[i];
+        let userHasSaved = false;
+        const auctionEndDate = new Date(user.endDate);
 
-              if (!user.savedByUser) continue; 
+        if (!user.savedByUser) continue;
 
-              for (let j = 0; j < user.savedByUser.length; j++) {
-                  let userSaved = user.savedByUser[j];
+        for (let j = 0; j < user.savedByUser.length; j++) {
+          let userSaved = user.savedByUser[j];
 
-                  if (userSaved === loggedIn) {
-                      userHasSaved = true;
-                      break;
-                  }
-              }
-
-              // Checks if the end date of the auctions has passed
-              if (userHasSaved && auctionEndDate > currentDate) {
-                  user.bidHistory = sortSaves(user.bidHistory);
-                  userSavedAuctions.push(user);
-              }
+          if (userSaved === loggedIn) {
+            userHasSaved = true;
+            break;
           }
-          setSavedAuctions(userSavedAuctions);
-      };
+        }
 
-      getSavedData();
+        // Checks if the end date of the auctions has passed
+        if (userHasSaved && auctionEndDate > currentDate) {
+          user.bidHistory = sortSaves(user.bidHistory);
+          userSavedAuctions.push(user);
+        }
+      }
+
+      if (userSavedAuctions.length === 0) {
+        setSavedAuctions([]);
+      } else {
+        setSavedAuctions(userSavedAuctions);
+
+      };
+    };
+
+    getSavedData();
   }, [loggedIn]);
 
 
@@ -162,77 +168,100 @@ export default function AccountPage() {
         <StyleCard>
           <div className="d-flex flex-column">
             <h5 className="fst-italic fw-bold d-flex justify-content-center">Your ongoing bids.</h5>
-            {bids ? bids.map((bid, index) => (
-              <div className="mt-5">
-                <ListCard item={bid}></ListCard>
-
-                <div className="d-flex justify-content-center mt-5">
-                  <h4>View more</h4>
-                  <Link className="ms-3" to="/AccountPage/OngoingBids">
-                    <img src="/src/assets/more.png" alt="View more" height="40px" />
-                  </Link>
-                </div>
-                
-              </div>
-            ))
-              : <p>Ain't no auction here, Mr. Auctioneer.</p>}
+            {bids !== null ? (
+              bids.length > 0 ? (
+                bids.map((bid, index) => (
+                  <div className="mt-5" key={index}>
+                    <ListCard item={bid}></ListCard>
+                    <div className="d-flex justify-content-center mt-5">
+                      <Link className="ms-3 d-flex justify-content-center" to="/AccountPage/OngoingBids">
+                        <h4 className="mx-2">View more </h4>
+                        <img src="/src/assets/more.png" alt="View more" height="40px" />
+                      </Link>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="text-center mt-3">You have no ongoing bids yet.</p>
+              )
+            ) : (
+              <p className="text-center mt-3">404</p>
+            )}
           </div>
         </StyleCard>
 
         <StyleCard>
           <div className="d-flex flex-column">
             <h5 className="fst-italic fw-bold d-flex justify-content-center">Your ongoing auctions.</h5>
-            {ongoingAuctions ? ongoingAuctions.map((ongoingAuction, index) => (
-              <div className="mt-5">
-                <ListCard item={ongoingAuction}></ListCard>
-
-                <div className="d-flex justify-content-center mt-5">
-                  <h4>View more</h4>
-                  <Link className="ms-3" to="/AccountPage/OngoingAuctions">
-                    <img src="/src/assets/more.png" alt="View more" height="40px" />
-                  </Link>
-                </div>
-
-              </div>
-            )) : <p>Ain't no auction here, Mr. Auctioneer.</p>}
+            {ongoingAuctions !== null ? (
+              ongoingAuctions.length > 0 ? (
+                ongoingAuctions.map((ongoingAuction, index) => (
+                  <div className="mt-5" key={index}>
+                    <ListCard item={ongoingAuction}></ListCard>
+                    <div className="d-flex justify-content-center mt-5">
+                      <Link className="ms-3 d-flex justify-content-center" to="/AccountPage/OngoingAuctions">
+                        <h4 className="mx-2">View more </h4>
+                        <img src="/src/assets/more.png" alt="View more" height="40px" />
+                      </Link>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="text-center mt-3">You have no ongoing auctions yet.</p>
+              )
+            ) : (
+              <p className="text-center mt-3">404</p>
+            )}
           </div>
         </StyleCard>
 
         <StyleCard>
           <div className="d-flex flex-column">
             <h5 className="fst-italic fw-bold d-flex justify-content-center">Your closed auctions.</h5>
-            {closedAuctions ? closedAuctions.map((closedAuction, index) => (
-              <div className="mt-5">
-                <ListCard item={closedAuction}></ListCard>
-
-                <div className="d-flex justify-content-center mt-5">
-                  <h4>View more</h4>
-                  <Link className="ms-3" to="/AccountPage/ClosedAuctions">
-                    <img src="/src/assets/more.png" alt="View more" height="40px" />
-                  </Link>
-                </div>
-
-              </div>
-            )) : <p>Ain't no auction here, Mr. Auctioneer.</p>}
+            {closedAuctions !== null ? (
+              closedAuctions.length > 0 ? (
+                closedAuctions.map((closedAuction, index) => (
+                  <div className="mt-5" key={index}>
+                    <ListCard item={closedAuction}></ListCard>
+                    <div className="d-flex justify-content-center mt-5">
+                      <Link className="ms-3 d-flex justify-content-center" to="/AccountPage/ClosedAuctions">
+                        <h4 className="mx-2">View more </h4>
+                        <img src="/src/assets/more.png" alt="View more" height="40px" />
+                      </Link>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="text-center mt-3">You have no closed auctions yet.</p>
+              )
+            ) : (
+              <p className="text-center mt-3">404</p>
+            )}
           </div>
         </StyleCard>
 
         <StyleCard>
           <div className="d-flex flex-column">
             <h5 className="fst-italic fw-bold d-flex justify-content-center">Your saved auctions.</h5>
-            {savedAuctions ? savedAuctions.map((savedAuction, index) => (
-              <div className="mt-5">
-                <ListCard item={savedAuction}></ListCard>
-
-                <div className="d-flex justify-content-center mt-5">
-                  <h4>View more</h4>
-                  <Link className="ms-3" to="/AccountPage/SavedAuctions">
-                    <img src="/src/assets/more.png" alt="View more" height="40px" />
-                  </Link>
-                </div>
-
-              </div>
-            )) : <p>Ain't no auction here, Mr. Auctioneer.</p>}
+            {savedAuctions !== null ? (
+              savedAuctions.length > 0 ? (
+                savedAuctions.map((savedAuction, index) => (
+                  <div className="mt-5" key={index}>
+                    <ListCard item={savedAuction}></ListCard>
+                    <div className="d-flex justify-content-center mt-5">
+                      <Link className="ms-3 d-flex justify-content-center" to="/AccountPage/SavedAuctions">
+                        <h4 className="mx-2">View more </h4>
+                        <img src="/src/assets/more.png" alt="View more" height="40px" />
+                      </Link>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="text-center mt-3">You have no saved auctions yet.</p>
+              )
+            ) : (
+              <p className="text-center mt-3">404</p>
+            )}
           </div>
         </StyleCard>
 
