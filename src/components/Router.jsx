@@ -43,7 +43,7 @@ export default function Router() {
                   />
                   <Route path="/AboutPage" element={<AboutPage />} />
                   <Route path="/NewAuction" element={<NewAuctionPage />} />
-                  <Route path="*" element={<PageNotFound/>}></Route>
+                  <Route path="*" element={<PageNotFound />}></Route>
                   {/* Alla andra paths när man är inloggad hamnar här */}
                 </Routes>
               </div>
@@ -54,7 +54,7 @@ export default function Router() {
               {/* Är man inte inloggad kommer man endast åt login och register */}
               <Route path="/" element={<LoginPage />} />
               <Route path="/registerPage" element={<RegisterPage />} />
-              <Route path="*" element={<LoginPage />}></Route>
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           )}
         </div>
