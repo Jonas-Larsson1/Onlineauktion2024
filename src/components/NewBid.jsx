@@ -91,7 +91,12 @@ export default function NewBid(props) {
           </Form.Text>
         </Form.Group>
         <Col>
-          <Button variant="success" type="submit" className="me-2 btn-lg" disabled={!!error}>
+          <Button
+            variant={error === "The auction is closed" ? "danger" : "success"}
+            type="submit"
+            className="me-2 btn-lg"
+            disabled={!!error}
+          >
             {error ? error : "Place bid"}
           </Button>
         </Col>
