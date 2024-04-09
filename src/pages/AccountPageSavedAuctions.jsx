@@ -8,48 +8,28 @@ export default function AccountPage() {
     const { loggedIn } = useContext(GlobalContext);
     const [savedAuctions, setSavedAuctions] = useState(null);
     const currentDate = new Date();
+    const [user, setUser] = useState(null);
 
-    function sortSaves(savedAuctions) {
-        savedAuctions.sort((a, b) => b.amount - a.amount);
-        return savedAuctions;
-    }
-
-    // Fetches auctions that logged in user has saved
     useEffect(() => {
-        const getSavedData = async () => {
-
-            const response = await fetch(`http://localhost:3000/auctions/`);
+        const getUserData = async () => {
+            const response = await fetch(`http://localhost:3000/users/${loggedIn}`);
             const result = await response.json();
+            setUser(result);
+    
 
-            const userSavedAuctions = [];
-
-            for (let i = 0; i < result.length; i++) {
-                let user = result[i];
-                let userHasSaved = false;
-                const auctionEndDate = new Date(user.endDate);
-
-                if (!user.savedByUser) continue; 
-
-                for (let j = 0; j < user.savedByUser.length; j++) {
-                    let userSaved = user.savedByUser[j];
-
-                    if (userSaved === loggedIn) {
-                        userHasSaved = true;
-                        break;
-                    }
-                }
-
-                // Checks if the end date of the auctions has passed
-                if (userHasSaved && auctionEndDate > currentDate) {
-                    user.bidHistory = sortSaves(user.bidHistory);
-                    userSavedAuctions.push(user);
-                }
+            const savedAuctionsDetails = [];
+            for (const auctionId of result.savedAuctions) {
+                const auctionResponse = await fetch(`http://localhost:3000/auctions/${auctionId}`);
+                const auctionResult = await auctionResponse.json();
+                savedAuctionsDetails.push(auctionResult);
             }
-            setSavedAuctions(userSavedAuctions);
-        };
 
-        getSavedData();
-    }, [loggedIn]);
+            savedAuctionsDetails.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
+            setSavedAuctions(savedAuctionsDetails); 
+        };
+    
+        getUserData();
+    }, []);
 
     // Printing out info
     return (

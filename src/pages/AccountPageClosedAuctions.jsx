@@ -51,6 +51,7 @@ export default function AccountPage() {
                     } 
                 }
             }
+            userClosedAuctions.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
             setClosedAuctions(userClosedAuctions);
         };
 

@@ -108,39 +108,23 @@ export default function AccountPage() {
   // Fetches auctions that logged in user has saved
   useEffect(() => {
     const getSavedData = async () => {
+        const response = await fetch(`http://localhost:3000/users/${loggedIn}`);
+        const result = await response.json();
+        setUser(result);
 
-      const response = await fetch(`http://localhost:3000/auctions/`);
-      const result = await response.json();
 
-      const userSavedAuctions = [];
-
-      for (let i = 0; i < result.length; i++) {
-        let user = result[i];
-        let userHasSaved = false;
-        const auctionEndDate = new Date(user.endDate);
-
-        if (!user.savedByUser) continue;
-
-        for (let j = 0; j < user.savedByUser.length; j++) {
-          let userSaved = user.savedByUser[j];
-
-          if (userSaved === loggedIn) {
-            userHasSaved = true;
+        const savedAuctionsDetails = [];
+        for (const auctionId of result.savedAuctions) {
+            const auctionResponse = await fetch(`http://localhost:3000/auctions/${auctionId}`);
+            const auctionResult = await auctionResponse.json();
+            savedAuctionsDetails.push(auctionResult);
             break;
-          }
         }
 
-        // Checks if the end date of the auctions has passed
-        if (userHasSaved && auctionEndDate > currentDate) {
-          user.bidHistory = sortSaves(user.bidHistory);
-          userSavedAuctions.push(user);
-        }
-      }
-
-      if (userSavedAuctions.length === 0) {
+      if (savedAuctionsDetails.length === 0) {
         setSavedAuctions([]);
       } else {
-        setSavedAuctions(userSavedAuctions);
+        setSavedAuctions(savedAuctionsDetails);
 
       };
     };

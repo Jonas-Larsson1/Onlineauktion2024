@@ -50,6 +50,7 @@ export default function AccountPage() {
                     } 
                 }
             }
+            userOngoingAuctions.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
             setOngoingAuctions(userOngoingAuctions);
         };
 

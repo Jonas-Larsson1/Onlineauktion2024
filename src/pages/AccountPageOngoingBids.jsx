@@ -57,6 +57,7 @@ export default function AccountPage() {
                     userBids.push(currentBid)
                 }
             }
+            userBids.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
             setBids(userBids)
         };
 
