@@ -561,6 +561,27 @@
       "bidHistory": [
         {}
       ]
+    },
+    {
+      "id": "6829",
+      "sellerId": "1",
+      "images": [
+        "https://web.pdx.edu/~corey8/c-vasquez4foxes/foxes/tibetan-fox1.jpg",
+        "",
+        ""
+      ],
+      "title": "Tibetan Fox",
+      "description": "\"I hate my life\" - Tibetan Fox, probably",
+      "startDate": 1712847784,
+      "endDate": 1714834984,
+      "startingPrice": "100",
+      "reservePrice": "200",
+      "category": [
+        "Foxes"
+      ],
+      "bidHistory": [
+        {}
+      ]
     }
   ],
   "users": [
