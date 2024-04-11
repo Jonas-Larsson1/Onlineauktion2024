@@ -456,6 +456,154 @@
           "amount": 200
         }
       ]
+    },
+    {
+      "id": "141a",
+      "sellerId": "3",
+      "images": [
+        "https://th.bing.com/th/id/OIP.Wl_q05Di0lKiQ4noYsDIRgHaEo?rs=1&pid=ImgDetMain"
+      ],
+      "title": "testing",
+      "description": "test",
+      "startDate": "2024-04-11T22:00:00.000Z",
+      "endDate": "2024-04-16T22:00:00.000Z",
+      "startingPrice": "200",
+      "reservePrice": "300",
+      "category": [
+        "Foxes"
+      ],
+      "bidHistory": [
+        {}
+      ]
+    },
+    {
+      "id": "9989",
+      "sellerId": "3",
+      "images": [
+        "peopeoe"
+      ],
+      "title": "epoirwpdf",
+      "description": "dskfjs",
+      "startDate": "2024-04-09T22:00:00.000Z",
+      "endDate": "2024-04-25T22:00:00.000Z",
+      "startingPrice": "300",
+      "reservePrice": "350",
+      "category": [
+        "Foxes"
+      ],
+      "bidHistory": [
+        {
+          "time": "2024-04-09T22:00:00.000Z",
+          "userId": "Auction start",
+          "amount": "300"
+        },
+        {
+          "userId": "3",
+          "time": 1712231106718,
+          "amount": 301
+        }
+      ]
+    },
+    {
+      "id": "53f8",
+      "sellerId": "3",
+      "images": [
+        "dfjshdkfdjs"
+      ],
+      "title": "efwlk",
+      "description": "rtetre",
+      "startDate": "2024-04-18T22:00:00.000Z",
+      "endDate": "2024-04-23T22:00:00.000Z",
+      "startingPrice": "150",
+      "reservePrice": "200",
+      "category": [
+        "Foxes"
+      ],
+      "bidHistory": [
+        {}
+      ]
+    },
+    {
+      "id": "9299",
+      "sellerId": "3",
+      "images": [
+        "https://i.pinimg.com/originals/2a/a6/18/2aa618854fa2179b694a5dc1323e0170.jpg"
+      ],
+      "title": "bird",
+      "description": "birdie bird",
+      "startDate": "2024-04-09T22:00:00.000Z",
+      "endDate": "2024-04-24T22:00:00.000Z",
+      "startingPrice": "120",
+      "reservePrice": "200",
+      "category": [
+        "Big Cats"
+      ],
+      "bidHistory": [
+        {}
+      ]
+    },
+    {
+      "id": "5dbb",
+      "sellerId": "3",
+      "images": [
+        "https://www.potawatomizoo.org/wp-content/uploads/2022/08/prince-gordon.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/d/dc/Pyxicephalus_adspersus_2zz.jpg",
+        "https://cdn.britannica.com/45/179145-050-51295E7A/African-bullfrog-South-Africa.jpg"
+      ],
+      "title": "Bullfrog",
+      "description": "skippidy frog",
+      "startDate": "2024-04-04T22:00:00.000Z",
+      "endDate": "2024-04-05T22:00:00.000Z",
+      "startingPrice": "20",
+      "reservePrice": "30",
+      "category": [
+        "Amphibians"
+      ],
+      "bidHistory": [
+        {}
+      ]
+    },
+    {
+      "id": "469a",
+      "sellerId": "3",
+      "images": [
+        "https://upload.wikimedia.org/wikipedia/commons/4/4d/Green_Iguana_In_Florida.jpg",
+        "https://cdn.britannica.com/24/142124-050-E23AC219/iguana.jpg",
+        "https://m.media-amazon.com/images/I/81Vkant+p3L._AC_UF1000,1000_QL80_.jpg"
+      ],
+      "title": "Guana Lizard",
+      "description": "Mad as hell",
+      "startDate": "2024-04-09T22:00:00.000Z",
+      "endDate": "2024-04-25T22:00:00.000Z",
+      "startingPrice": "50",
+      "reservePrice": "80",
+      "category": [
+        "Reptile"
+      ],
+      "bidHistory": [
+        {}
+      ]
+    },
+    {
+      "id": "89db",
+      "sellerId": "3",
+      "images": [
+        "https://th.bing.com/th/id/OIP.3NWhkjUqu8seDlFfI8IirwHaGf?rs=1&pid=ImgDetMain",
+        "",
+        ""
+      ],
+      "title": "Hjort",
+      "description": "Hjortdjur",
+      "startDate": "2024-04-16T22:00:00.000Z",
+      "endDate": "2024-04-26T22:00:00.000Z",
+      "startingPrice": "300",
+      "reservePrice": "350",
+      "category": [
+        "Hjortdjur"
+      ],
+      "bidHistory": [
+        {}
+      ]
     }
   ],
   "users": [

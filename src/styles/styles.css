@@ -1,3 +1,9 @@
+@keyframes show{
+    0%{opacity:100%;}
+    70%{opacity:100%}
+    100%{opacity:0%}
+}
+
 body{
     background-color: #41B3A3;
 }
@@ -60,4 +66,16 @@ body{
 a{
     text-decoration: none;
     color:black;
+}
+
+.logout-alert{
+    opacity: 0%;
+    animation-name: show;
+    animation-duration: 6s;
+    margin: 2rem;
+}
+
+.warning-alert{
+        margin-left: 25rem;
+        
 }
