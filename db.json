@@ -625,6 +625,48 @@
       "bidHistory": [
         {}
       ]
+    },
+    {
+      "id": "cc8c",
+      "sellerId": "3",
+      "images": [
+        "https://www.rainforest-alliance.org/wp-content/uploads/2021/06/capybara-square-1.jpg.optimal.jpg",
+        "https://www.rainforest-alliance.org/wp-content/uploads/2021/06/capybara-square-1.jpg.optimal.jpg",
+        "https://www.rainforest-alliance.org/wp-content/uploads/2021/06/capybara-square-1.jpg.optimal.jpg"
+      ],
+      "title": "Capybara",
+      "description": "Chill som faaan",
+      "startDate": 1712916346,
+      "endDate": 1712916346,
+      "startingPrice": "100",
+      "reservePrice": "200",
+      "category": [
+        "Rodents"
+      ],
+      "bidHistory": [
+        {}
+      ]
+    },
+    {
+      "id": "11c1",
+      "sellerId": "3",
+      "images": [
+        "https://www.rainforest-alliance.org/wp-content/uploads/2021/06/capybara-square-1.jpg.optimal.jpg",
+        "https://www.rainforest-alliance.org/wp-content/uploads/2021/06/capybara-square-1.jpg.optimal.jpg",
+        "https://www.rainforest-alliance.org/wp-content/uploads/2021/06/capybara-square-1.jpg.optimal.jpg"
+      ],
+      "title": "brother",
+      "description": "Capy",
+      "startDate": "2024-04-12T10:30:00.000Z",
+      "endDate": "2024-04-19T22:00:00.000Z",
+      "startingPrice": "100",
+      "reservePrice": "100",
+      "category": [
+        "Rodents"
+      ],
+      "bidHistory": [
+        {}
+      ]
     }
   ],
   "users": [

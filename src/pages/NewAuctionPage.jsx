@@ -5,6 +5,7 @@ import { GlobalContext } from "../GlobalContext";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 
+
 const NewAuctionPage = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -94,8 +95,8 @@ const NewAuctionPage = () => {
           images: allImages,
           title: mainTitle,
           description: description,
-          startDate: unixStartDate,
-          endDate: unixEndDate,
+          startDate: startDate,
+          endDate: endDate,
           startingPrice: startPrice,
           reservePrice: reservedPrice,
           category: [title],
@@ -150,11 +151,11 @@ const NewAuctionPage = () => {
     : null;
 
   const handleStartDateChange = (date) => {
-    setUnixStartDate(Math.floor(date.getTime() / 1000));
+    setStartDate(date)
   };
 
   const handleEndDateChange = (date) => {
-    setUnixEndDate(Math.floor(date.getTime() / 1000));
+    setEndDate(date)
   };
 
   // handles input in custom category
@@ -181,6 +182,7 @@ const NewAuctionPage = () => {
       ) : (
         ""
       )}
+      
       <form className="w-100 d-flex justify-content-center align-items-center m-3">
         <div className="d-flex flex-column" style={{ width: "30%" }}>
           <div className="d-flex flex-column">
@@ -222,13 +224,14 @@ const NewAuctionPage = () => {
               <div className="d-flex flex-column">
                 <label>Start Date:</label>
                 <DatePicker
-                  selected={new Date(unixStartDate * 1000)}
+                  selected={startDate}
                   onChange={handleStartDateChange}
+                  showTimeSelect
+                  dateFormat="yyyy-MM-dd-HH:mm"
                   selectsStart
                   // startDate={startDate}
                   // endDate={endDate}
                   minDate={new Date()}
-                  maxDate={unixEndDate}
                   className="form-control custom-date-picker "
                 />
               </div>
@@ -237,11 +240,13 @@ const NewAuctionPage = () => {
               <div className="d-flex flex-column">
                 <label>End Date:</label>
                 <DatePicker
-                  selected={new Date(unixEndDate * 1000)}
+                  selected={endDate}
                   onChange={handleEndDateChange}
+                  showTimeSelect
+                  dateFormat="yyyy-MM-dd-HH:mm"
                   selectsEnd
-                  minDate={unixStartDate}
-                  disabled={!unixStartDate} // End date is disabled when startDate is null
+                  minDate={startDate}
+                  disabled={!startDate} // End date is disabled when startDate is null
                   className="form-control custom-date-picker"
                 />
               </div>
