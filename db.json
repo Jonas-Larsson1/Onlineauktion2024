@@ -17,11 +17,6 @@
       "bidHistory": [
         {
           "userId": "3",
-          "time": 1712047389036,
-          "amount": 110
-        },
-        {
-          "userId": "3",
           "time": 1712047353064,
           "amount": 108
         },
@@ -46,9 +41,9 @@
           "amount": 100
         },
         {
-          "userId": "1",
-          "time": 1712317065001,
-          "amount": 300
+          "userId": "3",
+          "time": 1712047389036,
+          "amount": 110
         }
       ],
       "category": [
@@ -362,6 +357,11 @@
           "userId": "1",
           "time": 1711028300691,
           "amount": 200
+        },
+        {
+          "userId": "1",
+          "time": 1712239584393,
+          "amount": 210
         }
       ],
       "category": [
@@ -413,13 +413,46 @@
       ],
       "bidHistory": [
         {
+          "userId": "7b6d",
+          "time": 1712062339459,
+          "amount": 200
+        },
+        {
           "time": "2024-04-01T22:00:00.000Z",
           "userId": "Auction start",
           "amount": "100"
         },
         {
-          "userId": "7b6d",
-          "time": 1712062339459,
+          "userId": "1",
+          "time": 1712239535625,
+          "amount": 250
+        }
+      ]
+    },
+    {
+      "id": "89e2",
+      "sellerId": "1",
+      "images": [
+        "https://media.istockphoto.com/id/151518176/sv/foto/hyena-showing-tongue.jpg?s=612x612&w=0&k=20&c=Xh22e7pdeaAMtaYtZ7x3WIx1FhIej5-hn6pEdr5us7w="
+      ],
+      "title": "Hyena",
+      "description": "Katthund",
+      "startDate": "2024-04-03T22:00:00.000Z",
+      "endDate": "2024-04-16T22:00:00.000Z",
+      "startingPrice": "150",
+      "reservePrice": "200",
+      "category": [
+        "Test"
+      ],
+      "bidHistory": [
+        {
+          "time": "2024-04-03T22:00:00.000Z",
+          "userId": "Auction start",
+          "amount": "150"
+        },
+        {
+          "userId": "1",
+          "time": 1712239638960,
           "amount": 200
         }
       ]
@@ -600,7 +633,9 @@
       "username": "Tiger King",
       "password": "king123",
       "savedAuctions": [
-        "2"
+        "2",
+        "1",
+        "3"
       ]
     },
     {
