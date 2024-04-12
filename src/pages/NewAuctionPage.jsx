@@ -18,6 +18,8 @@ const NewAuctionPage = () => {
   const [startPrice, setStartPrice] = useState("");
   const [reservedPrice, setReservedPrice] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const [unixStartDate, setUnixStartDate] = useState(Math.floor(new Date().getTime() / 1000));
+  const [unixEndDate, setUnixEndDate] = useState(Math.floor(new Date().getTime() / 1000));
 
   const [warning, setWarning] = useState("");
   const [disabled, setDisabled] = useState(true)
@@ -43,9 +45,9 @@ const NewAuctionPage = () => {
 
 
   // posts to db
-  async function postNewAuction(e){
+  async function postNewAuction(e) {
     e.preventDefault()
-    
+
     // validation checks
     // if(imageInput[0].length >= 1 && 
     //   mainTitle.length > 3 && 
@@ -57,7 +59,7 @@ const NewAuctionPage = () => {
     //   title[0].length >= 1) {
 
     //     const res = await fetch("/api/auctions", {
-          
+
     //       method: "POST",
     //       headers: { "Content-Type": "application/json" },
     //       body: JSON.stringify({
@@ -78,8 +80,8 @@ const NewAuctionPage = () => {
       allImages[0].length >= 1 &&
       mainTitle.length > 2 &&
       description.length > 3 &&
-      startDate != null &&
-      endDate != null &&
+      unixStartDate != null &&
+      unixEndDate != null &&
       startPrice.length > 0 &&
       reservedPrice.length > 0 &&
       title[0].length >= 1
@@ -92,8 +94,8 @@ const NewAuctionPage = () => {
           images: allImages,
           title: mainTitle,
           description: description,
-          startDate: startDate,
-          endDate: endDate,
+          startDate: unixStartDate,
+          endDate: unixEndDate,
           startingPrice: startPrice,
           reservePrice: reservedPrice,
           category: [title],
@@ -119,10 +121,10 @@ const NewAuctionPage = () => {
     } else if (description.length < 1) {
       setWarning("You need at least three characters in description");
       setShowAlert(true);
-    } else if (startDate === null) {
+    } else if (unixStartDate === null) {
       setWarning("You need to put startdate of auction");
       setShowAlert(true);
-    } else if (endDate === null) {
+    } else if (unixEndDate === null) {
       setWarning("You need to put enddate of auction");
       setShowAlert(true);
     } else if (startPrice.length < 1) {
@@ -141,18 +143,18 @@ const NewAuctionPage = () => {
 
   let filtered = data
     ? data.map((item) =>
-        item.category.map((i) =>
-          existingCategories.includes(i) ? null : existingCategories.push(i)
-        )
+      item.category.map((i) =>
+        existingCategories.includes(i) ? null : existingCategories.push(i)
       )
+    )
     : null;
 
   const handleStartDateChange = (date) => {
-    setStartDate(date);
+    setUnixStartDate(Math.floor(date.getTime() / 1000));
   };
 
   const handleEndDateChange = (date) => {
-    setEndDate(date);
+    setUnixEndDate(Math.floor(date.getTime() / 1000));
   };
 
   // handles input in custom category
@@ -220,13 +222,13 @@ const NewAuctionPage = () => {
               <div className="d-flex flex-column">
                 <label>Start Date:</label>
                 <DatePicker
-                  selected={startDate}
+                  selected={new Date(unixStartDate * 1000)}
                   onChange={handleStartDateChange}
                   selectsStart
                   // startDate={startDate}
                   // endDate={endDate}
                   minDate={new Date()}
-                  maxDate={endDate}
+                  maxDate={unixEndDate}
                   className="form-control custom-date-picker "
                 />
               </div>
@@ -235,14 +237,12 @@ const NewAuctionPage = () => {
               <div className="d-flex flex-column">
                 <label>End Date:</label>
                 <DatePicker
-                  selected={endDate}
+                  selected={new Date(unixEndDate * 1000)}
                   onChange={handleEndDateChange}
                   selectsEnd
-                  // startDate={startDate}
-                  // endDate={endDate}
-                  minDate={startDate}
-                  disabled={!startDate}
-                  className="form-control custom-date-picker "
+                  minDate={unixStartDate}
+                  disabled={!unixStartDate} // End date is disabled when startDate is null
+                  className="form-control custom-date-picker"
                 />
               </div>
             </div>
@@ -326,28 +326,29 @@ const NewAuctionPage = () => {
           >
             Submit
           </button> */}
-        {/* </div> */}
-        {dropdownOpen ? <div className='list-group w-75 align-self-center'>
-          {existingCategories.map((cat, index) => 
-            <a key={index} className='list-group-item list-group-item-action text-center' href="#" onClick={() => {
-              setDropdownOpen(false), setTitle(cat), setDisabled(!disabled)}} >{cat}</a>
-          )}
-          
-          <input 
-            type='text' 
-            placeholder='Add custom category' 
-            value={customCategory}
-            onChange={(e) => setCustomCategory(e.target.value)} 
-            onKeyDown={handleKeyPress}/>
+          {/* </div> */}
+          {dropdownOpen ? <div className='list-group w-75 align-self-center'>
+            {existingCategories.map((cat, index) =>
+              <a key={index} className='list-group-item list-group-item-action text-center' href="#" onClick={() => {
+                setDropdownOpen(false), setTitle(cat), setDisabled(!disabled)
+              }} >{cat}</a>
+            )}
 
-          </div> 
-        : null}
+            <input
+              type='text'
+              placeholder='Add custom category'
+              value={customCategory}
+              onChange={(e) => setCustomCategory(e.target.value)}
+              onKeyDown={handleKeyPress} />
 
-        <button className="btn btn-primary mt-3 w-75 align-self-center" onClick={postNewAuction} disabled={disabled}>
-          Submit
-        </button>
-      </div>
-    </form>
+          </div>
+            : null}
+
+          <button className="btn btn-primary mt-3 w-75 align-self-center" onClick={postNewAuction} disabled={disabled}>
+            Submit
+          </button>
+        </div>
+      </form>
     </>
   )
 }

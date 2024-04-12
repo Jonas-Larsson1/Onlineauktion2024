@@ -98,6 +98,11 @@
       "bidHistory": [
         {
           "userId": "3",
+          "time": 1712050388380,
+          "amount": 270
+        },
+        {
+          "userId": "3",
           "time": 1712050369072,
           "amount": 268
         },
@@ -252,9 +257,9 @@
           "amount": 200
         },
         {
-          "userId": "3",
-          "time": 1712050388380,
-          "amount": 270
+          "userId": "1",
+          "time": 1712317082521,
+          "amount": 300
         }
       ],
       "category": [
@@ -352,6 +357,11 @@
           "userId": "1",
           "time": 1711028300691,
           "amount": 200
+        },
+        {
+          "userId": "1",
+          "time": 1712239584393,
+          "amount": 210
         }
       ],
       "category": [
@@ -403,13 +413,46 @@
       ],
       "bidHistory": [
         {
+          "userId": "7b6d",
+          "time": 1712062339459,
+          "amount": 200
+        },
+        {
           "time": "2024-04-01T22:00:00.000Z",
           "userId": "Auction start",
           "amount": "100"
         },
         {
-          "userId": "7b6d",
-          "time": 1712062339459,
+          "userId": "1",
+          "time": 1712239535625,
+          "amount": 250
+        }
+      ]
+    },
+    {
+      "id": "89e2",
+      "sellerId": "1",
+      "images": [
+        "https://media.istockphoto.com/id/151518176/sv/foto/hyena-showing-tongue.jpg?s=612x612&w=0&k=20&c=Xh22e7pdeaAMtaYtZ7x3WIx1FhIej5-hn6pEdr5us7w="
+      ],
+      "title": "Hyena",
+      "description": "Katthund",
+      "startDate": "2024-04-03T22:00:00.000Z",
+      "endDate": "2024-04-16T22:00:00.000Z",
+      "startingPrice": "150",
+      "reservePrice": "200",
+      "category": [
+        "Test"
+      ],
+      "bidHistory": [
+        {
+          "time": "2024-04-03T22:00:00.000Z",
+          "userId": "Auction start",
+          "amount": "150"
+        },
+        {
+          "userId": "1",
+          "time": 1712239638960,
           "amount": 200
         }
       ]
@@ -561,6 +604,27 @@
       "bidHistory": [
         {}
       ]
+    },
+    {
+      "id": "6829",
+      "sellerId": "1",
+      "images": [
+        "https://web.pdx.edu/~corey8/c-vasquez4foxes/foxes/tibetan-fox1.jpg",
+        "",
+        ""
+      ],
+      "title": "Tibetan Fox",
+      "description": "\"I hate my life\" - Tibetan Fox, probably",
+      "startDate": 1712847784,
+      "endDate": 1714834984,
+      "startingPrice": "100",
+      "reservePrice": "200",
+      "category": [
+        "Foxes"
+      ],
+      "bidHistory": [
+        {}
+      ]
     }
   ],
   "users": [
@@ -569,7 +633,9 @@
       "username": "Tiger King",
       "password": "king123",
       "savedAuctions": [
-        "2"
+        "2",
+        "1",
+        "3"
       ]
     },
     {
