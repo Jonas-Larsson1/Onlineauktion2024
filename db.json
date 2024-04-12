@@ -98,6 +98,11 @@
       "bidHistory": [
         {
           "userId": "3",
+          "time": 1712050388380,
+          "amount": 270
+        },
+        {
+          "userId": "3",
           "time": 1712050369072,
           "amount": 268
         },
@@ -252,9 +257,9 @@
           "amount": 200
         },
         {
-          "userId": "3",
-          "time": 1712050388380,
-          "amount": 270
+          "userId": "1",
+          "time": 1712317082521,
+          "amount": 300
         }
       ],
       "category": [
@@ -352,6 +357,11 @@
           "userId": "1",
           "time": 1711028300691,
           "amount": 200
+        },
+        {
+          "userId": "1",
+          "time": 1712239584393,
+          "amount": 210
         }
       ],
       "category": [
@@ -403,27 +413,210 @@
       ],
       "bidHistory": [
         {
+          "userId": "7b6d",
+          "time": 1712062339459,
+          "amount": 200
+        },
+        {
           "time": "2024-04-01T22:00:00.000Z",
           "userId": "Auction start",
           "amount": "100"
         },
         {
-          "userId": "7b6d",
-          "time": 1712062339459,
+          "userId": "1",
+          "time": 1712239535625,
+          "amount": 250
+        }
+      ]
+    },
+    {
+      "id": "89e2",
+      "sellerId": "1",
+      "images": [
+        "https://media.istockphoto.com/id/151518176/sv/foto/hyena-showing-tongue.jpg?s=612x612&w=0&k=20&c=Xh22e7pdeaAMtaYtZ7x3WIx1FhIej5-hn6pEdr5us7w="
+      ],
+      "title": "Hyena",
+      "description": "Katthund",
+      "startDate": "2024-04-03T22:00:00.000Z",
+      "endDate": "2024-04-16T22:00:00.000Z",
+      "startingPrice": "150",
+      "reservePrice": "200",
+      "category": [
+        "Test"
+      ],
+      "bidHistory": [
+        {
+          "time": "2024-04-03T22:00:00.000Z",
+          "userId": "Auction start",
+          "amount": "150"
+        },
+        {
+          "userId": "1",
+          "time": 1712239638960,
           "amount": 200
         }
       ]
     },
     {
-      "id": "5fd3",
+      "id": "141a",
       "sellerId": "3",
       "images": [
-        "https://media.wired.com/photos/593261cab8eb31692072f129/master/pass/85120553.jpg"
+        "https://th.bing.com/th/id/OIP.Wl_q05Di0lKiQ4noYsDIRgHaEo?rs=1&pid=ImgDetMain"
       ],
-      "title": "Testing",
-      "description": "Testing",
-      "startDate": "2024-04-10T22:00:00.000Z",
+      "title": "testing",
+      "description": "test",
+      "startDate": "2024-04-11T22:00:00.000Z",
+      "endDate": "2024-04-16T22:00:00.000Z",
+      "startingPrice": "200",
+      "reservePrice": "300",
+      "category": [
+        "Foxes"
+      ],
+      "bidHistory": [
+        {}
+      ]
+    },
+    {
+      "id": "9989",
+      "sellerId": "3",
+      "images": [
+        "peopeoe"
+      ],
+      "title": "epoirwpdf",
+      "description": "dskfjs",
+      "startDate": "2024-04-09T22:00:00.000Z",
+      "endDate": "2024-04-25T22:00:00.000Z",
+      "startingPrice": "300",
+      "reservePrice": "350",
+      "category": [
+        "Foxes"
+      ],
+      "bidHistory": [
+        {
+          "time": "2024-04-09T22:00:00.000Z",
+          "userId": "Auction start",
+          "amount": "300"
+        },
+        {
+          "userId": "3",
+          "time": 1712231106718,
+          "amount": 301
+        }
+      ]
+    },
+    {
+      "id": "53f8",
+      "sellerId": "3",
+      "images": [
+        "dfjshdkfdjs"
+      ],
+      "title": "efwlk",
+      "description": "rtetre",
+      "startDate": "2024-04-18T22:00:00.000Z",
       "endDate": "2024-04-23T22:00:00.000Z",
+      "startingPrice": "150",
+      "reservePrice": "200",
+      "category": [
+        "Foxes"
+      ],
+      "bidHistory": [
+        {}
+      ]
+    },
+    {
+      "id": "9299",
+      "sellerId": "3",
+      "images": [
+        "https://i.pinimg.com/originals/2a/a6/18/2aa618854fa2179b694a5dc1323e0170.jpg"
+      ],
+      "title": "bird",
+      "description": "birdie bird",
+      "startDate": "2024-04-09T22:00:00.000Z",
+      "endDate": "2024-04-24T22:00:00.000Z",
+      "startingPrice": "120",
+      "reservePrice": "200",
+      "category": [
+        "Big Cats"
+      ],
+      "bidHistory": [
+        {}
+      ]
+    },
+    {
+      "id": "5dbb",
+      "sellerId": "3",
+      "images": [
+        "https://www.potawatomizoo.org/wp-content/uploads/2022/08/prince-gordon.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/d/dc/Pyxicephalus_adspersus_2zz.jpg",
+        "https://cdn.britannica.com/45/179145-050-51295E7A/African-bullfrog-South-Africa.jpg"
+      ],
+      "title": "Bullfrog",
+      "description": "skippidy frog",
+      "startDate": "2024-04-04T22:00:00.000Z",
+      "endDate": "2024-04-05T22:00:00.000Z",
+      "startingPrice": "20",
+      "reservePrice": "30",
+      "category": [
+        "Amphibians"
+      ],
+      "bidHistory": [
+        {}
+      ]
+    },
+    {
+      "id": "469a",
+      "sellerId": "3",
+      "images": [
+        "https://upload.wikimedia.org/wikipedia/commons/4/4d/Green_Iguana_In_Florida.jpg",
+        "https://cdn.britannica.com/24/142124-050-E23AC219/iguana.jpg",
+        "https://m.media-amazon.com/images/I/81Vkant+p3L._AC_UF1000,1000_QL80_.jpg"
+      ],
+      "title": "Guana Lizard",
+      "description": "Mad as hell",
+      "startDate": "2024-04-09T22:00:00.000Z",
+      "endDate": "2024-04-25T22:00:00.000Z",
+      "startingPrice": "50",
+      "reservePrice": "80",
+      "category": [
+        "Reptile"
+      ],
+      "bidHistory": [
+        {}
+      ]
+    },
+    {
+      "id": "89db",
+      "sellerId": "3",
+      "images": [
+        "https://th.bing.com/th/id/OIP.3NWhkjUqu8seDlFfI8IirwHaGf?rs=1&pid=ImgDetMain",
+        "",
+        ""
+      ],
+      "title": "Hjort",
+      "description": "Hjortdjur",
+      "startDate": "2024-04-16T22:00:00.000Z",
+      "endDate": "2024-04-26T22:00:00.000Z",
+      "startingPrice": "300",
+      "reservePrice": "350",
+      "category": [
+        "Hjortdjur"
+      ],
+      "bidHistory": [
+        {}
+      ]
+    },
+    {
+      "id": "6829",
+      "sellerId": "1",
+      "images": [
+        "https://web.pdx.edu/~corey8/c-vasquez4foxes/foxes/tibetan-fox1.jpg",
+        "",
+        ""
+      ],
+      "title": "Tibetan Fox",
+      "description": "\"I hate my life\" - Tibetan Fox, probably",
+      "startDate": 1712847784,
+      "endDate": 1714834984,
       "startingPrice": "100",
       "reservePrice": "200",
       "category": [
@@ -440,7 +633,9 @@
       "username": "Tiger King",
       "password": "king123",
       "savedAuctions": [
-        "2"
+        "2",
+        "1",
+        "3"
       ]
     },
     {

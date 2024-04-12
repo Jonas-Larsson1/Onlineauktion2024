@@ -11,7 +11,16 @@ export default function NewBid(props) {
   const [defaultBid, setDefaultBid] = useState(null)
   const [currentBid, setCurrentBid] = useState(null)
   const [error, setError] = useState()
+  const [endDateObject, setEndDateObject] = useState(auction.endDate ? new Date(auction.endDate) : null);
 
+  useEffect(() => {
+    if (auction.endDate) {
+      setEndDateObject(new Date(auction.endDate));
+    }
+  }, [auction.endDate]);
+
+  const currentDate = new Date();
+  
   useEffect(() => {
     setHighestBid(getHighestBid(auction.bidHistory))
     setDefaultBid(getHighestBid(auction.bidHistory) + 1)
@@ -19,15 +28,17 @@ export default function NewBid(props) {
   }, [auction]);
 
   useEffect(() => {
-    if (currentBid === null) {
-      setError("Enter a bid") 
+    if (endDateObject < currentDate) {
+      setError("The auction is closed") 
     } else if (currentBid <= highestBid) {
       setError("Bid too low")
+    } else if (currentBid === null) {
+      setError("Enter a bid") 
     } else {
       setError(false)
     }
-  }, [currentBid])
-
+  }, [currentBid, endDateObject, currentDate])
+  
   function getHighestBid (bidHistory) {
     bidHistory.sort((a, b) => (b.amount) - (a.amount))
     return bidHistory.length > 0 ? bidHistory[0].amount : 0
@@ -73,14 +84,19 @@ export default function NewBid(props) {
       <Row className="mb-3">
         <Form.Group as={Col} controlId="newBid">
           <InputGroup>
-          <Form.Control name="amount" type="number" placeholder={0} value={currentBid ? currentBid : ' '} onInput={changeCurrentBid}/>
+          <Form.Control name="amount" type="number" placeholder={0} disabled={!!error && error === "The auction is closed"} value={currentBid ? currentBid : ' '} onInput={changeCurrentBid}/>
           </InputGroup>
           <Form.Text className="text-muted">
             Miniumum bid: {defaultBid}
           </Form.Text>
         </Form.Group>
         <Col>
-          <Button variant="success" type="submit" className="me-2 btn-lg" disabled={!!error}>
+          <Button
+            variant={error === "The auction is closed" ? "danger" : "success"}
+            type="submit"
+            className="me-2 btn-lg"
+            disabled={!!error}
+          >
             {error ? error : "Place bid"}
           </Button>
         </Col>

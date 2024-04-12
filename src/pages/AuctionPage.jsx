@@ -24,7 +24,7 @@ export default function AuctionPage() {
         result.bidHistory = [{
           time: result.startDate,
           userId: "Auction start" , 
-          amount: result.startingPrice
+          amount: Number(result.startingPrice)
         }]
       }
 

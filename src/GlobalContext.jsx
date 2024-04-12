@@ -3,7 +3,10 @@ import { redirect } from "react-router";
 
 const GlobalContext = createContext();
 
-function GlobalProvider({ children }) {
+function GlobalProvider({children}){
+
+    const[showLogoutAlert, setShowLogoutAlert] = useState(null)
+   
   const [show, setShow] = useState(() => {
     return sessionStorage.getItem("showAlert" === "true" || "false");
   });
@@ -56,6 +59,8 @@ function GlobalProvider({ children }) {
         setShow,
         hideAlert,
         displayAlert,
+      showLogoutAlert,
+      setShowLogoutAlert
       }}
     >
       {children}
