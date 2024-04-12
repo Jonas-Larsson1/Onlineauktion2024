@@ -5,6 +5,7 @@ import { GlobalContext } from "../GlobalContext.jsx";
 import { Alert, Button } from "react-bootstrap";
 import StyleCard from "../components/StyleCard.jsx";
 
+
 // Define the ListPage functional component.
 export default function ListPage() {
 
@@ -14,6 +15,7 @@ export default function ListPage() {
   const [user, setUser] = useState(null)
   const {loggedIn} = useContext(GlobalContext)
   const [activeList, setActiveList] = useState([]);
+  const [activeButton, setActiveButton] = useState('All');
 
   useEffect(() => {
     const getUserData = async () => {
@@ -34,8 +36,7 @@ export default function ListPage() {
 
         // Update the 'list' state variable with the fetched data.
         setList(result);
-        setActiveList(list)
-
+        
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -49,19 +50,19 @@ export default function ListPage() {
     list.sort((a, b) => b.bidHistory.length - a.bidHistory.length);
   }
 
-    // const newestFirst = list.toSorted((a, b) => {
-    //   a.endDate - b.endDate;
-    //   return
-    // });
+  const allItems = list.slice(1);
 
-    const ongoing = list.filter((item) => {
-      return Date.now() < item.endDate;
-    });
+  const ongoing = list.filter((item) => {
+    return Date.now() < item.endDate;
+  });
 
-    const finished = list.filter((item) => {
-      return Date.now() > item.endDate;
-    });
+  const finished = list.filter((item) => {
+    return Date.now() > item.endDate;
+  });
 
+  useEffect(() => {
+    setActiveList(allItems);
+  }, [list]);
     
   return (
     <>
@@ -81,35 +82,51 @@ export default function ListPage() {
         ""
       )}
 
-      <div className="container pb-4 border-bottom border-dark">
-        <div className="d-flex justify-content-center">
-          <div className="col-md-4 p-2" key="0">
-            <div>
-              <h2 className="fs-1 ms-2 pb-3 text text-danger">
-                Beast of the week!
-              </h2>
-              {list.length > 0 && list[0].hasOwnProperty("bidHistory") && (
-                <ListCard item={list[0]} />
-              )}
-            </div>
+      <div className="d-flex justify-content-center mt-4 border-bottom border-dark">
+        <div className="justify-self-center m-4" key="0">
+          <div>
+            <h2 className="fs-1 ms-2 pb-3 text text-danger">
+              Beast of the week!
+            </h2>
+            {list.length > 0 && list[0].hasOwnProperty("bidHistory") && (
+              <ListCard item={list[0]} />
+            )}
           </div>
         </div>
       </div>
       <div className="d-flex justify-content-center mt-4">
         <div className="btn-group-lg">
-          <button type="button" className="btn btn-dark m-2" onClick={() => {
-            setActiveList(list)
-          }}>
-              All
+          <button
+            type="button"
+            className={`btn btn-dark m-2 ps-5 pe-5 ${activeButton === 'All' ? 'active' : ''}`} 
+            data-bs-toggle="button"
+            onClick={() => {
+              setActiveList(allItems);
+              setActiveButton('All');
+            }}
+          >
+            All
           </button>
-          <button type="button" className="btn btn-dark m-2" onClick={() => {
-            setActiveList(ongoing)
-          }}>
+          <button
+            type="button"
+            className={`btn btn-dark m-2 ps-4 pe-4 ${activeButton === 'Ongoing' ? 'active' : ''}`}
+            data-bs-toggle="button"
+            onClick={() => {
+              setActiveList(ongoing);
+              setActiveButton('Ongoing');
+            }}
+          >
             Ongoing
           </button>
-          <button type="button" className="btn btn-dark m-2" onClick={() => {
-            setActiveList(finished)
-          }}>
+          <button
+            type="button"
+            className={`btn btn-dark m-2 ps-4 pe-4 ${activeButton === 'Finished' ? 'active' : ''}`}
+            data-bs-toggle="button"
+            onClick={() => {
+              setActiveList(finished);
+              setActiveButton('Finished');
+            }}
+          >
             Finished
           </button>
         </div>
