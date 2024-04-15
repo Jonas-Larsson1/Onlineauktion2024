@@ -3,6 +3,18 @@ import { getHash } from "../utilities/validation.js"
 
 export default function (server, db) {
 
+  server.get('/api/login', async (req, res) => {
+    if (req.session.user) {
+      res.status(200).json({
+        loggedIn: req.session.user
+      })
+    } else {
+      res.status(200).json({
+        loggedIn: false
+      })
+    }
+  })
+
   server.post('/api/login', async(req, res) => {
     if (req.session.user) {
       res.status(409).json({
@@ -25,6 +37,19 @@ export default function (server, db) {
           message: "Invalid email or password"
         })
       }
+    }
+  })
+
+  server.delete('/api/login', async(req, res) => {
+    if (req.session.user) {
+      req.session.destroy()
+      res.status(200).json({
+        message: "Succesfully logged out"
+      })
+    } else {
+      res.status(404).json({
+        message: "There is no user logged in"
+      })
     }
   })
 

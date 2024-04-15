@@ -7,6 +7,11 @@ export default function (server, db) {
     res.json(await User.find())
   })
 
+  server.get('/api/user/:id', async (req,res)=> {
+    const user = await User.findById(req.params.id)
+    res.json(user)
+  })
+
   server.post('/api/users', async (req, res) => {
     try {
       if (!req.body.username || !req.body.password) {

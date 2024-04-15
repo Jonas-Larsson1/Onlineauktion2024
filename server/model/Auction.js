@@ -5,14 +5,14 @@ const auctionSchema = new mongoose.Schema({
   title: String, 
   description: String, 
   images: [{type: String}],
-  startDate: Date, 
-  endDate: Date,
+  startDate: Number, 
+  endDate: Number,
   startingPrice: Number, 
   reservePrice: Number,
   bidHistory: [{type: mongoose.Schema.Types.ObjectId, ref:"bids"}],
   category: [{type: String}]
 });
 
-const Auction = mongoose.model("auction", auctionSchema);
+const Auction = mongoose.model("auctions", auctionSchema);
 
 export default Auction;

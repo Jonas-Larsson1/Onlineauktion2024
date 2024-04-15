@@ -28,7 +28,15 @@ function GlobalProvider({children}){
     setLoggedIn(userId);
   };
 
-  const logout = () => {
+  const logout = async () => {
+
+    await fetch('/api/login', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
     setLoggedIn(false);
   };
 

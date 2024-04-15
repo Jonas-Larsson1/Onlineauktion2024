@@ -99,7 +99,6 @@ const NewAuctionPage = () => {
           startingPrice: startPrice,
           reservePrice: reservedPrice,
           category: [title],
-          bidHistory: [{}],
         }),
       });
       if (res.ok) {
