@@ -10,7 +10,7 @@ export default function LoginPage() {
   const [passwordInput, setPasswordInput] = useState("");
   const [error, setError] = useState("");
 
-
+  const { loggedIn } = useContext(GlobalContext)
   const { login } = useContext(GlobalContext);
   const { displayAlert } = useContext(GlobalContext);
   const { showLogoutAlert } = useContext(GlobalContext);
@@ -18,30 +18,13 @@ export default function LoginPage() {
   const checkForUser = async (e) => {
     e.preventDefault()
 
-    const data = {
+    const userData = {
       username: usernameInput,
       password: passwordInput
     }
 
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
+    login(userData)
 
-    const result = await response.json()
-
-    
-    if (response.status == 201) {
-      login(result.loggedIn)
-    } else if (response.status == 404) {
-      alert(result.message)
-    } else if (response.status == 409) {
-      alert(result.message)
-    }
-    
   }
  
   // const checkForUser = async (e) => {
@@ -67,6 +50,9 @@ export default function LoginPage() {
   //     console.error("Error logging in:", error);
   //   }
   // };
+
+  // console.log("Am I logged in?", loggedIn)
+
 
   return (
     <>

@@ -27,7 +27,7 @@ export default function AccountPage() {
   // Fetches the logged in user
   useEffect(() => {
     const getUserData = async () => {
-      const response = await fetch(`http://localhost:3000/users/${loggedIn}`);
+      const response = await fetch(`/api/user/${loggedIn}`);
       const result = await response.json();
       setUser(result);
     };
@@ -39,7 +39,7 @@ export default function AccountPage() {
   // Fetches auctions where logged in user has placed a bid
   useEffect(() => {
     const getBidsData = async () => {
-      const response = await fetch(`http://localhost:3000/auctions/`);
+      const response = await fetch(`/api/auctions/`);
       const result = await response.json();
 
       const userBids = []

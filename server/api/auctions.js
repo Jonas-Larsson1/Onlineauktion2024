@@ -7,6 +7,10 @@ export default function (server, db) {
     res.json(await Auction.find())
   })
 
+  server.get("/api/auction/:id", async (req, res) => {
+    res.json(await Auction.findById(req.params.id))
+  })
+
   server.post("/api/auctions", async (req, res) => {
     try {
       if (isValidAuction(req.body)) {

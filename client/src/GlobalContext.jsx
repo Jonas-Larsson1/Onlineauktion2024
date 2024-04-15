@@ -7,6 +7,17 @@ function GlobalProvider({children}){
 
   const[showLogoutAlert, setShowLogoutAlert] = useState(null)
   const[loggedIn, setLoggedIn] = useState(false)
+
+  useEffect(() => {
+    const getSession = async () => {
+      const response = await fetch('/api/login')
+      const result = await response.json()
+  
+      setLoggedIn(result.loggedIn)
+    }
+
+    getSession()
+  }, [])
    
   const [show, setShow] = useState(() => {
     return sessionStorage.getItem("showAlert" === "true" || "false");
@@ -24,8 +35,22 @@ function GlobalProvider({children}){
     setShow(true);
   };
 
-  const login = (userId) => {
-    setLoggedIn(userId);
+  const login = async (userData) => {
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    })
+
+    const result = await response.json()
+
+    if (response.status == 201) {
+      setLoggedIn(result.loggedIn);
+    } else {
+      return response.message
+    }
   };
 
   const logout = async () => {
