@@ -1,36 +1,16 @@
 {
   "name": "onlineauktion2024",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "bootstrap": "^5.3.3",
-    "bootstrap-icons": "^1.11.3",
-    "json-server": "^1.0.0-alpha.23",
-    "react": "^18.2.0",
-    "react-bootstrap": "^2.10.2",
-    "react-datepicker": "^6.6.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.22.3"
-  },
-  "devDependencies": {
-    "@types/react": "^18.2.64",
-    "@types/react-dom": "^18.2.21",
-    "@vitejs/plugin-react": "^4.2.1",
-    "eslint": "^8.57.0",
-    "eslint-plugin-react": "^7.34.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
-    "vite": "^5.1.6"
-  },
+  "version": "1.0.0",
   "description": "Grupp 3 projektuppgift - Producera och Leverera Mjukvara",
-  "main": "vite.config.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "concurrently \"cd server && npm i\" \"cd client && npm i\"",
+    "start": "concurrently \"nodemon server/server.js\" \"cd client && npm run dev\""
+  },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 }
