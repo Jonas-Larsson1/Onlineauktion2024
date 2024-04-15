@@ -15,31 +15,54 @@ export default function LoginPage() {
   const { displayAlert } = useContext(GlobalContext);
   const { showLogoutAlert } = useContext(GlobalContext);
 
-
- 
   const checkForUser = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    try {
-      const response = await fetch("api/users");
-      const credentials = await response.json();
-      const user = credentials.find(
-        (user) =>
-          user.username.toLowerCase() === usernameInput.toLowerCase() &&
-          user.password === passwordInput
-      );
-
-      if (user) {
-        login(user.id); // set loggedIn to true
-        displayAlert();
-  
-      } else {
-        setError("Invalid username or password");
-      }
-    } catch (error) {
-      console.error("Error logging in:", error);
+    const data = {
+      username: usernameInput,
+      password: passwordInput
     }
-  };
+
+    fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+    })
+    .catch(error => {
+      console.error('Fel vid inloggning:', error);
+      alert('Gick inte att logga in.');
+    });
+  }
+ 
+  // const checkForUser = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const response = await fetch("api/users");
+  //     const credentials = await response.json();
+  //     const user = credentials.find(
+  //       (user) =>
+  //         user.username.toLowerCase() === usernameInput.toLowerCase() &&
+  //         user.password === passwordInput
+  //     );
+
+  //     if (user) {
+  //       login(user.id); // set loggedIn to true
+  //       displayAlert();
+  
+  //     } else {
+  //       setError("Invalid username or password");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error logging in:", error);
+  //   }
+  // };
 
   return (
     <>

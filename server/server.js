@@ -16,7 +16,7 @@ server.use(session({
   cookie: { secure: false } // cookie-inställningar, secure bör vara true i produktion med HTTPS
 }))
 
-mongoose.connect("")
+mongoose.connect("mongodb+srv://starke:awesomeauction@clustera.di6rkdy.mongodb.net/onlineauktion2024")
 
 apiRegister(server, mongoose)
 

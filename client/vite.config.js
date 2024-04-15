@@ -17,7 +17,7 @@ export default defineConfig({
 
         // url som vi vill skicka till, från vår react app
 
-        target: 'http://localhost:3000',
+        target: 'http://localhost:3000/api',
 
         changeOrigin: true,
 
