@@ -1,18 +1,5 @@
 import User from "../model/User.js"
-import crypto from "crypto"
-
-// const salt = "örtSalt"
-// const getHash = (password) => {
-//   let hash = crypto.pbkdf2Sync(
-//     password, salt, 1000, 64, 'sha512'
-//     ).toString('hex')
-//   return hash 
-// }
-
-// const isValidEmail = (email) => {
-//   const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-//   return emailRegex.test(email)
-// }
+import { getHash } from "../utilities/validation.js"
 
 export default function (server, db) {
 
@@ -24,8 +11,8 @@ export default function (server, db) {
     } else {
       const user = await User.findOne({
         username: req.body.username,
-        password: req.body.password
-        // password_hash: getHash(req.body.password)
+        // password: req.body.password
+        password: getHash(req.body.password)
       })
       
       if (user) {

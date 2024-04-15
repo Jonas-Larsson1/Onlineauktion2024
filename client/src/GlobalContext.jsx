@@ -5,7 +5,8 @@ const GlobalContext = createContext();
 
 function GlobalProvider({children}){
 
-    const[showLogoutAlert, setShowLogoutAlert] = useState(null)
+  const[showLogoutAlert, setShowLogoutAlert] = useState(null)
+  const[loggedIn, setLoggedIn] = useState(false)
    
   const [show, setShow] = useState(() => {
     return sessionStorage.getItem("showAlert" === "true" || "false");
@@ -22,24 +23,6 @@ function GlobalProvider({children}){
   const displayAlert = () => {
     setShow(true);
   };
-
-  const [loggedIn, setLoggedIn] = useState(() => {
-    if (
-      sessionStorage.getItem("loggedIn") === "false" ||
-      sessionStorage.getItem("loggedIn") === false ||
-      sessionStorage.getItem("loggedIn") === "null" ||
-      sessionStorage.getItem("loggedIn") === null
-    ) {
-      redirect("/LoginPage"); // returns false if logged in becomes false or null
-      return false
-    } else {
-      return sessionStorage.getItem("loggedIn"); // otherwise the value wont change
-    }
-  });
-
-  useEffect(() => {
-    sessionStorage.setItem("loggedIn", loggedIn);
-  }, [loggedIn]); // updates sessionstorage if loggedIn changes
 
   const login = (userId) => {
     setLoggedIn(userId);

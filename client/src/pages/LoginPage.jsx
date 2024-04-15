@@ -23,21 +23,25 @@ export default function LoginPage() {
       password: passwordInput
     }
 
-    fetch('/api/login', {
+    const response = await fetch('/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     })
-    .then(response => response.json())
-    .then(result => {
-      console.log(result)
-    })
-    .catch(error => {
-      console.error('Fel vid inloggning:', error);
-      alert('Gick inte att logga in.');
-    });
+
+    const result = await response.json()
+
+    
+    if (response.status == 201) {
+      login(result.loggedIn)
+    } else if (response.status == 404) {
+      alert(result.message)
+    } else if (response.status == 409) {
+      alert(result.message)
+    }
+    
   }
  
   // const checkForUser = async (e) => {
