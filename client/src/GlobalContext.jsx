@@ -7,18 +7,26 @@ function GlobalProvider({children}){
 
   const[showLogoutAlert, setShowLogoutAlert] = useState(null)
   const[loggedIn, setLoggedIn] = useState(false)
+  const[isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const getSession = async () => {
+      setIsLoading(true)
       const response = await fetch('/api/login')
-      const result = await response.json()
-  
-      setLoggedIn(result.loggedIn)
-    }
+
+      if (response.status === 200) {
+        const result = await response.json();
+        setLoggedIn(result.loggedIn);
+      } else {
+        setLoggedIn(null);
+      }
+
+      setIsLoading(false);
+    };
 
     getSession()
   }, [])
-   
+
   const [show, setShow] = useState(() => {
     return sessionStorage.getItem("showAlert" === "true" || "false");
   });
@@ -70,6 +78,7 @@ function GlobalProvider({children}){
       value={{
         loggedIn,
         login,
+        isLoading,
         logout,
         show,
         setShow,

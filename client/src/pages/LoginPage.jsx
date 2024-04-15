@@ -1,16 +1,16 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from "../GlobalContext";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 
 export default function LoginPage() {
+  const navigate = useNavigate()
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [error, setError] = useState("");
 
-  const { loggedIn } = useContext(GlobalContext)
   const { login } = useContext(GlobalContext);
   const { displayAlert } = useContext(GlobalContext);
   const { showLogoutAlert } = useContext(GlobalContext);
@@ -24,8 +24,12 @@ export default function LoginPage() {
     }
 
     login(userData)
+    navigate("/")
+
+    // felhantering saknas 
 
   }
+
  
   // const checkForUser = async (e) => {
   //   e.preventDefault();

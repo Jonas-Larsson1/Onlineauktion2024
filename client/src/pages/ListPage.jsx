@@ -134,8 +134,8 @@ export default function ListPage() {
       <div className="container">
         <div className="row row-cols-1 row-cols-md-3 g-4">
           {activeList.map((item, index) => (
-            <StyleCard>
-              <ListCard item={item} />
+            <StyleCard key={index}>
+              <ListCard item={item}  />
             </StyleCard>
           ))}
         </div>

@@ -9,7 +9,7 @@ export default function (server, db) {
         loggedIn: req.session.user
       })
     } else {
-      res.status(200).json({
+      res.status(404).json({
         loggedIn: false
       })
     }

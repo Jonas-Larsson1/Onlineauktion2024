@@ -10,7 +10,7 @@ const ListCard = ({ item }) => {
     item.bidHistory.sort((a, b) => new Date(b.time) - new Date(a.time));
   } else {
     item.bidHistory = [{
-      amount: 0,
+      amount: item.startingPrice,
     }
     ]
   }

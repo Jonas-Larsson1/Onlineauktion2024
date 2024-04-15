@@ -9,7 +9,6 @@ import AddToWatchList from "../components/AddToWatchList";
 export default function AuctionPage() {
   let { id } = useParams();
   const [auction, setAuction] = useState(null);
-  // const { auction, setAuction } = useContext(GlobalContext);
 
   const updateAuction = (updatedAuction) => {
     setAuction({...updatedAuction})
@@ -17,7 +16,7 @@ export default function AuctionPage() {
 
   useEffect(() => {
     const getData = async () => {
-      const response = await fetch(`/api/auctions/${id}`);
+      const response = await fetch(`/api/auction/${id}`);
       const result = await response.json();
 
       if (result.bidHistory.length === 0 || Object.keys(result.bidHistory[0]).length === 0) {
@@ -72,6 +71,7 @@ export default function AuctionPage() {
       )}
     </>
   );
+  
 }
 
 export function formatDateTime(dateTimeString) {
