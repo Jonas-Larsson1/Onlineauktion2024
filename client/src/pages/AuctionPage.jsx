@@ -18,6 +18,7 @@ export default function AuctionPage() {
     const getData = async () => {
       const response = await fetch(`/api/auction/${id}`);
       const result = await response.json();
+      
 
       if (result.bidHistory.length === 0 || Object.keys(result.bidHistory[0]).length === 0) {
         result.bidHistory = [{
@@ -25,8 +26,18 @@ export default function AuctionPage() {
           userId: "Auction start" , 
           amount: Number(result.startingPrice)
         }]
+      }else {
+        let cloneBidHistory = result.bidHistory;
+        for(let i = 0; i <= cloneBidHistory.length - 1; i++) {
+          if(cloneBidHistory[i].userId == "Auction start") {
+            result.bidHistory[i]["username"] = "Auction start"
+          }else {
+            const res = await fetch(`/api/user/getUsername/${cloneBidHistory[i].userId}`)
+            const username = await res.json()
+            result.bidHistory[i]["username"] = username
+          }          
+        }
       }
-
       setAuction(result);
     };
 
