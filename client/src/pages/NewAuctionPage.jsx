@@ -6,75 +6,56 @@ import { useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 
 const NewAuctionPage = () => {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [title, setTitle] = useState("");
-  const [customCategory, setCustomCategory] = useState("");
-  const [data, setData] = useState(null);
-  const [mainTitle, setMainTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [allImages, setAllImages] = useState(["", "", ""]);
-  const [startPrice, setStartPrice] = useState("");
-  const [reservedPrice, setReservedPrice] = useState("");
-  const [showAlert, setShowAlert] = useState(false);
-  const [unixStartDate, setUnixStartDate] = useState(Math.floor(new Date().getTime() / 1000));
-  const [unixEndDate, setUnixEndDate] = useState(Math.floor(new Date().getTime() / 1000));
+  const [auctionData, setAuctionData] = useState({
+    startDate: null,
+    endDate: null,
+    dropdownOpen: false,
+    title: "",
+    customCategory: "",
+    data: null,
+    mainTitle: "",
+    description: "",
+    allImages: ["", "", ""],
+    startPrice: "",
+    reservedPrice: "",
+    showAlert: false,
+    unixStartDate: Math.floor(new Date().getTime() / 1000),
+    unixEndDate: Math.floor(new Date().getTime() / 1000),
+    warning: "",
+    disabled: true,
+  });
 
-  const [warning, setWarning] = useState("");
-  const [disabled, setDisabled] = useState(true)
   const { loggedIn } = useContext(GlobalContext);
-
-  console.log(allImages);
   const navigate = useNavigate();
 
   const onImageInput = (index, value) => {
-    const imageInput = [...allImages];
+    const imageInput = [...auctionData.allImages];
     imageInput[index] = value;
-    setAllImages(imageInput);
+    setAuctionData({ ...auctionData, allImages: imageInput });
   };
 
   useEffect(() => {
     const getData = async () => {
       const response = await fetch("/api/auctions");
       const result = await response.json();
-      setData(result);
+      setAuctionData({ ...auctionData, data: result });
     };
     getData();
   }, []);
 
-
-  // posts to db
   async function postNewAuction(e) {
-    e.preventDefault()
+    e.preventDefault();
 
-    // validation checks
-    // if(imageInput[0].length >= 1 && 
-    //   mainTitle.length > 3 && 
-    //   description.length > 3 && 
-    //   startDate != null && 
-    //   endDate != null && 
-    //   startPrice.length > 0 && 
-    //   reservedPrice.length > 0 && 
-    //   title[0].length >= 1) {
-
-    //     const res = await fetch("/api/auctions", {
-
-    //       method: "POST",
-    //       headers: { "Content-Type": "application/json" },
-    //       body: JSON.stringify({
-    //         sellerId : loggedIn,
-    //         images: [imageInput],
-    //         title: mainTitle,
-    //         description: description,
-    //         startDate: startDate,
-    //         endDate: endDate,
-    //         startingPrice: startPrice,
-    //         reservePrice: reservedPrice,
-    //         category: [title],
-    //         bidHistory : [{}]
-    //       })
-    //     })
+    const {
+      allImages,
+      mainTitle,
+      description,
+      unixStartDate,
+      unixEndDate,
+      startPrice,
+      reservedPrice,
+      title,
+    } = auctionData;
 
     if (
       allImages[0].length >= 1 &&
@@ -102,88 +83,119 @@ const NewAuctionPage = () => {
         }),
       });
       if (res.ok) {
-        console.log(res)
-        navigate("/") // navigates to home page
+        console.log(res);
+        navigate("/"); // navigates to home page
       } else {
-        setWarning("Something went wrong");
-        setShowAlert(true);
+        setAuctionData({
+          ...auctionData,
+          warning: "Something went wrong",
+          showAlert: true,
+        });
       }
     } else if (allImages[0].length < 1) {
-      setWarning("You need at least one image");
-      setShowAlert(true);
-    } else if (allImages[0].length < 1) {
-      setWarning("You need at least one image");
-      setShowAlert(true);
+      setAuctionData({
+        ...auctionData,
+        warning: "You need at least one image",
+        showAlert: true,
+      });
     } else if (mainTitle.length < 2) {
-      setWarning("You at least two characters as title");
-      setShowAlert(true);
+      setAuctionData({
+        ...auctionData,
+        warning: "You need at least two characters as title",
+        showAlert: true,
+      });
     } else if (description.length < 1) {
-      setWarning("You need at least three characters in description");
-      setShowAlert(true);
+      setAuctionData({
+        ...auctionData,
+        warning: "You need at least three characters in description",
+        showAlert: true,
+      });
     } else if (unixStartDate === null) {
-      setWarning("You need to put startdate of auction");
-      setShowAlert(true);
+      setAuctionData({
+        ...auctionData,
+        warning: "You need to put start date of auction",
+        showAlert: true,
+      });
     } else if (unixEndDate === null) {
-      setWarning("You need to put enddate of auction");
-      setShowAlert(true);
+      setAuctionData({
+        ...auctionData,
+        warning: "You need to put end date of auction",
+        showAlert: true,
+      });
     } else if (startPrice.length < 1) {
-      setWarning("You need to put a starting price");
-      setShowAlert(true);
+      setAuctionData({
+        ...auctionData,
+        warning: "You need to put a starting price",
+        showAlert: true,
+      });
     } else if (reservedPrice.length < 1) {
-      setWarning("You need to put a reserved price");
-      setShowAlert(true);
+      setAuctionData({
+        ...auctionData,
+        warning: "You need to put a reserved price",
+        showAlert: true,
+      });
     } else {
-      setWarning("You need to choose a category");
-      setShowAlert(true);
+      setAuctionData({
+        ...auctionData,
+        warning: "You need to choose a category",
+        showAlert: true,
+      });
     }
   }
 
-  const existingCategories = [] // will hold categories after mapping
+  const existingCategories = [];
 
-  let filtered = data
-    ? data.map((item) =>
-      item.category.map((i) =>
-        existingCategories.includes(i) ? null : existingCategories.push(i)
+  let filtered = auctionData.data
+    ? auctionData.data.map((item) =>
+        item.category.map((i) =>
+          existingCategories.includes(i) ? null : existingCategories.push(i)
+        )
       )
-    )
     : null;
 
   const handleStartDateChange = (date) => {
-    setUnixStartDate(Math.floor(date.getTime() / 1000));
+    setAuctionData({
+      ...auctionData,
+      unixStartDate: Math.floor(date.getTime() / 1000),
+    });
   };
 
   const handleEndDateChange = (date) => {
-    setUnixEndDate(Math.floor(date.getTime() / 1000));
+    setAuctionData({
+      ...auctionData,
+      unixEndDate: Math.floor(date.getTime() / 1000),
+    });
   };
 
-  // handles input in custom category
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
-      setTitle(customCategory);
-      setDropdownOpen(false);
-      setCustomCategory('');
-      setDisabled(!disabled)
+      setAuctionData({
+        ...auctionData,
+        title: auctionData.customCategory,
+        dropdownOpen: false,
+        customCategory: "",
+        disabled: !auctionData.disabled,
+      });
     }
   };
 
   return (
     <>
-      {showAlert ? (
+      {auctionData.showAlert && (
         <Alert
           className="warning-alert"
           variant="danger"
-          onClose={() => setShowAlert(false)}
+          onClose={() => setAuctionData({ ...auctionData, showAlert: false })}
           dismissible
         >
-          <Alert.Heading> {warning}</Alert.Heading>
+          <Alert.Heading>{auctionData.warning}</Alert.Heading>
         </Alert>
-      ) : (
-        ""
       )}
+
       <form className="w-100 d-flex justify-content-center align-items-center m-3">
         <div className="d-flex flex-column" style={{ width: "30%" }}>
           <div className="d-flex flex-column">
-            {allImages.map((image, index) => (
+            {auctionData.allImages.map((image, index) => (
               <input
                 key={index}
                 type="text"
@@ -196,10 +208,10 @@ const NewAuctionPage = () => {
 
             <input
               type="text"
-              value={mainTitle}
-              onChange={(e) => {
-                setMainTitle(e.target.value);
-              }}
+              value={auctionData.mainTitle}
+              onChange={(e) =>
+                setAuctionData({ ...auctionData, mainTitle: e.target.value })
+              }
               className="form-control mb-2"
               placeholder="Title"
               aria-label="Title"
@@ -207,10 +219,10 @@ const NewAuctionPage = () => {
 
             <input
               type="text"
-              value={description}
-              onChange={(e) => {
-                setDescription(e.target.value);
-              }}
+              value={auctionData.description}
+              onChange={(e) =>
+                setAuctionData({ ...auctionData, description: e.target.value })
+              }
               className="form-control mb-2"
               placeholder="Description"
               aria-label="Description"
@@ -221,13 +233,11 @@ const NewAuctionPage = () => {
               <div className="d-flex flex-column">
                 <label>Start Date:</label>
                 <DatePicker
-                  selected={new Date(unixStartDate * 1000)}
+                  selected={new Date(auctionData.unixStartDate * 1000)}
                   onChange={handleStartDateChange}
                   selectsStart
-                  // startDate={startDate}
-                  // endDate={endDate}
                   minDate={new Date()}
-                  maxDate={unixEndDate}
+                  maxDate={auctionData.unixEndDate}
                   className="form-control custom-date-picker "
                 />
               </div>
@@ -236,11 +246,11 @@ const NewAuctionPage = () => {
               <div className="d-flex flex-column">
                 <label>End Date:</label>
                 <DatePicker
-                  selected={new Date(unixEndDate * 1000)}
+                  selected={new Date(auctionData.unixEndDate * 1000)}
                   onChange={handleEndDateChange}
                   selectsEnd
-                  minDate={unixStartDate}
-                  disabled={!unixStartDate} // End date is disabled when startDate is null
+                  minDate={auctionData.unixStartDate}
+                  disabled={!auctionData.unixStartDate} // End date is disabled when startDate is null
                   className="form-control custom-date-picker"
                 />
               </div>
@@ -250,13 +260,15 @@ const NewAuctionPage = () => {
             <div className="col">
               <div className="input-group mt-2">
                 <span className="input-group-text">€</span>
-
                 <input
                   type="text"
-                  value={startPrice}
-                  onChange={(e) => {
-                    setStartPrice(e.target.value);
-                  }}
+                  value={auctionData.startPrice}
+                  onChange={(e) =>
+                    setAuctionData({
+                      ...auctionData,
+                      startPrice: e.target.value,
+                    })
+                  }
                   className="form-control"
                   placeholder="Start Price"
                   aria-label="Start Price"
@@ -266,13 +278,15 @@ const NewAuctionPage = () => {
             <div className="col">
               <div className="input-group mt-2">
                 <span className="input-group-text">€</span>
-
                 <input
                   type="text"
-                  value={reservedPrice}
-                  onChange={(e) => {
-                    setReservedPrice(e.target.value);
-                  }}
+                  value={auctionData.reservedPrice}
+                  onChange={(e) =>
+                    setAuctionData({
+                      ...auctionData,
+                      reservedPrice: e.target.value,
+                    })
+                  }
                   className="form-control"
                   placeholder="Reserved Price"
                   aria-label="Reserved Price"
@@ -287,69 +301,60 @@ const NewAuctionPage = () => {
               id="dropdownMenuButton1"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              onClick={() => {
-                setDropdownOpen((prev) => !prev), filtered;
-              }}
+              onClick={() =>
+                setAuctionData({
+                  ...auctionData,
+                  dropdownOpen: !auctionData.dropdownOpen,
+                })
+              }
             >
-              {title == "" ? "Categories" : title}
+              {auctionData.title == "" ? "Categories" : auctionData.title}
             </button>
           </div>
-          {/* {dropdownOpen ? (
+          {auctionData.dropdownOpen ? (
             <div className="list-group w-75 align-self-center">
               {existingCategories.map((cat, index) => (
                 <a
                   key={index}
                   className="list-group-item list-group-item-action text-center"
                   href="#"
-                  onClick={() => {
-                    setDropdownOpen(false), setTitle(cat);
-                  }}
+                  onClick={() =>
+                    setAuctionData({
+                      ...auctionData,
+                      title: cat,
+                      dropdownOpen: false,
+                      disabled: !auctionData.disabled,
+                    })
+                  }
                 >
                   {cat}
                 </a>
               ))}
-
               <input
                 type="text"
                 placeholder="Add custom category"
-                value={customCategory}
-                onChange={(e) => setCustomCategory(e.target.value)}
+                value={auctionData.customCategory}
+                onChange={(e) =>
+                  setAuctionData({
+                    ...auctionData,
+                    customCategory: e.target.value,
+                  })
+                }
                 onKeyDown={handleKeyPress}
               />
             </div>
-          ) : null} */}
-
-          {/* <button
+          ) : null}
+          <button
             className="btn btn-primary mt-3 w-75 align-self-center"
             onClick={postNewAuction}
+            disabled={auctionData.disabled}
           >
-            Submit
-          </button> */}
-          {/* </div> */}
-          {dropdownOpen ? <div className='list-group w-75 align-self-center'>
-            {existingCategories.map((cat, index) =>
-              <a key={index} className='list-group-item list-group-item-action text-center' href="#" onClick={() => {
-                setDropdownOpen(false), setTitle(cat), setDisabled(!disabled)
-              }} >{cat}</a>
-            )}
-
-            <input
-              type='text'
-              placeholder='Add custom category'
-              value={customCategory}
-              onChange={(e) => setCustomCategory(e.target.value)}
-              onKeyDown={handleKeyPress} />
-
-          </div>
-            : null}
-
-          <button className="btn btn-primary mt-3 w-75 align-self-center" onClick={postNewAuction} disabled={disabled}>
             Submit
           </button>
         </div>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default NewAuctionPage
+export default NewAuctionPage;
