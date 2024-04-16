@@ -1,6 +1,8 @@
 import React, {useState, useEffect, useContext} from 'react'
 import { Button } from 'react-bootstrap'
 import {FetchedDataContext} from './SearchResults';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Categories = ({category, setCategory, setSearchQuery}) => {
   const { data } = useContext(FetchedDataContext) // global data

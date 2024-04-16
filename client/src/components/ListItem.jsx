@@ -42,7 +42,7 @@ const ListCard = ({ item }) => {
         <Card.Text style={{ height: "8rem", overflow: "hidden", textOverflow: "ellipsis" }}>
           {item.description.length > 125 ? `${item.description.substring(0, 125)}...` : item.description}
         </Card.Text>
-        <Card.Text><Link style={{color: "blue", textDecoration: "underline"}} to={`/SearchPage/${item.category}`}>{item.category}</Link></Card.Text>
+        <Card.Text><Link style={{color: "blue", textDecoration: "underline"}} to={`/searchPage/${item.category}`}>{item.category}</Link></Card.Text>
       </Card.Body>
       <ListGroup className="list-group list-group-flush">
         <ListGroup.Item>
