@@ -1,0 +1,17 @@
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+
+Given('I am on the Home page', () => {
+  // TODO: implement step
+});
+
+When('I click on an auction', () => {
+  // TODO: implement step
+});
+
+When('I insert at least a minimum bid', () => {
+  // TODO: implement step
+});
+
+Then('I click the place bid button', () => {
+  // TODO: implement step
+});

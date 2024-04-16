@@ -1,0 +1,45 @@
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+
+Given('that I am on the first page', () => {
+  // TODO: implement step
+});
+
+When('I click on the register button', () => {
+  // TODO: implement step
+});
+
+Then('I can see the {string}-form', (a) => {
+  // TODO: implement step
+});
+
+When('I enter a username {string} to register', (a) => {
+  // TODO: implement step
+});
+
+When('I enter a password {string} to register', (a) => {
+  // TODO: implement step
+});
+
+When('I click on the Submit button', () => {
+  // TODO: implement step
+});
+
+Then('I am registered and redirected to the loginpage', () => {
+  // TODO: implement step
+});
+
+When('I enter a username {string} to login', (a) => {
+  // TODO: implement step
+});
+
+When('I enter a password {string} to login', (a) => {
+  // TODO: implement step
+});
+
+When('I click on the Login button', () => {
+  // TODO: implement step
+});
+
+Then('I am logged in and redirected to the homepage', () => {
+  // TODO: implement step
+});
