@@ -1,2 +1,2 @@
 // Change to the url of the project you are testing
-module.exports = 'http://localhost:5173/login'
+module.exports = 'http://localhost:5173/'
