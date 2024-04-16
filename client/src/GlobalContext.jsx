@@ -6,7 +6,7 @@ const GlobalContext = createContext();
 function GlobalProvider({children}){
 
   const[showLogoutAlert, setShowLogoutAlert] = useState(null)
-  const[loggedIn, setLoggedIn] = useState(false)
+  const[loggedIn, setLoggedIn] = useState(null)
   const[isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -56,9 +56,9 @@ function GlobalProvider({children}){
 
     if (response.status == 201) {
       setLoggedIn(result.loggedIn);
-    } else {
-      return response.message
-    }
+    } 
+    
+    return response
   };
 
   const logout = async () => {
@@ -70,7 +70,7 @@ function GlobalProvider({children}){
       },
     })
 
-    setLoggedIn(false);
+    setLoggedIn(null);
   };
 
   return (

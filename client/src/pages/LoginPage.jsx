@@ -11,7 +11,7 @@ export default function LoginPage() {
   const [passwordInput, setPasswordInput] = useState("");
   const [error, setError] = useState("");
 
-  const { login } = useContext(GlobalContext);
+  const { login, loggedIn } = useContext(GlobalContext);
   const { displayAlert } = useContext(GlobalContext);
   const { showLogoutAlert } = useContext(GlobalContext);
 
@@ -23,39 +23,27 @@ export default function LoginPage() {
       password: passwordInput
     }
 
-    login(userData)
-    navigate("/")
+    const loginResponse = await login(userData)
 
-    // felhantering saknas 
+    console.log(loginResponse)
+    if (loginResponse.status === 201) {
+      navigate('/')
+    } else {
+      // felhantering saknas 
+    }
 
   }
 
- 
-  // const checkForUser = async (e) => {
-  //   e.preventDefault();
+  useEffect(() => {
+    const getSession = async () => {
+      const response = await fetch('/api/login')
+      if (response.status === 200) {
+        navigate('/')
+      } 
+    };
 
-  //   try {
-  //     const response = await fetch("api/users");
-  //     const credentials = await response.json();
-  //     const user = credentials.find(
-  //       (user) =>
-  //         user.username.toLowerCase() === usernameInput.toLowerCase() &&
-  //         user.password === passwordInput
-  //     );
-
-  //     if (user) {
-  //       login(user.id); // set loggedIn to true
-  //       displayAlert();
-  
-  //     } else {
-  //       setError("Invalid username or password");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error logging in:", error);
-  //   }
-  // };
-
-  // console.log("Am I logged in?", loggedIn)
+    getSession()
+  }, [])
 
 
   return (

@@ -31,40 +31,69 @@ export default function Router() {
     <>
       <BrowserRouter>
         <div className="App">
-          
             <div>
               <Navbar />
               <div className="content">
                 <Routes>
-                    <Route path="/" element={
-                      <ProtectedRoute>
-                        <ListPage />
-                      </ProtectedRoute>
-                    }/> 
-                    <Route path="/AuctionPage/:id" element={
-                      <ProtectedRoute>
-                        <AuctionPage /> 
-                      </ProtectedRoute>
-                    } />
-                    <Route path="/AccountPage/" element={
-                      <ProtectedRoute>
-                        <AccountPage />
-                      </ProtectedRoute>
-                    } />
-                    <Route path="/AccountPage/OngoingBids" element={<AccountPageOngoingBids />} />
-                    <Route path="/AccountPage/OngoingAuctions" element={<AccountPageOngoingAuctions />} />
-                    <Route path="/AccountPage/ClosedAuctions" element={<AccountPageClosedAuctions />} />
-                    <Route path="/AccountPage/SavedAuctions" element={<AccountPageSavedAuctions />} />
-                    <Route
-                      path="/SearchPage/:incomingSearchQuery"
-                      element={<SearchPage />}
-                      />
-                    <Route path="/AboutPage" element={<AboutPage />} />
-                    <Route path="/NewAuction" element={<NewAuctionPage />} />
-                    <Route path="*" element={<PageNotFound />}></Route>
-                    {/* Alla andra paths när man är inloggad hamnar här */}
+                  <Route path="/" element={
+                    <ProtectedRoute>
+                      <ListPage />
+                    </ProtectedRoute>
+                  } /> 
+                  <Route path="/AuctionPage/:id" element={
+                    <ProtectedRoute>
+                      <AuctionPage /> 
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/AccountPage/" element={
+                    <ProtectedRoute>
+                      <AccountPage />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/AccountPage/OngoingBids" element={
+                    <ProtectedRoute>
+                      <AccountPageOngoingBids />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/AccountPage/OngoingAuctions" element={
+                    <ProtectedRoute>
+                      <AccountPageOngoingAuctions />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/AccountPage/ClosedAuctions" element={
+                    <ProtectedRoute>
+                      <AccountPageClosedAuctions />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/AccountPage/SavedAuctions" element={
+                    <ProtectedRoute>
+                      <AccountPageSavedAuctions />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/SearchPage/:incomingSearchQuery" element={
+                    <ProtectedRoute>
+                      <SearchPage />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/AboutPage" element={
+                    <ProtectedRoute>
+                      <AboutPage />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/NewAuction" element={
+                    <ProtectedRoute>
+                      <NewAuctionPage /> 
+                    </ProtectedRoute>
+                  } />
+                  <Route path="*" element={
+                    <ProtectedRoute>
+                      <PageNotFound />
+                    </ProtectedRoute>
+                  } />
+
                   <Route path="/login" element={<LoginPage />} />
                   <Route path="/registerPage" element={<RegisterPage />} />
+
                   <Route path="*" element={<Navigate to="/login" replace />} />
                 </Routes>
               </div>
