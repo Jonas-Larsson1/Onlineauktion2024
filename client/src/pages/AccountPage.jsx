@@ -74,7 +74,7 @@ export default function AccountPage() {
   // Fetches auctions that logged in user has started
   useEffect(() => {
     const getAuctionData = async () => {
-      const response = await fetch(`http://localhost:3000/auctions/`);
+      const response = await fetch(`/api/auctions/`);
       const result = await response.json();
 
       const userOngoingAuctions = [];
@@ -108,14 +108,14 @@ export default function AccountPage() {
   // Fetches auctions that logged in user has saved
   useEffect(() => {
     const getSavedData = async () => {
-        const response = await fetch(`http://localhost:3000/users/${loggedIn}`);
+        const response = await fetch(`/api/user/${loggedIn}`);
         const result = await response.json();
         setUser(result);
 
 
         const savedAuctionsDetails = [];
         for (const auctionId of result.savedAuctions) {
-            const auctionResponse = await fetch(`http://localhost:3000/auctions/${auctionId}`);
+            const auctionResponse = await fetch(`api/auction/${auctionId}`);
             const auctionResult = await auctionResponse.json();
             savedAuctionsDetails.push(auctionResult);
             break;
