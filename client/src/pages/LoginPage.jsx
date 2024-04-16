@@ -1,68 +1,50 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from "../GlobalContext";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 
 export default function LoginPage() {
+  const navigate = useNavigate()
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [error, setError] = useState("");
 
-
-  const { login } = useContext(GlobalContext);
+  const { login, loggedIn } = useContext(GlobalContext);
   const { displayAlert } = useContext(GlobalContext);
   const { showLogoutAlert } = useContext(GlobalContext);
 
   const checkForUser = async (e) => {
     e.preventDefault()
 
-    const data = {
+    const userData = {
       username: usernameInput,
       password: passwordInput
     }
 
-    fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-    .then(response => response.json())
-    .then(result => {
-      console.log(result)
-    })
-    .catch(error => {
-      console.error('Fel vid inloggning:', error);
-      alert('Gick inte att logga in.');
-    });
+    const loginResponse = await login(userData)
+
+    console.log(loginResponse)
+    if (loginResponse.status === 201) {
+      navigate('/')
+    } else {
+      // felhantering saknas 
+    }
+
   }
- 
-  // const checkForUser = async (e) => {
-  //   e.preventDefault();
 
-  //   try {
-  //     const response = await fetch("api/users");
-  //     const credentials = await response.json();
-  //     const user = credentials.find(
-  //       (user) =>
-  //         user.username.toLowerCase() === usernameInput.toLowerCase() &&
-  //         user.password === passwordInput
-  //     );
+  useEffect(() => {
+    const getSession = async () => {
+      const response = await fetch('/api/login')
+      if (response.status === 200) {
+        navigate('/')
+      } 
+    };
 
-  //     if (user) {
-  //       login(user.id); // set loggedIn to true
-  //       displayAlert();
-  
-  //     } else {
-  //       setError("Invalid username or password");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error logging in:", error);
-  //   }
-  // };
+    getSession()
+  }, [])
+
 
   return (
     <>

@@ -38,13 +38,12 @@ export default function RegisterPage() {
       newPassword.length > 5 &&
       !usernameTaken
     ) {
-      const res = await fetch("api/users", {
+      const res = await fetch("/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           username: newUsername,
-          password: newPassword,
-          savedAuctions: [],
+          password: newPassword
         }),
       });
       if (res.ok) {

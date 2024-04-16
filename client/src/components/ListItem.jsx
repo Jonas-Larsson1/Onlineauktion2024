@@ -6,7 +6,14 @@ import { Link } from "react-router-dom";
 const ListCard = ({ item }) => {
   
   // Sort the bid history of the item in descending order by time.
-  item.bidHistory.sort((a, b) => new Date(b.time) - new Date(a.time));
+  if (item.bidHistory.lenght > 0) {
+    item.bidHistory.sort((a, b) => new Date(b.time) - new Date(a.time));
+  } else {
+    item.bidHistory = [{
+      amount: item.startingPrice,
+    }
+    ]
+  }
 
   // Define a function to determine and return a status badge based on the auction's end date.
   const statusBadge = () => {
@@ -46,7 +53,7 @@ const ListCard = ({ item }) => {
         </ListGroup.Item>
       </ListGroup>
       <Card.Body className="text-center">
-        <a href={`/AuctionPage/${item.id}`} className="btn btn-primary w-100 position-absolute start-0 bottom-0">View</a>
+        <a href={`/AuctionPage/${item._id}`} className="btn btn-primary w-100 position-absolute start-0 bottom-0">View</a>
       </Card.Body>
     </Card>
   </>);

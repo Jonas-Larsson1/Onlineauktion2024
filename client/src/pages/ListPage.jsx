@@ -19,7 +19,7 @@ export default function ListPage() {
 
   useEffect(() => {
     const getUserData = async () => {
-      const response = await fetch(`http://localhost:3000/users/${loggedIn}`);
+      const response = await fetch(`/api/user/${loggedIn}`);
       const result = await response.json();
       setUser(result);
     };
@@ -31,7 +31,7 @@ export default function ListPage() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await fetch("api/auctions/");
+        const response = await fetch("/api/auctions/");
         const result = await response.json();
 
         // Update the 'list' state variable with the fetched data.
@@ -134,8 +134,8 @@ export default function ListPage() {
       <div className="container">
         <div className="row row-cols-1 row-cols-md-3 g-4">
           {activeList.map((item, index) => (
-            <StyleCard>
-              <ListCard item={item} />
+            <StyleCard key={index}>
+              <ListCard item={item}  />
             </StyleCard>
           ))}
         </div>
