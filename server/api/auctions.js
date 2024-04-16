@@ -11,6 +11,28 @@ export default function (server, db) {
     res.json(await Auction.findById(req.params.id))
   })
 
+  server.put("/api/auction/:id", async (req, res) => {
+    try {
+      const auctionToUpdate = await Auction.findByIdAndUpdate(
+        req.params.id, 
+        req.body, 
+        {new: false}
+      )
+
+      if (auctionToUpdate) {
+        res.status(200).json({
+          message: "Auction successfully updated."
+        })
+      } else {
+        res.status(404).json({
+          message: "Auction not found."
+        })
+      }
+    } catch (error) {
+      res.status(500).json({message: "Error updating auction", error: error })
+    }
+  })
+
   server.post("/api/auctions", async (req, res) => {
     try {
       if (isValidAuction(req.body)) {

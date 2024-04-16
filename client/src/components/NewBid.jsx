@@ -62,11 +62,15 @@ export default function NewBid(props) {
   
       auction.bidHistory.push(newBid)
 
-      const response = await fetch(`/api/auctions/${auction.id}`, {
+      console.log(auction)
+
+      const response = await fetch(`/api/auction/${auction._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(auction)
       })
+
+      
 
       if (response.ok) {
         updateAuction(auction)

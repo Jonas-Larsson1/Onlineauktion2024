@@ -10,7 +10,7 @@ export default function AddToWatchList (props) {
 
   useEffect(() => {
     const getData = async () => {
-      const response = await fetch(`/api/users/${loggedIn}`);
+      const response = await fetch(`/api/user/${loggedIn}`);
       const result = await response.json();
 
       setUser(result);
@@ -21,7 +21,7 @@ export default function AddToWatchList (props) {
 
   useEffect(() => {
     if (user) {
-      if (user.savedAuctions.includes(auction.id)) {
+      if (user.savedAuctions.includes(auction._id)) {
         setSavedByUser(true)
       }
     }
@@ -30,17 +30,17 @@ export default function AddToWatchList (props) {
   const addToWatchList = async (event) => {
     event.preventDefault()
 
-    if (!user.savedAuctions.includes(auction.id)) {
-      user.savedAuctions.push(auction.id)
+    if (!user.savedAuctions.includes(auction._id)) {
+      user.savedAuctions.push(auction._id)
       setSavedByUser(true)
       
     } else {
-      const savedAuctionIndex = user.savedAuctions.indexOf(auction.id)
+      const savedAuctionIndex = user.savedAuctions.indexOf(auction._id)
       user.savedAuctions.splice(savedAuctionIndex, 1)
       setSavedByUser(false)
     }
     
-    const response = await fetch(`/api/users/${loggedIn}`, {
+    const response = await fetch(`/api/user/${loggedIn}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user)

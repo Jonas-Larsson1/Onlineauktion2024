@@ -9,7 +9,8 @@ const auctionSchema = new mongoose.Schema({
   endDate: Number,
   startingPrice: Number, 
   reservePrice: Number,
-  bidHistory: [{type: mongoose.Schema.Types.ObjectId, ref:"bids"}],
+  // bidHistory: [{type: mongoose.Schema.Types.ObjectId, ref:"bids"}],
+  bidHistory: [{type: mongoose.Schema.Types.Mixed }],
   category: [{type: String}]
 });
 
