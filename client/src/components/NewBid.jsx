@@ -1,6 +1,7 @@
 import { Button, Form, InputGroup, Row, Col, Badge } from "react-bootstrap";
 import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from '../GlobalContext'
+import { formatDateTime } from "../pages/AuctionPage";
 
 export default function NewBid(props) {
   const { loggedIn } = useContext(GlobalContext)
@@ -28,7 +29,9 @@ export default function NewBid(props) {
   }, [auction]);
 
   useEffect(() => {
-    if (endDateObject < currentDate) {
+    const endDateFormatted = formatDateTime(endDateObject); 
+
+    if (endDateFormatted < currentDate) {
       setError("The auction is closed") 
     } else if (currentBid <= highestBid) {
       setError("Bid too low")
