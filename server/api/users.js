@@ -9,13 +9,11 @@ export default function (server, db) {
 
   server.get('/api/user/:id', async (req,res)=> {
     const user = await User.findById(req.params.id)
-    console.log(user)
     res.json(user)
   })
 
   server.get('/api/user/getUsername/:id', async (req,res) => {
     const user = await User.findById(req.params.id)
-    console.log(user.username + " hej from new route")
     res.json(user.username)
   })  
 

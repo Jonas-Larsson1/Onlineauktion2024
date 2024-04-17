@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 export default function LimitBidHistory(props) {
   const { auction } = props
   let bidHistory = auction.bidHistory;
-  // const userNameNotId = bidHistory.userId.map((bid) => bid.userId.populate('userId').username)
 
   const [bidsToShow, setBidsToShow] = useState(null);
   const [buttonText, setButtonText] = useState("Show more bids");
