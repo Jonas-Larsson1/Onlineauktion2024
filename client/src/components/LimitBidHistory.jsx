@@ -48,7 +48,7 @@ export default function LimitBidHistory(props) {
               {bidsToShow ? bidsToShow.map((bid, index) => (
                 <tr key={index}>
                   <td>{formatDateTime(bid.time)}</td>
-                  <td>{bid.userId}</td>
+                  <td>{bid.username}</td>
                   <td>{bid.amount}</td>
                 </tr>
               ))

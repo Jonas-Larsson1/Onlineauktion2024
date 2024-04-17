@@ -59,16 +59,21 @@ export default function NewBid(props) {
     const bidAmount = parseInt(formData.get("amount"))
     
     if (bidAmount > highestBid) {
+      const res = await fetch(`/api/user/getUsername/${loggedIn}`)
+      const username = await res.json()
       const newBid = {
         userId: loggedIn, 
         time: Date.now(),
-        amount: bidAmount
+        amount: bidAmount,
+        username : username
       }
   
       auction.bidHistory.push(newBid)
 
       console.log(auction)
 
+
+      //pls change me ! only newBid data upload or crosscheck auction data on server!
       const response = await fetch(`/api/auction/${auction._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -82,6 +87,7 @@ export default function NewBid(props) {
         setCurrentBid(null)
       } else {
         // säg åt användaren det gick åt skogen
+        alert("I did not work.")
       }
     } else {
       setError("Bid too low")
