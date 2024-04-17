@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const ListCard = ({ item }) => {
   
   // Sort the bid history of the item in descending order by time.
-  if (item.bidHistory.lenght > 0) {
+  if (item.bidHistory.length > 0) {
     item.bidHistory.sort((a, b) => new Date(b.time) - new Date(a.time));
   } else {
     item.bidHistory = [{
@@ -20,16 +20,20 @@ const ListCard = ({ item }) => {
 
     // Helper function to check if the current date is past the item's end date.
     const hasSurpassedTime = () => {
-      return Date.now() > item.endDate;
+      const endDateUnix = item.endDate; 
+      const currentUnix = Math.floor(Date.now() / 1000); 
+      return currentUnix > endDateUnix; 
     };
 
     // Conditionally render a badge indicating whether the auction is finished or ongoing.
-    const badgeColor = hasSurpassedTime() ? 
-    <span className={`position-absolute translate-middle top-0 start-50 p-2 badge bg-danger fs-6`}> Finished </span> 
-    : <span className={`position-absolute translate-middle top-0 start-50 p-2 badge bg-success fs-6`}> Ongoing </span>;
-  
+    const badgeColor = hasSurpassedTime() ? (
+      <span className={`position-absolute translate-middle top-0 start-50 p-2 badge bg-danger fs-6`}> Finished </span>
+    ) : (
+      <span className={`position-absolute translate-middle top-0 start-50 p-2 badge bg-success fs-6`}> Ongoing </span>
+    );
+
     return badgeColor;
-  }
+  };
   
   return (<>
     <Card style={{ width: "22rem", height: "38rem" }}>
