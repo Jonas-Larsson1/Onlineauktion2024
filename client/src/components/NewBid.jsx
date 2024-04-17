@@ -23,6 +23,9 @@ export default function NewBid(props) {
 
     const newSocket = io("http://localhost:5500");
 
+    newSocket.on("newBidAdded", (msg) => {
+      console.log(msg)
+    })
 
     setSocket(newSocket);
 
@@ -31,11 +34,6 @@ export default function NewBid(props) {
       newSocket.disconnect();
     };
   }, []);
-
-  useEffect(() => {
-    socket?.emit("newUser", loggedIn)
-  }, [socket, loggedIn])
-
   const currentDate = new Date();
 
   useEffect(() => {
@@ -102,11 +100,17 @@ export default function NewBid(props) {
         body: JSON.stringify(auction)
       })
 
-      
+      const result = await response.json()
 
       if (response.ok) {
+        console.log(result)
         updateAuction(auction)
         setCurrentBid(null)
+           socket.emit("newBidNotification", {
+             userId: loggedIn,
+             username: username,
+             bidAmount: bidAmount
+          })
       } else {
         // säg åt användaren det gick åt skogen
         alert("I did not work.")

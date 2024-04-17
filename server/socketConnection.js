@@ -5,8 +5,10 @@ export default function socketConnection(io) {
         const addNewBid = (bidData, socketId) => {
           // Check if a bid with the same username and amount already exists
           // Make sure 'username' and 'amount' are defined or passed as parameters
-          !bids.some((bid) => bid.username === bidData.username && bid.amount === bidData.amount) &&
+        
             bids.push({ bidData, socketId });
+
+            io.emit("newBidAdded", bidData);
         };
       
         const removeBid = (socketId) =>{
@@ -17,11 +19,12 @@ export default function socketConnection(io) {
           console.log("Client connected");
       
           // Emit a test event to the client
-          socket.emit("firstEvent", "Hello, this is a test");
+          io.emit("firstEvent", "Hello, this is a test");
       
           socket.on("newBidNotification", (bidData) => {
             addNewBid(bidData, socket.id);
           });
+
       
           socket.on("disconnect", () => {
             removeBid(socket.id);
