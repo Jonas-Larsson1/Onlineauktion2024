@@ -6,8 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 
 const NewAuctionPage = () => {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [customCategory, setCustomCategory] = useState("");
@@ -24,6 +22,7 @@ const NewAuctionPage = () => {
   const [warning, setWarning] = useState("");
   const [disabled, setDisabled] = useState(true)
   const { loggedIn } = useContext(GlobalContext);
+  const [startDateChanged, setStartDateChanged] = useState(false);
 
   console.log(allImages);
   const navigate = useNavigate();
@@ -148,13 +147,14 @@ const NewAuctionPage = () => {
     )
     : null;
 
-  const handleStartDateChange = (date) => {
-    setUnixStartDate(Math.floor(date.getTime() / 1000));
-  };
-
-  const handleEndDateChange = (date) => {
-    setUnixEndDate(Math.floor(date.getTime() / 1000));
-  };
+    const handleStartDateChange = (date) => {
+      setUnixStartDate(Math.floor(date.getTime() / 1000));
+      setStartDateChanged(true);
+    };
+  
+    const handleEndDateChange = (date) => {
+      setUnixEndDate(Math.floor(date.getTime() / 1000));
+    };
 
   // handles input in custom category
   const handleKeyPress = (event) => {
@@ -224,11 +224,12 @@ const NewAuctionPage = () => {
                   selected={new Date(unixStartDate * 1000)}
                   onChange={handleStartDateChange}
                   selectsStart
-                  // startDate={startDate}
-                  // endDate={endDate}
                   minDate={new Date()}
-                  maxDate={unixEndDate}
-                  className="form-control custom-date-picker "
+                  className="form-control custom-date-picker"
+                  showTimeSelect
+                  //timeFormat="HH:mm"
+                  timeIntervals={15}
+                  dateFormat="yyyy-MM-dd HH:mm"
                 />
               </div>
             </div>
@@ -239,9 +240,13 @@ const NewAuctionPage = () => {
                   selected={new Date(unixEndDate * 1000)}
                   onChange={handleEndDateChange}
                   selectsEnd
-                  minDate={unixStartDate}
-                  disabled={!unixStartDate} // End date is disabled when startDate is null
+                  minDate={unixStartDate * 1000}
+                  disabled={!startDateChanged} // End date is disabled when startDate is null
                   className="form-control custom-date-picker"
+                  showTimeSelect
+                  //timeFormat="HH:mm"
+                  timeIntervals={15}
+                  dateFormat="yyyy-MM-dd HH:mm"
                 />
               </div>
             </div>
