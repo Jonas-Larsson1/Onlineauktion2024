@@ -5,21 +5,25 @@ import { GlobalContext } from "../GlobalContext";
 import ImageGallery from "../components/ImageGallery";
 import Bidding from "../components/Bidding";
 import AddToWatchList from "../components/AddToWatchList";
-
-
+import EditButton from "../components/EditButton";
 
 export default function AuctionPage() {
+  const { loggedIn } = useContext(GlobalContext);
   let { id } = useParams();
   const [auction, setAuction] = useState(null);
+  const [isCreator, setIsCreator] = useState(false);
 
   const updateAuction = (updatedAuction) => {
-    setAuction({...updatedAuction})
-  }
+    setAuction({ ...updatedAuction });
+  };
 
   useEffect(() => {
     const getData = async () => {
       const response = await fetch(`/api/auction/${id}`);
       const result = await response.json();
+
+      // Check if the logged-in user is the creator of the auction
+      setIsCreator(result.sellerId === loggedIn);
       
 
       if (result.bidHistory.length === 0 || Object.keys(result.bidHistory[0]).length === 0) {
@@ -55,21 +59,30 @@ export default function AuctionPage() {
           <Row>
             <Col sm={6}>
               <Card data-bs-theme="dark">
-                <Card.Body>
-                  <ImageGallery auction={auction} />
-                  <Card.Title>{auction.title}</Card.Title>
-                  <Card.Text>{auction.description}</Card.Text>
-                    <Card className="my-3" border="light" style={{ padding: "1rem" }}>
-                      Auction duration:{" "}
-                      <b>
-                        {formatDateTime(auction.startDate)}
-                        &nbsp; - &nbsp;
-                        {formatDateTime(auction.endDate)}
-                      </b>
-                      <br />
-                    </Card>
-                  <AddToWatchList auction={auction}/>
+              <Card.Body className="d-flex align-items-center justify-content-end">
+                  {/* Render the "Edit auction" button only if the logged-in user is the creator */}
+                  {isCreator && (
+                    <>
+                      <div>
+                        <h3>Edit auction</h3>
+                      </div>
+                      <EditButton itemId={auction._id} />
+                    </>
+                  )}
                 </Card.Body>
+                <ImageGallery auction={auction} />
+                <Card.Title>{auction.title}</Card.Title>
+                <Card.Text>{auction.description}</Card.Text>
+                <Card className="my-3" border="light" style={{ padding: "1rem" }}>
+                  Auction duration:{" "}
+                  <b>
+                    {formatDateTime(auction.startDate)}
+                    &nbsp; - &nbsp;
+                    {formatDateTime(auction.endDate)}
+                  </b>
+                  <br />
+                </Card>
+                <AddToWatchList auction={auction} />
               </Card>
             </Col>
             <Col sm={6}>
@@ -84,6 +97,7 @@ export default function AuctionPage() {
       )}
     </>
   );
+  
   
 }
 
