@@ -25,12 +25,21 @@ const ListCard = ({ item }) => {
       return currentUnix > endDateUnix; 
     };
 
+    const hasStartedTime = () => {
+      const startDateUnix = item.startDate;
+      const currentUnix = Math.floor(Date.now() / 1000);
+      return currentUnix >= startDateUnix;
+    };
+
+
     // Conditionally render a badge indicating whether the auction is finished or ongoing.
-    const badgeColor = hasSurpassedTime() ? (
-      <span className={`position-absolute translate-middle top-0 start-50 p-2 badge bg-danger fs-6`}> Finished </span>
-    ) : (
-      <span className={`position-absolute translate-middle top-0 start-50 p-2 badge bg-success fs-6`}> Ongoing </span>
+    const badgeColor = hasSurpassedTime() 
+      ? <span className={`position-absolute translate-middle top-0 start-50 p-2 badge bg-danger fs-6`}> Finished </span>
+      : (hasStartedTime() 
+        ? <span className={`position-absolute translate-middle top-0 start-50 p-2 badge bg-success fs-6`}> Ongoing </span>
+        : <span className={`position-absolute translate-middle top-0 start-50 p-2 badge bg-warning fs-6`}> Upcoming </span>
     );
+
 
     return badgeColor;
   };
