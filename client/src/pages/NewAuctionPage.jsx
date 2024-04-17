@@ -23,6 +23,7 @@ const NewAuctionPage = () => {
     unixEndDate: Math.floor(new Date().getTime() / 1000),
     warning: "",
     disabled: true,
+    startDateChanged: false
   });
 
   const { loggedIn } = useContext(GlobalContext);
@@ -158,6 +159,7 @@ const NewAuctionPage = () => {
     setAuctionData({
       ...auctionData,
       unixStartDate: Math.floor(date.getTime() / 1000),
+      startDateChanged: true
     });
   };
 
