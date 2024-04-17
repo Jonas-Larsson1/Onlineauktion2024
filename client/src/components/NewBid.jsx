@@ -2,10 +2,12 @@ import { Button, Form, InputGroup, Row, Col, Badge } from "react-bootstrap";
 import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from '../GlobalContext'
 import { formatDateTime } from "../pages/AuctionPage";
+import io from 'socket.io-client';
 
 export default function NewBid(props) {
   const { loggedIn } = useContext(GlobalContext)
 
+  
   const { auction, updateAuction } = props
 
   const [highestBid, setHighestBid] = useState(null)
@@ -13,6 +15,26 @@ export default function NewBid(props) {
   const [currentBid, setCurrentBid] = useState(null)
   const [error, setError] = useState()
   const [endDateObject, setEndDateObject] = useState(auction.endDate ? new Date(auction.endDate) : null);
+
+  const [socket, setSocket] = useState(null);
+
+ 
+  useEffect(() => {
+
+    const newSocket = io("http://localhost:5500");
+
+
+    setSocket(newSocket);
+
+  
+    return () => {
+      newSocket.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    socket?.emit("newUser", loggedIn)
+  }, [socket, loggedIn])
 
   const currentDate = new Date();
 

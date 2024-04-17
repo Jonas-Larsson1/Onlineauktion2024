@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install": "concurrently \"cd server && npm i\" \"cd client && npm i\" \"cd cypress-cucumber && npm i \" ",
+    "install": "concurrently \"cd server && npm i\" \"cd client && npm i\" \"cd cypress-cucumber && npm i \"",
     "start": "concurrently \"nodemon server/server.js\" \"cd client && npm run dev\""
   },
   "author": "",

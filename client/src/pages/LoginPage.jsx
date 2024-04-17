@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 
 export default function LoginPage() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [error, setError] = useState("");
@@ -15,36 +15,37 @@ export default function LoginPage() {
   const { displayAlert } = useContext(GlobalContext);
   const { showLogoutAlert } = useContext(GlobalContext);
 
+
+ 
+
   const checkForUser = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const userData = {
       username: usernameInput,
-      password: passwordInput
-    }
+      password: passwordInput,
+    };
 
-    const loginResponse = await login(userData)
+    const loginResponse = await login(userData);
 
-    console.log(loginResponse)
+    console.log(loginResponse);
     if (loginResponse.status === 201) {
-      navigate('/')
+      navigate("/");
     } else {
-      // felhantering saknas 
+      // felhantering saknas
     }
-
-  }
+  };
 
   useEffect(() => {
     const getSession = async () => {
-      const response = await fetch('/api/login')
+      const response = await fetch("/api/login");
       if (response.status === 200) {
-        navigate('/')
-      } 
+        navigate("/");
+      }
     };
 
-    getSession()
-  }, [])
-
+    getSession();
+  }, []);
 
   return (
     <>
@@ -71,7 +72,7 @@ export default function LoginPage() {
           />
         </Form.Group>
 
-      {/* <Form.Group className="mb-3" controlId="formCheckbox">
+        {/* <Form.Group className="mb-3" controlId="formCheckbox">
         <Form.Check type="checkbox" label="Check me out" />
       </Form.Group> */}
 
@@ -83,24 +84,16 @@ export default function LoginPage() {
         <div>
           <b>OR</b>
         </div>
-        
-      
+
         <Button>
           <Link className="register-link" to="/registerPage">
             Register!
           </Link>
         </Button>
         {showLogoutAlert ? (
-         
-          <Alert
-            className= "logout-alert"
-            severity="info"
-          >
-           <em>
-             Goodbye, you are now logged out! 
-            </em>
-        
-          </Alert> 
+          <Alert className="logout-alert" severity="info">
+            <em>Goodbye, you are now logged out!</em>
+          </Alert>
         ) : (
           ""
         )}

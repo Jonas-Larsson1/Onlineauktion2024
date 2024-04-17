@@ -12,6 +12,9 @@ export default function ListPage() {
   const [list, setList] = useState([]);
   const { show, setShow, hideAlert, loggedIn } = useContext(GlobalContext);
   const [user, setUser] = useState(null);
+  
+
+
 
   useEffect(() => {
     const getUserData = async () => {
