@@ -5,7 +5,7 @@ import StyleCard from './StyleCard';
 
 const FetchedDataContext = React.createContext(); // global state for fetched data
 
-const SearchResults = ({ category }) => {
+const SearchResults = ({ category, setSearchQuery }) => {
   const { searchQuery } = useContext(SearchContext)
   const { setData } = useContext(FetchedDataContext)
 
@@ -56,7 +56,7 @@ const SearchResults = ({ category }) => {
             </div> */}
           {/* </div> */}
             <StyleCard>
-          <ListCard item={item}/>
+          <ListCard item={item} />
           </StyleCard>
         </div>
       : null))

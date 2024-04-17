@@ -1,6 +1,7 @@
 import { Button, Form, InputGroup, Row, Col, Badge } from "react-bootstrap";
 import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from '../GlobalContext'
+import { formatDateTime } from "../pages/AuctionPage";
 
 export default function NewBid(props) {
   const { loggedIn } = useContext(GlobalContext)
@@ -13,13 +14,14 @@ export default function NewBid(props) {
   const [error, setError] = useState()
   const [endDateObject, setEndDateObject] = useState(auction.endDate ? new Date(auction.endDate) : null);
 
+  const currentDate = new Date();
+
   useEffect(() => {
     if (auction.endDate) {
       setEndDateObject(new Date(auction.endDate));
     }
   }, [auction.endDate]);
 
-  const currentDate = new Date();
   
   useEffect(() => {
     setHighestBid(getHighestBid(auction.bidHistory))
@@ -28,16 +30,19 @@ export default function NewBid(props) {
   }, [auction]);
 
   useEffect(() => {
-    if (endDateObject < currentDate) {
-      setError("The auction is closed") 
+    const endDateFormatted = formatDateTime(endDateObject);
+    const endDateDate = new Date(endDateFormatted);
+  
+    if (endDateDate < currentDate) {
+      setError("The auction is closed");
     } else if (currentBid <= highestBid) {
-      setError("Bid too low")
+      setError("Bid too low");
     } else if (currentBid === null) {
-      setError("Enter a bid") 
+      setError("Enter a bid");
     } else {
-      setError(false)
+      setError(false);
     }
-  }, [currentBid, endDateObject, currentDate])
+  }, [currentBid, endDateObject, currentDate]);
   
   function getHighestBid (bidHistory) {
     bidHistory.sort((a, b) => (b.amount) - (a.amount))
