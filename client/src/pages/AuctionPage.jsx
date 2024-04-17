@@ -6,6 +6,8 @@ import ImageGallery from "../components/ImageGallery";
 import Bidding from "../components/Bidding";
 import AddToWatchList from "../components/AddToWatchList";
 
+
+
 export default function AuctionPage() {
   let { id } = useParams();
   const [auction, setAuction] = useState(null);
@@ -74,21 +76,15 @@ export default function AuctionPage() {
   
 }
 
-export function formatDateTime(dateTimeString) {
+export function formatDateTime(unixTimestamp) {
+  const date = new Date(unixTimestamp * 1000); 
   const options = {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    hour12: false,
-    timeZone: "UTC",
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
+    hour: 'numeric',
+    minute: 'numeric'
   };
 
-  const formattedDate = new Date(dateTimeString).toLocaleDateString(
-    "sv-SE",
-    options
-  );
-
-  return formattedDate;
-}
+  return date.toLocaleString('en-GB', options);
+};

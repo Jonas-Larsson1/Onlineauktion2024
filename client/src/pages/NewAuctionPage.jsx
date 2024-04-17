@@ -26,6 +26,7 @@ const NewAuctionPage = () => {
   });
 
   const { loggedIn } = useContext(GlobalContext);
+  const [startDateChanged, setStartDateChanged] = useState(false);
   const navigate = useNavigate();
 
   const onImageInput = (index, value) => {
@@ -237,8 +238,11 @@ const NewAuctionPage = () => {
                   onChange={handleStartDateChange}
                   selectsStart
                   minDate={new Date()}
-                  maxDate={auctionData.unixEndDate}
-                  className="form-control custom-date-picker "
+                  className="form-control custom-date-picker"
+                  showTimeSelect
+                  //timeFormat="HH:mm"
+                  timeIntervals={15}
+                  dateFormat="yyyy-MM-dd HH:mm"
                 />
               </div>
             </div>
@@ -252,6 +256,10 @@ const NewAuctionPage = () => {
                   minDate={auctionData.unixStartDate}
                   disabled={!auctionData.unixStartDate} // End date is disabled when startDate is null
                   className="form-control custom-date-picker"
+                  showTimeSelect
+                  //timeFormat="HH:mm"
+                  timeIntervals={15}
+                  dateFormat="yyyy-MM-dd HH:mm"
                 />
               </div>
             </div>
