@@ -81,7 +81,8 @@ const EditAuction = () => {
         }
     };
 
-    const updateAuction = async () => {
+    async function updateAuction(e) {
+        e.preventDefault();
         try {
             const response = await fetch(`/api/auction/${id}`, {
                 method: "PUT",
@@ -99,7 +100,11 @@ const EditAuction = () => {
             if (!response.ok) {
                 throw new Error("Failed to update auction data");
             }
-            // Optionally, you can update the state or perform other actions upon successful update
+            
+
+            alert("Auction updated")
+            navigate(`/AuctionPage/${id}`);
+
         } catch (error) {
             console.error("Error updating auction data:", error);
             setAuctionData({
