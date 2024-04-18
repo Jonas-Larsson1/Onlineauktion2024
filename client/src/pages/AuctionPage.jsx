@@ -24,24 +24,24 @@ export default function AuctionPage() {
 
       // Check if the logged-in user is the creator of the auction
       setIsCreator(result.sellerId === loggedIn);
-      
+
 
       if (result.bidHistory.length === 0 || Object.keys(result.bidHistory[0]).length === 0) {
         result.bidHistory = [{
           time: result.startDate,
-          userId: "Auction start" , 
+          userId: "Auction start",
           amount: Number(result.startingPrice)
         }]
-      }else {
+      } else {
         let cloneBidHistory = result.bidHistory;
-        for(let i = 0; i <= cloneBidHistory.length - 1; i++) {
-          if(cloneBidHistory[i].userId == "Auction start") {
+        for (let i = 0; i <= cloneBidHistory.length - 1; i++) {
+          if (cloneBidHistory[i].userId == "Auction start") {
             result.bidHistory[i]["username"] = "Auction start"
-          }else {
+          } else {
             const res = await fetch(`/api/user/getUsername/${cloneBidHistory[i].userId}`)
             const username = await res.json()
             result.bidHistory[i]["username"] = username
-          }          
+          }
         }
       }
       setAuction(result);
@@ -58,19 +58,21 @@ export default function AuctionPage() {
           <h1 className="mx-2">{auction.title}</h1>
           <Row>
             <Col sm={6}>
-              <Card data-bs-theme="dark">
-              <Card.Body className="d-flex align-items-center justify-content-end">
+              <Card data-bs-theme="dark" style={{ padding: "20px" }}>
+                <Card.Body className="d-flex align-items-center justify-content-end" style={{ paddingBottom: "0" }}>
                   {/* Render the "Edit auction" button only if the logged-in user is the creator */}
                   {isCreator && (
                     <>
-                      <div>
-                        <h3>Edit auction</h3>
+                      <div className="d-flex align-items-center">
+                        <h3 style={{ margin: "-25px 10px 0 10px" }}>Edit auction</h3>
                       </div>
                       <EditButton itemId={auction._id} />
                     </>
                   )}
                 </Card.Body>
-                <ImageGallery auction={auction} />
+                <div style={{ marginBottom: "10px" }}>
+                  <ImageGallery auction={auction} />
+                </div>
                 <Card.Title>{auction.title}</Card.Title>
                 <Card.Text>{auction.description}</Card.Text>
                 <Card className="my-3" border="light" style={{ padding: "1rem" }}>
@@ -97,12 +99,12 @@ export default function AuctionPage() {
       )}
     </>
   );
-  
-  
+
+
 }
 
 export function formatDateTime(unixTimestamp) {
-  const date = new Date(unixTimestamp * 1000); 
+  const date = new Date(unixTimestamp * 1000);
   const options = {
     year: 'numeric',
     month: 'short',

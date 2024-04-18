@@ -60,7 +60,7 @@ export default function AccountPage() {
     // Printing out info
     return (<>
         
-        <BackButton/>
+        <BackButton to="/AccountPage" />
 
         <div style={{ backgroundColor: "#41B3A3", minHeight: '100vh' }}>
 
