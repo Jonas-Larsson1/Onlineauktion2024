@@ -18,16 +18,7 @@ export default function Checkout () {
   }, [])
 
   const handlePayAll = async () => {
-    // const lineItems = []
-  
-    // wonAuctions.forEach(auction => {
-    //   lineItems.push({
-    //     price: auction.highestBid.amount,
-    //     quantity: 1
-    //   })
-    // })
-    
-    // Use Stripe API to initiate payment with line items
+
     const session = await fetch('/api/create-checkout-session', {
       method: 'POST',
       headers: {
