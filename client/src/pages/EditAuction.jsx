@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import "react-datepicker/dist/react-datepicker.css";
 import { useParams } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import StyleCard from "../components/StyleCard";
@@ -7,9 +6,10 @@ import { GlobalContext } from "../GlobalContext";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../components/BackButton";
 
-
 const EditAuction = () => {
     const { id } = useParams();
+    const { loggedIn } = useContext(GlobalContext);
+    const navigate = useNavigate();
 
     const [auctionData, setAuctionData] = useState({
         dropdownOpen: false,
@@ -24,30 +24,39 @@ const EditAuction = () => {
         disabled: true,
     });
 
-    const { loggedIn } = useContext(GlobalContext);
-
-    const navigate = useNavigate();
-
-    const onImageInput = (index, value) => {
-        const imageInput = [...auctionData.allImages];
-        imageInput[index] = value;
-        setAuctionData({ ...auctionData, allImages: imageInput });
-    };
-
     useEffect(() => {
         const fetchData = async () => {
             try {
+                // Fetch auction data
                 const response = await fetch(`/api/auction/${id}`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch auction data");
                 }
                 const data = await response.json();
+
+                // Fetch categories
+                const categoriesResponse = await fetch("/api/auctions");
+                if (!categoriesResponse.ok) {
+                    throw new Error("Failed to fetch categories");
+                }
+                const categoriesData = await categoriesResponse.json();
+                const existingCategories = categoriesData.reduce((acc, curr) => {
+                    curr.category.forEach((cat) => {
+                        if (!acc.includes(cat)) {
+                            acc.push(cat);
+                        }
+                    });
+                    return acc;
+                }, []);
+
+                // Set auction data and categories
                 setAuctionData({
                     ...auctionData,
                     allImages: data.images || ["", "", ""],
                     mainTitle: data.title || "",
                     description: data.description || "",
                     title: data.category[0] || "",
+                    data: existingCategories
                 });
             } catch (error) {
                 console.error("Error fetching auction data:", error);
@@ -61,29 +70,13 @@ const EditAuction = () => {
         fetchData();
     }, [id]);
 
-    const existingCategories = [];
-
-    let filtered = auctionData.data
-        ? auctionData.data.map((item) =>
-            item.category.map((i) =>
-                existingCategories.includes(i) ? null : existingCategories.push(i)
-            )
-        )
-        : null;
-
-    const handleKeyPress = (event) => {
-        if (event.key === "Enter") {
-            setAuctionData({
-                ...auctionData,
-                title: auctionData.customCategory,
-                dropdownOpen: false,
-                customCategory: "",
-                disabled: !auctionData.disabled,
-            });
-        }
+    const onImageInput = (index, value) => {
+        const imageInput = [...auctionData.allImages];
+        imageInput[index] = value;
+        setAuctionData({ ...auctionData, allImages: imageInput });
     };
 
-    async function updateAuction(e) {
+    const updateAuction = async (e) => {
         e.preventDefault();
         try {
             const response = await fetch(`/api/auction/${id}`, {
@@ -102,7 +95,6 @@ const EditAuction = () => {
                 throw new Error("Failed to update auction data");
             }
 
-
             alert("Auction updated")
             navigate(`/AuctionPage/${id}`);
 
@@ -116,13 +108,12 @@ const EditAuction = () => {
         }
     };
 
-    async function deleteAuction(e) {
+    const deleteAuction = async (e) => {
         e.preventDefault();
 
         try {
             const response = await fetch(`/api/auction/${id}`, {
                 method: "DELETE"
-
             });
             if (!response.ok) {
                 throw new Error("Failed to delete auction");
@@ -141,10 +132,21 @@ const EditAuction = () => {
         }
     };
 
+    const handleKeyPress = (event) => {
+        if (event.key === "Enter") {
+            setAuctionData({
+                ...auctionData,
+                title: auctionData.customCategory,
+                dropdownOpen: false,
+                customCategory: "",
+                disabled: !auctionData.disabled,
+            });
+        }
+    };
+
     return (
         <>
             <div style={{ height: '100vh' }}>
-
                 <BackButton to={`/AuctionPage/${id}`} />
 
                 {auctionData.showAlert && (
@@ -218,8 +220,8 @@ const EditAuction = () => {
                             </button>
                         </div>
                         {auctionData.dropdownOpen ? (
-                            <div className="list-group w-75 align-self-center">
-                                {existingCategories.map((cat, index) => (
+                            <div className="list-group w-75 align-self-center" style={{ maxHeight: "200px", overflowY: "auto" }}>
+                                {auctionData.data && auctionData.data.map((cat, index) => (
                                     <a
                                         key={index}
                                         className="list-group-item list-group-item-action text-center"
@@ -259,7 +261,7 @@ const EditAuction = () => {
 
                         <button
                             className="btn btn-danger mt-3 w-75 align-self-center"
-                            onClick={(event) => deleteAuction(event)}
+                            onClick={deleteAuction}
                         >
                             Delete auction
                         </button>
