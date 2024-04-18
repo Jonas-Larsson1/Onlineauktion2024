@@ -34,15 +34,9 @@ const NewAuctionPage = () => {
     const imageInput = [...auctionData.allImages];
     imageInput[index] = value;
 
-    const nonEmptyImages = imageInput.filter(img => img != '');
-    const emptySlots = 3 - nonEmptyImages.length;
 
-    for (let i = 0; i < emptySlots; i++) {
-      if (i < nonEmptyImages.length) {
-        nonEmptyImages.push(nonEmptyImages[i]);
-      } }
+    setAuctionData({ ...auctionData, allImages:  imageInput });
 
-    setAuctionData({ ...auctionData, allImages: nonEmptyImages });
   };
 
   useEffect(() => {
@@ -56,7 +50,7 @@ const NewAuctionPage = () => {
 
   async function postNewAuction(e) {
     e.preventDefault();
-
+    
     const {
       allImages,
       mainTitle,
@@ -67,7 +61,17 @@ const NewAuctionPage = () => {
       reservedPrice,
       title,
     } = auctionData;
-
+    console.log(auctionData.allImages)
+    for (let i = 0; i < auctionData.allImages.length; i++){
+      if(auctionData.allImages[i] === ""){
+        const nonEmptyIndex = auctionData.allImages.findIndex(img => img !== "");
+        if (nonEmptyIndex !== -1) {
+          // Replace the empty string with the first non-empty image URL
+          allImages[i] = allImages[nonEmptyIndex];
+        }
+      }
+      console.log(allImages)
+    }
     if (
       allImages[0].length >= 1 &&
       mainTitle.length > 2 &&
@@ -95,7 +99,7 @@ const NewAuctionPage = () => {
       });
       if (res.ok) {
         console.log(res);
-        navigate("/"); // navigates to home page
+        // navigate("/"); // navigates to home page
       } else {
         setAuctionData({
           ...auctionData,
