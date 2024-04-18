@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { Card, Button } from 'react-bootstrap';
 import StyleCard from "../components/StyleCard";
-import ListCard from "../components/ListItem";
+import WonItem from "../components/WonItem";
+import { Button } from "react-bootstrap";
 
 export default function Checkout () {
   const [wonAuctions, setWonAuctions] = useState([])
@@ -16,11 +16,18 @@ export default function Checkout () {
     getData()
   }, [])
 
+  const handlePayAll = async () => {
+    return "hej"
+  }
+
   return <>
-    <h2>Won Auctions</h2>
+    <h2 className="text-center my-4">Auctions waiting for payment</h2>
+    <div className="text-center my-4">
+      <Button onClick={handlePayAll} variant="success" size="lg">Pay All</Button>
+    </div>
     {wonAuctions.map((auction, index) => (
     <StyleCard key={index}>
-      <ListCard item={auction} />
+      <WonItem item={auction} />
     </StyleCard>
     ))}
   </>

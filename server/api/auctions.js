@@ -1,5 +1,6 @@
 import Auction from "../model/Auction.js"
 import { isValidAuction } from "../utilities/validation.js"
+import { Types } from 'mongoose';
 
 export default function (server, db) {
 
@@ -11,12 +12,59 @@ export default function (server, db) {
     res.json(await Auction.findById(req.params.id))
   })
 
+  server.get('/api/wonAuctions', async (req, res) => {
+    try {
+      const userId = req.session.user
+      if (!userId) {
+        return res.status(401).json({ message: 'User not authenticated' })
+      }
+
+      // const validUserId = new Types.ObjectId(userId);
+      const auctions = await Auction.aggregate([
+        {
+          $match: {
+            endDate: { $lt: (new Date() / 1000) } // Auction has ended
+          }
+        },
+        {
+          $unwind: '$bidHistory' // Split bidHistory array into separate documents
+        },
+        {
+          $sort: {
+            'bidHistory.amount': -1 // Sort bidHistory by amount, highest first
+          }
+        },
+        {
+          $group: {
+            _id: '$_id',
+            auction: { $first: '$$ROOT' },
+            highestBid: { $first: '$bidHistory' }, // Get the first (highest) bid after sorting
+            // Include other fields as needed
+          }
+        },
+        {
+          $match: {
+            'highestBid.userId': userId.toString() // Filter by user's highest bid
+          }
+        },
+        {
+          $replaceRoot: { newRoot: '$auction' } // Replace root with the saved auction object
+        }
+      ]);
+
+      res.json(auctions);
+
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  })
+
   server.put("/api/auction/:id", async (req, res) => {
     try {
       const auctionToUpdate = await Auction.findByIdAndUpdate(
-        req.params.id, 
-        req.body, 
-        {new: false}
+        req.params.id,
+        req.body,
+        { new: false }
       )
 
       if (auctionToUpdate) {
@@ -29,21 +77,21 @@ export default function (server, db) {
         })
       }
     } catch (error) {
-      res.status(500).json({message: "Error updating auction", error: error })
+      res.status(500).json({ message: "Error updating auction", error: error })
     }
   })
 
   server.post("/api/auctions", async (req, res) => {
     try {
       if (isValidAuction(req.body)) {
-        const newAuction = new Auction ({
+        const newAuction = new Auction({
           sellerId: req.body.sellerId,
-          title: req.body.title, 
-          description: req.body.description, 
+          title: req.body.title,
+          description: req.body.description,
           images: req.body.images,
-          startDate: req.body.startDate, 
+          startDate: req.body.startDate,
           endDate: req.body.endDate,
-          startingPrice: req.body.startingPrice, 
+          startingPrice: req.body.startingPrice,
           reservePrice: req.body.reservePrice,
           category: req.body.category
         })
@@ -54,7 +102,7 @@ export default function (server, db) {
         res.status(400).json({ message: "Invalid format for auction!" })
       }
     } catch (error) {
-      res.status(500).json({message: "Error posting auction", error: error })
+      res.status(500).json({ message: "Error posting auction", error: error })
     }
   })
 

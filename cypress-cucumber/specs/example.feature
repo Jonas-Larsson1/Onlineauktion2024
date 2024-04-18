@@ -1,6 +1,7 @@
-Feature: Read the paper
-
-    Scenario: See the image on the first page
-        Given that I am on the first page
-        When I click on the logo
-        Then I can see the picture
+Feature: new bid
+ 
+    Scenario: I want to be able to give a new bid to an auction
+      Given I am on the Home page
+      When I click on an auction
+      # And I insert at least a minimum bid
+      # Then I click the place bid button
