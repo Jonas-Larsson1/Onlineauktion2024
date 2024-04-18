@@ -4,12 +4,19 @@ import { Types } from 'mongoose';
 
 export default function (server, db) {
 
+
+
   server.get("/api/auctions", async (req, res) => {
     res.json(await Auction.find())
   })
 
   server.get("/api/auction/:id", async (req, res) => {
-    res.json(await Auction.findById(req.params.id))
+    try {
+      const auction = await Auction.findById(req.params.id)
+      res.json(auction)
+    } catch (error) {
+      res.status(500).json({message: "Error getting auction", error: error })
+    }
   })
 
   server.get('/api/wonAuctions', async (req, res) => {
@@ -112,6 +119,18 @@ export default function (server, db) {
     } catch (error) {
       res.status(500).json({ message: "Error posting auction", error: error })
     }
-  })
+  });
 
+  server.delete("/api/auction/:id", async (req, res) => {
+    try {
+      const deletedAuction = await Auction.findByIdAndDelete(req.params.id);
+      if (deletedAuction) {
+        res.status(200).json({ message: "Auction deleted successfully" });
+      } else {
+        res.status(404).json({ message: "Auction not found" });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Error deleting auction", error: error });
+    }
+  });
 }

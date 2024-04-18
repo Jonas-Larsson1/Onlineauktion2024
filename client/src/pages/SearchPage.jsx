@@ -6,6 +6,7 @@ import Categories from '../components/Categories.jsx';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom'; 
 
 
+
 const SearchPage = () => {
   const navigate = useNavigate();
   const {incomingSearchQuery} = useParams() // search query from URL
@@ -17,11 +18,12 @@ const SearchPage = () => {
  
   useEffect(() => {
     setSearchQuery(incomingSearchQuery);
+    if (window.location.pathname.includes("Collection")) {
+      setSearchQuery("")
+    }
   }, [incomingSearchQuery]);
 
-  // useEffect(() => {
-  //   navigate(`/SearchPage/${searchQuery}`);
-  // }, [searchQuery, navigate]);
+
 
   return <>
   {/* access to fetched data */}
@@ -32,11 +34,11 @@ const SearchPage = () => {
           <div className="d-flex flex-column p-2" style={{width:"70%"}}>
             <SearchBar setCategory={setCategory}/>
             <div className='d-flex flex-column align-items-center'>
-            <SearchResults category={category}/>
+            <SearchResults category={category} setCategory={setCategory}/>
             </div>
           </div>
           <div className='col-lg-3 p-2'>
-            <Categories category={category} setCategory={setCategory} setSearchQuery={setSearchQuery}/>
+            <Categories category={category}  setCategory={setCategory} setSearchQuery={setSearchQuery} searchQuery={searchQuery}/>
           </div>
         </div>
       </SearchContext.Provider>
