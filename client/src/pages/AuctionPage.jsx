@@ -27,6 +27,9 @@ export default function AuctionPage() {
         return
       }
 
+      // Check if the logged-in user is the creator of the auction
+      setIsCreator(result.sellerId === loggedIn);
+
       if (
         result.bidHistory.length === 0 ||
         Object.keys(result.bidHistory[0]).length === 0
@@ -34,11 +37,12 @@ export default function AuctionPage() {
         result.bidHistory = [
           {
             time: result.startDate,
-            userId: "Auction start",
+            username: "Auction start",
             amount: Number(result.startingPrice),
           },
         ];
       } else {
+
         let cloneBidHistory = result.bidHistory;
         for (let i = 0; i <= cloneBidHistory.length - 1; i++) {
           if (cloneBidHistory[i].userId == "Auction start") {
