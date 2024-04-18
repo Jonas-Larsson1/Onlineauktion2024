@@ -18,23 +18,11 @@ export default function NewBid(props) {
     auction.endDate ? new Date(auction.endDate) : null
   );
   const [newBid, setNewBid] = useState([]);
-  const [socket, setSocket] = useState(null);
+  const {socket, setSocket} = useContext(GlobalContext);
 
 
 
-  useEffect(() => {
-    const newSocket = io("http://localhost:5500");
-
-    newSocket.on("newBidAdded", (bidData) => {
-      console.log(bidData)
-      setNewBid(prevBids => [...prevBids, bidData]);
-    });
-    setSocket(newSocket);
-
-    return () => {
-      newSocket.disconnect();
-    };
-  }, []);
+  
   const currentDate = new Date();
 
 
@@ -118,7 +106,7 @@ export default function NewBid(props) {
         updateAuction(auction);
         setCurrentBid(null);
         socket.emit("newBidNotification", {
-          userId: loggedIn,
+          recieverId: auction.bidHistory[0].userId,
           username: username,
           bidAmount: bidAmount,
           title: auction.title,

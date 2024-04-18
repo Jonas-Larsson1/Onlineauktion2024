@@ -5,40 +5,54 @@ import toast, { Toaster } from 'react-hot-toast';
 
 export default function SocketListener() {
 
+    const { socket, setSocket } = useContext(GlobalContext)
+    const { loggedIn } = useContext(GlobalContext)
+   
+  
+
     
-
-
-    const displayNotification = ({ username, bidAmount, title }) => {
-
-        if(username == undefined){
-          return false
-        }else {
-          toast(`New bid from ${username} \n On: ${title} \n Amount: ${bidAmount} `);
-        }
-       
-      };
-
     useEffect(() => {
-      const newSocket = io("http://localhost:5500");
-  
-      newSocket.on("newBidAdded", (bidData) => {
-        console.log(bidData)
-        displayNotification(bidData)
-      });
-      
-     
-  
-      return () => {
-        newSocket.disconnect();
-      };
-    }, []);
-    
-  
+        socket?.emit("newUser", loggedIn)
+    }, [socket, loggedIn])
+    useEffect(() => {
+        let newSocket = io("http://localhost:5500")
 
+        setSocket(newSocket)
+         
+        newSocket.on("newBidAdded", (bidData) => {
+            console.log(bidData)
+            displayNotification(bidData)
+        });
+        
+
+        
+       if(!loggedIn) {
+            newSocket.disconnect();
+        }
+    }, [loggedIn])
+
+ 
+
+   
+        
+        
+        
+        
+        const displayNotification = ({ username, bidAmount, title }) => {
+            
+            if(username == undefined){
+                return false
+            }else {
+                toast(`${username} has outbidded you \n On: ${title} \n New highest bid: ${bidAmount} `);
+            }
+            
+        };
   
-
-
-  return <>
+        
+        
+        
+        
+        return <>
   
   <Toaster 
             position="top-center"

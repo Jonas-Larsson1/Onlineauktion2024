@@ -71,6 +71,7 @@ function GlobalProvider({ children }) {
     });
 
     setLoggedIn(null);
+    window.location.reload()
   };
 
   return (
@@ -86,8 +87,8 @@ function GlobalProvider({ children }) {
         displayAlert,
         showLogoutAlert,
         setShowLogoutAlert,
-        // socket,
-        // setSocket
+         socket,
+         setSocket
       }}
     >
       {children}

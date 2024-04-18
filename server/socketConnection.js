@@ -1,34 +1,57 @@
 export default function socketConnection(io) {
     
-        let bids = []; // Using 'bids' instead of 'users' for clarity
-      
-        const addNewBid = (bidData, socketId) => {
-          // Check if a bid with the same username and amount already exists
-          // Make sure 'username' and 'amount' are defined or passed as parameters
-        
-            bids.push({ bidData, socketId });
+        // let bids = []; 
+        let users = []
 
-            io.emit("newBidAdded", bidData);
-        };
+        const addNewUser = (userId, socketId) => {
+            !users.some(user => user.userId === userId) && users.push({userId, socketId})
+        } 
       
-        const removeBid = (socketId) =>{
-          bids = bids.filter(bid => bid.socketId !== socketId);
+        const removeUser = (socketId) => {
+            users = users.filter(user => user.socketId !== socketId)
         }
+        // const addNewBid = (bidData, socketId) => {
+        
+        
+        //     bids.push({ bidData, socketId });
+           
+            
+        // };
+      
+        const getUser = (userId) => {
+            return users.find((user) => user.userId === userId)
+        }
+
+        // const removeBid = (socketId) =>{
+        //   bids = bids.filter(bid => bid.socketId !== socketId);
+        // }
       
         io.on("connection", (socket) => {
           console.log("Client connected");
       
+            socket.on("newUser", (userId)=> {
+                addNewUser(userId, socket.id)
+                console.log(users)
+            })
+
+         
           // Emit a test event to the client
           io.emit("firstEvent", "Hello, this is a test");
-      
-          socket.on("newBidNotification", (bidData) => {
-            addNewBid(bidData, socket.id);
+       
+          socket.on("newBidNotification", ({recieverId, username, bidAmount, title})=> {
+            const reciever = getUser(recieverId)
+            io.to(reciever.socketId).emit("newBidAdded", {
+                username, 
+                bidAmount,
+                title
+            })
           });
 
       
           socket.on("disconnect", () => {
-            removeBid(socket.id);
-            console.log("Client disconnected");
+           console.log("disconnect")
+            removeUser(socket.id)
+           
           });
         });
       }
