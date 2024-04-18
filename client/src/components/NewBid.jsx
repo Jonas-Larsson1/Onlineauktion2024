@@ -3,6 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from "../GlobalContext";
 import { formatDateTime } from "../pages/AuctionPage";
 import io from "socket.io-client";
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function NewBid(props) {
   const { loggedIn } = useContext(GlobalContext);
@@ -18,7 +19,9 @@ export default function NewBid(props) {
   );
   const [newBid, setNewBid] = useState([]);
   const [socket, setSocket] = useState(null);
-  console.log(newBid)
+  const [notification, setNotification] = useState(null);
+  const [auctionTitle, setAuctionTitle] = useState("")
+
 
   useEffect(() => {
     const newSocket = io("http://localhost:5500");
@@ -27,7 +30,6 @@ export default function NewBid(props) {
       console.log(bidData)
       setNewBid(prevBids => [...prevBids, bidData]);
     });
-
     setSocket(newSocket);
 
     return () => {
@@ -35,6 +37,14 @@ export default function NewBid(props) {
     };
   }, []);
   const currentDate = new Date();
+
+
+  useEffect(() => {
+  if (newBid.length > 0) {
+    const latestBid = newBid[newBid.length - 1]; // Get the latest bid
+    displayNotification(latestBid);
+  }
+}, [newBid]);
 
   useEffect(() => {
     if (auction.endDate) {
@@ -72,6 +82,25 @@ export default function NewBid(props) {
     setCurrentBid(event.target.value);
   };
 
+  useEffect(() => {
+    if (newBid) {
+      displayNotification(newBid);
+    }
+  }, [newBid]);
+
+  const displayNotification = ({ username, bidAmount, title }) => {
+
+    if(username == undefined){
+      return false
+    }else {
+      toast(`New bid from ${username} \n On: ${title} \n Amount: ${bidAmount} `);
+    }
+   
+  };
+
+  
+  
+
   const placeBid = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -89,7 +118,7 @@ export default function NewBid(props) {
 
       auction.bidHistory.push(newBid);
 
-      console.log(auction);
+      
 
       //pls change me ! only newBid data upload or crosscheck auction data on server!
       const response = await fetch(`/api/auction/${auction._id}`, {
@@ -97,17 +126,18 @@ export default function NewBid(props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(auction),
       });
-
-      const result = await response.json();
+        
+        
 
       if (response.ok) {
-        console.log(result);
+  
         updateAuction(auction);
         setCurrentBid(null);
         socket.emit("newBidNotification", {
           userId: loggedIn,
           username: username,
           bidAmount: bidAmount,
+          title: auction.title,
         });
       } else {
         // säg åt användaren det gick åt skogen
@@ -118,10 +148,17 @@ export default function NewBid(props) {
     }
   };
 
+  
+
+
   return (
     <>
-    
+      
+
       <Form onSubmit={placeBid}>
+      {/* <div className="notifications">
+          {newBid.map((n) => displayNotification(n))}
+        </div> */}
         <Row className="mb-3">
           <Form.Group as={Col} controlId="newBid">
             <InputGroup>
@@ -134,12 +171,23 @@ export default function NewBid(props) {
                 onInput={changeCurrentBid}
               />
             </InputGroup>
-            {newBid.map((bid, index) => (
-        <div key={index}>
-          <p>Username: {bid.username}</p>
-          <p>Amount: {bid.bidAmount}</p>
-        </div>
-      ))}
+            <Toaster 
+            position="top-center"
+            gutter={12}
+            containerStyle={{margin:"8px"}}
+            toastOptions={{
+              success: {
+                duration: 15000
+              },
+              style: {
+                fontSize: "16px",
+                maxWidth:"500px",
+                padding: "16px 24px",
+                backgroundColor:"green"
+              }
+            }}
+            />
+
             <Form.Text className="text-muted">
               Miniumum bid: {defaultBid}
             </Form.Text>
