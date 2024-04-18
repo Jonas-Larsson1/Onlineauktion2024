@@ -20,6 +20,10 @@ export default function AuctionPage() {
       const response = await fetch(`/api/auction/${id}`);
       const result = await response.json();
 
+      if (!response.ok) {
+        return
+      }
+
       if (
         result.bidHistory.length === 0 ||
         Object.keys(result.bidHistory[0]).length === 0

@@ -8,7 +8,12 @@ export default function (server, db) {
   })
 
   server.get("/api/auction/:id", async (req, res) => {
-    res.json(await Auction.findById(req.params.id))
+    try {
+      const auction = await Auction.findById(req.params.id)
+      res.json(auction)
+    } catch (error) {
+      res.status(500).json({message: "Error getting auction", error: error })
+    }
   })
 
   server.put("/api/auction/:id", async (req, res) => {
