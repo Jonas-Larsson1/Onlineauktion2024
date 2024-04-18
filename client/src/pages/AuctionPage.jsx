@@ -7,7 +7,6 @@ import Bidding from "../components/Bidding";
 import AddToWatchList from "../components/AddToWatchList";
 import PageNotFound from "./PageNotFound";
 import EditButton from "../components/EditButton";
-import PageNotFound from "./PageNotFound";
 
 export default function AuctionPage() {
   const { loggedIn } = useContext(GlobalContext);
