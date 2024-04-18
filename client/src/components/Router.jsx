@@ -26,6 +26,7 @@ import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
 import PageNotFound from "../pages/PageNotFound.jsx";
 
+
 export default function Router() {
 
   return (
