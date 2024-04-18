@@ -196,6 +196,10 @@ const NewAuctionPage = () => {
     }
   };
 
+  const toTitleCase = (str) => {
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  };
+
   return (
     <>
       {auctionData.showAlert && (
@@ -361,7 +365,7 @@ const NewAuctionPage = () => {
                 onChange={(e) =>
                   setAuctionData({
                     ...auctionData,
-                    customCategory: e.target.value,
+                    customCategory: toTitleCase(e.target.value),
                   })
                 }
                 onKeyDown={handleKeyPress}
