@@ -5,6 +5,7 @@ import { GlobalContext } from "../GlobalContext";
 import ImageGallery from "../components/ImageGallery";
 import Bidding from "../components/Bidding";
 import AddToWatchList from "../components/AddToWatchList";
+import PageNotFound from "./PageNotFound";
 import EditButton from "../components/EditButton";
 import PageNotFound from "./PageNotFound";
 import Loading from "../components/Loading";
@@ -38,12 +39,13 @@ export default function AuctionPage() {
           result.bidHistory = [
             {
               time: result.startDate,
-              userId: "Auction start",
+              username: "Auction start",
               amount: Number(result.startingPrice),
             },
           ];
         } else {
-          let cloneBidHistory = result.bidHistory;
+  
+        let cloneBidHistory = result.bidHistory;
           for (let i = 0; i <= cloneBidHistory.length - 1; i++) {
             if (cloneBidHistory[i].userId == "Auction start") {
               result.bidHistory[i]["username"] = "Auction start";
