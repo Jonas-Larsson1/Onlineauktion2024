@@ -33,7 +33,16 @@ const NewAuctionPage = () => {
   const onImageInput = (index, value) => {
     const imageInput = [...auctionData.allImages];
     imageInput[index] = value;
-    setAuctionData({ ...auctionData, allImages: imageInput });
+
+    const nonEmptyImages = imageInput.filter(img => img != '');
+    const emptySlots = 3 - nonEmptyImages.length;
+
+    for (let i = 0; i < emptySlots; i++) {
+      if (i < nonEmptyImages.length) {
+        nonEmptyImages.push(nonEmptyImages[i]);
+      } }
+
+    setAuctionData({ ...auctionData, allImages: nonEmptyImages });
   };
 
   useEffect(() => {
