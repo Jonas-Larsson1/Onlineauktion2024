@@ -149,10 +149,10 @@ const NewAuctionPage = () => {
 
   let filtered = auctionData.data
     ? auctionData.data.map((item) =>
-        item.category.map((i) =>
-          existingCategories.includes(i) ? null : existingCategories.push(i)
-        )
+      item.category.map((i) =>
+        existingCategories.includes(i) ? null : existingCategories.push(i)
       )
+    )
     : null;
 
   const handleStartDateChange = (date) => {
@@ -242,7 +242,6 @@ const NewAuctionPage = () => {
                   minDate={new Date()}
                   className="form-control custom-date-picker"
                   showTimeSelect
-                  //timeFormat="HH:mm"
                   timeIntervals={15}
                   dateFormat="yyyy-MM-dd HH:mm"
                 />
@@ -255,11 +254,10 @@ const NewAuctionPage = () => {
                   selected={new Date(auctionData.unixEndDate * 1000)}
                   onChange={handleEndDateChange}
                   selectsEnd
-                  minDate={auctionData.unixStartDate}
-                  disabled={!auctionData.unixStartDate} // End date is disabled when startDate is null
+                  minDate={auctionData.unixStartDate ? new Date(auctionData.unixStartDate * 1000) : null} 
+                  disabled={!auctionData.startDateChanged} 
                   className="form-control custom-date-picker"
                   showTimeSelect
-                  //timeFormat="HH:mm"
                   timeIntervals={15}
                   dateFormat="yyyy-MM-dd HH:mm"
                 />

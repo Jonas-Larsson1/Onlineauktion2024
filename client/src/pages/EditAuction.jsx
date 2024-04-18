@@ -93,8 +93,7 @@ const EditAuction = () => {
                     title: auctionData.mainTitle,
                     description: auctionData.description,
                     images: auctionData.allImages,
-                    category: [auctionData.title] // Assuming category is an array
-                    // Add other fields here as needed
+                    category: [auctionData.title] 
                 })
             });
             if (!response.ok) {
