@@ -45,6 +45,7 @@ export default function (server, db) {
           endDate: req.body.endDate,
           startingPrice: req.body.startingPrice, 
           reservePrice: req.body.reservePrice,
+          bidHistory: req.body.bidHistory,
           category: req.body.category
         })
 

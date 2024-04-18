@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+// import BidHistory from "./BidHistory"
 
 const auctionSchema = new mongoose.Schema({
   sellerId: {type: mongoose.Schema.Types.ObjectId, ref:"users"},
@@ -9,7 +10,8 @@ const auctionSchema = new mongoose.Schema({
   endDate: Number,
   startingPrice: Number, 
   reservePrice: Number,
-  // bidHistory: [{type: mongoose.Schema.Types.ObjectId, ref:"bids"}],
+  // bidHistory: [{type: mongoose.Schema.Types.ObjectId, ref:"bidHistory"}],
+  // bidHistory: [{type: [BidHistory.schema]}],
   bidHistory: [{type: mongoose.Schema.Types.Mixed }],
   category: [{type: String}]
 });

@@ -1,11 +1,11 @@
 import mongoose from "mongoose"
 
-const bidsSchema = new mongoose.Schema({
+const bidSchema = new mongoose.Schema({
   userId: {type: mongoose.Schema.Types.ObjectId, ref:"users"},
   time: Date,
   amount: Number
 });
 
-const Bid = mongoose.model("bid", bidsSchema);
+const Bid = mongoose.model("bid", bidSchema);
 
 export default Bid;
