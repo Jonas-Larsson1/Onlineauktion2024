@@ -21,6 +21,8 @@ import AccountPageOngoingAuctions  from "../pages/AccountPageOngoingAuctions.jsx
 import AccountPageClosedAuctions from "../pages/AccountPageClosedAuctions.jsx";
 import AccountPageSavedAuctions from "../pages/AccountPageSavedAuctions.jsx";
 
+import Checkout from "../pages/Checkout.jsx"
+
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
 import PageNotFound from "../pages/PageNotFound.jsx";
@@ -88,6 +90,12 @@ export default function Router() {
                   <Route path="*" element={
                     <ProtectedRoute>
                       <PageNotFound />
+                    </ProtectedRoute>
+                  } />
+
+                  <Route path="/checkout" element={
+                    <ProtectedRoute>
+                      <Checkout /> 
                     </ProtectedRoute>
                   } />
 

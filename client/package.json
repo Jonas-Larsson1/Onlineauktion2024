@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "^2.7.0",
+    "@stripe/stripe-js": "^3.3.0",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "json-server": "^1.0.0-alpha.23",
