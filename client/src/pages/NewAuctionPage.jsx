@@ -62,16 +62,17 @@ const NewAuctionPage = () => {
       title,
     } = auctionData;
     console.log(auctionData.allImages)
+  
     for (let i = 0; i < auctionData.allImages.length; i++){
       if(auctionData.allImages[i] === ""){
         const nonEmptyIndex = auctionData.allImages.findIndex(img => img !== "");
         if (nonEmptyIndex !== -1) {
-          // Replace the empty string with the first non-empty image URL
           allImages[i] = allImages[nonEmptyIndex];
         }
       }
       console.log(allImages)
     }
+
     if (
       allImages[0].length >= 1 &&
       mainTitle.length > 2 &&
@@ -99,7 +100,7 @@ const NewAuctionPage = () => {
       });
       if (res.ok) {
         console.log(res);
-        // navigate("/"); // navigates to home page
+        navigate("/"); // navigates to home page
       } else {
         setAuctionData({
           ...auctionData,
@@ -110,7 +111,7 @@ const NewAuctionPage = () => {
     } else if (allImages[0].length < 1) {
       setAuctionData({
         ...auctionData,
-        warning: "You need at least one image",
+        warning: "Please upload the first Image",
         showAlert: true,
       });
     } else if (mainTitle.length < 2) {
