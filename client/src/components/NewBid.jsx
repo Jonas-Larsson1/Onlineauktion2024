@@ -19,8 +19,7 @@ export default function NewBid(props) {
   );
   const [newBid, setNewBid] = useState([]);
   const [socket, setSocket] = useState(null);
-  const [notification, setNotification] = useState(null);
-  const [auctionTitle, setAuctionTitle] = useState("")
+
 
 
   useEffect(() => {
