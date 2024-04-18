@@ -7,6 +7,7 @@ import Bidding from "../components/Bidding";
 import AddToWatchList from "../components/AddToWatchList";
 import PageNotFound from "./PageNotFound";
 import EditButton from "../components/EditButton";
+import PageNotFound from "./PageNotFound";
 
 export default function AuctionPage() {
   const { loggedIn } = useContext(GlobalContext);
@@ -42,11 +43,13 @@ export default function AuctionPage() {
         let cloneBidHistory = result.bidHistory;
         for (let i = 0; i <= cloneBidHistory.length - 1; i++) {
           if (cloneBidHistory[i].userId == "Auction start") {
-            result.bidHistory[i]["username"] = "Auction start"
+            result.bidHistory[i]["username"] = "Auction start";
           } else {
-            const res = await fetch(`/api/user/getUsername/${cloneBidHistory[i].userId}`)
-            const username = await res.json()
-            result.bidHistory[i]["username"] = username
+            const res = await fetch(
+              `/api/user/getUsername/${cloneBidHistory[i].userId}`
+            );
+            const username = await res.json();
+            result.bidHistory[i]["username"] = username;
           }
         }
       }
@@ -64,12 +67,17 @@ export default function AuctionPage() {
           <Row>
             <Col sm={6}>
               <Card data-bs-theme="dark" style={{ padding: "20px" }}>
-                <Card.Body className="d-flex align-items-center justify-content-end" style={{ paddingBottom: "0" }}>
+                <Card.Body
+                  className="d-flex align-items-center justify-content-end"
+                  style={{ paddingBottom: "0" }}
+                >
                   {/* Render the "Edit auction" button only if the logged-in user is the creator */}
                   {isCreator && (
                     <>
                       <div className="d-flex align-items-center">
-                        <h3 style={{ margin: "-25px 10px 0 10px" }}>Edit auction</h3>
+                        <h3 style={{ margin: "-25px 10px 0 10px" }}>
+                          Edit auction
+                        </h3>
                       </div>
                       <EditButton itemId={auction._id} />
                     </>
@@ -80,7 +88,11 @@ export default function AuctionPage() {
                 </div>
                 <Card.Title>{auction.title}</Card.Title>
                 <Card.Text>{auction.description}</Card.Text>
-                <Card className="my-3" border="light" style={{ padding: "1rem" }}>
+                <Card
+                  className="my-3"
+                  border="light"
+                  style={{ padding: "1rem" }}
+                >
                   Auction duration:{" "}
                   <b>
                     {formatDateTime(auction.startDate)}
@@ -104,8 +116,6 @@ export default function AuctionPage() {
       )}
     </>
   );
-
-
 }
 
 export function formatDateTime(unixTimestamp) {
