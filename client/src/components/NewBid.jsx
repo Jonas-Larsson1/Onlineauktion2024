@@ -38,12 +38,7 @@ export default function NewBid(props) {
   const currentDate = new Date();
 
 
-  useEffect(() => {
-  if (newBid.length > 0) {
-    const latestBid = newBid[newBid.length - 1]; // Get the latest bid
-    displayNotification(latestBid);
-  }
-}, [newBid]);
+
 
   useEffect(() => {
     if (auction.endDate) {
@@ -81,21 +76,11 @@ export default function NewBid(props) {
     setCurrentBid(event.target.value);
   };
 
-  useEffect(() => {
-    if (newBid) {
-      displayNotification(newBid);
-    }
-  }, [newBid]);
+  
 
-  const displayNotification = ({ username, bidAmount, title }) => {
 
-    if(username == undefined){
-      return false
-    }else {
-      toast(`New bid from ${username} \n On: ${title} \n Amount: ${bidAmount} `);
-    }
-   
-  };
+
+
 
   
   

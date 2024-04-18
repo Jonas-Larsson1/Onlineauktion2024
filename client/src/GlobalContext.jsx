@@ -8,6 +8,7 @@ function GlobalProvider({ children }) {
   const [showLogoutAlert, setShowLogoutAlert] = useState(null);
   const [loggedIn, setLoggedIn] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [socket, setSocket] = useState(null);
 
   useEffect(() => {
     const getSession = async () => {

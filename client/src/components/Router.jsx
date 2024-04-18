@@ -24,6 +24,7 @@ import AccountPageSavedAuctions from "../pages/AccountPageSavedAuctions.jsx";
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
 import PageNotFound from "../pages/PageNotFound.jsx";
+import SocketListener from "./SocketListener.jsx";
 
 export default function Router() {
 
@@ -33,6 +34,9 @@ export default function Router() {
         <div className="App">
             <div>
               <Navbar />
+              <ProtectedRoute>
+              <SocketListener />
+              </ProtectedRoute>
               <div className="content">
                 <Routes>
                   <Route path="/" element={
