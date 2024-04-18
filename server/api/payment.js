@@ -4,25 +4,43 @@ const stripe = stripePackage('sk_test_51P6pSYIOdyjaVUZksOvMpUtwiiHOCQMWcyORGSCnC
 
 export default function (server, db) {
   
-  server.post('/create-checkout-session', async (req, res) => {
-    const session = await stripe.checkout.sessions.create({
-      line_items: [
-        {
-          // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-          price: '{{PRICE_ID}}',
-          quantity: 1,
-        },
-      ],
-      currency: "eur", 
+  server.post('/api/create-checkout-session', async (req, res) => {
+    const wonAuctions = req.body.wonAuctions;
+    const lineItems = [];
 
-      
-      mode: 'payment',
-      success_url: `http://localhost:5173/checkout?success=true`,
-      cancel_url: `http://localhost:5173/checkout?canceled=true`,
-    });
+    try {
 
-    res.redirect(303, session.url);
+      const pricePromises = wonAuctions.map(async auction => {
+        const price = await stripe.prices.create({
+          currency: 'eur',
+          unit_amount: auction.highestBid.amount * 100,
+          product_data: {
+            name: auction.title
+          }
+        })
+        return price.id
+      })
+
+      const priceIds = await Promise.all(pricePromises);
+
+      priceIds.forEach(priceId => {
+        lineItems.push({
+          price: priceId,
+          quantity: 1
+        });
+      });
+
+      const session = await stripe.checkout.sessions.create({
+        line_items: lineItems,
+        mode: 'payment',
+        success_url: `http://localhost:5173/checkout?success=true`,
+        cancel_url: `http://localhost:5173/checkout?canceled=true`,
+      });
+
+      res.json({url: session.url})
+    } catch (error) {
+      console.error('Error creating checkout session:', error);
+      res.status(500).json({ error: 'Error creating checkout session' });
+    }
   });
-
-
 }

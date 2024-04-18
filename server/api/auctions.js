@@ -43,6 +43,14 @@ export default function (server, db) {
           }
         },
         {
+          $addFields: {
+            'auction.highestBid': '$highestBid', // Add highestBid property to the auction object
+          }
+        },
+        {
+          $unset: 'auction.bidHistory' // Remove the bidHistory property from the auction object
+        },
+        {
           $match: {
             'highestBid.userId': userId.toString() // Filter by user's highest bid
           }

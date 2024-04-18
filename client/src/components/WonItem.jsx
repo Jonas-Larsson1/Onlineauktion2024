@@ -16,7 +16,7 @@ export default function WonItem ({ item }) {
       </Card.Body>
       <ListGroup className="list-group list-group-flush">
         <ListGroup.Item>
-          <h3>Your winning bid was:</h3> {item.bidHistory.amount}€
+          <h3>Your winning bid was:</h3> {item.highestBid.amount}€
         </ListGroup.Item>
         <ListGroup.Item>
           <h3>Auction ended on</h3> {formatDateTime(item.endDate)}
