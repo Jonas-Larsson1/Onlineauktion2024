@@ -14,9 +14,11 @@ export default function LoginPage() {
   const { login, loggedIn } = useContext(GlobalContext);
   const { displayAlert } = useContext(GlobalContext);
   const { showLogoutAlert } = useContext(GlobalContext);
+  const { setSocket } = useContext(GlobalContext)
+
+  setSocket(null)
 
 
- 
 
   const checkForUser = async (e) => {
     e.preventDefault();

@@ -71,7 +71,7 @@ function GlobalProvider({ children }) {
     });
 
     setLoggedIn(null);
-    window.location.reload()
+   window.location.reload()
   };
 
   return (

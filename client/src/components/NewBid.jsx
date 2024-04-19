@@ -110,6 +110,7 @@ export default function NewBid(props) {
           username: username,
           bidAmount: bidAmount,
           title: auction.title,
+          senderId: loggedIn, 
         });
       } else {
         // säg åt användaren det gick åt skogen

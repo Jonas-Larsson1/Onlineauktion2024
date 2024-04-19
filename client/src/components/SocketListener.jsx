@@ -7,8 +7,7 @@ export default function SocketListener() {
 
     const { socket, setSocket } = useContext(GlobalContext)
     const { loggedIn } = useContext(GlobalContext)
-   
-  
+    const [newBidAdded, setNewBidAdded] = useState(null)  
 
     
     useEffect(() => {
@@ -22,20 +21,19 @@ export default function SocketListener() {
         newSocket.on("newBidAdded", (bidData) => {
             console.log(bidData)
             displayNotification(bidData)
+            setNewBidAdded
         });
         
-
-        
-       if(!loggedIn) {
-            newSocket.disconnect();
-        }
-    }, [loggedIn])
-
+        newSocket.on("userNotOnline", (msg) => {
+            console.log(msg)
+        })
+       
+    }, [])
  
 
-   
+     
         
-        
+
         
         
         const displayNotification = ({ username, bidAmount, title }) => {
