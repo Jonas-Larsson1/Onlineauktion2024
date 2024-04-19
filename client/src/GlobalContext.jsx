@@ -1,6 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import { redirect } from "react-router";
-import { io } from "socket.io-client";
 
 const GlobalContext = createContext();
 

@@ -2,8 +2,7 @@ import { Button, Form, InputGroup, Row, Col, Badge } from "react-bootstrap";
 import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from "../GlobalContext";
 import { formatDateTime } from "../pages/AuctionPage";
-import io from "socket.io-client";
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 export default function NewBid(props) {
   const { loggedIn } = useContext(GlobalContext);

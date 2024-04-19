@@ -29,7 +29,7 @@ export default function socketConnection(io) {
         io.on("connection", (socket) => {
           console.log("Client connected");
       
-            socket.on("newUser", (userId)=> { // listens to when "newUser event on client"
+            socket.on("newUser", (userId)=> { // listens to when "newUser event on client "
                 addNewUser(userId, socket.id)
                 console.log(users)
             })
@@ -42,9 +42,13 @@ export default function socketConnection(io) {
           socket.on("newBidNotification", ({recieverId, username, bidAmount, title, senderId})=> {
             const reciever = getUser(recieverId)
             const sender = getUser(senderId)
+           
             if(!reciever){ // Handles event where there is not reciever online
                 io.to(sender.socketId).emit("userNotOnline", "User is not online")
-        }else{
+        }else if(recieverId === senderId){
+            return false
+        }
+        else{
            
             io.to(reciever.socketId).emit("newBidAdded", {
                 username, 
