@@ -34,7 +34,7 @@ export default function (server, db) {
         line_items: lineItems,
         mode: 'payment',
         success_url: `http://localhost:5173/checkout?success=true`,
-        cancel_url: `http://localhost:5173/checkout?canceled=true`,
+        cancel_url: `http://localhost:5173/checkout?success=false`,
       });
 
       res.json({url: session.url})

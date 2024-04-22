@@ -2,8 +2,12 @@ import { useEffect, useState } from "react"
 import StyleCard from "../components/StyleCard";
 import WonItem from "../components/WonItem";
 import { Button } from "react-bootstrap";
+import { useSearchParams } from "react-router-dom";
 
 export default function Checkout () {
+  const [searchParams] = useSearchParams();
+
+  const [success, setSuccess] = useState(searchParams.get('success'))
   const [wonAuctions, setWonAuctions] = useState([])
   
   useEffect(() => {
@@ -13,9 +17,38 @@ export default function Checkout () {
       setWonAuctions(res)
     }
 
-    getData()
-    
+    getData()  
+
   }, [])
+
+  useEffect(() => {
+    const updateAuctionsToPaid = async () => {
+      
+      const body = {
+        auctionIds: wonAuctions.map(auction => auction._id),
+        update: {
+          "$set": {
+            "paid": true
+          }
+        }
+      }
+
+      console.log(body)
+      const response = await fetch(`/api/auctions`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      })
+
+      const result = await response.json()
+
+      console.log(result)
+    }
+
+    if (success && wonAuctions.length > 0) {
+      updateAuctionsToPaid()
+    }
+  }, [wonAuctions])
 
   const handlePayAll = async () => {
 

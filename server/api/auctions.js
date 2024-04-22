@@ -4,8 +4,6 @@ import { Types } from 'mongoose';
 
 export default function (server, db) {
 
-
-
   server.get("/api/auctions", async (req, res) => {
     res.json(await Auction.find())
   })
@@ -71,6 +69,33 @@ export default function (server, db) {
 
       res.json(auctions);
 
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  })
+
+  server.put("/api/auctions", async (req, res) => {
+    try {
+
+      if (!req.body.auctionIds || !req.body.update) {
+        return res.status(400).json({ message: "Missing auctionIds or update parameters" });
+      }
+      
+      const result = await Auction.updateMany(
+        { _id: { $in: req.body.auctionIds } },
+        req.body.update,
+        { multi: true }
+      )
+
+      if (result.matchedCount === 0) {
+        return res.status(404).json({ message: "No auctions found with the provided IDs" });
+      }
+
+      res.status(200).json({
+        message: "Auctions successfully updated.",
+        modifiedCount: result.modifiedCount
+      })
+      
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
