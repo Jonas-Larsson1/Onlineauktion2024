@@ -10,7 +10,7 @@ export default function AccountPage() {
     const [user, setUser] = useState(null);
     const [closedAuctions, setClosedAuctions] = useState(null);
 
-    const currentDate = new Date();
+    const currentDate = Math.floor(Date.now() / 1000);
 
     function sortBids(bidHistory) {
         bidHistory.sort((a, b) => b.amount - a.amount)
@@ -48,7 +48,7 @@ export default function AccountPage() {
                     if (auctionEndDate < currentDate) {
                         currentAuction.bidHistory = sortBids(currentAuction.bidHistory)
                         userClosedAuctions.push(currentAuction);
-                    } 
+                    }
                 }
             }
             userClosedAuctions.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
@@ -61,7 +61,7 @@ export default function AccountPage() {
     // Printing out info
     return (<>
 
-        <BackButton />
+        <BackButton to="/AccountPage" />
 
         <div style={{ backgroundColor: "#41B3A3", minHeight: '100vh' }}>
 
