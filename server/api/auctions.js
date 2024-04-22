@@ -60,7 +60,7 @@ export default function (server, db) {
         {
           $match: {
             'highestBid.userId': userId.toString(), // Filter by user's highest bid
-            'auction.highestBid.amount': { $gt: '$reservePrice' }, // Check if highest bid is higher than reservePrice
+            $expr: { $gt: ['$highestBid.amount', '$reservePrice'] }, // Check if highest bid is higher than reservePrice
             'auction.paid': false // Check if the auction is not paid
           }
         },
