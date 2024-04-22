@@ -35,9 +35,9 @@ export default function Router() {
         <div className="App">
             <div>
               <Navbar />
-              <ProtectedRoute>
+         
               <SocketListener />
-              </ProtectedRoute>
+           
               <div className="content">
                 <Routes>
                   <Route path="/" element={

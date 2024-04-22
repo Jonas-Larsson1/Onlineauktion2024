@@ -12,8 +12,14 @@ export default function AuctionPage() {
   let { id } = useParams();
   const [auction, setAuction] = useState(null);
 
+
+
   const updateAuction = (updatedAuction) => {
     setAuction({...updatedAuction})
+  }
+
+  const sendNotification = (newNotification) => {
+    setNotification({...newNotification})
   }
 
   useEffect(() => {

@@ -7,7 +7,7 @@ import { Toaster } from 'react-hot-toast';
 export default function NewBid(props) {
   const { loggedIn } = useContext(GlobalContext);
 
-  const { auction, updateAuction } = props;
+  const { auction, updateAuction} = props;
 
   const [highestBid, setHighestBid] = useState(null);
   const [defaultBid, setDefaultBid] = useState(null);
@@ -19,20 +19,8 @@ export default function NewBid(props) {
 
   const {socket} = useContext(GlobalContext);
 
-
-
-
-  
   const currentDate = new Date();
   
-  
-  
-  
-  
-
-
-
-
   useEffect(() => {
     if (auction.endDate) {
       setEndDateObject(new Date(auction.endDate));
@@ -69,14 +57,6 @@ export default function NewBid(props) {
     setCurrentBid(event.target.value);
   };
 
-  
-
-
-
-
-
-  
-  
 
   const placeBid = async (event) => {
     event.preventDefault();
@@ -95,29 +75,22 @@ export default function NewBid(props) {
 
       auction.bidHistory.push(newBid);
 
-      
-
       //pls change me ! only newBid data upload or crosscheck auction data on server!
-      const response = await fetch(`/api/auction/${auction._id}`, {
+      const response = await fetch(`/api/auction/newBid/${auction._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(auction),
+        body: JSON.stringify({
+          auction: auction,
+          user: loggedIn
+        }),
       });
-      
-      const lastResponse = await fetch(`/api/user/${auction.bidHistory[0].userId}`);
-      const user = await lastResponse.json()  
 
+      const result = await response.json()
+      console.log(response)
+      console.log(result)
+   
       if (response.ok) {
-        console.log(user)
        updateAuction(auction);
-        setCurrentBid(null);
-        socket.emit("newBidNotification", {
-          recieverId: auction.bidHistory[0].userId,
-          username: username,
-          bidAmount: bidAmount,
-          title: auction.title,
-          senderId: loggedIn, 
-        });
       } else {
         // säg åt användaren det gick åt skogen
         alert("I did not work.");
@@ -128,11 +101,8 @@ export default function NewBid(props) {
   };
 
   
-
-
   return (
     <>
-      
 
       <Form onSubmit={placeBid}>
       {/* <div className="notifications">
