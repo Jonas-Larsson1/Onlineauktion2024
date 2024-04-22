@@ -34,6 +34,9 @@ export default function Checkout () {
     window.location.href = body.url
 
   }
+
+  // spara wonactutions i server session och skapa en funktion i backend som markerar
+  // dem som betalda när man kommer till success redirecten.
  
   return <>
     <h2 className="text-center my-4">Auctions waiting for payment</h2>
