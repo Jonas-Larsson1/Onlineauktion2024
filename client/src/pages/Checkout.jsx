@@ -20,11 +20,11 @@ export default function Checkout() {
         auctionsToProcess = await response.json()
       }
 
-      if (!success) {
+      if (!success === "true") {
         setWonAuctions(auctionsToProcess)
       } else {
-        console.log(paymentId)
-        console.log(success)
+        // console.log(paymentId)
+        // console.log(success)
 
         const body = {
           auctionIds: auctionsToProcess.map(auction => auction._id)
@@ -62,15 +62,17 @@ export default function Checkout() {
 
   }
 
+  // frontend still needs work
   return (
     <>
-      {(success ===  true) ? (
+      {(success === "true") ? (
         <div className="container mt-5">
           <h1>Success! Your purchase was completed.</h1>
           <p>Thank you for shopping with us.</p>
           <Button className="mb-5" as={Link} to="/">Return to Home</Button>
         </div>
       ) : (
+        // en alert om success är false ?
         wonAuctions.length > 0 ? (
           <>
             <h2 className="text-center my-4">Auctions waiting for payment</h2>
