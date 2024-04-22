@@ -74,32 +74,32 @@ export default function (server, db) {
     }
   })
 
-  server.put("/api/auctions", async (req, res) => {
-    try {
+  // server.put("/api/auctions", async (req, res) => {
+  //   try {
 
-      if (!req.body.auctionIds || !req.body.update) {
-        return res.status(400).json({ message: "Missing auctionIds or update parameters" });
-      }
+  //     if (!req.body.auctionIds || !req.body.update) {
+  //       return res.status(400).json({ message: "Missing auctionIds or update parameters" });
+  //     }
       
-      const result = await Auction.updateMany(
-        { _id: { $in: req.body.auctionIds } },
-        req.body.update,
-        { multi: true }
-      )
+  //     const result = await Auction.updateMany(
+  //       { _id: { $in: req.body.auctionIds } },
+  //       req.body.update,
+  //       { multi: true }
+  //     )
 
-      if (result.matchedCount === 0) {
-        return res.status(404).json({ message: "No auctions found with the provided IDs" });
-      }
+  //     if (result.matchedCount === 0) {
+  //       return res.status(404).json({ message: "No auctions found with the provided IDs" });
+  //     }
 
-      res.status(200).json({
-        message: "Auctions successfully updated.",
-        modifiedCount: result.modifiedCount
-      })
+  //     res.status(200).json({
+  //       message: "Auctions successfully updated.",
+  //       modifiedCount: result.modifiedCount
+  //     })
       
-    } catch (error) {
-      res.status(500).json({ message: error.message });
-    }
-  })
+  //   } catch (error) {
+  //     res.status(500).json({ message: error.message });
+  //   }
+  // })
 
   server.put("/api/auction/:id", async (req, res) => {
     try {

@@ -6,49 +6,42 @@ import { useSearchParams } from "react-router-dom";
 
 export default function Checkout () {
   const [searchParams] = useSearchParams();
-
   const [success, setSuccess] = useState(searchParams.get('success'))
+  const [paymentId, setPaymentId] = useState(searchParams.get('payment_id'))
   const [wonAuctions, setWonAuctions] = useState([])
   
   useEffect(() => {
     const getData = async () => {
-      const req = await fetch('/api/wonAuctions')
-      const res = await req.json()
-      setWonAuctions(res)
+      let auctionsToProcess
+      const response = await fetch('/api/wonAuctions')
+
+      if (response.ok) {
+        auctionsToProcess = await response.json()
+      }
+
+      if (!success) {
+        setWonAuctions(auctionsToProcess)
+      } else {
+        console.log(paymentId)
+        console.log(success)
+
+        const body = {
+          auctionIds: auctionsToProcess.map(auction => auction._id)
+        }
+  
+        const response = await fetch(`/api/pay-for-auctions/${paymentId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        })
+
+        const result = await response.json()
+        console.log(result)
+      }
     }
 
     getData()  
-
   }, [])
-
-  useEffect(() => {
-    const updateAuctionsToPaid = async () => {
-      
-      const body = {
-        auctionIds: wonAuctions.map(auction => auction._id),
-        update: {
-          "$set": {
-            "paid": true
-          }
-        }
-      }
-
-      console.log(body)
-      const response = await fetch(`/api/auctions`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
-      })
-
-      const result = await response.json()
-
-      console.log(result)
-    }
-
-    if (success && wonAuctions.length > 0) {
-      updateAuctionsToPaid()
-    }
-  }, [wonAuctions])
 
   const handlePayAll = async () => {
 
