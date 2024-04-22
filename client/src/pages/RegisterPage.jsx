@@ -98,7 +98,7 @@ export default function RegisterPage() {
       />
       <button
         className="material-symbols-outlined"
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/login")}
       >
         arrow_back
       </button>

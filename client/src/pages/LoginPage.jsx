@@ -14,9 +14,9 @@ export default function LoginPage() {
   const { login, loggedIn } = useContext(GlobalContext);
   const { displayAlert } = useContext(GlobalContext);
   const { showLogoutAlert } = useContext(GlobalContext);
-  const { setSocket } = useContext(GlobalContext)
+  // const { setSocket } = useContext(GlobalContext)
 
-  setSocket(null)
+  // setSocket(null)
 
 
 
@@ -43,7 +43,7 @@ export default function LoginPage() {
       const response = await fetch("/api/login");
       if (response.status === 200) {
         navigate("/");
-      }
+      } 
     };
 
     getSession();

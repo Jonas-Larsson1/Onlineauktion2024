@@ -16,13 +16,19 @@ export default function NewBid(props) {
   const [endDateObject, setEndDateObject] = useState(
     auction.endDate ? new Date(auction.endDate) : null
   );
-  const [newBid, setNewBid] = useState([]);
-  const {socket, setSocket} = useContext(GlobalContext);
+
+  const {socket} = useContext(GlobalContext);
+
 
 
 
   
   const currentDate = new Date();
+  
+  
+  
+  
+  
 
 
 
@@ -97,12 +103,13 @@ export default function NewBid(props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(auction),
       });
-        
-        
+      
+      const lastResponse = await fetch(`/api/user/${auction.bidHistory[0].userId}`);
+      const user = await lastResponse.json()  
 
       if (response.ok) {
-  
-        updateAuction(auction);
+        console.log(user)
+       updateAuction(auction);
         setCurrentBid(null);
         socket.emit("newBidNotification", {
           recieverId: auction.bidHistory[0].userId,

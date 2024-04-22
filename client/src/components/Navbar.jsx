@@ -87,6 +87,12 @@ const Navbar = () => {
           </Link>
         </button>
 
+        <button className="navbar-btn ms-2 text-decoration-none text-secondary" >
+          <Link to="/NotificationPage">
+            <img src="/src/assets/bild.png" alt="Account" height="40px" />
+          </Link>
+        </button>
+
         <button
           className="logout-btn"
           onClick={() => {

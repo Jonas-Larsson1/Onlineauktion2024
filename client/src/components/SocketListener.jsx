@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { GlobalContext } from "../GlobalContext";
 import io from "socket.io-client";
 import toast, { Toaster } from 'react-hot-toast';
@@ -7,9 +7,10 @@ export default function SocketListener() {
 
     const { socket, setSocket } = useContext(GlobalContext)
     const { loggedIn } = useContext(GlobalContext)
-    
+   
 
-    
+   
+
     useEffect(() => {
         socket?.emit("newUser", loggedIn)
     }, [socket, loggedIn])
@@ -21,7 +22,8 @@ export default function SocketListener() {
         newSocket.on("newBidAdded", (bidData) => {
             console.log(bidData)
             displayNotification(bidData)
-    
+         
+           
         });
         
         newSocket.on("userNotOnline", (msg) => {
@@ -32,7 +34,7 @@ export default function SocketListener() {
  
 
  
-
+   
         
         
         const displayNotification = ({ username, bidAmount, title }) => {

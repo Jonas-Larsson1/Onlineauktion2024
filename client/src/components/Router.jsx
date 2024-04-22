@@ -20,6 +20,7 @@ import AccountPageOngoingBids from "../pages/AccountPageOngoingBids.jsx";
 import AccountPageOngoingAuctions  from "../pages/AccountPageOngoingAuctions.jsx";
 import AccountPageClosedAuctions from "../pages/AccountPageClosedAuctions.jsx";
 import AccountPageSavedAuctions from "../pages/AccountPageSavedAuctions.jsx";
+import NotificationPage from "../pages/NotificationPage.jsx";
 
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
@@ -87,6 +88,11 @@ export default function Router() {
                   <Route path="/NewAuction" element={
                     <ProtectedRoute>
                       <NewAuctionPage /> 
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/NotificationPage" element={
+                    <ProtectedRoute>
+                      <NotificationPage /> 
                     </ProtectedRoute>
                   } />
                   <Route path="*" element={
