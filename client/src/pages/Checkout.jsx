@@ -2,14 +2,15 @@ import { useEffect, useState } from "react"
 import StyleCard from "../components/StyleCard";
 import WonItem from "../components/WonItem";
 import { Button } from "react-bootstrap";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 
-export default function Checkout () {
+
+export default function Checkout() {
   const [searchParams] = useSearchParams();
   const [success, setSuccess] = useState(searchParams.get('success'))
   const [paymentId, setPaymentId] = useState(searchParams.get('payment_id'))
   const [wonAuctions, setWonAuctions] = useState([])
-  
+
   useEffect(() => {
     const getData = async () => {
       let auctionsToProcess
@@ -28,7 +29,7 @@ export default function Checkout () {
         const body = {
           auctionIds: auctionsToProcess.map(auction => auction._id)
         }
-  
+
         const response = await fetch(`/api/pay-for-auctions/${paymentId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -40,7 +41,7 @@ export default function Checkout () {
       }
     }
 
-    getData()  
+    getData()
   }, [])
 
   const handlePayAll = async () => {
@@ -61,18 +62,31 @@ export default function Checkout () {
 
   }
 
-  // spara wonactutions i server session och skapa en funktion i backend som markerar
-  // dem som betalda när man kommer till success redirecten.
- 
-  return <>
-    <h2 className="text-center my-4">Auctions waiting for payment</h2>
-    <div className="text-center my-4">
-      <Button onClick={handlePayAll} variant="success" size="lg">Pay All</Button>
-    </div>
-    {wonAuctions.map((auction, index) => (
-    <StyleCard key={index}>
-      <WonItem item={auction} />
-    </StyleCard>
-    ))}
-  </>
+  return (
+    <>
+      {(success ===  true) ? (
+        <div className="container mt-5">
+          <h1>Success! Your purchase was completed.</h1>
+          <p>Thank you for shopping with us.</p>
+          <Button className="mb-5" as={Link} to="/">Return to Home</Button>
+        </div>
+      ) : (
+        wonAuctions.length > 0 ? (
+          <>
+            <h2 className="text-center my-4">Auctions waiting for payment</h2>
+            <div className="text-center my-4">
+              <Button onClick={handlePayAll} variant="success" size="lg">Pay All</Button>
+            </div>
+            <StyleCard >
+              {wonAuctions.map((auction, index) => (
+                  <WonItem className="mx-5" item={auction} key={index} />
+                ))}
+            </StyleCard>
+          </>
+        ) : (
+          <p className="text-center my-4">You have no won auctions to pay for.</p>
+        )
+      )}
+    </>
+  );
 }

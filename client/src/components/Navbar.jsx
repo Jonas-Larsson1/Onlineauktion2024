@@ -85,9 +85,15 @@ const Navbar = () => {
           </button>
         </Link>
 
-        <button className="navbar-btn ms-2 text-decoration-none text-secondary" >
+        <button className="navbar-btn mx-2 text-decoration-none text-secondary" >
           <Link to="/AccountPage">
             <img src="/src/assets/account.webp" alt="Account" height="40px" />
+          </Link>
+        </button>
+
+        <button className="navbar-btn ms-2 text-decoration-none text-secondary" >
+          <Link to="/checkout">
+            <img src="/src/assets/shoppingCart.png" alt="ShoppingCart" height="40px" />
           </Link>
         </button>
 
