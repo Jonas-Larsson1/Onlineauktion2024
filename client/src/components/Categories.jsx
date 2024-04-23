@@ -34,8 +34,8 @@ const Categories = ({category, setCategory, setSearchQuery, SearchQuery}) => {
   };
 
   useEffect(() => {
-    console.log(category); // Log category after it's updated
-    console.log(SearchQuery)
+    // console.log(category); // Log category after it's updated
+    // console.log(SearchQuery)
   }, [category, SearchQuery]);
 
   

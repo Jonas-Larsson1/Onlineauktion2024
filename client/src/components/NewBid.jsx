@@ -70,7 +70,7 @@ export default function NewBid(props) {
   
       auction.bidHistory.push(newBid)
 
-      console.log(auction)
+      // console.log(auction)
 
 
       //pls change me ! only newBid data upload or crosscheck auction data on server!
