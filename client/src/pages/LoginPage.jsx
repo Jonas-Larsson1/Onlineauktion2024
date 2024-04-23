@@ -30,7 +30,7 @@ export default function LoginPage() {
 
     const loginResponse = await login(userData);
 
-    console.log(loginResponse);
+    // console.log(loginResponse)
     if (loginResponse.status === 201) {
       navigate("/");
     } else {

@@ -70,10 +70,13 @@ export default function NewBid(props) {
         userId: loggedIn,
         time: Date.now(),
         amount: bidAmount,
-        username: username,
-      };
+        username : username
+      }
+  
+      auction.bidHistory.push(newBid)
 
-      auction.bidHistory.push(newBid);
+      // console.log(auction)
+
 
       //pls change me ! only newBid data upload or crosscheck auction data on server!
       const response = await fetch(`/api/auction/newBid/${auction._id}`, {

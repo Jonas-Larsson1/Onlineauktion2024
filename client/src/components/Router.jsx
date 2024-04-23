@@ -17,10 +17,13 @@ import AccountPage from "../pages/AccountPage.jsx";
 import NewAuctionPage from "../pages/NewAuctionPage.jsx";
 import AboutPage from "../pages/AboutPage.jsx";
 import AccountPageOngoingBids from "../pages/AccountPageOngoingBids.jsx";
-import AccountPageOngoingAuctions  from "../pages/AccountPageOngoingAuctions.jsx";
+import AccountPageOngoingAuctions from "../pages/AccountPageOngoingAuctions.jsx";
 import AccountPageClosedAuctions from "../pages/AccountPageClosedAuctions.jsx";
 import AccountPageSavedAuctions from "../pages/AccountPageSavedAuctions.jsx";
 import NotificationPage from "../pages/NotificationPage.jsx";
+
+import Checkout from "../pages/Checkout.jsx"
+import EditAuction from "../pages/EditAuction.jsx";
 
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
@@ -33,82 +36,93 @@ export default function Router() {
     <>
       <BrowserRouter>
         <div className="App">
-            <div>
-              <Navbar />
+          <div>
+            <Navbar />
          
               <SocketListener />
            
-              <div className="content">
-                <Routes>
-                  <Route path="/" element={
-                    <ProtectedRoute>
-                      <ListPage />
-                    </ProtectedRoute>
-                  } /> 
-                  <Route path="/AuctionPage/:id" element={
-                    <ProtectedRoute>
-                      <AuctionPage /> 
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/AccountPage/" element={
-                    <ProtectedRoute>
-                      <AccountPage />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/AccountPage/OngoingBids" element={
-                    <ProtectedRoute>
-                      <AccountPageOngoingBids />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/AccountPage/OngoingAuctions" element={
-                    <ProtectedRoute>
-                      <AccountPageOngoingAuctions />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/AccountPage/ClosedAuctions" element={
-                    <ProtectedRoute>
-                      <AccountPageClosedAuctions />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/AccountPage/SavedAuctions" element={
-                    <ProtectedRoute>
-                      <AccountPageSavedAuctions />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/SearchPage/:incomingSearchQuery" element={
-                    <ProtectedRoute>
-                      <SearchPage />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/AboutPage" element={
-                    <ProtectedRoute>
-                      <AboutPage />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/NewAuction" element={
-                    <ProtectedRoute>
-                      <NewAuctionPage /> 
-                    </ProtectedRoute>
-                  } />
+            <div className="content">
+              <Routes>
+                <Route path="/" element={
+                  <ProtectedRoute>
+                    <ListPage />
+                  </ProtectedRoute>
+                } />
+                <Route path="/AuctionPage/:id" element={
+                  <ProtectedRoute>
+                    <AuctionPage />
+                  </ProtectedRoute>
+                } />
+                <Route path="/AccountPage/" element={
+                  <ProtectedRoute>
+                    <AccountPage />
+                  </ProtectedRoute>
+                } />
+                <Route path="/AccountPage/OngoingBids" element={
+                  <ProtectedRoute>
+                    <AccountPageOngoingBids />
+                  </ProtectedRoute>
+                } />
+                <Route path="/AccountPage/OngoingAuctions" element={
+                  <ProtectedRoute>
+                    <AccountPageOngoingAuctions />
+                  </ProtectedRoute>
+                } />
+                <Route path="/AccountPage/ClosedAuctions" element={
+                  <ProtectedRoute>
+                    <AccountPageClosedAuctions />
+                  </ProtectedRoute>
+                } />
+                <Route path="/AccountPage/SavedAuctions" element={
+                  <ProtectedRoute>
+                    <AccountPageSavedAuctions />
+                  </ProtectedRoute>
+                } />
+                <Route path="/SearchPage/:incomingSearchQuery" element={
+                  <ProtectedRoute>
+                    <SearchPage />
+                  </ProtectedRoute>
+                } />
+                <Route path="/AboutPage" element={
+                  <ProtectedRoute>
+                    <AboutPage />
+                  </ProtectedRoute>
+                } />
+                <Route path="/NewAuction" element={
+                  <ProtectedRoute>
+                    <NewAuctionPage />
+                  </ProtectedRoute>
+                } />
+                <Route path="/EditAuction/:id" element={
+                  <ProtectedRoute>
+                    <EditAuction />
+                  </ProtectedRoute>
+                } />
                   <Route path="/NotificationPage" element={
                     <ProtectedRoute>
                       <NotificationPage /> 
                     </ProtectedRoute>
                   } />
-                  <Route path="*" element={
+                <Route path="*" element={
+                  <ProtectedRoute>
+                    <PageNotFound />
+                  </ProtectedRoute>
+                } />
+
+                  <Route path="/checkout" element={
                     <ProtectedRoute>
-                      <PageNotFound />
+                      <Checkout /> 
                     </ProtectedRoute>
                   } />
 
-                  <Route path="/login" element={<LoginPage />} />
-                  <Route path="/registerPage" element={<RegisterPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/registerPage" element={<RegisterPage />} />
 
-                  <Route path="*" element={<Navigate to="/login" replace />} />
-                </Routes>
-              </div>
-              <Footer />
+                <Route path="*" element={<Navigate to="/login" replace />} />
+              </Routes>
             </div>
+            <Footer />
+          </div>
         </div>
       </BrowserRouter>
     </>

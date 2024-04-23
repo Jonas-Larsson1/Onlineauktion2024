@@ -1,9 +1,14 @@
 import { Card, ListGroup } from "react-bootstrap";
-import { formatDateTime } from "../pages/AuctionPage";
+import { formatDateTime } from "../pages/AuctionPage.jsx";
 import { Link } from "react-router-dom";
 
 // Define a functional component ListCard that accepts an item as a prop.
 const ListCard = ({ item }) => {
+
+  if (item == null) {
+    return 
+  }
+  
   
   // Sort the bid history of the item in descending order by time.
   if (item.bidHistory.length > 0) {
@@ -66,7 +71,7 @@ const ListCard = ({ item }) => {
         </ListGroup.Item>
       </ListGroup>
       <Card.Body className="text-center">
-        <a href={`/AuctionPage/${item._id}`} className="btn btn-primary w-100 position-absolute start-0 bottom-0">View</a>
+        <Link to={`/AuctionPage/${item._id}`} className="btn btn-primary w-100 position-absolute start-0 bottom-0">View</Link>
       </Card.Body>
     </Card>
   </>);

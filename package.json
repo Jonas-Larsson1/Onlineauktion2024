@@ -12,5 +12,8 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "react-loading": "^2.0.3"
   }
 }

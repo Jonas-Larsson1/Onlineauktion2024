@@ -2,10 +2,11 @@ import React, {useState, useEffect, useContext} from 'react'
 import { Button } from 'react-bootstrap'
 import {FetchedDataContext} from './SearchResults';
 import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
-const Categories = ({category, setCategory, setSearchQuery}) => {
+const Categories = ({category, setCategory, setSearchQuery, SearchQuery}) => {
   const { data } = useContext(FetchedDataContext) // global data
+  const navigate = useNavigate();
 
   const [toggle, setToggle] = useState(false) // toggle for category filter
   const [auctionData, setAuctionData] = useState([]) // holds auction data
@@ -16,12 +17,27 @@ const Categories = ({category, setCategory, setSearchQuery}) => {
     setAuctionData(data); // updating auctionData with fetched data
   }, [data]);
 
-  const handleCategoryClick = (category) => {
-    setSearchQuery('') // resets search query
-    setCategory(category);
-    setToggle(false); // closes menu with categories
+  // const handleCategoryClick = (category) => {
+  //   setSearchQuery('') // resets search query
+  //   setCategory(category);
+  //   setToggle(false); // closes menu with categories
     
+  //   // navigate(`/searchPage/${category}`)
+    
+  // };
+
+  const handleShowAllClick = () => {
+    setCategory(null); // Reset category to null to show all items first
+    setSearchQuery('');
+    setToggle(false); // Close menu with categories
+
   };
+
+  useEffect(() => {
+    // console.log(category); // Log category after it's updated
+    // console.log(SearchQuery)
+  }, [category, SearchQuery]);
+
   
   const filteredCategories = auctionData ? 
     auctionData.map((item) => 
@@ -42,12 +58,17 @@ const Categories = ({category, setCategory, setSearchQuery}) => {
     <div className='p-2'>
       {toggle ? 
         <div className='list-group'>
-          <a className='list-group-item list-group-item-action' href="#" onClick={() => handleCategoryClick(null)}>
+          {/* <a className='list-group-item list-group-item-action' href="#" onClick={() => handleCategoryClick(null)}>
             <b>Show all</b>
-          </a>
+          </a> */}
+           <Link className='list-group-item list-group-item-action' to="/SearchPage/Collection"
+              onClick={handleShowAllClick}
+            > <b>Show all</b>
+            </Link>
           {/* renders each category */}
           {allCategories.map((cat, index) => 
-            <a key={index} className='list-group-item list-group-item-action' href="#" onClick={() => handleCategoryClick(cat)}>{cat}</a>
+            // <a key={index} className='list-group-item list-group-item-action' href="#" onClick={() => handleCategoryClick(cat)}>{cat}</a>
+            <Link key={index} className='list-group-item list-group-item-action' to={`/SearchPage/${cat}`}  onClick={() => {setCategory(cat), console.log(category), setToggle(false)}}>{cat}</Link>
           )}
         </div> 
       : null}

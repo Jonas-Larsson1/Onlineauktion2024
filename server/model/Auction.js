@@ -9,6 +9,7 @@ const auctionSchema = new mongoose.Schema({
   endDate: Number,
   startingPrice: Number, 
   reservePrice: Number,
+  paid: { type: Boolean, default: 'false' },
   // bidHistory: [{type: mongoose.Schema.Types.ObjectId, ref:"bids"}],
   bidHistory: [{type: mongoose.Schema.Types.Mixed }],
   category: [{type: String}]
