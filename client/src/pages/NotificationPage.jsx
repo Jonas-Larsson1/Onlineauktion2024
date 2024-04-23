@@ -1,58 +1,41 @@
 import { useEffect, useState } from "react";
-import Notification from "../components/Notification.jsx";
+import Notifications from "../components/Notifications.jsx";
 import StyleCard from "../components/StyleCard.jsx";
 
 export default function NotificationPage() {
   const [notifications, setNotifications] = useState([]);
-  const [message, setMessage] = useState([]);
-  const [fetched, setFetched] = useState(false)
+  const [render, forceRender] = useState(false);
 
   useEffect(() => {
+    const fetchNotifications = async () => {
+      const response = await fetch("/api/notifications");
+      const result = await response.json();
 
+      setNotifications(result)
+    };
 
-
-      const fetchNotifications = async () => {
-        if(!fetched){
-        const response = await fetch("/api/notifications");
-        const result = await response.json();
-        setNotifications(result)
-        setFetched(true)
-        
-        for(let i = 0; i < result.length; i++){
-          
-          setMessage((prev) => [...prev,result[i]])
-          
-        }
-      }
-      else{
-        return null
-      }
-      };
-      
     fetchNotifications();
-  }, []);
+  }, [render]);
+
+  const forceReRender = () => {
+    forceRender((prev) => !prev);
+  }
 
   return (
     <>
       {notifications ? (
-        <div
-          className="d-flex justify-content-center"
-          style={{ width: "100%" }}
-        >
-          <div className="w-25">
-            <StyleCard>
-              <h4 className="fst-italic fw-bold">Your notifications: </h4>
-            </StyleCard>
+        <>
+          <h2 className="text-center my-4 fst-italic fw-bold">Your notifications: </h2>
+          <div className="flex justify-content-center " style={{ maxWidth: "70vw", marginLeft: "auto", marginRight: "auto", marginBottom: "100px" }}>
+            <div className="d-flex flex-row mx-3 px-3 mb-5" style={{ flexWrap: 'wrap' }}>
 
-
-
-                <Notification
-                  message={message}
-                  notifications={notifications}
-                />
-            
+            <Notifications
+              className="mx-5"
+              notifications={notifications} forceReRender={forceReRender}
+              />
           </div>
-        </div>
+          </div>
+        </>
       ) : (
         "nothing here"
       )}

@@ -1,24 +1,21 @@
 import { useContext, useEffect, useState } from "react";
-import StyleCard from "./StyleCard";
+import StyleCard from "./StyleCard.jsx";
 import { GlobalContext } from "../GlobalContext";
 import * as React from "react";
 
-export default function Notification(props) {
-  const { notifications } = props;
- 
-  
-  console.log(notifications);
+export default function Notifications(props) {
+  const { notifications, forceReRender } = props;
 
   const removeNotification = async (e) => {
     const notificationId = e.target.value
-    console.log(e.target.value)
     const response = await fetch(`/api/notifications/${notificationId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
     });
-    
+
+    forceReRender()
   };
 
   return (
@@ -26,7 +23,7 @@ export default function Notification(props) {
       {notifications
         ? notifications.map((notification, index) => {
             return (
-              <StyleCard key={index}>
+              <StyleCard key={index} >
                 <h4 className="fst-italic fw-bold">
                   <div>{notification.message}</div>
                   <small>{notification.date}</small>
