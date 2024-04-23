@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import StyleCard from "../components/StyleCard";
 import WonItem from "../components/WonItem";
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { useSearchParams, Link } from "react-router-dom";
 
 
@@ -10,6 +10,11 @@ export default function Checkout() {
   const [success, setSuccess] = useState(searchParams.get('success'))
   const [paymentId, setPaymentId] = useState(searchParams.get('payment_id'))
   const [wonAuctions, setWonAuctions] = useState([])
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
 
   useEffect(() => {
     const getData = async () => {
@@ -20,11 +25,9 @@ export default function Checkout() {
         auctionsToProcess = await response.json()
       }
 
-      if (!success === "true") {
+      if (success !== "true") {
         setWonAuctions(auctionsToProcess)
-      } else {
-        // console.log(paymentId)
-        // console.log(success)
+      } else if (success === "true") {
 
         const body = {
           auctionIds: auctionsToProcess.map(auction => auction._id)
@@ -62,7 +65,6 @@ export default function Checkout() {
 
   }
 
-  // frontend still needs work
   return (
     <>
       {(success === "true") ? (
@@ -72,7 +74,6 @@ export default function Checkout() {
           <Button className="mb-5" as={Link} to="/">Return to Home</Button>
         </div>
       ) : (
-        // en alert om success är false ?
         wonAuctions.length > 0 ? (
           <>
             <h2 className="text-center my-4">Auctions waiting for payment</h2>
