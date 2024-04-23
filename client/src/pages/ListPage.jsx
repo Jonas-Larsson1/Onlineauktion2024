@@ -20,7 +20,7 @@ export default function ListPage() {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/users/${loggedIn}`);
+        const response = await fetch(`/api/user/${loggedIn}`);
         const result = await response.json();
         setUser(result);
       } catch (error) {
