@@ -41,20 +41,9 @@ const Navbar = () => {
     <Link className="ms-3" to="/">
       <img src="/src/assets/petabw.png" alt="petaLogo" height="80px" />
     </Link>
-      <div className=" links fw-bold mx-5 text-decoration-none d-flex p-2">
+      <div className=" links fw-bold mx-2 text-decoration-none d-flex p-2">
+
         <button className="navbar-btn container d-flex">
-          <div className={`collapse ${isOpen ? 'show' : ''}`} id="searchField">
-            <form className="form-inline " onSubmit={handleNavbarSearch}>
-              <input 
-                  className="form-control border border-dark form-control-l" 
-                  type="search" 
-                  placeholder="Search" 
-                  aria-label="Search" 
-                  value={searchValue}
-                  onChange={handleSearchValueChange} 
-                  name="searchQuery" />
-            </form>
-          </div>
           <img
           className="ms-5 "
           src="/src/assets/search.png"
@@ -81,7 +70,7 @@ const Navbar = () => {
           </button>
         </Link>
 
-        <button className="navbar-btn ms-2 text-decoration-none text-secondary" >
+        <button className="navbar-btn mx-2 text-decoration-none text-secondary" >
           <Link to="/AccountPage">
             <img src="/src/assets/account.webp" alt="Account" height="40px" />
           </Link>
@@ -89,7 +78,7 @@ const Navbar = () => {
 
         <button className="navbar-btn ms-2 text-decoration-none text-secondary" >
           <Link to="/NotificationPage">
-            <img src="/src/assets/bild.png" alt="Account" height="40px" />
+            <img src="/src/assets/notification.png" alt="Account" height="40px" />
           </Link>
         </button>
 
