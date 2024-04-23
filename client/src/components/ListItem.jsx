@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 
 // Define a functional component ListCard that accepts an item as a prop.
 const ListCard = ({ item }) => {
+
+  if (item == null) {
+    return 
+  }
+  
   
   // Sort the bid history of the item in descending order by time.
   if (item.bidHistory.length > 0) {
