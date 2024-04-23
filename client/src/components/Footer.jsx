@@ -7,7 +7,7 @@ const Footer = () => {
   return loggedIn ? (
     <nav
       className="navbar border-top border-dark"
-      style={{ backgroundColor: "#E27D60" }}
+      style={{ position: "fixed", bottom: 0, backgroundColor: "#E27D60", width:"100vw" }}
     >
       <Link className="mx-3" to="/">
         <img src="/src/assets/petaicon.png" alt="petaLogo" height="50px" />

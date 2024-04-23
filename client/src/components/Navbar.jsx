@@ -57,7 +57,7 @@ const Navbar = () => {
           </div>
           <img
           className="ms-5 "
-          src="/src/assets/magnifyingGlass.webp"
+          src="/src/assets/search.png"
           alt="Search button"
           height="40px"
           onClick={toggleInputField}
@@ -66,7 +66,7 @@ const Navbar = () => {
 
         <button className="navbar-btn mx-2 text-decoration-none text-secondary" >
           <Link className="ms-3" to="/NewAuction">
-            <img src="/src/assets/sell.png" alt="Sell" height="40px" />
+            <img src="/src/assets/selly.png" alt="Sell" height="40px" />
           </Link>
         </button>
 
@@ -103,7 +103,7 @@ const Navbar = () => {
           }}>
 
           <img
-            src="/src/assets/logout.webp"
+            src="/src/assets/logout.png"
             className="logout-img"
             height="40px"
           />

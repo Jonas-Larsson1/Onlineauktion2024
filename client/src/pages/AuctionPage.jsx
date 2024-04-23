@@ -18,9 +18,7 @@ export default function AuctionPage() {
     setAuction({...updatedAuction})
   }
 
-  const sendNotification = (newNotification) => {
-    setNotification({...newNotification})
-  }
+
 
   useEffect(() => {
     const getData = async () => {

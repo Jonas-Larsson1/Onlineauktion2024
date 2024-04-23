@@ -7,7 +7,7 @@ export default function (server, db) {
       const userId = req.session.user
       if (!userId) {
         return res.status(401).json({ message: 'User not authenticated' })
-      }
+      } 
 
       const notifications = await Notification.find({
         userId: userId
