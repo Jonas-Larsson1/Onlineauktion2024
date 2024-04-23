@@ -23,7 +23,7 @@ export default function WonItem ({ item }) {
         </ListGroup.Item>
       </ListGroup>
       <Card.Body className="text-center">
-        <a href={`/AuctionPage/${item._id}`} className="btn btn-primary w-100 position-absolute start-0 bottom-0">View</a>
+        <Link to={`/AuctionPage/${item._id}`} className="btn btn-primary w-100 position-absolute start-0 bottom-0">View</Link>
       </Card.Body>
     </Card>
   </>

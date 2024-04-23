@@ -5,6 +5,7 @@ import { GlobalContext } from "../GlobalContext";
 import "../styles/styles.css";
 import Categories from "./Categories";
 import SearchBar from "./SearchBar";
+import CheckoutNavButton from "./CheckoutNavButton.jsx";
 
 const Navbar = () => {
   const navigate = useNavigate()
@@ -90,12 +91,8 @@ const Navbar = () => {
             <img src="/src/assets/account.webp" alt="Account" height="40px" />
           </Link>
         </button>
-
-        <button className="navbar-btn ms-2 text-decoration-none text-secondary" >
-          <Link to="/checkout">
-            <img src="/src/assets/shoppingCart.png" alt="ShoppingCart" height="40px" />
-          </Link>
-        </button>
+ 
+        <CheckoutNavButton />
 
         <button
           className="logout-btn"
