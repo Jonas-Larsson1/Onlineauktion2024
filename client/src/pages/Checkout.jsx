@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import StyleCard from "../components/StyleCard";
 import WonItem from "../components/WonItem";
-import { Button, Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useSearchParams, Link } from "react-router-dom";
 
 
@@ -10,11 +10,6 @@ export default function Checkout() {
   const [success, setSuccess] = useState(searchParams.get('success'))
   const [paymentId, setPaymentId] = useState(searchParams.get('payment_id'))
   const [wonAuctions, setWonAuctions] = useState([])
-
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
 
   useEffect(() => {
     const getData = async () => {
@@ -40,7 +35,6 @@ export default function Checkout() {
         })
 
         const result = await response.json()
-        console.log(result)
       }
     }
 
