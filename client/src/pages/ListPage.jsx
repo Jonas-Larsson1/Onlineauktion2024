@@ -6,11 +6,14 @@ import { Alert, Button } from "react-bootstrap";
 import StyleCard from "../components/StyleCard.jsx";
 import { format } from "date-fns"; // Import the format function from date-fns library
 import { formatDateTime } from "../pages/AuctionPage";
+import Loading from "../components/Loading";
+
 
 export default function ListPage() {
   const [list, setList] = useState([]);
   const { show, setShow, hideAlert, loggedIn } = useContext(GlobalContext);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -36,6 +39,7 @@ export default function ListPage() {
         result.sort((a, b) => new Date(a.endDate) - new Date(b.endDate));
 
         setList(result);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -50,6 +54,7 @@ export default function ListPage() {
 
   return (
     <>
+      <Loading loading={loading} />
       {user ? (
         <Alert show={show} variant="success" className="alert">
           <Alert.Heading>

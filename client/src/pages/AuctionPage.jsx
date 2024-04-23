@@ -7,12 +7,16 @@ import Bidding from "../components/Bidding";
 import AddToWatchList from "../components/AddToWatchList";
 import PageNotFound from "./PageNotFound";
 import EditButton from "../components/EditButton";
+import Loading from "../components/Loading";
 
 export default function AuctionPage() {
   const { loggedIn } = useContext(GlobalContext);
   let { id } = useParams();
   const [auction, setAuction] = useState(null);
   const [isCreator, setIsCreator] = useState(false);
+  const [loading, setLoading] = useState(true);
+ const [fetchError, setFetchError] = useState(false);
+
 
   const updateAuction = (updatedAuction) => {
     setAuction({ ...updatedAuction });
@@ -20,43 +24,45 @@ export default function AuctionPage() {
 
   useEffect(() => {
     const getData = async () => {
-      const response = await fetch(`/api/auction/${id}`);
-      const result = await response.json();
+      try {
+        const response = await fetch(`/api/auction/${id}`);
+        const result = await response.json();
 
-      if (!response.ok) {
-        return
-      }
+        // Check if the logged-in user is the creator of the auction
+        setIsCreator(result.sellerId === loggedIn);
 
-      // Check if the logged-in user is the creator of the auction
-      setIsCreator(result.sellerId === loggedIn);
-
-      if (
-        result.bidHistory.length === 0 ||
-        Object.keys(result.bidHistory[0]).length === 0
-      ) {
-        result.bidHistory = [
-          {
-            time: result.startDate,
-            username: "Auction start",
-            amount: Number(result.startingPrice),
-          },
-        ];
-      } else {
-
+        if (
+          result.bidHistory.length === 0 ||
+          Object.keys(result.bidHistory[0]).length === 0
+        ) {
+          result.bidHistory = [
+            {
+              time: result.startDate,
+              username: "Auction start",
+              amount: Number(result.startingPrice),
+            },
+          ];
+        } else {
+  
         let cloneBidHistory = result.bidHistory;
-        for (let i = 0; i <= cloneBidHistory.length - 1; i++) {
-          if (cloneBidHistory[i].userId == "Auction start") {
-            result.bidHistory[i]["username"] = "Auction start";
-          } else {
-            const res = await fetch(
-              `/api/user/getUsername/${cloneBidHistory[i].userId}`
-            );
-            const username = await res.json();
-            result.bidHistory[i]["username"] = username;
+          for (let i = 0; i <= cloneBidHistory.length - 1; i++) {
+            if (cloneBidHistory[i].userId == "Auction start") {
+              result.bidHistory[i]["username"] = "Auction start";
+            } else {
+              const res = await fetch(
+                `/api/user/getUsername/${cloneBidHistory[i].userId}`
+              );
+              const username = await res.json();
+              result.bidHistory[i]["username"] = username;
+            }
           }
         }
+        setAuction(result);
+        setLoading(false);
+      } catch (error) {
+        setFetchError(true);
+        setLoading(false);
       }
-      setAuction(result);
     };
 
     getData();
@@ -64,6 +70,7 @@ export default function AuctionPage() {
 
   return (
     <>
+     <Loading loading={loading} />
       {auction ? (
         <div className="m-3">
           <h1 className="mx-2">{auction.title}</h1>
@@ -114,9 +121,9 @@ export default function AuctionPage() {
             </Col>
           </Row>
         </div>
-      ) : (
-        PageNotFound()
-      )}
+      ) : fetchError ? (
+        <PageNotFound />
+      ) : null}
     </>
   );
 }
