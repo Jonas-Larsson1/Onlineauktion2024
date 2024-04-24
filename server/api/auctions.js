@@ -141,9 +141,10 @@ export default function (server, db) {
           return b.amount - a.amount
         })
 
-        const userToNotify = sortedBidHistory[1].userId
+        const userToNotify = sortedBidHistory[0].userId
         const outbiddingUser = await User.findById(req.body.user)
-        
+        // const image = auctionToUpdate.images[0]
+
         if(userToNotify.toString() !== outbiddingUser._id.toString()){
        
 
@@ -152,12 +153,13 @@ export default function (server, db) {
           userId: userToNotify,
           auctionId: req.params.id,
           date: Date.now(),
-          message: `You have been outbidded by "${outbiddingUser.username}" on auction ${auctionToUpdate.title}`
+          message: `You have been outbidded by "${outbiddingUser.username}" on auction ${auctionToUpdate.title}`,
+          // image: image
         })
      
         await newNotification.save()
 
-
+ 
       } 
 
         res.status(200).json({
