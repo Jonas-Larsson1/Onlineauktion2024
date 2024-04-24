@@ -15,7 +15,7 @@ export default function NotificationPage() {
     };
 
     fetchNotifications();
-  }, []);
+  }, [render]);
 
   const forceReRender = () => {
     forceRender((prev) => !prev);

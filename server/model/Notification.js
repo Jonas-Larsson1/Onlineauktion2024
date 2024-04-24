@@ -5,7 +5,7 @@ const notificationSchema =  new mongoose.Schema({
     auctionId: {type: mongoose.Schema.Types.ObjectId, ref:"auctions"},
     date: Number,
     message: String,
-    // image: [{type: String}]
+    image: [{type: String}]
 })
 
 const Notification = mongoose.model('notifications', notificationSchema)
