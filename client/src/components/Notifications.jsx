@@ -8,9 +8,11 @@ import { Link } from "react-router-dom";
 
 export default function Notifications(props) {
   const { notifications, forceReRender } = props;
+  const [isChecked, setIsChecked] = useState(false)
 
   const removeNotification = async (e) => {
     const notificationId = e.target.value;
+    setIsChecked(isChecked)
     const response = await fetch(`/api/notifications/${notificationId}`, {
       method: "DELETE",
       headers: {
@@ -36,6 +38,7 @@ export default function Notifications(props) {
                       type="checkbox"
                       className="ms-3"
                       value={notification._id}
+                      checked={isChecked}
                       onChange={removeNotification}
                     />
                     Mark as read
