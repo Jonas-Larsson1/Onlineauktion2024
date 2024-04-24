@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import StyleCard from "./StyleCard.jsx";
-import { GlobalContext } from "../GlobalContext";
 import { Card } from "react-bootstrap";
 import * as React from "react";
 import { formatDateTime } from "../pages/AuctionPage.jsx";
