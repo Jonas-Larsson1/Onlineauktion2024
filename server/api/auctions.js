@@ -144,6 +144,8 @@ export default function (server, db) {
         const userToNotify = sortedBidHistory[0].userId
         const outbiddingUser = await User.findById(req.body.user)
         const image = auctionToUpdate.images[0]
+   
+        const date = Date.now() / 1000
 
         if(userToNotify.toString() !== outbiddingUser._id.toString()){
        
@@ -152,7 +154,7 @@ export default function (server, db) {
         const newNotification = new Notification ({
           userId: userToNotify,
           auctionId: req.params.id,
-          date: Date.now(),
+          date: date,
           message: `You have been outbidded by "${outbiddingUser.username}" on auction ${auctionToUpdate.title}`,
           image: image
         })
