@@ -94,6 +94,14 @@ export default function NewBid(props) {
    
       if (response.ok) {
        updateAuction(auction);
+       socket.emit("newBidNotification", {
+        senderId: loggedIn,
+        recieverId: auction.bidHistory[0].userId,
+        username: username,
+        bidAmount: bidAmount,
+        title: auction.title,
+      });
+      
       } else {
         // säg åt användaren det gick åt skogen
         alert("I did not work.");

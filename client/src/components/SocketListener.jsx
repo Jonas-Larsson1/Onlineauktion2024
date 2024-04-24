@@ -41,7 +41,8 @@ export default function SocketListener() {
             
             if(username == undefined){
                 return false
-            }else {
+            }else
+            {
                 toast(`${username} has outbidded you \n On: ${title} \n New highest bid: ${bidAmount} `);
             }
             

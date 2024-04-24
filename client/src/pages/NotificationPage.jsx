@@ -31,8 +31,7 @@ export default function NotificationPage() {
 
             <Notifications
               className="mx-5"
-              notifications={notifications} 
-              forceReRender={forceReRender}
+              notifications={notifications} forceReRender={forceReRender}
               />
           </div>
           </div>
