@@ -5,12 +5,14 @@ import StyleCard from "../components/StyleCard";
 import { GlobalContext } from "../GlobalContext";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../components/BackButton";
+import Loading from "../components/Loading";
 
 const EditAuction = () => {
     const { id } = useParams();
     const { loggedIn } = useContext(GlobalContext);
     const navigate = useNavigate();
-
+    const [isCreator, setIsCreator] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [auctionData, setAuctionData] = useState({
         dropdownOpen: false,
         title: "",
@@ -27,14 +29,14 @@ const EditAuction = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Fetch auction data
                 const response = await fetch(`/api/auction/${id}`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch auction data");
                 }
-                const data = await response.json();
+                const auction = await response.json();
 
-                // Fetch categories
+                setIsCreator(auction.sellerId === loggedIn);
+
                 const categoriesResponse = await fetch("/api/auctions");
                 if (!categoriesResponse.ok) {
                     throw new Error("Failed to fetch categories");
@@ -49,15 +51,16 @@ const EditAuction = () => {
                     return acc;
                 }, []);
 
-                // Set auction data and categories
                 setAuctionData({
                     ...auctionData,
-                    allImages: data.images || ["", "", ""],
-                    mainTitle: data.title || "",
-                    description: data.description || "",
-                    title: data.category[0] || "",
+                    allImages: auction.images || ["", "", ""],
+                    mainTitle: auction.title || "",
+                    description: auction.description || "",
+                    title: auction.category[0] || "",
                     data: existingCategories
                 });
+
+                setLoading(false);
             } catch (error) {
                 console.error("Error fetching auction data:", error);
                 setAuctionData({
@@ -68,7 +71,7 @@ const EditAuction = () => {
             }
         };
         fetchData();
-    }, [id]);
+    }, [id, loggedIn]);
 
     const onImageInput = (index, value) => {
         const imageInput = [...auctionData.allImages];
@@ -123,7 +126,6 @@ const EditAuction = () => {
             navigate("/");
 
         } catch (error) {
-            console.error("Error deleting auction:", error);
             setAuctionData({
                 ...auctionData,
                 showAlert: true,
@@ -146,6 +148,7 @@ const EditAuction = () => {
 
     return (
         <>
+            <Loading loading={loading} />
             <div style={{ height: '100vh' }}>
                 <BackButton to={`/AuctionPage/${id}`} />
 
@@ -160,113 +163,125 @@ const EditAuction = () => {
                     </Alert>
                 )}
 
-                <div className="d-flex justify-content-center mb-5" style={{ width: '100%' }}>
-                    <div className="w-25">
-                        <StyleCard><h4 className="fst-italic fw-bold">Edit your auction</h4></StyleCard>
-                    </div>
-                </div>
-
-                <form className="w-100 d-flex justify-content-center align-items-center m-3">
-                    <div className="d-flex flex-column" style={{ width: "30%" }}>
-                        <div className="d-flex flex-column">
-                            {auctionData.allImages.map((image, index) => (
-                                <input
-                                    key={index}
-                                    type="text"
-                                    value={image}
-                                    className="form-control mb-2"
-                                    onChange={(e) => onImageInput(index, e.target.value)}
-                                    placeholder="Link to your image"
-                                />
-                            ))}
-
-                            <input
-                                type="text"
-                                value={auctionData.mainTitle}
-                                onChange={(e) =>
-                                    setAuctionData({ ...auctionData, mainTitle: e.target.value })
-                                }
-                                className="form-control mb-2"
-                                placeholder="Title"
-                                aria-label="Title"
-                            />
-
-                            <input
-                                type="text"
-                                value={auctionData.description}
-                                onChange={(e) =>
-                                    setAuctionData({ ...auctionData, description: e.target.value })
-                                }
-                                className="form-control mb-2"
-                                placeholder="Description"
-                                aria-label="Description"
-                            />
+                {isCreator ? (
+                    <div>
+                        <div className="d-flex justify-content-center mb-5" style={{ width: '100%' }}>
+                            <div className="w-25">
+                                <StyleCard><h4 className="fst-italic fw-bold">Edit your auction</h4></StyleCard>
+                            </div>
                         </div>
-                        <div className="dropdown mt-2 w-100 d-flex justify-content-center">
-                            <button
-                                className="btn btn-secondary dropdown-toggle w-75"
-                                type="button"
-                                id="dropdownMenuButton1"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                                onClick={() =>
-                                    setAuctionData({
-                                        ...auctionData,
-                                        dropdownOpen: !auctionData.dropdownOpen,
-                                    })
-                                }
-                            >
-                                {auctionData.title === "" ? "Categories" : auctionData.title}
-                            </button>
-                        </div>
-                        {auctionData.dropdownOpen ? (
-                            <div className="list-group w-75 align-self-center" style={{ maxHeight: "200px", overflowY: "auto" }}>
-                                {auctionData.data && auctionData.data.map((cat, index) => (
-                                    <a
-                                        key={index}
-                                        className="list-group-item list-group-item-action text-center"
-                                        href="#"
+
+                        <form className="w-100 d-flex justify-content-center align-items-center m-3">
+                            <div className="d-flex flex-column" style={{ width: "30%" }}>
+                                <div className="d-flex flex-column">
+                                    {auctionData.allImages.map((image, index) => (
+                                        <input
+                                            key={index}
+                                            type="text"
+                                            value={image}
+                                            className="form-control mb-2"
+                                            onChange={(e) => onImageInput(index, e.target.value)}
+                                            placeholder="Link to your image"
+                                        />
+                                    ))}
+
+                                    <input
+                                        type="text"
+                                        value={auctionData.mainTitle}
+                                        onChange={(e) =>
+                                            setAuctionData({ ...auctionData, mainTitle: e.target.value })
+                                        }
+                                        className="form-control mb-2"
+                                        placeholder="Title"
+                                        aria-label="Title"
+                                    />
+
+                                    <input
+                                        type="text"
+                                        value={auctionData.description}
+                                        onChange={(e) =>
+                                            setAuctionData({ ...auctionData, description: e.target.value })
+                                        }
+                                        className="form-control mb-2"
+                                        placeholder="Description"
+                                        aria-label="Description"
+                                    />
+                                </div>
+                                <div className="dropdown mt-2 w-100 d-flex justify-content-center">
+                                    <button
+                                        className="btn btn-secondary dropdown-toggle w-75"
+                                        type="button"
+                                        id="dropdownMenuButton1"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
                                         onClick={() =>
                                             setAuctionData({
                                                 ...auctionData,
-                                                title: cat,
-                                                dropdownOpen: false,
-                                                disabled: !auctionData.disabled,
+                                                dropdownOpen: !auctionData.dropdownOpen,
                                             })
                                         }
                                     >
-                                        {cat}
-                                    </a>
-                                ))}
-                                <input
-                                    type="text"
-                                    placeholder="Add custom category"
-                                    value={auctionData.customCategory}
-                                    onChange={(e) =>
-                                        setAuctionData({
-                                            ...auctionData,
-                                            customCategory: e.target.value,
-                                        })
-                                    }
-                                    onKeyDown={handleKeyPress}
-                                />
-                            </div>
-                        ) : null}
-                        <button
-                            className="btn btn-primary mt-3 w-75 align-self-center"
-                            onClick={updateAuction}
-                        >
-                            Update auction
-                        </button>
+                                        {auctionData.title === "" ? "Categories" : auctionData.title}
+                                    </button>
+                                </div>
+                                {auctionData.dropdownOpen ? (
+                                    <div className="list-group w-75 align-self-center" style={{ maxHeight: "200px", overflowY: "auto" }}>
+                                        {auctionData.data && auctionData.data.map((cat, index) => (
+                                            <a
+                                                key={index}
+                                                className="list-group-item list-group-item-action text-center"
+                                                href="#"
+                                                onClick={() =>
+                                                    setAuctionData({
+                                                        ...auctionData,
+                                                        title: cat,
+                                                        dropdownOpen: false,
+                                                        disabled: !auctionData.disabled,
+                                                    })
+                                                }
+                                            >
+                                                {cat}
+                                            </a>
+                                        ))}
+                                        <input
+                                            type="text"
+                                            placeholder="Add custom category"
+                                            value={auctionData.customCategory}
+                                            onChange={(e) =>
+                                                setAuctionData({
+                                                    ...auctionData,
+                                                    customCategory: e.target.value,
+                                                })
+                                            }
+                                            onKeyDown={handleKeyPress}
+                                        />
+                                    </div>
+                                ) : null}
+                                <button
+                                    className="btn btn-primary mt-3 w-75 align-self-center"
+                                    onClick={updateAuction}
+                                >
+                                    Update auction
+                                </button>
 
-                        <button
-                            className="btn btn-danger mt-3 w-75 align-self-center"
-                            onClick={deleteAuction}
-                        >
-                            Delete auction
-                        </button>
+                                <button
+                                    className="btn btn-danger mt-3 w-75 align-self-center"
+                                    onClick={deleteAuction}
+                                >
+                                    Delete auction
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                ) : (
+                    <div>
+                        <div className="d-flex justify-content-center mb-5" style={{ width: '100%' }}>
+                            <div className="w-25">
+                                <StyleCard><h4 className="fst-italic fw-bold">You can only edit your own auctions.</h4></StyleCard>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </>
     );
