@@ -13,9 +13,10 @@ function GlobalProvider({ children }) {
       setIsLoading(true);
       const response = await fetch("/api/login");
 
+      const result = await response.json().loggedIn;
+
       if (response.status === 200) {
-        const result = await response.json();
-        setLoggedIn(result.loggedIn);
+        setLoggedIn(result);
       } else {
         setLoggedIn(null);
       }
