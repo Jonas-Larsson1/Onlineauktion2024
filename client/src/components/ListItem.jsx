@@ -71,7 +71,7 @@ const ListCard = ({ item }) => {
         </ListGroup.Item>
       </ListGroup>
       <Card.Body className="text-center">
-        <Link to={`/AuctionPage/${item._id}`} className="btn btn-primary w-100 position-absolute start-0 bottom-0">View</Link>
+      <Link to={`/AuctionPage/${item._id}`} className="btn btn-primary w-100 position-absolute start-0 bottom-0 d-flex justify-content-center">View</Link>
       </Card.Body>
     </Card>
   </>);
