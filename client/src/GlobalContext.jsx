@@ -8,6 +8,8 @@ function GlobalProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [socket, setSocket] = useState(null);
   const [ displayLoginAlert, setDisplayLoginAlert ] = useState(false);
+  const [isCreator, setIsCreator] = useState(false);
+
 
   useEffect(() => {
     const getSession = async () => {
@@ -91,7 +93,9 @@ function GlobalProvider({ children }) {
          socket,
          setSocket,
          displayLoginAlert,
-         setDisplayLoginAlert
+         setDisplayLoginAlert,
+         isCreator,
+         setIsCreator
       }}
     >
       {children}

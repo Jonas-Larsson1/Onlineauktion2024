@@ -93,7 +93,7 @@ export default function AccountPage() {
           if (auctionEndDate > currentDate) {
             currentAuction.bidHistory = sortBids(currentAuction.bidHistory)
             userOngoingAuctions.push(currentAuction);
-
+            break;
           } else {
             currentAuction.bidHistory = sortBids(currentAuction.bidHistory)
             userClosedAuctions.push(currentAuction);
@@ -116,13 +116,14 @@ export default function AccountPage() {
       const result = await response.json();
       setUser(result);
 
-
       const savedAuctionsDetails = [];
       for (const auctionId of result.savedAuctions) {
         const auctionResponse = await fetch(`api/auction/${auctionId}`);
         const auctionResult = await auctionResponse.json();
-        savedAuctionsDetails.push(auctionResult);
-        break;
+        if (auctionResult) {
+          savedAuctionsDetails.push(auctionResult);
+          break;
+        }
       }
 
       if (savedAuctionsDetails.length === 0) {
