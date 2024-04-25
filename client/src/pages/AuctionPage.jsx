@@ -13,7 +13,7 @@ export default function AuctionPage() {
   const { loggedIn } = useContext(GlobalContext);
   let { id } = useParams();
   const [auction, setAuction] = useState(null);
-  const [isCreator, setIsCreator] = useState(false);
+  const {isCreator, setIsCreator} = useContext(GlobalContext);
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState(false);
 
