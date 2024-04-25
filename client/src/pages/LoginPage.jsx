@@ -1,68 +1,52 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from "../GlobalContext";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
-  const [error, setError] = useState("");
 
 
   const { login } = useContext(GlobalContext);
-  const { displayAlert } = useContext(GlobalContext);
+  const { displayLoginAlert } = useContext(GlobalContext);
   const { showLogoutAlert } = useContext(GlobalContext);
 
+
+
+
   const checkForUser = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const data = {
+    const userData = {
       username: usernameInput,
-      password: passwordInput
-    }
+      password: passwordInput,
+    };
 
-    fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-    .then(response => response.json())
-    .then(result => {
-      console.log(result)
-    })
-    .catch(error => {
-      console.error('Fel vid inloggning:', error);
-      alert('Gick inte att logga in.');
-    });
-  }
- 
-  // const checkForUser = async (e) => {
-  //   e.preventDefault();
+    const loginResponse = await login(userData);
 
-  //   try {
-  //     const response = await fetch("api/users");
-  //     const credentials = await response.json();
-  //     const user = credentials.find(
-  //       (user) =>
-  //         user.username.toLowerCase() === usernameInput.toLowerCase() &&
-  //         user.password === passwordInput
-  //     );
+   
+    if (loginResponse.status === 201) {
+      navigate("/");
+    } 
+  };
 
-  //     if (user) {
-  //       login(user.id); // set loggedIn to true
-  //       displayAlert();
-  
-  //     } else {
-  //       setError("Invalid username or password");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error logging in:", error);
-  //   }
-  // };
+
+
+  useEffect(() => {
+    const getSession = async () => {
+      const response = await fetch("/api/login");
+      const result = await response.json()
+      if (result.loggedIn != false) {
+        navigate("/");
+      } 
+    };
+
+    getSession();
+  }, []);
 
   return (
     <>
@@ -89,36 +73,28 @@ export default function LoginPage() {
           />
         </Form.Group>
 
-      {/* <Form.Group className="mb-3" controlId="formCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group> */}
 
         <Button variant="primary" onClick={checkForUser}>
           Login
         </Button>
 
-        <div>{error}</div>
+        {displayLoginAlert ? (
+          <Alert severity="info" style={{ margin: "2rem"}}>
+            <em>Wrong username or password!</em>
+          </Alert>) : ""}
         <div>
           <b>OR</b>
         </div>
-        
-      
+
         <Button>
           <Link className="register-link" to="/registerPage">
             Register!
           </Link>
         </Button>
         {showLogoutAlert ? (
-         
-          <Alert
-            className= "logout-alert"
-            severity="info"
-          >
-           <em>
-             Goodbye, you are now logged out! 
-            </em>
-        
-          </Alert> 
+          <Alert className="logout-alert" severity="info">
+            <em>Goodbye, you are now logged out!</em>
+          </Alert>
         ) : (
           ""
         )}

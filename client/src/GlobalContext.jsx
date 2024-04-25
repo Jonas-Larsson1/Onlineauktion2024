@@ -1,12 +1,32 @@
 import { createContext, useEffect, useState } from "react";
-import { redirect } from "react-router";
 
 const GlobalContext = createContext();
 
-function GlobalProvider({children}){
+function GlobalProvider({ children }) {
+  const [showLogoutAlert, setShowLogoutAlert] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [socket, setSocket] = useState(null);
+  const [ displayLoginAlert, setDisplayLoginAlert ] = useState(false);
 
-    const[showLogoutAlert, setShowLogoutAlert] = useState(null)
-   
+  useEffect(() => {
+    const getSession = async () => {
+      setIsLoading(true);
+      const response = await fetch("/api/login");
+      const result = await response.json()
+
+      if (result.loggedIn != false) {
+        setLoggedIn(result.loggedIn);
+      } else {
+        setLoggedIn(null);
+      }
+
+      setIsLoading(false);
+    };
+
+    getSession();
+  }, []);
+
   const [show, setShow] = useState(() => {
     return sessionStorage.getItem("showAlert" === "true" || "false");
   });
@@ -23,30 +43,36 @@ function GlobalProvider({children}){
     setShow(true);
   };
 
-  const [loggedIn, setLoggedIn] = useState(() => {
-    if (
-      sessionStorage.getItem("loggedIn") === "false" ||
-      sessionStorage.getItem("loggedIn") === false ||
-      sessionStorage.getItem("loggedIn") === "null" ||
-      sessionStorage.getItem("loggedIn") === null
-    ) {
-      redirect("/LoginPage"); // returns false if logged in becomes false or null
-      return false
-    } else {
-      return sessionStorage.getItem("loggedIn"); // otherwise the value wont change
+  const login = async (userData) => {
+    const response = await fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+
+    const result = await response.json();
+
+    if (response.status == 201) {
+      setLoggedIn(result.loggedIn);
+    } else{
+      setDisplayLoginAlert(true)
     }
-  });
 
-  useEffect(() => {
-    sessionStorage.setItem("loggedIn", loggedIn);
-  }, [loggedIn]); // updates sessionstorage if loggedIn changes
-
-  const login = (userId) => {
-    setLoggedIn(userId);
+    return response;
   };
 
-  const logout = () => {
-    setLoggedIn(false);
+  const logout = async () => {
+    await fetch("/api/login", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    setLoggedIn(null);
+   window.location.reload()
   };
 
   return (
@@ -54,13 +80,18 @@ function GlobalProvider({children}){
       value={{
         loggedIn,
         login,
+        isLoading,
         logout,
         show,
         setShow,
         hideAlert,
         displayAlert,
-      showLogoutAlert,
-      setShowLogoutAlert
+        showLogoutAlert,
+        setShowLogoutAlert,
+         socket,
+         setSocket,
+         displayLoginAlert,
+         setDisplayLoginAlert
       }}
     >
       {children}

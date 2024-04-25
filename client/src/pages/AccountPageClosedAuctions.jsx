@@ -10,7 +10,7 @@ export default function AccountPage() {
     const [user, setUser] = useState(null);
     const [closedAuctions, setClosedAuctions] = useState(null);
 
-    const currentDate = new Date();
+    const currentDate = Date.now();
 
     function sortBids(bidHistory) {
         bidHistory.sort((a, b) => b.amount - a.amount)
@@ -20,7 +20,7 @@ export default function AccountPage() {
     // Fetches the logged in user
     useEffect(() => {
         const getUserData = async () => {
-            const response = await fetch(`http://localhost:3000/users/${loggedIn}`);
+            const response = await fetch(`/api/user/${loggedIn}`);
             const result = await response.json();
             setUser(result);
         };
@@ -33,7 +33,7 @@ export default function AccountPage() {
     // Fetches auctions that logged in user has started
     useEffect(() => {
         const getAuctionData = async () => {
-            const response = await fetch(`http://localhost:3000/auctions/`);
+            const response = await fetch(`/api/auctions/`);
             const result = await response.json();
 
             const userClosedAuctions = [];
@@ -48,7 +48,7 @@ export default function AccountPage() {
                     if (auctionEndDate < currentDate) {
                         currentAuction.bidHistory = sortBids(currentAuction.bidHistory)
                         userClosedAuctions.push(currentAuction);
-                    } 
+                    }
                 }
             }
             userClosedAuctions.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
@@ -61,7 +61,7 @@ export default function AccountPage() {
     // Printing out info
     return (<>
 
-        <BackButton />
+        <BackButton to="/AccountPage" />
 
         <div style={{ backgroundColor: "#41B3A3", minHeight: '100vh' }}>
 

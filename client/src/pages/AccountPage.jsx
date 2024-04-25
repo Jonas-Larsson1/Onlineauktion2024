@@ -3,6 +3,7 @@ import StyleCard from "../components/StyleCard";
 import ListCard from "../components/ListItem";
 import { GlobalContext } from "../GlobalContext";
 import { Link } from "react-router-dom";
+import Loading from "../components/Loading";
 
 export default function AccountPage() {
   const { loggedIn } = useContext(GlobalContext)
@@ -11,8 +12,9 @@ export default function AccountPage() {
   const [ongoingAuctions, setOngoingAuctions] = useState(null);
   const [closedAuctions, setClosedAuctions] = useState(null);
   const [savedAuctions, setSavedAuctions] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const currentDate = new Date();
+  const currentDate = Date.now();
 
   function sortBids(bidHistory) {
     bidHistory.sort((a, b) => b.amount - a.amount)
@@ -27,7 +29,7 @@ export default function AccountPage() {
   // Fetches the logged in user
   useEffect(() => {
     const getUserData = async () => {
-      const response = await fetch(`http://localhost:3000/users/${loggedIn}`);
+      const response = await fetch(`/api/user/${loggedIn}`);
       const result = await response.json();
       setUser(result);
     };
@@ -39,7 +41,7 @@ export default function AccountPage() {
   // Fetches auctions where logged in user has placed a bid
   useEffect(() => {
     const getBidsData = async () => {
-      const response = await fetch(`http://localhost:3000/auctions/`);
+      const response = await fetch(`/api/auctions/`);
       const result = await response.json();
 
       const userBids = []
@@ -66,6 +68,7 @@ export default function AccountPage() {
         }
       }
       setBids(userBids)
+      setLoading(false);
     };
 
     getBidsData();
@@ -74,7 +77,7 @@ export default function AccountPage() {
   // Fetches auctions that logged in user has started
   useEffect(() => {
     const getAuctionData = async () => {
-      const response = await fetch(`http://localhost:3000/auctions/`);
+      const response = await fetch(`/api/auctions/`);
       const result = await response.json();
 
       const userOngoingAuctions = [];
@@ -100,6 +103,7 @@ export default function AccountPage() {
       }
       setOngoingAuctions(userOngoingAuctions);
       setClosedAuctions(userClosedAuctions);
+      setLoading(false);
     };
 
     getAuctionData();
@@ -108,23 +112,25 @@ export default function AccountPage() {
   // Fetches auctions that logged in user has saved
   useEffect(() => {
     const getSavedData = async () => {
-        const response = await fetch(`http://localhost:3000/users/${loggedIn}`);
-        const result = await response.json();
-        setUser(result);
+      const response = await fetch(`/api/user/${loggedIn}`);
+      const result = await response.json();
+      setUser(result);
 
 
-        const savedAuctionsDetails = [];
-        for (const auctionId of result.savedAuctions) {
-            const auctionResponse = await fetch(`http://localhost:3000/auctions/${auctionId}`);
-            const auctionResult = await auctionResponse.json();
-            savedAuctionsDetails.push(auctionResult);
-            break;
-        }
+      const savedAuctionsDetails = [];
+      for (const auctionId of result.savedAuctions) {
+        const auctionResponse = await fetch(`api/auction/${auctionId}`);
+        const auctionResult = await auctionResponse.json();
+        savedAuctionsDetails.push(auctionResult);
+        break;
+      }
 
       if (savedAuctionsDetails.length === 0) {
         setSavedAuctions([]);
+        setLoading(false);
       } else {
         setSavedAuctions(savedAuctionsDetails);
+        setLoading(false);
 
       };
     };
@@ -135,6 +141,8 @@ export default function AccountPage() {
 
   // Printing out info
   return (<>
+    <Loading loading={loading} />
+
     <div className="pt-5" style={{ backgroundColor: "#41B3A3", minHeight: '100vh' }}>
       {user ? (
 
