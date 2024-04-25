@@ -90,15 +90,15 @@ export default function NewBid(props) {
       });
 
       const result = await response.json()
-      console.log(response)
-      console.log(result)
+      // console.log(response)
+      // console.log(result)
    
       if (response.ok) {
        updateAuction(auction);
        socket.emit("newBidNotification", {
         senderId: loggedIn,
         recieverId: auction.bidHistory[0].userId,
-        username: username,
+        username: userResult.username,
         bidAmount: bidAmount,
         title: auction.title,
       });
