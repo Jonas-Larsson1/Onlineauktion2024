@@ -115,7 +115,7 @@ export default function AuctionPage() {
 }
 
 export function formatDateTime(unixTimestamp) {
-  const date = new Date(unixTimestamp * 1000);
+  const date = new Date(unixTimestamp);
   const options = {
     year: "numeric",
     month: "short",

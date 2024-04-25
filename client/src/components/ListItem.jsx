@@ -26,13 +26,13 @@ const ListCard = ({ item }) => {
     // Helper function to check if the current date is past the item's end date.
     const hasSurpassedTime = () => {
       const endDateUnix = item.endDate; 
-      const currentUnix = Math.floor(Date.now() / 1000); 
+      const currentUnix = Date.now(); 
       return currentUnix > endDateUnix; 
     };
 
     const hasStartedTime = () => {
       const startDateUnix = item.startDate;
-      const currentUnix = Math.floor(Date.now() / 1000);
+      const currentUnix = Date.now();
       return currentUnix >= startDateUnix;
     };
 

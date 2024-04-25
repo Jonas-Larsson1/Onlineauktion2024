@@ -30,7 +30,7 @@ export default function (server, db) {
       const auctions = await Auction.aggregate([
         {
           $match: {
-            endDate: { $lt: (new Date() / 1000) } // Auction has ended
+            endDate: { $lt: (new Date()) } // Auction has ended
           }
         },
         {
@@ -145,7 +145,7 @@ export default function (server, db) {
         const outbiddingUser = await User.findById(req.body.user)
         const image = auctionToUpdate.images[0]
    
-        const date = Date.now() / 1000
+        const date = Date.now()
 
         if(userToNotify.toString() !== outbiddingUser._id.toString()){
        

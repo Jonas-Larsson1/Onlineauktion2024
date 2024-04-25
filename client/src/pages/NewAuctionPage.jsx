@@ -20,8 +20,8 @@ const NewAuctionPage = () => {
     startPrice: "",
     reservedPrice: "",
     showAlert: false,
-    unixStartDate: Math.floor(new Date().getTime() / 1000),
-    unixEndDate: Math.floor(new Date().getTime() / 1000),
+    unixStartDate: Date.now(),
+    unixEndDate: Date.now(),
     warning: "",
     disabled: true,
     startDateChanged: false
@@ -165,7 +165,7 @@ const NewAuctionPage = () => {
   const handleStartDateChange = (date) => {
     setAuctionData({
       ...auctionData,
-      unixStartDate: Math.floor(date.getTime() / 1000),
+      unixStartDate: date.getTime(),
       startDateChanged: true
     });
   };
@@ -173,7 +173,7 @@ const NewAuctionPage = () => {
   const handleEndDateChange = (date) => {
     setAuctionData({
       ...auctionData,
-      unixEndDate: Math.floor(date.getTime() / 1000),
+      unixEndDate: date.getTime(),
     });
   };
 
@@ -280,7 +280,7 @@ const NewAuctionPage = () => {
                 <div className="d-flex flex-column">
                   <label>Start Date:</label>
                   <DatePicker
-                    selected={new Date(auctionData.unixStartDate * 1000)}
+                    selected={new Date(auctionData.unixStartDate)}
                     onChange={handleStartDateChange}
                     selectsStart
                     minDate={new Date()}
@@ -295,10 +295,10 @@ const NewAuctionPage = () => {
                 <div className="d-flex flex-column">
                   <label>End Date:</label>
                   <DatePicker
-                    selected={new Date(auctionData.unixEndDate * 1000)}
+                    selected={new Date(auctionData.unixEndDate)}
                     onChange={handleEndDateChange}
                     selectsEnd
-                    minDate={auctionData.unixStartDate ? new Date(auctionData.unixStartDate * 1000) : null}
+                    minDate={auctionData.unixStartDate ? new Date(auctionData.unixStartDate) : null}
                     disabled={!auctionData.startDateChanged}
                     className="form-control custom-date-picker"
                     showTimeSelect

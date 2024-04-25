@@ -9,7 +9,7 @@ export default function AccountPage() {
     const [user, setUser] = useState(null);
     const [ongoingAuctions, setOngoingAuctions] = useState(null);
 
-    const currentDate = Math.floor(Date.now() / 1000); 
+    const currentDate = Date.now(); 
 
     function sortBids(bidHistory) {
         bidHistory.sort((a, b) => b.amount - a.amount)
