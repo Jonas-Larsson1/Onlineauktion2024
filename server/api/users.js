@@ -12,11 +12,6 @@ export default function (server, db) {
     res.json(user)
   })
 
-  server.get('/api/user/getUsername/:id', async (req,res) => {
-    const user = await User.findById(req.params.id)
-    res.json(user.username)
-  })  
-
   server.put("/api/user/:id", async (req, res) => {
     try {
       const userToUpdate = await User.findByIdAndUpdate(
