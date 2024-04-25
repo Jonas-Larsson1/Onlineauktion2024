@@ -1,5 +1,11 @@
 export default function ImageAdder ( {images, setAuctionData} ) {
 
+  const onImageInput = (index, value) => {
+    const imageInput = [...images];
+    imageInput[index] = value;
+    setAuctionData({ ...images, allImages: imageInput });
+  };
+
   const addImageInput = () => {
     setAuctionData(prevState => ({
       ...prevState,

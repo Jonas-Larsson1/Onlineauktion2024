@@ -34,14 +34,6 @@ const NewAuctionPage = () => {
   const { loggedIn } = useContext(GlobalContext);
   const navigate = useNavigate();
 
-  const onImageInput = (index, value) => {
-    const imageInput = [...auctionData.allImages];
-    imageInput[index] = value;
-
-
-    setAuctionData({ ...auctionData, allImages:  imageInput });
-
-  };
 
   useEffect(() => {
     const getData = async () => {
