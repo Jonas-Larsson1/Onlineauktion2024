@@ -15,15 +15,16 @@ export default function AccountPage() {
             const response = await fetch(`/api/user/${loggedIn}`);
             const result = await response.json();
             setUser(result);
-    
 
             const savedAuctionsDetails = [];
             for (const auctionId of result.savedAuctions) {
                 const auctionResponse = await fetch(`/api/auction/${auctionId}`);
                 const auctionResult = await auctionResponse.json();
-                savedAuctionsDetails.push(auctionResult);
-            }
-
+                if (auctionResult) {
+                  savedAuctionsDetails.push(auctionResult);
+                }
+              }
+              
             savedAuctionsDetails.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
             setSavedAuctions(savedAuctionsDetails); 
         };

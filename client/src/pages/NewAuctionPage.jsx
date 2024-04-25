@@ -21,7 +21,7 @@ const NewAuctionPage = () => {
     reservedPrice: "",
     showAlert: false,
     unixStartDate: Date.now(),
-    unixEndDate: Date.now(),
+    unixEndDate: (Date.now() + 604800000),
     warning: "",
     disabled: true,
     startDateChanged: false
