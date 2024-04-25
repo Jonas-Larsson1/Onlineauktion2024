@@ -87,9 +87,7 @@ export default function NewBid(props) {
       });
 
       const result = await response.json()
-      // console.log(response)
-      // console.log(result)
-      console.log(result)
+  
    
       if (response.ok) {
         if (auction.bidHistory.length > 1)

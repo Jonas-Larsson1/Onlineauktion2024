@@ -99,7 +99,7 @@ const NewAuctionPage = () => {
         }),
       });
       if (res.ok) {
-        // console.log(res);
+      
         navigate("/"); // navigates to home page
       } else {
         setAuctionData({

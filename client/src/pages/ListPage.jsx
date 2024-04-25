@@ -83,7 +83,7 @@ export default function ListPage() {
           </div>
         </div>
       </div>
-      <div className="container">
+      <div className="container" style={{ marginBottom : "15vh"}}>
         <div className="row row-cols-1 row-cols-md-3 g-4">
           {list.slice(1).map((item, index) => (
             <StyleCard key={index}>

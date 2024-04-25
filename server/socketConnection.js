@@ -1,6 +1,6 @@
 export default function socketConnection(io) {
     
-        // let bids = []; 
+       
         let users = []
 
         const addNewUser = (userId, socketId) => {
@@ -10,21 +10,13 @@ export default function socketConnection(io) {
         const removeUser = (socketId) => {
             users = users.filter(user => user.socketId !== socketId)
         }
-        // const addNewBid = (bidData, socketId) => {
-        
-        
-        //     bids.push({ bidData, socketId });
-           
-            
-        // };
+   
       
         const getUser = (userId) => {
             return users.find((user) => user.userId === userId)
         }
 
-        // const removeBid = (socketId) =>{
-        //   bids = bids.filter(bid => bid.socketId !== socketId);
-        // }
+     
       
         io.on("connection", (socket) => {
           console.log("Client connected");
