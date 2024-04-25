@@ -17,14 +17,7 @@ const Categories = ({category, setCategory, setSearchQuery, SearchQuery}) => {
     setAuctionData(data); // updating auctionData with fetched data
   }, [data]);
 
-  // const handleCategoryClick = (category) => {
-  //   setSearchQuery('') // resets search query
-  //   setCategory(category);
-  //   setToggle(false); // closes menu with categories
-    
-  //   // navigate(`/searchPage/${category}`)
-    
-  // };
+
 
   const handleShowAllClick = () => {
     setCategory(null); // Reset category to null to show all items first
@@ -32,11 +25,6 @@ const Categories = ({category, setCategory, setSearchQuery, SearchQuery}) => {
     setToggle(false); // Close menu with categories
 
   };
-
-  useEffect(() => {
-    // console.log(category); // Log category after it's updated
-    // console.log(SearchQuery)
-  }, [category, SearchQuery]);
 
   
   const filteredCategories = auctionData ? 
@@ -58,16 +46,13 @@ const Categories = ({category, setCategory, setSearchQuery, SearchQuery}) => {
     <div className='p-2'>
       {toggle ? 
         <div className='list-group'>
-          {/* <a className='list-group-item list-group-item-action' href="#" onClick={() => handleCategoryClick(null)}>
-            <b>Show all</b>
-          </a> */}
+
            <Link className='list-group-item list-group-item-action' to="/SearchPage/Collection"
               onClick={handleShowAllClick}
             > <b>Show all</b>
             </Link>
           {/* renders each category */}
           {allCategories.map((cat, index) => 
-            // <a key={index} className='list-group-item list-group-item-action' href="#" onClick={() => handleCategoryClick(cat)}>{cat}</a>
             <Link key={index} className='list-group-item list-group-item-action' to={`/SearchPage/${cat}`}  onClick={() => {setCategory(cat), console.log(category), setToggle(false)}}>{cat}</Link>
           )}
         </div> 
