@@ -7,6 +7,7 @@ function GlobalProvider({ children }) {
   const [loggedIn, setLoggedIn] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [socket, setSocket] = useState(null);
+  const [ displayLoginAlert, setDisplayLoginAlert ] = useState(false);
   const [isCreator, setIsCreator] = useState(false);
 
 
@@ -57,6 +58,8 @@ function GlobalProvider({ children }) {
 
     if (response.status == 201) {
       setLoggedIn(result.loggedIn);
+    } else{
+      setDisplayLoginAlert(true)
     }
 
     return response;
@@ -89,6 +92,8 @@ function GlobalProvider({ children }) {
         setShowLogoutAlert,
          socket,
          setSocket,
+         displayLoginAlert,
+         setDisplayLoginAlert,
          isCreator,
          setIsCreator
       }}

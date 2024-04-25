@@ -9,14 +9,12 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
-  const [error, setError] = useState("");
 
-  const { login, loggedIn } = useContext(GlobalContext);
-  const { displayAlert } = useContext(GlobalContext);
+
+  const { login } = useContext(GlobalContext);
+  const { displayLoginAlert } = useContext(GlobalContext);
   const { showLogoutAlert } = useContext(GlobalContext);
-  // const { setSocket } = useContext(GlobalContext)
 
-  // setSocket(null)
 
 
 
@@ -30,13 +28,13 @@ export default function LoginPage() {
 
     const loginResponse = await login(userData);
 
-    // console.log(loginResponse)
+   
     if (loginResponse.status === 201) {
       navigate("/");
-    } else {
-      // felhantering saknas
-    }
+    } 
   };
+
+
 
   useEffect(() => {
     const getSession = async () => {
@@ -75,15 +73,15 @@ export default function LoginPage() {
           />
         </Form.Group>
 
-        {/* <Form.Group className="mb-3" controlId="formCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group> */}
 
         <Button variant="primary" onClick={checkForUser}>
           Login
         </Button>
 
-        <div>{error}</div>
+        {displayLoginAlert ? (
+          <Alert severity="info" style={{ margin: "2rem"}}>
+            <em>Wrong username or password!</em>
+          </Alert>) : ""}
         <div>
           <b>OR</b>
         </div>
