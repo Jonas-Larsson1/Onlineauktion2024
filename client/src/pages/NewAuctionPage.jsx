@@ -196,6 +196,13 @@ const NewAuctionPage = () => {
     }));
   };
 
+  const removeImageInput = (index) => {
+    setAuctionData((prevState) => {
+      const updatedImages = prevState.allImages.filter((_, i) => i !== index);
+      return { ...prevState, allImages: updatedImages };
+    });
+  };
+
   return (
     <>
       <div style={{ height: '100vh' }}>
@@ -220,17 +227,27 @@ const NewAuctionPage = () => {
           <div className="d-flex flex-column" style={{ width: "30%" }}>
             <div className="d-flex flex-column">
             {auctionData.allImages.map((image, index) => (
-              <input
-                key={index}
-                type="text"
-                value={image}
-                className="form-control mr-2"
-                onChange={(e) => onImageInput(index, e.target.value)}
-                placeholder="Link to your image"
-              />
+              <div key={index} className="d-flex align-items-center mb-1">
+                <input
+                  key={index}
+                  type="text"
+                  value={image}
+                  className="form-control mr-2"
+                  onChange={(e) => onImageInput(index, e.target.value)}
+                  placeholder="Link to your image"
+                />
+                {index > 0 ? 
+                  <button
+                  className="btn btn-danger"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    removeImageInput(index)
+                  }}>-</button>
+                : <></>}
+              </div>
             ))}
 
-              <button className="btn btn-primary my-2" onClick={(e) => {
+              <button className="btn btn-primary mt-2 mb-4" onClick={(e) => {
                 e.preventDefault()
                 addImageInput()
               }}>Click to add another image</button>
