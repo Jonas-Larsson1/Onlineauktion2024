@@ -76,9 +76,6 @@ export default function NewBid(props) {
   
       auction.bidHistory.push(newBid)
 
-   
-
-
       //pls change me ! only newBid data upload or crosscheck auction data on server!
       const response = await fetch(`/api/auction/newBid/${auction._id}`, {
         method: "PUT",
@@ -92,17 +89,19 @@ export default function NewBid(props) {
       const result = await response.json()
       // console.log(response)
       // console.log(result)
+      console.log(result)
    
       if (response.ok) {
-       updateAuction(auction);
-       socket.emit("newBidNotification", {
-        senderId: loggedIn,
-        recieverId: auction.bidHistory[0].userId,
-        username: userResult.username,
-        bidAmount: bidAmount,
-        title: auction.title,
-      });
-      
+        if (auction.bidHistory.length > 1)
+        socket.emit("newBidNotification", {
+          senderId: loggedIn,
+          recieverId: auction.bidHistory[0].userId,
+          username: userResult.username,
+          bidAmount: bidAmount,
+          title: auction.title,
+        });
+      updateAuction(auction);
+        
       } else {
         // säg åt användaren det gick åt skogen
         alert("I did not work.");
