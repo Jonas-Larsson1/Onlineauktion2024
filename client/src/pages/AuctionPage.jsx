@@ -59,7 +59,7 @@ export default function AuctionPage() {
 
   return (
     <>
-      <Loading loading={loading} />    
+      <Loading loading={loading} />
       {auction ? (
         <div className="m-3">
           <h1 className="mx-2">{auction.title}</h1>
@@ -70,7 +70,7 @@ export default function AuctionPage() {
                   className="d-flex align-items-center justify-content-end"
                   style={{ paddingBottom: "0" }}
                 >
-                  {isCreator && (auction.endDate > unixTimestamp) && (
+                  {isCreator && auction.endDate > unixTimestamp && (
                     <>
                       <div className="d-flex align-items-center">
                         <h3 style={{ margin: "-25px 10px 0 10px" }}>
@@ -82,7 +82,14 @@ export default function AuctionPage() {
                   )}
                 </Card.Body>
                 <div style={{ marginBottom: "10px" }}>
-                  <ImageGallery auction={auction} />
+                  {auction.images.length === 1 ? (
+                    <img
+                      src={auction.images[0]}
+                      style={{ width: "100%" }}
+                    />
+                  ) : (
+                    <ImageGallery auction={auction} />
+                  )}
                 </div>
                 <Card.Title>{auction.title}</Card.Title>
                 <Card.Text>{auction.description}</Card.Text>
