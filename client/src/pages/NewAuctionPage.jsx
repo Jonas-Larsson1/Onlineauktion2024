@@ -24,8 +24,8 @@ const NewAuctionPage = () => {
     startPrice: "",
     reservedPrice: "",
     showAlert: false,
-    unixStartDate: Date.now(),
-    unixEndDate: (Date.now() + 604800000),
+    unixStartDate: roundToNearestMinutes(now, { roundingMethod: 'ceil', nearestTo: 15 }),
+    unixEndDate: roundToNearestMinutes((Date.now() + 86400000), { roundingMethod: 'ceil', nearestTo: 15 }),
     warning: "",
     disabled: true,
     startDateChanged: false
@@ -57,17 +57,6 @@ const NewAuctionPage = () => {
       reservedPrice,
       title,
     } = auctionData;
-    console.log(auctionData.allImages)
-  
-    for (let i = 0; i < auctionData.allImages.length; i++){
-      if(auctionData.allImages[i] === ""){
-        const nonEmptyIndex = auctionData.allImages.findIndex(img => img !== "");
-        if (nonEmptyIndex !== -1) {
-          allImages[i] = allImages[nonEmptyIndex];
-        }
-      }
-      console.log(allImages)
-    }
 
     if (
       allImages.length >= 1 &&
@@ -157,13 +146,13 @@ const NewAuctionPage = () => {
 
   const existingCategories = [];
 
-  let filtered = auctionData.data
-    ? auctionData.data.map((item) =>
-      item.category.map((i) =>
-        existingCategories.includes(i) ? null : existingCategories.push(i)
-      )
-    )
-    : null;
+  // let filtered = auctionData.data
+  //   ? auctionData.data.map((item) =>
+  //     item.category.map((i) =>
+  //       existingCategories.includes(i) ? null : existingCategories.push(i)
+  //     )
+  //   )
+  //   : null;
 
   const handleStartDateChange = (date) => {
     setAuctionData({
@@ -220,7 +209,7 @@ const NewAuctionPage = () => {
           <div className="d-flex flex-column" style={{ width: "30%" }}>
             <div className="d-flex flex-column">
 
-              <ImageAdder images={auctionData.allImages} setAuctionData={setAuctionData} />
+              <ImageAdder auctionData={auctionData} setAuctionData={setAuctionData} />
 
               <input
                 type="text"
@@ -259,6 +248,7 @@ const NewAuctionPage = () => {
                     showTimeSelect
                     timeIntervals={15}
                     dateFormat="yyyy-MM-dd HH:mm"
+                    timeFormat="HH:mm"
                   />
                 </div>
               </div>
@@ -275,6 +265,7 @@ const NewAuctionPage = () => {
                     showTimeSelect
                     timeIntervals={15}
                     dateFormat="yyyy-MM-dd HH:mm"
+                    timeFormat="HH:mm"
                   />
                 </div>
               </div>

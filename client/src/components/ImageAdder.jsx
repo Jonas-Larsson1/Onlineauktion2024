@@ -1,9 +1,9 @@
-export default function ImageAdder ( {images, setAuctionData} ) {
+export default function ImageAdder ( {auctionData, setAuctionData} ) {
 
   const onImageInput = (index, value) => {
-    const imageInput = [...images];
+    const imageInput = auctionData.allImages
     imageInput[index] = value;
-    setAuctionData({ ...images, allImages: imageInput });
+    setAuctionData({ ...auctionData, allImages: imageInput });
   };
 
   const addImageInput = () => {
@@ -21,12 +21,12 @@ export default function ImageAdder ( {images, setAuctionData} ) {
   };
   
   return <>
-  {images.map((image, index) => (
+  {auctionData.allImages.map((image, index) => (
     <div key={index} className="d-flex align-items-center mb-1">
       <input
         key={index}
         type="text"
-        value={image}
+        value={image || ''}
         className="form-control mr-2"
         onChange={(e) => onImageInput(index, e.target.value)}
         placeholder="Link to your image"

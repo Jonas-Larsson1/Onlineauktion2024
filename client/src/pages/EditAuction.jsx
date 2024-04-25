@@ -175,7 +175,7 @@ const EditAuction = () => {
             <form className="w-100 d-flex justify-content-center align-items-center m-3">
               <div className="d-flex flex-column" style={{ width: "30%" }}>
                 <div className="d-flex flex-column">
-                  <ImageAdder images={auctionData.allImages} setAuctionData={setAuctionData} />
+                  <ImageAdder auctionData={auctionData} setAuctionData={setAuctionData} />
 
                   <input
                     type="text"
