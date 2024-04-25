@@ -1,7 +1,7 @@
 import { Button, Form, InputGroup, Row, Col, Badge } from "react-bootstrap";
 import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from "../GlobalContext";
-import { formatDateTime } from "../pages/AuctionPage";
+import { formatDateTime } from "../pages/AuctionPage.jsx";
 import { Toaster } from 'react-hot-toast';
 
 export default function NewBid(props) {
@@ -64,13 +64,14 @@ export default function NewBid(props) {
     const bidAmount = parseInt(formData.get("amount"));
 
     if (bidAmount > highestBid) {
-      const res = await fetch(`/api/user/getUsername/${loggedIn}`);
-      const username = await res.json();
+      const user = await fetch(`/api/user/${loggedIn}`)
+      const userResult = await user.json()
+      console.log(userResult)
       const newBid = {
         userId: loggedIn,
         time: Date.now(),
         amount: bidAmount,
-        username : username
+        username : userResult.username
       }
   
       auction.bidHistory.push(newBid)

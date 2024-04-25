@@ -15,7 +15,7 @@ export default function AuctionPage() {
   const [auction, setAuction] = useState(null);
   const [isCreator, setIsCreator] = useState(false);
   const [loading, setLoading] = useState(true);
- const [fetchError, setFetchError] = useState(false);
+  const [fetchError, setFetchError] = useState(false);
 
 
   const updateAuction = (updatedAuction) => {
@@ -43,6 +43,7 @@ export default function AuctionPage() {
             },
           ];
         } 
+        
         setAuction(result);
         setLoading(false);
       } catch (error) {
@@ -56,7 +57,7 @@ export default function AuctionPage() {
 
   return (
     <>
-     <Loading loading={loading} />
+      <Loading loading={loading} />    
       {auction ? (
         <div className="m-3">
           <h1 className="mx-2">{auction.title}</h1>
@@ -67,7 +68,6 @@ export default function AuctionPage() {
                   className="d-flex align-items-center justify-content-end"
                   style={{ paddingBottom: "0" }}
                 >
-                  {/* Render the "Edit auction" button only if the logged-in user is the creator */}
                   {isCreator && (
                     <>
                       <div className="d-flex align-items-center">
