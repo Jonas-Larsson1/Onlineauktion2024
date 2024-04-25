@@ -2,12 +2,12 @@ import { Button, Form, InputGroup, Row, Col, Badge } from "react-bootstrap";
 import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from "../GlobalContext";
 import { formatDateTime } from "../pages/AuctionPage.jsx";
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 
 export default function NewBid(props) {
   const { loggedIn } = useContext(GlobalContext);
 
-  const { auction, updateAuction} = props;
+  const { auction, updateAuction } = props;
 
   const [highestBid, setHighestBid] = useState(null);
   const [defaultBid, setDefaultBid] = useState(null);
@@ -16,16 +16,25 @@ export default function NewBid(props) {
   const [endDateObject, setEndDateObject] = useState(
     auction.endDate ? new Date(auction.endDate) : null
   );
+  const [startDateObject, setStartDateObject] = useState(
+    auction.startDate ? new Date(auction.startDate) : null
+  );
 
-  const {socket} = useContext(GlobalContext);
+  const { socket } = useContext(GlobalContext);
 
   const currentDate = new Date();
-  
+
   useEffect(() => {
     if (auction.endDate) {
       setEndDateObject(new Date(auction.endDate));
     }
   }, [auction.endDate]);
+
+    useEffect(() => {
+      if (auction.startDate) {
+        setStartDateObject(new Date(auction.startDate));
+      }
+    }, [auction.startDate]);
 
   useEffect(() => {
     setHighestBid(getHighestBid(auction.bidHistory));
@@ -36,9 +45,13 @@ export default function NewBid(props) {
   useEffect(() => {
     const endDateFormatted = formatDateTime(endDateObject);
     const endDateDate = new Date(endDateFormatted);
+    const startDateFormatted = formatDateTime(startDateObject);
+    const startDateDate = new Date(startDateFormatted);
 
     if (endDateDate < currentDate) {
       setError("The auction is closed");
+    } else if (startDateDate > currentDate) {
+      setError("Auction hasn't begun yet!");
     } else if (currentBid <= highestBid) {
       setError("Bid too low");
     } else if (currentBid === null) {
@@ -46,7 +59,7 @@ export default function NewBid(props) {
     } else {
       setError(false);
     }
-  }, [currentBid, endDateObject, currentDate]);
+  }, [currentBid, endDateObject, currentDate, startDateObject]);
 
   function getHighestBid(bidHistory) {
     bidHistory.sort((a, b) => b.amount - a.amount);
@@ -57,53 +70,44 @@ export default function NewBid(props) {
     setCurrentBid(event.target.value);
   };
 
-
   const placeBid = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const bidAmount = parseInt(formData.get("amount"));
 
     if (bidAmount > highestBid) {
-      const user = await fetch(`/api/user/${loggedIn}`)
-      const userResult = await user.json()
-      
+      const user = await fetch(`/api/user/${loggedIn}`);
+      const userResult = await user.json();
+
       const newBid = {
         userId: loggedIn,
         time: Date.now(),
         amount: bidAmount,
-        username : userResult.username
-      }
-  
-      auction.bidHistory.push(newBid)
+        username: userResult.username,
+      };
 
-      //pls change me ! only newBid data upload or crosscheck auction data on server!
+      auction.bidHistory.push(newBid);
+      
       const response = await fetch(`/api/auction/newBid/${auction._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           auction: auction,
-          user: loggedIn
+          user: loggedIn,
         }),
       });
 
-      const result = await response.json()
-      // console.log(response)
-      // console.log(result)
-      console.log(result)
-   
       if (response.ok) {
         if (auction.bidHistory.length > 1)
-        socket.emit("newBidNotification", {
-          senderId: loggedIn,
-          recieverId: auction.bidHistory[0].userId,
-          username: userResult.username,
-          bidAmount: bidAmount,
-          title: auction.title,
-        });
-      updateAuction(auction);
-        
+          socket.emit("newBidNotification", {
+            senderId: loggedIn,
+            recieverId: auction.bidHistory[0].userId,
+            username: userResult.username,
+            bidAmount: bidAmount,
+            title: auction.title,
+          });
+        updateAuction(auction);
       } else {
-        // säg åt användaren det gick åt skogen
         alert("I did not work.");
       }
     } else {
@@ -111,14 +115,9 @@ export default function NewBid(props) {
     }
   };
 
-  
   return (
     <>
-
       <Form onSubmit={placeBid}>
-      {/* <div className="notifications">
-          {newBid.map((n) => displayNotification(n))}
-        </div> */}
         <Row className="mb-3">
           <Form.Group as={Col} controlId="newBid">
             <InputGroup>
@@ -126,26 +125,29 @@ export default function NewBid(props) {
                 name="amount"
                 type="number"
                 placeholder={0}
-                disabled={!!error && error === "The auction is closed"}
+                disabled={
+                  (!!error && error === "The auction is closed") ||
+                  error === "Auction hasn't begun yet!"
+                }
                 value={currentBid ? currentBid : " "}
                 onInput={changeCurrentBid}
               />
             </InputGroup>
-            <Toaster 
-            position="top-center"
-            gutter={12}
-            containerStyle={{margin:"8px"}}
-            toastOptions={{
-              success: {
-                duration: 15000
-              },
-              style: {
-                fontSize: "16px",
-                maxWidth:"500px",
-                padding: "16px 24px",
-                backgroundColor:"green"
-              }
-            }}
+            <Toaster
+              position="top-center"
+              gutter={12}
+              containerStyle={{ margin: "8px" }}
+              toastOptions={{
+                success: {
+                  duration: 15000,
+                },
+                style: {
+                  fontSize: "16px",
+                  maxWidth: "500px",
+                  padding: "16px 24px",
+                  backgroundColor: "green",
+                },
+              }}
             />
 
             <Form.Text className="text-muted">
@@ -154,7 +156,7 @@ export default function NewBid(props) {
           </Form.Group>
           <Col>
             <Button
-              variant={error === "The auction is closed" ? "danger" : "success"}
+              variant={error ?  "danger" : "success"}
               type="submit"
               className="me-2 btn-lg"
               disabled={!!error}
