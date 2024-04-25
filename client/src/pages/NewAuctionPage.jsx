@@ -161,13 +161,13 @@ const NewAuctionPage = () => {
 
   const existingCategories = [];
 
-  // let filtered = auctionData.data
-  //   ? auctionData.data.map((item) =>
-  //     item.category.map((i) =>
-  //       existingCategories.includes(i) ? null : existingCategories.push(i)
-  //     )
-  //   )
-  //   : null;
+  let filtered = auctionData.data
+    ? auctionData.data.map((item) =>
+      item.category.map((i) =>
+        existingCategories.includes(i) ? null : existingCategories.push(i)
+      )
+    )
+    : null;
 
   const handleStartDateChange = (date) => {
     setAuctionData({
@@ -267,10 +267,7 @@ const NewAuctionPage = () => {
                 type="text"
                 value={auctionData.mainTitle}
                 onChange={(e) =>
-                  setAuctionData({
-                    ...auctionData,
-                    customCategory: toTitleCase(e.target.value),
-                  })
+                  setAuctionData({ ...auctionData, mainTitle: e.target.value })
                 }
                 className="form-control mb-2"
                 placeholder="Title"
@@ -402,7 +399,7 @@ const NewAuctionPage = () => {
                   onChange={(e) =>
                     setAuctionData({
                       ...auctionData,
-                      customCategory: e.target.value,
+                      customCategory:  toTitleCase(e.target.value),
                     })
                   }
                   onKeyDown={handleKeyPress}
