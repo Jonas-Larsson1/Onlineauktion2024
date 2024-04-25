@@ -14,6 +14,8 @@ export default function ListPage() {
   const { show, setShow, hideAlert, loggedIn } = useContext(GlobalContext);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [activeList, setActiveList] = useState([]);
+  const [activeButton, setActiveButton] = useState('All');
 
   useEffect(() => {
     const getUserData = async () => {
@@ -52,6 +54,24 @@ export default function ListPage() {
     list.sort((a, b) => b.bidHistory.length - a.bidHistory.length);
   }
 
+  const allItems = list.slice(1);
+
+  const ongoing = list.filter((item) => {
+    return item.startDate < Date.now() && Date.now() < item.endDate;
+  });
+
+  const upcoming = list.filter((item) => {
+    return Date.now() < item.startDate;
+  });
+
+  const finished = list.filter((item) => {
+    return Date.now() > item.endDate;
+  });
+
+  useEffect(() => {
+    setActiveList(allItems);
+  }, [list]);
+
   return (
     <>
       <Loading loading={loading} />
@@ -83,9 +103,57 @@ export default function ListPage() {
           </div>
         </div>
       </div>
+      <div className="d-flex justify-content-center mt-4">
+        <div className="btn-group-lg">
+          <button
+            type="button"
+            className={`btn btn btn-outline-dark m-2 ps-5 pe-5 ${activeButton === 'All' ? 'active' : ''}`} 
+            data-bs-toggle="button"
+            onClick={() => {
+              setActiveList(allItems);
+              setActiveButton('All');
+            }}
+          >
+            All
+          </button>
+          <button
+            type="button"
+            className={`btn btn btn-outline-dark m-2 ps-4 pe-4 ${activeButton === 'Ongoing' ? 'active'  : ''}`}
+            data-bs-toggle="button"
+            onClick={() => {
+              setActiveList(ongoing);
+              setActiveButton('Ongoing');
+            }}
+          >
+            Ongoing
+          </button>
+          <button
+            type="button"
+            className={`btn btn btn-outline-dark m-2 ps-4 pe-4 ${activeButton === 'Upcoming' ? 'active '  : ''}`}
+            data-bs-toggle="button"
+            onClick={() => {
+              setActiveList(upcoming);
+              setActiveButton('Upcoming');
+            }}
+          >
+            Upcoming
+          </button>
+          <button
+            type="button"
+            className={`btn btn btn-outline-dark m-2 ps-4 pe-4 ${activeButton === 'Finished' ? 'active' : ''}`}
+            data-bs-toggle="button"
+            onClick={() => {
+              setActiveList(finished);
+              setActiveButton('Finished');
+            }}
+          >
+            Finished
+          </button>
+        </div>
+      </div>
       <div className="container" style={{ marginBottom : "15vh"}}>
         <div className="row row-cols-1 row-cols-md-3 g-4">
-          {list.slice(1).map((item, index) => (
+          {activeList.map((item, index) => (
             <StyleCard key={index}>
               <ListCard
                 item={item}
