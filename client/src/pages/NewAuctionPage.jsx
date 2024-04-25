@@ -16,7 +16,7 @@ const NewAuctionPage = () => {
     data: null,
     mainTitle: "",
     description: "",
-    allImages: ["", "", ""],
+    allImages: [""],
     startPrice: "",
     reservedPrice: "",
     showAlert: false,
@@ -28,13 +28,19 @@ const NewAuctionPage = () => {
   });
 
   const { loggedIn } = useContext(GlobalContext);
-  const [startDateChanged, setStartDateChanged] = useState(false);
   const navigate = useNavigate();
 
   const onImageInput = (index, value) => {
-    const imageInput = [...auctionData.allImages];
-    imageInput[index] = value;
-    setAuctionData({ ...auctionData, allImages: imageInput });
+    if (index >= 0 && index < auctionData.allImages.length) {
+      const imageInput = [...auctionData.allImages];
+      imageInput[index] = value;
+      setAuctionData({ ...auctionData, allImages: imageInput });
+    } else {
+      setAuctionData(prevState => ({
+        ...prevState,
+        allImages: [...prevState.allImages, value]
+      }));
+    }
   };
 
   useEffect(() => {
@@ -61,7 +67,7 @@ const NewAuctionPage = () => {
     } = auctionData;
 
     if (
-      allImages[0].length >= 1 &&
+      allImages.length >= 1 &&
       mainTitle.length > 2 &&
       description.length > 3 &&
       unixStartDate != null &&
@@ -95,7 +101,7 @@ const NewAuctionPage = () => {
           showAlert: true,
         });
       }
-    } else if (allImages[0].length < 1) {
+    } else if (allImages.length < 1) {
       setAuctionData({
         ...auctionData,
         warning: "You need at least one image",
@@ -148,13 +154,13 @@ const NewAuctionPage = () => {
 
   const existingCategories = [];
 
-  let filtered = auctionData.data
-    ? auctionData.data.map((item) =>
-      item.category.map((i) =>
-        existingCategories.includes(i) ? null : existingCategories.push(i)
-      )
-    )
-    : null;
+  // let filtered = auctionData.data
+  //   ? auctionData.data.map((item) =>
+  //     item.category.map((i) =>
+  //       existingCategories.includes(i) ? null : existingCategories.push(i)
+  //     )
+  //   )
+  //   : null;
 
   const handleStartDateChange = (date) => {
     setAuctionData({
@@ -183,6 +189,13 @@ const NewAuctionPage = () => {
     }
   };
 
+  const addImageInput = () => {
+    setAuctionData(prevState => ({
+      ...prevState,
+      allImages: [...prevState.allImages, ""]
+    }));
+  };
+
   return (
     <>
       <div style={{ height: '100vh' }}>
@@ -206,16 +219,22 @@ const NewAuctionPage = () => {
         <form className="w-100 d-flex justify-content-center align-items-center m-3">
           <div className="d-flex flex-column" style={{ width: "30%" }}>
             <div className="d-flex flex-column">
-              {auctionData.allImages.map((image, index) => (
-                <input
-                  key={index}
-                  type="text"
-                  value={image}
-                  className="form-control mb-2"
-                  onChange={(e) => onImageInput(index, e.target.value)}
-                  placeholder="Link to your image"
-                />
-              ))}
+            {auctionData.allImages.map((image, index) => (
+              <input
+                key={index}
+                type="text"
+                value={image}
+                className="form-control mr-2"
+                onChange={(e) => onImageInput(index, e.target.value)}
+                placeholder="Link to your image"
+              />
+            ))}
+
+              <button className="btn btn-primary my-2" onClick={(e) => {
+                e.preventDefault()
+                addImageInput()
+              }}>Click to add another image</button>
+
 
               <input
                 type="text"
