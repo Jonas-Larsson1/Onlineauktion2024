@@ -66,7 +66,7 @@ export default function NewBid(props) {
     if (bidAmount > highestBid) {
       const user = await fetch(`/api/user/${loggedIn}`)
       const userResult = await user.json()
-      console.log(userResult)
+      
       const newBid = {
         userId: loggedIn,
         time: Date.now(),
@@ -76,7 +76,7 @@ export default function NewBid(props) {
   
       auction.bidHistory.push(newBid)
 
-      // console.log(auction)
+   
 
 
       //pls change me ! only newBid data upload or crosscheck auction data on server!
