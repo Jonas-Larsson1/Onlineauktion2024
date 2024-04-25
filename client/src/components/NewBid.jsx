@@ -5,7 +5,7 @@ import { formatDateTime } from "../pages/AuctionPage.jsx";
 import { Toaster } from "react-hot-toast";
 
 export default function NewBid(props) {
-  const { loggedIn } = useContext(GlobalContext);
+  const { loggedIn, isCreator } = useContext(GlobalContext);
 
   const { auction, updateAuction } = props;
 
@@ -118,6 +118,7 @@ export default function NewBid(props) {
   return (
     <>
       <Form onSubmit={placeBid}>
+            {!isCreator ? 
         <Row className="mb-3">
           <Form.Group as={Col} controlId="newBid">
             <InputGroup>
@@ -131,24 +132,8 @@ export default function NewBid(props) {
                 }
                 value={currentBid ? currentBid : " "}
                 onInput={changeCurrentBid}
-              />
+                />
             </InputGroup>
-            <Toaster
-              position="top-center"
-              gutter={12}
-              containerStyle={{ margin: "8px" }}
-              toastOptions={{
-                success: {
-                  duration: 15000,
-                },
-                style: {
-                  fontSize: "16px",
-                  maxWidth: "500px",
-                  padding: "16px 24px",
-                  backgroundColor: "green",
-                },
-              }}
-            />
 
             <Form.Text className="text-muted">
               Miniumum bid: {defaultBid}
@@ -160,11 +145,12 @@ export default function NewBid(props) {
               type="submit"
               className="me-2 btn-lg"
               disabled={!!error}
-            >
+              >
               {error ? error : "Place bid"}
             </Button>
           </Col>
         </Row>
+                : ""}
         <Row className="mb-3">
           <Col>
             <Badge bg="light" className="text-dark p-2">

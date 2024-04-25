@@ -5,8 +5,11 @@ import { GlobalContext } from "../GlobalContext";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import StyleCard from "../components/StyleCard";
+import { setMinutes, setHours } from "date-fns";
 
 const NewAuctionPage = () => {
+  const [now, setStartDate] = useState(new Date());
+
   const [auctionData, setAuctionData] = useState({
     startDate: null,
     endDate: null,
@@ -21,7 +24,7 @@ const NewAuctionPage = () => {
     reservedPrice: "",
     showAlert: false,
     unixStartDate: Date.now(),
-    unixEndDate: Date.now(),
+    unixEndDate: (Date.now() + 604800000),
     warning: "",
     disabled: true,
     startDateChanged: false
@@ -31,16 +34,12 @@ const NewAuctionPage = () => {
   const navigate = useNavigate();
 
   const onImageInput = (index, value) => {
-    if (index >= 0 && index < auctionData.allImages.length) {
-      const imageInput = [...auctionData.allImages];
-      imageInput[index] = value;
-      setAuctionData({ ...auctionData, allImages: imageInput });
-    } else {
-      setAuctionData(prevState => ({
-        ...prevState,
-        allImages: [...prevState.allImages, value]
-      }));
-    }
+    const imageInput = [...auctionData.allImages];
+    imageInput[index] = value;
+
+
+    setAuctionData({ ...auctionData, allImages:  imageInput });
+
   };
 
   useEffect(() => {
@@ -54,7 +53,7 @@ const NewAuctionPage = () => {
 
   async function postNewAuction(e) {
     e.preventDefault();
-
+    
     const {
       allImages,
       mainTitle,
@@ -65,6 +64,17 @@ const NewAuctionPage = () => {
       reservedPrice,
       title,
     } = auctionData;
+    console.log(auctionData.allImages)
+  
+    for (let i = 0; i < auctionData.allImages.length; i++){
+      if(auctionData.allImages[i] === ""){
+        const nonEmptyIndex = auctionData.allImages.findIndex(img => img !== "");
+        if (nonEmptyIndex !== -1) {
+          allImages[i] = allImages[nonEmptyIndex];
+        }
+      }
+      console.log(allImages)
+    }
 
     if (
       allImages.length >= 1 &&
@@ -92,7 +102,7 @@ const NewAuctionPage = () => {
         }),
       });
       if (res.ok) {
-        // console.log(res);
+      
         navigate("/"); // navigates to home page
       } else {
         setAuctionData({
@@ -104,7 +114,7 @@ const NewAuctionPage = () => {
     } else if (allImages.length < 1) {
       setAuctionData({
         ...auctionData,
-        warning: "You need at least one image",
+        warning: "Please upload the first Image",
         showAlert: true,
       });
     } else if (mainTitle.length < 2) {
@@ -154,13 +164,13 @@ const NewAuctionPage = () => {
 
   const existingCategories = [];
 
-  // let filtered = auctionData.data
-  //   ? auctionData.data.map((item) =>
-  //     item.category.map((i) =>
-  //       existingCategories.includes(i) ? null : existingCategories.push(i)
-  //     )
-  //   )
-  //   : null;
+  let filtered = auctionData.data
+    ? auctionData.data.map((item) =>
+      item.category.map((i) =>
+        existingCategories.includes(i) ? null : existingCategories.push(i)
+      )
+    )
+    : null;
 
   const handleStartDateChange = (date) => {
     setAuctionData({
@@ -189,6 +199,9 @@ const NewAuctionPage = () => {
     }
   };
 
+  const toTitleCase = (str) => {
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());}
+    
   const addImageInput = () => {
     setAuctionData(prevState => ({
       ...prevState,
@@ -284,6 +297,8 @@ const NewAuctionPage = () => {
                     onChange={handleStartDateChange}
                     selectsStart
                     minDate={new Date()}
+                    minTime={setMinutes(now, 0)}
+                    maxTime={setHours(setMinutes(now, 45), 23)}
                     className="form-control custom-date-picker"
                     showTimeSelect
                     timeIntervals={15}
@@ -299,6 +314,8 @@ const NewAuctionPage = () => {
                     onChange={handleEndDateChange}
                     selectsEnd
                     minDate={auctionData.unixStartDate ? new Date(auctionData.unixStartDate) : null}
+                    minTime={setMinutes(now, 60)}
+                    maxTime={setHours(setMinutes(now, 45), 23)}
                     disabled={!auctionData.startDateChanged}
                     className="form-control custom-date-picker"
                     showTimeSelect
@@ -389,7 +406,7 @@ const NewAuctionPage = () => {
                   onChange={(e) =>
                     setAuctionData({
                       ...auctionData,
-                      customCategory: e.target.value,
+                      customCategory:  toTitleCase(e.target.value),
                     })
                   }
                   onKeyDown={handleKeyPress}
