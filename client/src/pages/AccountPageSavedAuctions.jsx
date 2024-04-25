@@ -7,7 +7,7 @@ import BackButton from "../components/BackButton";
 export default function AccountPage() {
     const { loggedIn } = useContext(GlobalContext);
     const [savedAuctions, setSavedAuctions] = useState(null);
-    const currentDate = Math.floor(Date.now() / 1000); 
+
     const [user, setUser] = useState(null);
 
     useEffect(() => {

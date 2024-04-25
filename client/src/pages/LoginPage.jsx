@@ -39,7 +39,8 @@ export default function LoginPage() {
   useEffect(() => {
     const getSession = async () => {
       const response = await fetch("/api/login");
-      if (response.status === 200) {
+      const result = await response.json()
+      if (result.loggedIn != false) {
         navigate("/");
       } 
     };

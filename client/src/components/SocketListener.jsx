@@ -5,17 +5,16 @@ import toast, { Toaster } from 'react-hot-toast';
 
 export default function SocketListener() {
 
-    const { socket, setSocket } = useContext(GlobalContext)
-    const { loggedIn } = useContext(GlobalContext)
-   
+  const { socket, setSocket } = useContext(GlobalContext)
+  const { loggedIn } = useContext(GlobalContext)
 
-   
+  useEffect(() => {
 
-    useEffect(() => {
-        socket?.emit("newUser", loggedIn)
-    }, [socket, loggedIn])
-    useEffect(() => {
-        let newSocket = io("http://localhost:5500")
+    socket?.emit("newUser", loggedIn)
+    
+  }, [socket, loggedIn])
+  useEffect(() => {
+    let newSocket = io("http://localhost:5500")
 
         setSocket(newSocket)
          
