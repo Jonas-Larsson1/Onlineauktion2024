@@ -46,7 +46,7 @@ const NewAuctionPage = () => {
 
   async function postNewAuction(e) {
     e.preventDefault();
-    
+
     const {
       allImages,
       mainTitle,
@@ -84,7 +84,7 @@ const NewAuctionPage = () => {
         }),
       });
       if (res.ok) {
-      
+
         navigate("/"); // navigates to home page
       } else {
         setAuctionData({
@@ -182,8 +182,9 @@ const NewAuctionPage = () => {
   };
 
   const toTitleCase = (str) => {
-    return str.replace(/\b\w/g, (char) => char.toUpperCase());}
-    
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  }
+
 
   return (
     <>
@@ -205,22 +206,23 @@ const NewAuctionPage = () => {
           </div>
         </div>
 
-        <form className="w-100 d-flex justify-content-center align-items-center m-3">
-          <div className="d-flex flex-column" style={{ width: "30%" }}>
-            <div className="d-flex flex-column">
+        <div className="d-flex justify-content-center">
+          <form className="w-100 d-flex justify-content-center align-items-center m-3">
+            <div className="d-flex flex-column" style={{ width: "30%" }}>
+              <div className="d-flex flex-column">
 
               <ImageAdder auctionData={auctionData} setAuctionData={setAuctionData} />
 
-              <input
-                type="text"
-                value={auctionData.mainTitle}
-                onChange={(e) =>
-                  setAuctionData({ ...auctionData, mainTitle: e.target.value })
-                }
-                className="form-control mb-2"
-                placeholder="Title"
-                aria-label="Title"
-              />
+                <input
+                  type="text"
+                  value={auctionData.mainTitle}
+                  onChange={(e) =>
+                    setAuctionData({ ...auctionData, mainTitle: e.target.value })
+                  }
+                  className="form-control mb-2"
+                  placeholder="Title"
+                  aria-label="Title"
+                />
 
               <input
                 type="text"
@@ -367,7 +369,8 @@ const NewAuctionPage = () => {
               Submit
             </button>
           </div>
-        </form>
+          </form>
+        </div>
       </div>
     </>
   );

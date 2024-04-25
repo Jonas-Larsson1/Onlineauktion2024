@@ -4,7 +4,7 @@ import { useContext, useState, useEffect } from "react"
 
 export default function AddToWatchList (props) {
   const { auction } = props
-  const { loggedIn } = useContext(GlobalContext)
+  const { loggedIn, isCreator } = useContext(GlobalContext)
   const [ user, setUser ] = useState()
   const [ savedByUser, setSavedByUser  ] = useState(false)
 
@@ -55,7 +55,7 @@ export default function AddToWatchList (props) {
 
   return <>
     <Form onSubmit={addToWatchList}>
-      <Button type="submit" variant="secondary" className="btn-sm">
+      <Button type="submit" variant="secondary" className="btn-sm" disabled={isCreator ? true : false}>
         {!savedByUser ? "Add to your saved auctions" : "Remove from your saved auctions"}
       </Button>
     </Form>
