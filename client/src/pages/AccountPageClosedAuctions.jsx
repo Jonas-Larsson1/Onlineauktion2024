@@ -4,7 +4,6 @@ import ListCard from "../components/ListItem";
 import { GlobalContext } from "../GlobalContext";
 import BackButton from "../components/BackButton";
 
-
 export default function AccountPage() {
     const { loggedIn } = useContext(GlobalContext)
     const [user, setUser] = useState(null);
@@ -27,7 +26,6 @@ export default function AccountPage() {
 
         getUserData();
     }, []);
-
 
 
     // Fetches auctions that logged in user has started

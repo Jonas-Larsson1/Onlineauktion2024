@@ -36,7 +36,6 @@ export default function AccountPage() {
 
             const userOngoingAuctions = [];
 
-
             for (let i = 0; i < result.length; i++) {
                 let currentAuction = result[i]
 
