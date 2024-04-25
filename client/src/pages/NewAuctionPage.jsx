@@ -400,6 +400,7 @@ const NewAuctionPage = () => {
               className="btn btn-primary mt-3 w-75 align-self-center"
               onClick={postNewAuction}
               disabled={auctionData.disabled}
+              style={{marginBottom : "15vh"}}
             >
               Submit
             </button>
