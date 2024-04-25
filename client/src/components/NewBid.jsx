@@ -97,7 +97,7 @@ export default function NewBid(props) {
        socket.emit("newBidNotification", {
         senderId: loggedIn,
         recieverId: auction.bidHistory[0].userId,
-        username: username,
+        username: userResult.username,
         bidAmount: bidAmount,
         title: auction.title,
       });

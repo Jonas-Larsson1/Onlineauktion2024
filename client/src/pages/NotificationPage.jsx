@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import Notifications from "../components/Notifications.jsx";
 import Loading from "../components/Loading.jsx";
+import { useNavigate } from "react-router-dom";
 
 export default function NotificationPage() {
   const [notifications, setNotifications] = useState([]);
   const [render, forceRender] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  const navigate = useNavigate()
+  
   useEffect(() => {
     const fetchNotifications = async () => {
       const response = await fetch("/api/notifications");
@@ -21,6 +24,7 @@ export default function NotificationPage() {
 
   const forceReRender = () => {
     forceRender((prev) => !prev);
+    navigate('/notifications')
   }
 
   return (
