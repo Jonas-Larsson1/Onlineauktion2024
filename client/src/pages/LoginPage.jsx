@@ -14,9 +14,7 @@ export default function LoginPage() {
   const { login, loggedIn } = useContext(GlobalContext);
   const { displayAlert } = useContext(GlobalContext);
   const { showLogoutAlert } = useContext(GlobalContext);
-  // const { setSocket } = useContext(GlobalContext)
 
-  // setSocket(null)
 
 
 
@@ -30,7 +28,7 @@ export default function LoginPage() {
 
     const loginResponse = await login(userData);
 
-    // console.log(loginResponse)
+   
     if (loginResponse.status === 201) {
       navigate("/");
     } else {
@@ -74,9 +72,6 @@ export default function LoginPage() {
           />
         </Form.Group>
 
-        {/* <Form.Group className="mb-3" controlId="formCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group> */}
 
         <Button variant="primary" onClick={checkForUser}>
           Login

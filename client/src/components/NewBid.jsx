@@ -90,8 +90,7 @@ export default function NewBid(props) {
       });
 
       const result = await response.json()
-      console.log(response)
-      console.log(result)
+  
    
       if (response.ok) {
        updateAuction(auction);

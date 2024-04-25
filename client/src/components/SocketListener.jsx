@@ -20,7 +20,7 @@ export default function SocketListener() {
         setSocket(newSocket)
          
         newSocket.on("newBidAdded", (bidData) => {
-            console.log(bidData)
+         
             displayNotification(bidData)
          
            
