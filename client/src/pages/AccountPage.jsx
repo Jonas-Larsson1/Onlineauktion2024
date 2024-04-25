@@ -93,7 +93,7 @@ export default function AccountPage() {
           if (auctionEndDate > currentDate) {
             currentAuction.bidHistory = sortBids(currentAuction.bidHistory)
             userOngoingAuctions.push(currentAuction);
-
+            break;
           } else {
             currentAuction.bidHistory = sortBids(currentAuction.bidHistory)
             userClosedAuctions.push(currentAuction);

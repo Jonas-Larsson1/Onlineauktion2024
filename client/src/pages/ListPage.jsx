@@ -76,9 +76,11 @@ export default function ListPage() {
               <h2 className="fs-1 ms-2 pb-3 text text-danger">
                 Beast of the week!
               </h2>
+              <div className="d-flex justify-content-center">
               {list.length > 0 && list[0].hasOwnProperty("bidHistory") && (
                 <ListCard item={list[0]} />
               )}
+              </div>
             </div>
           </div>
         </div>

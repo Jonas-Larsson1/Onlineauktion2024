@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import StyleCard from "../components/StyleCard";
 import { setMinutes, setHours } from "date-fns";
+import ImageAdder from "../components/ImageAdder";
 
 const NewAuctionPage = () => {
   const [now, setStartDate] = useState(new Date());
@@ -33,14 +34,6 @@ const NewAuctionPage = () => {
   const { loggedIn } = useContext(GlobalContext);
   const navigate = useNavigate();
 
-  const onImageInput = (index, value) => {
-    const imageInput = [...auctionData.allImages];
-    imageInput[index] = value;
-
-
-    setAuctionData({ ...auctionData, allImages:  imageInput });
-
-  };
 
   useEffect(() => {
     const getData = async () => {
@@ -53,7 +46,7 @@ const NewAuctionPage = () => {
 
   async function postNewAuction(e) {
     e.preventDefault();
-    
+
     const {
       allImages,
       mainTitle,
@@ -65,9 +58,9 @@ const NewAuctionPage = () => {
       title,
     } = auctionData;
     console.log(auctionData.allImages)
-  
-    for (let i = 0; i < auctionData.allImages.length; i++){
-      if(auctionData.allImages[i] === ""){
+
+    for (let i = 0; i < auctionData.allImages.length; i++) {
+      if (auctionData.allImages[i] === "") {
         const nonEmptyIndex = auctionData.allImages.findIndex(img => img !== "");
         if (nonEmptyIndex !== -1) {
           allImages[i] = allImages[nonEmptyIndex];
@@ -102,7 +95,7 @@ const NewAuctionPage = () => {
         }),
       });
       if (res.ok) {
-      
+
         navigate("/"); // navigates to home page
       } else {
         setAuctionData({
@@ -200,21 +193,9 @@ const NewAuctionPage = () => {
   };
 
   const toTitleCase = (str) => {
-    return str.replace(/\b\w/g, (char) => char.toUpperCase());}
-    
-  const addImageInput = () => {
-    setAuctionData(prevState => ({
-      ...prevState,
-      allImages: [...prevState.allImages, ""]
-    }));
-  };
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  }
 
-  const removeImageInput = (index) => {
-    setAuctionData((prevState) => {
-      const updatedImages = prevState.allImages.filter((_, i) => i !== index);
-      return { ...prevState, allImages: updatedImages };
-    });
-  };
 
   return (
     <>
@@ -236,193 +217,171 @@ const NewAuctionPage = () => {
           </div>
         </div>
 
-        <form className="w-100 d-flex justify-content-center align-items-center m-3">
-          <div className="d-flex flex-column" style={{ width: "30%" }}>
-            <div className="d-flex flex-column">
-            {auctionData.allImages.map((image, index) => (
-              <div key={index} className="d-flex align-items-center mb-1">
-                <input
-                  key={index}
-                  type="text"
-                  value={image}
-                  className="form-control mr-2"
-                  onChange={(e) => onImageInput(index, e.target.value)}
-                  placeholder="Link to your image"
-                />
-                {index > 0 ? 
-                  <button
-                  className="btn btn-danger"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    removeImageInput(index)
-                  }}>-</button>
-                : <></>}
-              </div>
-            ))}
+        <div className="d-flex justify-content-center">
+          <form className="w-100 d-flex justify-content-center align-items-center m-3">
+            <div className="d-flex flex-column" style={{ width: "30%" }}>
+              <div className="d-flex flex-column">
 
-              <button className="btn btn-primary mt-2 mb-4" onClick={(e) => {
-                e.preventDefault()
-                addImageInput()
-              }}>Click to add another image</button>
+                <ImageAdder images={auctionData.allImages} setAuctionData={setAuctionData} />
 
-
-              <input
-                type="text"
-                value={auctionData.mainTitle}
-                onChange={(e) =>
-                  setAuctionData({ ...auctionData, mainTitle: e.target.value })
-                }
-                className="form-control mb-2"
-                placeholder="Title"
-                aria-label="Title"
-              />
-
-              <input
-                type="text"
-                value={auctionData.description}
-                onChange={(e) =>
-                  setAuctionData({ ...auctionData, description: e.target.value })
-                }
-                className="form-control mb-2"
-                placeholder="Description"
-                aria-label="Description"
-              />
-            </div>
-            <div className="row">
-              <div className="col">
-                <div className="d-flex flex-column">
-                  <label>Start Date:</label>
-                  <DatePicker
-                    selected={new Date(auctionData.unixStartDate)}
-                    onChange={handleStartDateChange}
-                    selectsStart
-                    minDate={new Date()}
-                    minTime={setMinutes(now, 0)}
-                    maxTime={setHours(setMinutes(now, 45), 23)}
-                    className="form-control custom-date-picker"
-                    showTimeSelect
-                    timeIntervals={15}
-                    dateFormat="yyyy-MM-dd HH:mm"
-                  />
-                </div>
-              </div>
-              <div className="col">
-                <div className="d-flex flex-column">
-                  <label>End Date:</label>
-                  <DatePicker
-                    selected={new Date(auctionData.unixEndDate)}
-                    onChange={handleEndDateChange}
-                    selectsEnd
-                    minDate={auctionData.unixStartDate ? new Date(auctionData.unixStartDate) : null}
-                    minTime={setMinutes(now, 60)}
-                    maxTime={setHours(setMinutes(now, 45), 23)}
-                    disabled={!auctionData.startDateChanged}
-                    className="form-control custom-date-picker"
-                    showTimeSelect
-                    timeIntervals={15}
-                    dateFormat="yyyy-MM-dd HH:mm"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col">
-                <div className="input-group mt-2">
-                  <span className="input-group-text">€</span>
-                  <input
-                    type="text"
-                    value={auctionData.startPrice}
-                    onChange={(e) =>
-                      setAuctionData({
-                        ...auctionData,
-                        startPrice: e.target.value,
-                      })
-                    }
-                    className="form-control"
-                    placeholder="Start Price"
-                    aria-label="Start Price"
-                  />
-                </div>
-              </div>
-              <div className="col">
-                <div className="input-group mt-2">
-                  <span className="input-group-text">€</span>
-                  <input
-                    type="text"
-                    value={auctionData.reservedPrice}
-                    onChange={(e) =>
-                      setAuctionData({
-                        ...auctionData,
-                        reservedPrice: e.target.value,
-                      })
-                    }
-                    className="form-control"
-                    placeholder="Reserved Price"
-                    aria-label="Reserved Price"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="dropdown mt-2 w-100 d-flex justify-content-center">
-              <button
-                className="btn btn-secondary dropdown-toggle w-75"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                onClick={() =>
-                  setAuctionData({
-                    ...auctionData,
-                    dropdownOpen: !auctionData.dropdownOpen,
-                  })
-                }
-              >
-                {auctionData.title == "" ? "Categories" : auctionData.title}
-              </button>
-            </div>
-            {auctionData.dropdownOpen ? (
-              <div className="list-group w-75 align-self-center">
-                {existingCategories.map((cat, index) => (
-                  <a
-                    key={index}
-                    className="list-group-item list-group-item-action text-center"
-                    href="#"
-                    onClick={() =>
-                      setAuctionData({
-                        ...auctionData,
-                        title: cat,
-                        dropdownOpen: false,
-                        disabled: !auctionData.disabled,
-                      })
-                    }
-                  >
-                    {cat}
-                  </a>
-                ))}
                 <input
                   type="text"
-                  placeholder="Add custom category"
-                  value={auctionData.customCategory}
+                  value={auctionData.mainTitle}
                   onChange={(e) =>
+                    setAuctionData({ ...auctionData, mainTitle: e.target.value })
+                  }
+                  className="form-control mb-2"
+                  placeholder="Title"
+                  aria-label="Title"
+                />
+
+                <input
+                  type="text"
+                  value={auctionData.description}
+                  onChange={(e) =>
+                    setAuctionData({ ...auctionData, description: e.target.value })
+                  }
+                  className="form-control mb-2"
+                  placeholder="Description"
+                  aria-label="Description"
+                />
+              </div>
+              <div className="row">
+                <div className="col">
+                  <div className="d-flex flex-column">
+                    <label>Start Date:</label>
+                    <DatePicker
+                      selected={new Date(auctionData.unixStartDate)}
+                      onChange={handleStartDateChange}
+                      selectsStart
+                      minDate={new Date()}
+                      minTime={setMinutes(now, 0)}
+                      maxTime={setHours(setMinutes(now, 45), 23)}
+                      className="form-control custom-date-picker"
+                      showTimeSelect
+                      timeIntervals={15}
+                      dateFormat="yyyy-MM-dd HH:mm"
+                    />
+                  </div>
+                </div>
+                <div className="col">
+                  <div className="d-flex flex-column">
+                    <label>End Date:</label>
+                    <DatePicker
+                      selected={new Date(auctionData.unixEndDate)}
+                      onChange={handleEndDateChange}
+                      selectsEnd
+                      minDate={auctionData.unixStartDate ? new Date(auctionData.unixStartDate) : null}
+                      minTime={setMinutes(now, 60)}
+                      maxTime={setHours(setMinutes(now, 45), 23)}
+                      disabled={!auctionData.startDateChanged}
+                      className="form-control custom-date-picker"
+                      showTimeSelect
+                      timeIntervals={15}
+                      dateFormat="yyyy-MM-dd HH:mm"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col">
+                  <div className="input-group mt-2">
+                    <span className="input-group-text">€</span>
+                    <input
+                      type="text"
+                      value={auctionData.startPrice}
+                      onChange={(e) =>
+                        setAuctionData({
+                          ...auctionData,
+                          startPrice: e.target.value,
+                        })
+                      }
+                      className="form-control"
+                      placeholder="Start Price"
+                      aria-label="Start Price"
+                    />
+                  </div>
+                </div>
+                <div className="col">
+                  <div className="input-group mt-2">
+                    <span className="input-group-text">€</span>
+                    <input
+                      type="text"
+                      value={auctionData.reservedPrice}
+                      onChange={(e) =>
+                        setAuctionData({
+                          ...auctionData,
+                          reservedPrice: e.target.value,
+                        })
+                      }
+                      className="form-control"
+                      placeholder="Reserved Price"
+                      aria-label="Reserved Price"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="dropdown mt-2 w-100 d-flex justify-content-center">
+                <button
+                  className="btn btn-secondary dropdown-toggle w-75"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  onClick={() =>
                     setAuctionData({
                       ...auctionData,
-                      customCategory:  toTitleCase(e.target.value),
+                      dropdownOpen: !auctionData.dropdownOpen,
                     })
                   }
-                  onKeyDown={handleKeyPress}
-                />
+                >
+                  {auctionData.title == "" ? "Categories" : auctionData.title}
+                </button>
               </div>
-            ) : null}
-            <button
-              className="btn btn-primary mt-3 w-75 align-self-center"
-              onClick={postNewAuction}
-              disabled={auctionData.disabled}
-              style={{marginBottom : "15vh"}}
-            >
-              Submit
-            </button>
-          </div>
-        </form>
+              {auctionData.dropdownOpen ? (
+                <div className="list-group w-75 align-self-center">
+                  {existingCategories.map((cat, index) => (
+                    <a
+                      key={index}
+                      className="list-group-item list-group-item-action text-center"
+                      href="#"
+                      onClick={() =>
+                        setAuctionData({
+                          ...auctionData,
+                          title: cat,
+                          dropdownOpen: false,
+                          disabled: !auctionData.disabled,
+                        })
+                      }
+                    >
+                      {cat}
+                    </a>
+                  ))}
+                  <input
+                    type="text"
+                    placeholder="Add custom category"
+                    value={auctionData.customCategory}
+                    onChange={(e) =>
+                      setAuctionData({
+                        ...auctionData,
+                        customCategory: toTitleCase(e.target.value),
+                      })
+                    }
+                    onKeyDown={handleKeyPress}
+                  />
+                </div>
+              ) : null}
+              <button
+                className="btn btn-primary mt-3 w-75 align-self-center"
+                onClick={postNewAuction}
+                disabled={auctionData.disabled}
+                style={{ marginBottom: "15vh" }}
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );
