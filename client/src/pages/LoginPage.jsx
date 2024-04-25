@@ -9,10 +9,10 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
-  const [error, setError] = useState("");
 
-  const { login, loggedIn } = useContext(GlobalContext);
-  const { displayAlert } = useContext(GlobalContext);
+
+  const { login } = useContext(GlobalContext);
+  const { displayLoginAlert } = useContext(GlobalContext);
   const { showLogoutAlert } = useContext(GlobalContext);
 
 
@@ -31,10 +31,10 @@ export default function LoginPage() {
    
     if (loginResponse.status === 201) {
       navigate("/");
-    } else {
-      // felhantering saknas
-    }
+    } 
   };
+
+
 
   useEffect(() => {
     const getSession = async () => {
@@ -77,7 +77,10 @@ export default function LoginPage() {
           Login
         </Button>
 
-        <div>{error}</div>
+        {displayLoginAlert ? (
+          <Alert severity="info" style={{ margin: "2rem"}}>
+            <em>Wrong username or password!</em>
+          </Alert>) : ""}
         <div>
           <b>OR</b>
         </div>
