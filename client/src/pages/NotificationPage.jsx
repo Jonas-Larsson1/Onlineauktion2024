@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import Notifications from "../components/Notifications.jsx";
-import StyleCard from "../components/StyleCard.jsx";
+import Loading from "../components/Loading.jsx";
 
 export default function NotificationPage() {
   const [notifications, setNotifications] = useState([]);
   const [render, forceRender] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchNotifications = async () => {
@@ -12,6 +13,7 @@ export default function NotificationPage() {
       const result = await response.json();
 
       setNotifications(result)
+      setLoading(false)
     };
 
     fetchNotifications();
@@ -23,6 +25,7 @@ export default function NotificationPage() {
 
   return (
     <>
+    <Loading loading={loading} />
       {notifications ? (
         <>
           <h2 className="text-center my-4 fst-italic fw-bold">Your notifications: </h2>

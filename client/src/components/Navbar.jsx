@@ -3,9 +3,8 @@ import React, { useContext, useState } from "react";
 import { GlobalContext } from "../GlobalContext";
 
 import "../styles/styles.css";
-import Categories from "./Categories";
-import SearchBar from "./SearchBar";
 import CheckoutNavButton from "./CheckoutNavButton.jsx";
+import NotificationNavButton from "./NotificationNavButton.jsx";
 
 const Navbar = () => {
   const navigate = useNavigate()
@@ -81,11 +80,7 @@ const Navbar = () => {
           </Link>
         </button>
 
-        <button className="navbar-btn mx-2 text-decoration-none text-secondary" >
-          <Link to="/NotificationPage">
-            <img src="/src/assets/notification.png" alt="Account" height="40px" />
-          </Link>
-        </button>
+        <NotificationNavButton />
 
         <CheckoutNavButton />
 

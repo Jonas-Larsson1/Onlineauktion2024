@@ -17,6 +17,7 @@ export default function (server, db) {
       res.status(500).json({ message: error.message });
     }
   });
+  
   server.delete("/api/notifications/:id", async (req, res) => {  try {
     const deletedNotification = await Notification.findByIdAndDelete(req.params.id);
     if (deletedNotification) {

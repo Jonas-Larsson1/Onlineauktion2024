@@ -98,7 +98,7 @@ export default function Router() {
                     <EditAuction />
                   </ProtectedRoute>
                 } />
-                  <Route path="/NotificationPage" element={
+                  <Route path="/notifications" element={
                     <ProtectedRoute>
                       <NotificationPage /> 
                     </ProtectedRoute>
