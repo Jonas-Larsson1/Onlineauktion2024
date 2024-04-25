@@ -193,8 +193,9 @@ const NewAuctionPage = () => {
   };
 
   const toTitleCase = (str) => {
-    return str.replace(/\b\w/g, (char) => char.toUpperCase());}
-    
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  }
+
 
   return (
     <>
@@ -216,11 +217,12 @@ const NewAuctionPage = () => {
           </div>
         </div>
 
-        <form className="w-100 d-flex justify-content-center align-items-center m-3">
-          <div className="d-flex flex-column" style={{ width: "30%" }}>
-            <div className="d-flex flex-column">
+        <div className="d-flex justify-content-center">
+          <form className="w-100 d-flex justify-content-center align-items-center m-3">
+            <div className="d-flex flex-column" style={{ width: "30%" }}>
+              <div className="d-flex flex-column">
 
-              <ImageAdder images={auctionData.allImages} setAuctionData={setAuctionData} />
+                <ImageAdder images={auctionData.allImages} setAuctionData={setAuctionData} />
 
                 <input
                   type="text"
