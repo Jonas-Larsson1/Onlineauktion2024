@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import StyleCard from "../components/StyleCard";
 import { setMinutes, setHours } from "date-fns";
+import ImageAdder from "../components/ImageAdder";
 
 const NewAuctionPage = () => {
   const [now, setStartDate] = useState(new Date());
@@ -33,14 +34,6 @@ const NewAuctionPage = () => {
   const { loggedIn } = useContext(GlobalContext);
   const navigate = useNavigate();
 
-  const onImageInput = (index, value) => {
-    const imageInput = [...auctionData.allImages];
-    imageInput[index] = value;
-
-
-    setAuctionData({ ...auctionData, allImages: imageInput });
-
-  };
 
   useEffect(() => {
     const getData = async () => {
@@ -200,22 +193,8 @@ const NewAuctionPage = () => {
   };
 
   const toTitleCase = (str) => {
-    return str.replace(/\b\w/g, (char) => char.toUpperCase());
-  }
-
-  const addImageInput = () => {
-    setAuctionData(prevState => ({
-      ...prevState,
-      allImages: [...prevState.allImages, ""]
-    }));
-  };
-
-  const removeImageInput = (index) => {
-    setAuctionData((prevState) => {
-      const updatedImages = prevState.allImages.filter((_, i) => i !== index);
-      return { ...prevState, allImages: updatedImages };
-    });
-  };
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());}
+    
 
   return (
     <>
@@ -237,36 +216,11 @@ const NewAuctionPage = () => {
           </div>
         </div>
 
-        <div className="d-flex justify-content-center">
-          <form className="w-100 d-flex justify-content-center align-items-center m-3">
-            <div className="d-flex flex-column" style={{ width: "30%" }}>
-              <div className="d-flex flex-column">
-                {auctionData.allImages.map((image, index) => (
-                  <div key={index} className="d-flex align-items-center mb-1">
-                    <input
-                      key={index}
-                      type="text"
-                      value={image}
-                      className="form-control mr-2"
-                      onChange={(e) => onImageInput(index, e.target.value)}
-                      placeholder="Link to your image"
-                    />
-                    {index > 0 ?
-                      <button
-                        className="btn btn-danger"
-                        onClick={(e) => {
-                          e.preventDefault()
-                          removeImageInput(index)
-                        }}>-</button>
-                      : <></>}
-                  </div>
-                ))}
+        <form className="w-100 d-flex justify-content-center align-items-center m-3">
+          <div className="d-flex flex-column" style={{ width: "30%" }}>
+            <div className="d-flex flex-column">
 
-                <button className="btn btn-primary mt-2 mb-4" onClick={(e) => {
-                  e.preventDefault()
-                  addImageInput()
-                }}>Click to add another image</button>
-
+              <ImageAdder images={auctionData.allImages} setAuctionData={setAuctionData} />
 
                 <input
                   type="text"
