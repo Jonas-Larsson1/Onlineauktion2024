@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { GlobalContext } from "../GlobalContext";
+import { GlobalContext } from "../GlobalContext.jsx";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
-import StyleCard from "../components/StyleCard";
-import { setMinutes, setHours } from "date-fns";
-import ImageAdder from "../components/ImageAdder";
+import StyleCard from "../components/StyleCard.jsx";
+import { setMinutes, setHours, startOfMinute, roundToNearestHours, roundToNearestMinutes } from "date-fns";
+import ImageAdder from "../components/ImageAdder.jsx";
 
 const NewAuctionPage = () => {
   const [now, setStartDate] = useState(new Date());
@@ -253,7 +253,7 @@ const NewAuctionPage = () => {
                     onChange={handleStartDateChange}
                     selectsStart
                     minDate={new Date()}
-                    minTime={setMinutes(now, 0)}
+                    minTime={roundToNearestMinutes(now, { roundingMethod: 'ceil', nearestTo: 15 })}
                     maxTime={setHours(setMinutes(now, 45), 23)}
                     className="form-control custom-date-picker"
                     showTimeSelect
@@ -269,9 +269,7 @@ const NewAuctionPage = () => {
                     selected={new Date(auctionData.unixEndDate)}
                     onChange={handleEndDateChange}
                     selectsEnd
-                    minDate={auctionData.unixStartDate ? new Date(auctionData.unixStartDate) : null}
-                    minTime={setMinutes(now, 60)}
-                    maxTime={setHours(setMinutes(now, 45), 23)}
+                    minDate={auctionData.unixStartDate + 86400000}
                     disabled={!auctionData.startDateChanged}
                     className="form-control custom-date-picker"
                     showTimeSelect
