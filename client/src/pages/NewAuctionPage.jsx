@@ -5,8 +5,11 @@ import { GlobalContext } from "../GlobalContext";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import StyleCard from "../components/StyleCard";
+import { setMinutes, setHours } from "date-fns";
 
 const NewAuctionPage = () => {
+  const [now, setStartDate] = useState(new Date());
+
   const [auctionData, setAuctionData] = useState({
     startDate: null,
     endDate: null,
@@ -284,6 +287,8 @@ const NewAuctionPage = () => {
                     onChange={handleStartDateChange}
                     selectsStart
                     minDate={new Date()}
+                    minTime={setMinutes(now, 0)}
+                    maxTime={setHours(setMinutes(now, 45), 23)}
                     className="form-control custom-date-picker"
                     showTimeSelect
                     timeIntervals={15}
@@ -299,6 +304,8 @@ const NewAuctionPage = () => {
                     onChange={handleEndDateChange}
                     selectsEnd
                     minDate={auctionData.unixStartDate ? new Date(auctionData.unixStartDate) : null}
+                    minTime={setMinutes(now, 60)}
+                    maxTime={setHours(setMinutes(now, 45), 23)}
                     disabled={!auctionData.startDateChanged}
                     className="form-control custom-date-picker"
                     showTimeSelect
