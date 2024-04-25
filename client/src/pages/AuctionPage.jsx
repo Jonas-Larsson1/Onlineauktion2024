@@ -16,6 +16,8 @@ export default function AuctionPage() {
   const {isCreator, setIsCreator} = useContext(GlobalContext);
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState(false);
+  const today = new Date();
+  const unixTimestamp = today.getTime();
 
 
   const updateAuction = (updatedAuction) => {
@@ -68,7 +70,7 @@ export default function AuctionPage() {
                   className="d-flex align-items-center justify-content-end"
                   style={{ paddingBottom: "0" }}
                 >
-                  {isCreator && (
+                  {isCreator && (auction.endDate > unixTimestamp) && (
                     <>
                       <div className="d-flex align-items-center">
                         <h3 style={{ margin: "-25px 10px 0 10px" }}>
