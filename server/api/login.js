@@ -6,10 +6,12 @@ export default function (server, db) {
   server.get('/api/login', async (req, res) => {
     if (req.session.user) {
       res.status(200).json({
+        message: "Session created",
         loggedIn: req.session.user
       })
     } else {
-      res.status(404).json({
+      res.status(200).json({
+        message: "No active session",
         loggedIn: false
       })
     }

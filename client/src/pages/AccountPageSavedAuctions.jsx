@@ -7,7 +7,7 @@ import BackButton from "../components/BackButton";
 export default function AccountPage() {
     const { loggedIn } = useContext(GlobalContext);
     const [savedAuctions, setSavedAuctions] = useState(null);
-    const currentDate = new Date();
+
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -34,7 +34,7 @@ export default function AccountPage() {
     // Printing out info
     return (
         <>
-            <BackButton/>
+            <BackButton to="/AccountPage" />
 
             <div style={{ backgroundColor: "#41B3A3", minHeight: '100vh' }}>
 
