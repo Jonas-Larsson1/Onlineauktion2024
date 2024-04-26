@@ -75,12 +75,6 @@ const EditAuction = () => {
     fetchData();
   }, [id, loggedIn]);
 
-  const onImageInput = (index, value) => {
-    const imageInput = [...auctionData.allImages];
-    imageInput[index] = value;
-    setAuctionData({ ...auctionData, allImages: imageInput });
-  };
-
   //Function that updates the database
   const updateAuction = async (e) => {
     e.preventDefault();

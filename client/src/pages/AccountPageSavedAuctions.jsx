@@ -15,6 +15,7 @@ export default function AccountPage() {
             const result = await response.json();
             setUser(result);
 
+            // Fetches the auctions saved to the user
             const savedAuctionsDetails = [];
             for (const auctionId of result.savedAuctions) {
                 const auctionResponse = await fetch(`/api/auction/${auctionId}`);
@@ -31,7 +32,6 @@ export default function AccountPage() {
         getUserData();
     }, []);
 
-    // Printing out info
     return (
         <>
             <BackButton to="/AccountPage" />
