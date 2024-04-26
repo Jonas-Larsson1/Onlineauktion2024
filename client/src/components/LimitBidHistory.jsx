@@ -3,39 +3,58 @@ import { formatDateTime } from "../pages/AuctionPage";
 import { useEffect, useState } from "react";
 
 export default function LimitBidHistory(props) {
-  const { auction } = props
+  // Destructure the auction prop
+  const { auction } = props;
+  // Initialize bidHistory variable
   let bidHistory = auction.bidHistory;
 
+  // State variables
   const [bidsToShow, setBidsToShow] = useState(null);
   const [buttonText, setButtonText] = useState("Show more bids");
   const [showAllBids, setShowAllBids] = useState(false);
 
+  // Function to toggle showing all bids or limited bids
   function ShowMoreBids(event) {
     if (!showAllBids) {
+      // Show all bids
       setBidsToShow(bidHistory);
       setButtonText("Show less bids");
     } else {
+      // Show limited bids
       setButtonText("Show more bids");
       setBidsToShow(bidHistory.slice(0, 5));
     }
-    event.currentTarget.checked
+    // Toggle showAllBids state
     setShowAllBids(!showAllBids);
   }
 
+  // useEffect to update bidsToShow when auction changes
   useEffect(() => {
-    bidHistory.sort((a, b) => new Date(b.time) - new Date(a.time))
-    setBidsToShow(bidHistory.slice(0, 5))
-  }, [auction])
+    // Sort bidHistory by time in descending order
+    bidHistory.sort((a, b) => new Date(b.time) - new Date(a.time));
+    // Set initial bids to show (first 5 bids)
+    setBidsToShow(bidHistory.slice(0, 5));
+  }, [auction]);
 
   return (
     <>
+      {/* Row for the toggle button */}
       <Row className="justify-content-end mb-2">
         <Col>
-          {bidHistory.length > 5 ? 
-            <ToggleButton className="" variant="secondary" type="checkbox" size="sm" checked={showAllBids} onClick={(event) => ShowMoreBids(event)}>
+          {/* Toggle button to show more/less bids */}
+          {bidHistory.length > 5 ? (
+            <ToggleButton
+              className=""
+              variant="secondary"
+              type="checkbox"
+              size="sm"
+              checked={showAllBids}
+              onClick={(event) => ShowMoreBids(event)}
+            >
               {buttonText}
             </ToggleButton>
-          : null}
+          ) : null}
+          {/* Table to display bid history */}
           <Table striped bordered hover variant="dark" size="sm">
             <thead>
               <tr>
@@ -45,16 +64,21 @@ export default function LimitBidHistory(props) {
               </tr>
             </thead>
             <tbody>
-              {bidsToShow ? bidsToShow.map((bid, index) => (
-                <tr key={index}>
-                  <td>{formatDateTime(bid.time)}</td>
-                  <td>{bid.username}</td>
-                  <td>{bid.amount}</td>
+              {/* Map through bidsToShow and display bid details */}
+              {bidsToShow ? (
+                bidsToShow.map((bid, index) => (
+                  <tr key={index}>
+                    <td>{formatDateTime(bid.time)}</td>
+                    <td>{bid.username}</td>
+                    <td>{bid.amount}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  {/* Display 'Loading...' when bidsToShow is null */}
+                  <td>Loading...</td>
                 </tr>
-              ))
-            : <tr>
-                <td>Loading...</td>
-              </tr>}
+              )}
             </tbody>
           </Table>
         </Col>
