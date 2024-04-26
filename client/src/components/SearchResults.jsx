@@ -5,20 +5,22 @@ import StyleCard from './StyleCard';
 
 const FetchedDataContext = React.createContext(); // global state for fetched data
 
-const SearchResults = ({ category, setCategory}) => {
+const SearchResults = ({ category}) => {
   const { searchQuery } = useContext(SearchContext)
   const { setData } = useContext(FetchedDataContext)
-
   const [fetchedData, setFetchedData] = useState(null)
   const [filteredData, setFilteredData] = useState(fetchedData);
 
   useEffect(() => {
     const getData = async () => {
+      try {
       const response = await fetch('/api/auctions')
       const result = await response.json()
       setFetchedData(result)
       setData(result)
-    }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }}
     getData()
 
   }, [])

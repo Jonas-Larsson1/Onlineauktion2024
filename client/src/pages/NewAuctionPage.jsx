@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { GlobalContext } from "../GlobalContext.jsx";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import StyleCard from "../components/StyleCard.jsx";
-import { setMinutes, setHours, startOfMinute, roundToNearestHours, roundToNearestMinutes } from "date-fns";
+import { setMinutes, setHours, roundToNearestMinutes } from "date-fns";
 import ImageAdder from "../components/ImageAdder.jsx";
 
 const NewAuctionPage = () => {
@@ -37,12 +37,133 @@ const NewAuctionPage = () => {
 
   useEffect(() => {
     const getData = async () => {
+      try{
       const response = await fetch("/api/auctions");
       const result = await response.json();
       setAuctionData({ ...auctionData, data: result });
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
     getData();
   }, []);
+
+  
+  const handleStartDateChange = (date) => {
+    setAuctionData({
+      ...auctionData,
+      unixStartDate: date.getTime(),
+      startDateChanged: true
+    });
+  };
+
+  const handleEndDateChange = (date) => {
+    setAuctionData({
+      ...auctionData,
+      unixEndDate: date.getTime(),
+    });
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      setAuctionData({
+        ...auctionData,
+        title: auctionData.customCategory,
+        dropdownOpen: false,
+        customCategory: "",
+        disabled: !auctionData.disabled,
+      });
+    }
+  };
+
+  const toTitleCase = (str) => {
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  }
+  
+  
+  const existingCategories = [];
+
+  let filtered = auctionData.data
+    ? auctionData.data.map((item) =>
+      item.category.map((i) =>
+        existingCategories.includes(i) ? null : existingCategories.push(i)
+      )
+    )
+    : null;
+
+    // const validateAuctionData = () => {
+    //   const { allImages, mainTitle, description, unixStartDate, unixEndDate, startPrice, reservedPrice, title } = auctionData;
+  
+    //   if (allImages.length < 1) {
+    //     return "Please upload the first Image";
+    //   } else if (mainTitle.length < 2) {
+    //     return "You need at least two characters as title";
+    //   } else if (description.length < 1) {
+    //     return "You need at least three characters in description";
+    //   } else if (unixStartDate === null) {
+    //     return "You need to put start date of auction";
+    //   } else if (unixEndDate === null) {
+    //     return "You need to put end date of auction";
+    //   } else if (startPrice.length < 1) {
+    //     return "You need to put a starting price";
+    //   } else if (reservedPrice.length < 1) {
+    //     return "You need to put a reserved price";
+    //   } else if (title[0].length < 1) {
+    //     return "You need to choose a category";
+    //   }
+  
+    //   return "";
+    // };
+
+    // const submitAuction = async () => {
+    //       const {
+    //   allImages,
+    //   mainTitle,
+    //   description,
+    //   unixStartDate,
+    //   unixEndDate,
+    //   startPrice,
+    //   reservedPrice,
+    //   title,
+    // } = auctionData;
+    //   const validationMessage = validateAuctionData();
+      
+  
+    //   if (validationMessage) {
+    //     setAuctionData({ ...auctionData, warning: validationMessage, showAlert: true });
+    //     return;
+    //   }
+  
+    //   try {
+    //     const res = await fetch("/api/auctions", {
+    //       method: "POST",
+    //       headers: { "Content-Type": "application/json" },
+    //       body: JSON.stringify({
+    //         sellerId: loggedIn,
+    //         images: allImages,
+    //         title: mainTitle,
+    //         description: description,
+    //         startDate: unixStartDate,
+    //         endDate: unixEndDate,
+    //         startingPrice: startPrice,
+    //         reservePrice: reservedPrice,
+    //         category: [title],
+    //       }),
+    //     });
+    //     if (res.ok) {
+    //       navigate("/");
+    //     } else {
+    //       setAuctionData({ ...auctionData, warning: "Something went wrong", showAlert: true });
+    //     }
+    //   } catch (error) {
+    //     console.error("Error posting auction:", error);
+    //   }
+    // };
+  
+    // const handleAuctionSubmit = (e) => {
+    //   e.preventDefault();
+    //   submitAuction();
+    // };
 
   async function postNewAuction(e) {
     e.preventDefault();
@@ -144,46 +265,7 @@ const NewAuctionPage = () => {
     }
   }
 
-  const existingCategories = [];
 
-  // let filtered = auctionData.data
-  //   ? auctionData.data.map((item) =>
-  //     item.category.map((i) =>
-  //       existingCategories.includes(i) ? null : existingCategories.push(i)
-  //     )
-  //   )
-  //   : null;
-
-  const handleStartDateChange = (date) => {
-    setAuctionData({
-      ...auctionData,
-      unixStartDate: date.getTime(),
-      startDateChanged: true
-    });
-  };
-
-  const handleEndDateChange = (date) => {
-    setAuctionData({
-      ...auctionData,
-      unixEndDate: date.getTime(),
-    });
-  };
-
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      setAuctionData({
-        ...auctionData,
-        title: auctionData.customCategory,
-        dropdownOpen: false,
-        customCategory: "",
-        disabled: !auctionData.disabled,
-      });
-    }
-  };
-
-  const toTitleCase = (str) => {
-    return str.replace(/\b\w/g, (char) => char.toUpperCase());
-  }
 
 
   return (
@@ -217,7 +299,7 @@ const NewAuctionPage = () => {
                   type="text"
                   value={auctionData.mainTitle}
                   onChange={(e) =>
-                    setAuctionData({ ...auctionData, mainTitle: e.target.value })
+                    setAuctionData({ ...auctionData, mainTitle: toTitleCase(e.target.value) })
                   }
                   className="form-control mb-2"
                   placeholder="Title"
@@ -228,7 +310,7 @@ const NewAuctionPage = () => {
                 type="text"
                 value={auctionData.description}
                 onChange={(e) =>
-                  setAuctionData({ ...auctionData, description: e.target.value })
+                  setAuctionData({ ...auctionData, description: toTitleCase(e.target.value) })
                 }
                 className="form-control mb-2"
                 placeholder="Description"
@@ -327,7 +409,7 @@ const NewAuctionPage = () => {
                 {auctionData.title == "" ? "Categories" : auctionData.title}
               </button>
             </div>
-            {auctionData.dropdownOpen ? (
+            {auctionData.dropdownOpen ? filtered && (
               <div className="list-group w-75 align-self-center">
                 {existingCategories.map((cat, index) => (
                   <a
