@@ -11,9 +11,8 @@ export default function LoginPage() {
   const [passwordInput, setPasswordInput] = useState("");
 
 
-  const { login } = useContext(GlobalContext);
-  const { displayLoginAlert } = useContext(GlobalContext);
-  const { showLogoutAlert } = useContext(GlobalContext);
+  const { login, displayLoginAlert, showLogoutAlert } = useContext(GlobalContext);
+ 
 
 
 

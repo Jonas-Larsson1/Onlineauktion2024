@@ -22,6 +22,7 @@ export default function ListPage() {
         const response = await fetch(`/api/user/${loggedIn}`);
         const result = await response.json();
         setUser(result);
+        setShow(true);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -74,19 +75,27 @@ export default function ListPage() {
   return (
     <>
       <Loading loading={loading} />
+
       {user ? (
-        <Alert show={show} variant="success" className="alert">
-          <Alert.Heading>
-            Welcome to the exclusive online auction site <em>Peta</em>,{" "}
-            {user.username} !
-          </Alert.Heading>
-          <p>Happy bidding!</p>
-          <hr />
-          <Button onClick={hideAlert} variant="outline-success">
-            Close me
-          </Button>
-        </Alert>
-      ) : null}
+    
+    <Alert
+      show={show}
+      variant="success"
+      className="alert"
+      style={{width: "100%", marginLeft: "0", alignSelf: "center"}}
+    >
+      <Alert.Heading>
+        Welcome to the exclusive online auction site <em>Peta</em>,{" "}
+        {user.username} !
+      </Alert.Heading>
+      <p>Happy bidding!</p>
+      <hr />
+      <Button onClick={hideAlert} variant="outline-success">
+        Close me
+      </Button>
+    </Alert>
+
+) : null}
 
       <div className="container pb-4 border-bottom border-dark">
         <div className="d-flex justify-content-center">

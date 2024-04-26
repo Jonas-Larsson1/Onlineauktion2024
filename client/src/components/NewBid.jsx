@@ -5,7 +5,7 @@ import { formatDateTime } from "../pages/AuctionPage.jsx";
 import { Toaster } from "react-hot-toast";
 
 export default function NewBid(props) {
-  const { loggedIn, isCreator } = useContext(GlobalContext);
+  const { loggedIn, isCreator, socket } = useContext(GlobalContext);
 
   const { auction, updateAuction } = props;
 
@@ -20,7 +20,7 @@ export default function NewBid(props) {
     auction.startDate ? new Date(auction.startDate) : null
   );
 
-  const { socket } = useContext(GlobalContext);
+  
 
   const currentDate = new Date();
 

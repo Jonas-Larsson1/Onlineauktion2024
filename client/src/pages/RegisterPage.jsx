@@ -48,7 +48,7 @@ export default function RegisterPage() {
       });
       if (res.ok) {
         alert("Account registered!");
-        navigate("/"); // navigates home after registration
+        navigate("/login"); // navigates home after registration
       } else {
         alert("Something went wrong!");
       }
@@ -71,9 +71,12 @@ export default function RegisterPage() {
     if (newUsername.length < 6) {
       setUsernameWarning("Username too short");
     }
-    if (newUsername.length > 6) {
+    if (newUsername.length >= 6) {
       setUsernameWarning("");
     }
+    // if (newUsername.length <= 16) {
+    //   setUsernameWarning("");
+    // }
     if (newUsername.length > 16) {
       setUsernameWarning("Username too long");
     }
@@ -84,7 +87,7 @@ export default function RegisterPage() {
     if (newPassword.length < 6) {
       setPasswordWarning("Password too short");
     }
-    if (newPassword.length > 6) {
+    if (newPassword.length >= 6) {
       setPasswordWarning("");
     }
   }, [newPassword]);
