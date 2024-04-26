@@ -7,7 +7,6 @@ import BackButton from "../components/BackButton";
 export default function AccountPage() {
     const { loggedIn } = useContext(GlobalContext);
     const [savedAuctions, setSavedAuctions] = useState(null);
-
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -21,14 +20,14 @@ export default function AccountPage() {
                 const auctionResponse = await fetch(`/api/auction/${auctionId}`);
                 const auctionResult = await auctionResponse.json();
                 if (auctionResult) {
-                  savedAuctionsDetails.push(auctionResult);
+                    savedAuctionsDetails.push(auctionResult);
                 }
-              }
-              
+            }
+
             savedAuctionsDetails.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
-            setSavedAuctions(savedAuctionsDetails); 
+            setSavedAuctions(savedAuctionsDetails);
         };
-    
+
         getUserData();
     }, []);
 
@@ -38,7 +37,6 @@ export default function AccountPage() {
             <BackButton to="/AccountPage" />
 
             <div style={{ backgroundColor: "#41B3A3", minHeight: '100vh' }}>
-
                 <div className="d-flex justify-content-center" style={{ width: '100%' }}>
                     <div className="w-25">
                         <StyleCard><h4 className="fst-italic fw-bold">Your saved auctions.</h4></StyleCard>
@@ -61,23 +59,4 @@ export default function AccountPage() {
             </div>
         </>
     );
-}
-
-export function formatDateTime(dateTimeString) {
-    const options = {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        hour12: false,
-        timeZone: "UTC"
-    };
-
-    const formattedDate = new Date(dateTimeString).toLocaleDateString(
-        "sv-SE",
-        options
-    );
-
-    return formattedDate;
 }

@@ -27,6 +27,7 @@ const EditAuction = () => {
     disabled: true,
   });
 
+  // Fetches the auction.
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -80,6 +81,7 @@ const EditAuction = () => {
     setAuctionData({ ...auctionData, allImages: imageInput });
   };
 
+  //Function that updates the database
   const updateAuction = async (e) => {
     e.preventDefault();
     try {
@@ -112,6 +114,7 @@ const EditAuction = () => {
     }
   };
 
+  // Deletes auction
   const deleteAuction = async (e) => {
     e.preventDefault();
 
@@ -168,7 +171,7 @@ const EditAuction = () => {
           <div>
             <div className="d-flex justify-content-center mb-5" style={{ width: '100%' }}>
               <div className="w-25">
-                <StyleCard><h4 className="fst-italic fw-bold">Edit your auction</h4></StyleCard>
+                <StyleCard><h4 className="fst-italic fw-bold">Edit your auction.</h4></StyleCard>
               </div>
             </div>
 
