@@ -98,18 +98,11 @@ export default function RegisterPage() {
       />
       <button
         className="material-symbols-outlined"
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/login")}
       >
         arrow_back
       </button>
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Example@email.com" />
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
-      </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicUsername">
         <Form.Label>Username</Form.Label>
@@ -136,9 +129,6 @@ export default function RegisterPage() {
         />
         <Form.Text className="text-muted">{passwordWarning}</Form.Text>
       </Form.Group>
-      {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group> */}
       <Button variant="primary" onClick={registerUser}>
         Submit
       </Button>

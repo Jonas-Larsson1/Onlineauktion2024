@@ -4,13 +4,12 @@ import ListCard from "../components/ListItem";
 import { GlobalContext } from "../GlobalContext";
 import BackButton from "../components/BackButton";
 
-
 export default function AccountPage() {
     const { loggedIn } = useContext(GlobalContext)
     const [user, setUser] = useState(null);
     const [closedAuctions, setClosedAuctions] = useState(null);
 
-    const currentDate = new Date();
+    const currentDate = Date.now();
 
     function sortBids(bidHistory) {
         bidHistory.sort((a, b) => b.amount - a.amount)
@@ -27,7 +26,6 @@ export default function AccountPage() {
 
         getUserData();
     }, []);
-
 
 
     // Fetches auctions that logged in user has started
@@ -48,7 +46,7 @@ export default function AccountPage() {
                     if (auctionEndDate < currentDate) {
                         currentAuction.bidHistory = sortBids(currentAuction.bidHistory)
                         userClosedAuctions.push(currentAuction);
-                    } 
+                    }
                 }
             }
             userClosedAuctions.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
@@ -61,7 +59,7 @@ export default function AccountPage() {
     // Printing out info
     return (<>
 
-        <BackButton />
+        <BackButton to="/AccountPage" />
 
         <div style={{ backgroundColor: "#41B3A3", minHeight: '100vh' }}>
 

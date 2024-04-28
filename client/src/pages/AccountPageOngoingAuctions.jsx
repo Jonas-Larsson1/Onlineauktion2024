@@ -4,13 +4,12 @@ import ListCard from "../components/ListItem";
 import { GlobalContext } from "../GlobalContext";
 import BackButton from "../components/BackButton";
 
-
 export default function AccountPage() {
     const { loggedIn } = useContext(GlobalContext)
     const [user, setUser] = useState(null);
     const [ongoingAuctions, setOngoingAuctions] = useState(null);
 
-    const currentDate = new Date();
+    const currentDate = Date.now(); 
 
     function sortBids(bidHistory) {
         bidHistory.sort((a, b) => b.amount - a.amount)
@@ -41,7 +40,7 @@ export default function AccountPage() {
                 let currentAuction = result[i]
 
                 if (currentAuction.sellerId === loggedIn) {
-                    const auctionEndDate = new Date(currentAuction.endDate);
+                    const auctionEndDate = currentAuction.endDate;
 
                     // Checks if the end date of the auctions has passed
                     if (auctionEndDate > currentDate) {
@@ -60,7 +59,7 @@ export default function AccountPage() {
     // Printing out info
     return (<>
         
-        <BackButton/>
+        <BackButton to="/AccountPage" />
 
         <div style={{ backgroundColor: "#41B3A3", minHeight: '100vh' }}>
 

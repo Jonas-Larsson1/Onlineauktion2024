@@ -7,7 +7,7 @@ import BackButton from "../components/BackButton";
 export default function AccountPage() {
     const { loggedIn } = useContext(GlobalContext);
     const [savedAuctions, setSavedAuctions] = useState(null);
-    const currentDate = new Date();
+
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -15,15 +15,16 @@ export default function AccountPage() {
             const response = await fetch(`/api/user/${loggedIn}`);
             const result = await response.json();
             setUser(result);
-    
 
             const savedAuctionsDetails = [];
             for (const auctionId of result.savedAuctions) {
                 const auctionResponse = await fetch(`/api/auction/${auctionId}`);
                 const auctionResult = await auctionResponse.json();
-                savedAuctionsDetails.push(auctionResult);
-            }
-
+                if (auctionResult) {
+                  savedAuctionsDetails.push(auctionResult);
+                }
+              }
+              
             savedAuctionsDetails.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
             setSavedAuctions(savedAuctionsDetails); 
         };
@@ -34,7 +35,7 @@ export default function AccountPage() {
     // Printing out info
     return (
         <>
-            <BackButton/>
+            <BackButton to="/AccountPage" />
 
             <div style={{ backgroundColor: "#41B3A3", minHeight: '100vh' }}>
 
