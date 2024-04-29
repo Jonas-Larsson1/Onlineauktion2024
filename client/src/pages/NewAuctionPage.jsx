@@ -146,13 +146,13 @@ const NewAuctionPage = () => {
 
   const existingCategories = [];
 
-  // let filtered = auctionData.data
-  //   ? auctionData.data.map((item) =>
-  //     item.category.map((i) =>
-  //       existingCategories.includes(i) ? null : existingCategories.push(i)
-  //     )
-  //   )
-  //   : null;
+  auctionData.data
+    ? auctionData.data.map((item) =>
+      item.category.map((i) =>
+        existingCategories.includes(i) ? null : existingCategories.push(i)
+      )
+    )
+    : null;
 
   const handleStartDateChange = (date) => {
     setAuctionData({
