@@ -224,7 +224,7 @@ const NewAuctionPage = () => {
                   aria-label="Title"
                 />
 
-              <input
+              <textarea
                 type="text"
                 value={auctionData.description}
                 onChange={(e) =>
