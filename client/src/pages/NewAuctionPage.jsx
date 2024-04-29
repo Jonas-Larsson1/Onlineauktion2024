@@ -202,7 +202,7 @@ const NewAuctionPage = () => {
 
         <div className="d-flex justify-content-center mt-5 mb-5" style={{ width: '100%' }}>
           <div className="w-25">
-            <StyleCard><h4 className="fst-italic fw-bold">Create a new auction</h4></StyleCard>
+            <StyleCard><h4 className="fst-italic fw-bold">Create a new auction.</h4></StyleCard>
           </div>
         </div>
 
