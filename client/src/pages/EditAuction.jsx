@@ -78,6 +78,8 @@ const EditAuction = () => {
   //Function that updates the database
   const updateAuction = async (e) => {
     e.preventDefault();
+    const filteredImages = auctionData.allImages.filter(image => image.trim() !== "");
+
     try {
       const response = await fetch(`/api/auction/${id}`, {
         method: "PUT",
@@ -87,7 +89,7 @@ const EditAuction = () => {
         body: JSON.stringify({
           title: auctionData.mainTitle,
           description: auctionData.description,
-          images: auctionData.allImages,
+          images: filteredImages,
           category: [auctionData.title]
         })
       });
