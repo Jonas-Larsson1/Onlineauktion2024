@@ -49,36 +49,36 @@ const NewAuctionPage = () => {
   }, []);
 
   
-  const handleStartDateChange = (date) => {
-    setAuctionData({
-      ...auctionData,
-      unixStartDate: date.getTime(),
-      startDateChanged: true
-    });
-  };
+  // const handleStartDateChange = (date) => {
+  //   setAuctionData({
+  //     ...auctionData,
+  //     unixStartDate: date.getTime(),
+  //     startDateChanged: true
+  //   });
+  // };
 
-  const handleEndDateChange = (date) => {
-    setAuctionData({
-      ...auctionData,
-      unixEndDate: date.getTime(),
-    });
-  };
+  // const handleEndDateChange = (date) => {
+  //   setAuctionData({
+  //     ...auctionData,
+  //     unixEndDate: date.getTime(),
+  //   });
+  // };
 
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      setAuctionData({
-        ...auctionData,
-        title: auctionData.customCategory,
-        dropdownOpen: false,
-        customCategory: "",
-        disabled: !auctionData.disabled,
-      });
-    }
-  };
+  // const handleKeyPress = (event) => {
+  //   if (event.key === "Enter") {
+  //     setAuctionData({
+  //       ...auctionData,
+  //       title: auctionData.customCategory,
+  //       dropdownOpen: false,
+  //       customCategory: "",
+  //       disabled: !auctionData.disabled,
+  //     });
+  //   }
+  // };
 
-  const toTitleCase = (str) => {
-    return str.replace(/\b\w/g, (char) => char.toUpperCase());
-  }
+  // const toTitleCase = (str) => {
+  //   return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  // }
   
   
   const existingCategories = [];
@@ -266,6 +266,44 @@ const NewAuctionPage = () => {
   }
 
 
+  auctionData.data
+    ? auctionData.data.map((item) =>
+      item.category.map((i) =>
+        existingCategories.includes(i) ? null : existingCategories.push(i)
+      )
+    )
+    : null;
+
+  const handleStartDateChange = (date) => {
+    setAuctionData({
+      ...auctionData,
+      unixStartDate: date.getTime(),
+      startDateChanged: true
+    });
+  };
+
+  const handleEndDateChange = (date) => {
+    setAuctionData({
+      ...auctionData,
+      unixEndDate: date.getTime(),
+    });
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      setAuctionData({
+        ...auctionData,
+        title: auctionData.customCategory,
+        dropdownOpen: false,
+        customCategory: "",
+        disabled: !auctionData.disabled,
+      });
+    }
+  };
+
+  const toTitleCase = (str) => {
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  }
 
 
   return (
@@ -284,7 +322,7 @@ const NewAuctionPage = () => {
 
         <div className="d-flex justify-content-center mt-5 mb-5" style={{ width: '100%' }}>
           <div className="w-25">
-            <StyleCard><h4 className="fst-italic fw-bold">Create a new auction</h4></StyleCard>
+            <StyleCard><h4 className="fst-italic fw-bold">Create a new auction.</h4></StyleCard>
           </div>
         </div>
 
@@ -306,7 +344,7 @@ const NewAuctionPage = () => {
                   aria-label="Title"
                 />
 
-              <input
+              <textarea
                 type="text"
                 value={auctionData.description}
                 onChange={(e) =>
