@@ -146,13 +146,13 @@ const NewAuctionPage = () => {
 
   const existingCategories = [];
 
-  // let filtered = auctionData.data
-  //   ? auctionData.data.map((item) =>
-  //     item.category.map((i) =>
-  //       existingCategories.includes(i) ? null : existingCategories.push(i)
-  //     )
-  //   )
-  //   : null;
+  auctionData.data
+    ? auctionData.data.map((item) =>
+      item.category.map((i) =>
+        existingCategories.includes(i) ? null : existingCategories.push(i)
+      )
+    )
+    : null;
 
   const handleStartDateChange = (date) => {
     setAuctionData({
@@ -202,7 +202,7 @@ const NewAuctionPage = () => {
 
         <div className="d-flex justify-content-center mt-5 mb-5" style={{ width: '100%' }}>
           <div className="w-25">
-            <StyleCard><h4 className="fst-italic fw-bold">Create a new auction</h4></StyleCard>
+            <StyleCard><h4 className="fst-italic fw-bold">Create a new auction.</h4></StyleCard>
           </div>
         </div>
 
@@ -224,7 +224,7 @@ const NewAuctionPage = () => {
                   aria-label="Title"
                 />
 
-              <input
+              <textarea
                 type="text"
                 value={auctionData.description}
                 onChange={(e) =>
