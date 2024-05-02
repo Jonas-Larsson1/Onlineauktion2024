@@ -30,7 +30,7 @@ export default function (server, db) {
       const auctions = await Auction.aggregate([
         {
           $match: {
-            endDate: { $lt: (new Date()) } // Auction has ended
+            endDate: { $lt: (Date.now()) } // Auction has ended
           }
         },
         {
