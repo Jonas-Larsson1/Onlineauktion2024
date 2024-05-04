@@ -24,6 +24,7 @@
   - Checkout
 
 - **Endpoints Created:**
+  > Together
   - `POST /api/login` 
   - `POST /api/auctions` 
   - `POST /api/users` 
@@ -33,7 +34,7 @@
   - `GET /api/users` 
   - `GET /api/user:id` 
   - `DELETE /api/login` 
-
+  > Individually
   - `POST /api/create-checkout-session` 
   - `GET /api/wonAuctions` 
   - `PUT /api/auction:id` 
@@ -50,6 +51,8 @@
 - **Features Developed:**
   - Notifications when outbid
   - Create new auctions
+  - Register new user
+  - Login user
 - **Components Built:**
   - Notifications
   - SocketListener
@@ -58,6 +61,7 @@
   - RegisterPage
   - NewAuctionPage
 - **Endpoints Created:**
+  > Together
   - `POST /api/login` 
   - `POST /api/auctions` 
   - `POST /api/users` 
@@ -67,7 +71,7 @@
   - `GET /api/users` 
   - `GET /api/user:id` 
   - `DELETE /api/login` 
-
+  > Individually
   - `GET /api/notifications`
   - `PUT /api/auction/newBid:id` 
   - `DELETE /api/notifications:id`
@@ -87,6 +91,7 @@
   - SearchPage
   - NewAuctionpage
 - **Endpoints Created:**
+  > Together
   - `POST /api/login` 
   - `POST /api/auctions` 
   - `POST /api/users` 
@@ -105,7 +110,7 @@
 - **Features Developed:**
   - Edit existing auctions
   - Nav and footer bar
-  - Account page
+  - Account page 
   - Loading placeholder
 - **Components Built:**
   - BackButton
@@ -117,6 +122,7 @@
   - EditAuction
   - StyleCard
 - **Endpoints Created:**
+  > Together
   - `POST /api/login` 
   - `POST /api/auctions` 
   - `POST /api/users` 
@@ -126,6 +132,8 @@
   - `GET /api/users` 
   - `GET /api/user:id` 
   - `DELETE /api/login` 
+  > Individually
+  - `DELETE /api/auction/:id` 
 - **Tests Conducted:**
   - Register user feature
 
@@ -139,6 +147,7 @@
   - ListPage
   - ListItem
 - **Endpoints Created:**
+  > Together
   - `POST /api/login` 
   - `POST /api/auctions` 
   - `POST /api/users` 
@@ -170,6 +179,7 @@
   - PageNotFound
   - AboutPage
 - **Endpoints Created:**
+  > Together
   - `POST /api/login` 
   - `POST /api/auctions` 
   - `POST /api/users` 
