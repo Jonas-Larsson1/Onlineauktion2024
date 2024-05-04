@@ -17,7 +17,7 @@ const SearchBar = ({setCategory}) => {
       setCategory(null) // reset category
   }
 
-  return (<>
+  return (
     <form className="d-flex w-75 align-self-center" onSubmit={handleSubmit}>
       <input 
         type="text" 
@@ -28,7 +28,7 @@ const SearchBar = ({setCategory}) => {
         aria-label="Search" 
       />
     </form>
-  </>)
+  )
 }
 
 export default SearchBar;

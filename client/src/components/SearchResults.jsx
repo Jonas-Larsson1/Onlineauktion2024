@@ -5,19 +5,22 @@ import StyleCard from './StyleCard';
 
 const FetchedDataContext = React.createContext(); // global state for fetched data
 
-const SearchResults = ({ category, setCategory}) => {
+const SearchResults = ({ category }) => {
   const { searchQuery } = useContext(SearchContext)
   const { setData } = useContext(FetchedDataContext)
-
   const [fetchedData, setFetchedData] = useState(null)
   const [filteredData, setFilteredData] = useState(fetchedData);
 
   useEffect(() => {
     const getData = async () => {
-      const response = await fetch('/api/auctions')
-      const result = await response.json()
-      setFetchedData(result)
-      setData(result)
+      try {
+        const response = await fetch('/api/auctions')
+        const result = await response.json()
+        setFetchedData(result)
+        setData(result)
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     }
     getData()
 
@@ -37,23 +40,20 @@ const SearchResults = ({ category, setCategory}) => {
     }
   }, [fetchedData, searchQuery, category])
 
-
-
-
   return (<>
-  {/* Displays earch query */}
+    {/* Displays earch query */}
     {searchQuery !== '' ? <p className='align-self-start mx-4'>You are searching for: <b>{searchQuery}</b> </p> : null}
     <div className='d-flex flex-row flex-wrap justify-content-between'>
-    {filteredData ? filteredData.map((item, index) => (
-      category === null || item.category.includes(category) ?
-        <div key={index} className='d-flex flex-row flex-wrap m-2'>
+      {filteredData ? filteredData.map((item, index) => (
+        category === null || item.category.includes(category) ?
+          <div key={index} className='d-flex flex-row flex-wrap m-2'>
             <StyleCard>
-          <ListCard item={item} />
-          </StyleCard>
-        </div>
-      : null))
+              <ListCard item={item} />
+            </StyleCard>
+          </div>
+          : null))
 
-    : null}</div>
+        : null}</div>
   </>)
 }
 
