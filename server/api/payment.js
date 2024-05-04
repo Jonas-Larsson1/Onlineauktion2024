@@ -2,8 +2,10 @@ import stripePackage from 'stripe';
 import { getHash } from '../utilities/validation.js';
 import { v4 as uuidv4 } from 'uuid';
 import Auction from '../model/Auction.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const stripe = stripePackage('sk_test_51P6pSYIOdyjaVUZksOvMpUtwiiHOCQMWcyORGSCnC4bPCy6nEbYytmK4VAYJaADTuUQQhW8SBmLZhJktVBXR7NBO00sBktHY9G');
+const stripe = stripePackage(process.env.STRIPE_SECRET_KEY);
 
 export default function (server, db) {
   
