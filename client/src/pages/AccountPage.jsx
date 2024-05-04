@@ -7,36 +7,17 @@ import Loading from "../components/Loading";
 
 export default function AccountPage() {
   const { loggedIn } = useContext(GlobalContext)
-  const [user, setUser] = useState(null);
   const [bids, setBids] = useState(null);
   const [ongoingAuctions, setOngoingAuctions] = useState(null);
   const [closedAuctions, setClosedAuctions] = useState(null);
   const [savedAuctions, setSavedAuctions] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  const currentDate = Math.floor(Date.now() / 1000);
+  const currentDate = Date.now();
 
   function sortBids(bidHistory) {
     bidHistory.sort((a, b) => b.amount - a.amount)
     return bidHistory
   }
-
-  function sortSaves(savedAuctions) {
-    savedAuctions.sort((a, b) => b.amount - a.amount);
-    return savedAuctions;
-  }
-
-  // Fetches the logged in user
-  useEffect(() => {
-    const getUserData = async () => {
-      const response = await fetch(`/api/user/${loggedIn}`);
-      const result = await response.json();
-      setUser(result);
-    };
-
-    getUserData();
-  }, []);
-
 
   // Fetches auctions where logged in user has placed a bid
   useEffect(() => {
@@ -72,7 +53,7 @@ export default function AccountPage() {
     };
 
     getBidsData();
-  }, [user]);
+  }, []);
 
   // Fetches auctions that logged in user has started
   useEffect(() => {
@@ -93,7 +74,7 @@ export default function AccountPage() {
           if (auctionEndDate > currentDate) {
             currentAuction.bidHistory = sortBids(currentAuction.bidHistory)
             userOngoingAuctions.push(currentAuction);
-
+            break;
           } else {
             currentAuction.bidHistory = sortBids(currentAuction.bidHistory)
             userClosedAuctions.push(currentAuction);
@@ -107,22 +88,22 @@ export default function AccountPage() {
     };
 
     getAuctionData();
-  }, [user]);
+  }, []);
 
   // Fetches auctions that logged in user has saved
   useEffect(() => {
     const getSavedData = async () => {
       const response = await fetch(`/api/user/${loggedIn}`);
       const result = await response.json();
-      setUser(result);
-
 
       const savedAuctionsDetails = [];
       for (const auctionId of result.savedAuctions) {
         const auctionResponse = await fetch(`api/auction/${auctionId}`);
         const auctionResult = await auctionResponse.json();
-        savedAuctionsDetails.push(auctionResult);
-        break;
+        if (auctionResult) {
+          savedAuctionsDetails.push(auctionResult);
+          break;
+        }
       }
 
       if (savedAuctionsDetails.length === 0) {
@@ -139,16 +120,15 @@ export default function AccountPage() {
   }, [loggedIn]);
 
 
-  // Printing out info
   return (<>
     <Loading loading={loading} />
 
     <div className="pt-5" style={{ backgroundColor: "#41B3A3", minHeight: '100vh' }}>
-      {user ? (
+      {loggedIn ? (
 
         <div className="d-flex justify-content-center" style={{ width: '100%' }}>
           <div className="w-25">
-            <StyleCard><h4 className="fst-italic fw-bold">Welcome back, {user.username}.</h4></StyleCard>
+            <StyleCard><h4 className="fst-italic fw-bold">Your auctions.</h4></StyleCard>
           </div>
         </div>
 
@@ -261,23 +241,4 @@ export default function AccountPage() {
       </div>
     </div>
   </>);
-}
-
-export function formatDateTime(dateTimeString) {
-  const options = {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    hour12: false,
-    timeZone: "UTC"
-  };
-
-  const formattedDate = new Date(dateTimeString).toLocaleDateString(
-    "sv-SE",
-    options
-  );
-
-  return formattedDate;
 }

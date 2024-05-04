@@ -1,4 +1,6 @@
 import Auction from "../model/Auction.js"
+import Notification from "../model/Notification.js"
+import User from "../model/User.js"
 import { isValidAuction } from "../utilities/validation.js"
 import { Types } from 'mongoose';
 
@@ -13,7 +15,7 @@ export default function (server, db) {
       const auction = await Auction.findById(req.params.id)
       res.json(auction)
     } catch (error) {
-      res.status(500).json({message: "Error getting auction", error: error })
+      res.status(500).json({ message: "Error getting auction", error: error })
     }
   })
 
@@ -28,7 +30,7 @@ export default function (server, db) {
       const auctions = await Auction.aggregate([
         {
           $match: {
-            endDate: { $lt: (new Date() / 1000) } // Auction has ended
+            endDate: { $lt: (Date.now()) } // Auction has ended
           }
         },
         {
@@ -80,7 +82,7 @@ export default function (server, db) {
   //     if (!req.body.auctionIds || !req.body.update) {
   //       return res.status(400).json({ message: "Missing auctionIds or update parameters" });
   //     }
-      
+
   //     const result = await Auction.updateMany(
   //       { _id: { $in: req.body.auctionIds } },
   //       req.body.update,
@@ -95,7 +97,7 @@ export default function (server, db) {
   //       message: "Auctions successfully updated.",
   //       modifiedCount: result.modifiedCount
   //     })
-      
+
   //   } catch (error) {
   //     res.status(500).json({ message: error.message });
   //   }
@@ -122,6 +124,61 @@ export default function (server, db) {
       res.status(500).json({ message: "Error updating auction", error: error })
     }
   })
+
+
+
+  server.put("/api/auction/newBid/:id", async (req, res) => {
+    try {
+
+      const auctionToUpdate = await Auction.findByIdAndUpdate(
+        req.params.id,
+        req.body.auction,
+        { new: false }
+      )
+
+      if (auctionToUpdate) {
+
+        if (auctionToUpdate.bidHistory.length > 0) {
+
+          const sortedBidHistory = auctionToUpdate.bidHistory.sort((a, b) => {
+            return b.amount - a.amount
+          })
+          
+          const userToNotify = sortedBidHistory[0].userId
+          const outbiddingUser = await User.findById(req.body.user)
+          const image = auctionToUpdate.images[0]
+          
+          const date = Date.now()
+          
+          if (userToNotify.toString() !== outbiddingUser._id.toString()) {
+            const newNotification = new Notification({
+              userId: userToNotify,
+              auctionId: req.params.id,
+              date: date,
+              message: `You have been outbidded by "${outbiddingUser.username}" on auction ${auctionToUpdate.title}`,
+              image: image
+            })
+            
+            await newNotification.save()
+          }
+        }
+
+        res.status(200).json({
+          message: "Auction successfully bidded on."
+        })
+
+      } else {
+        res.status(404).json({
+          message: "Auction not found."
+        })
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Error updating auction", error: error })
+    }
+
+  })
+
+
 
   server.post("/api/auctions", async (req, res) => {
     try {

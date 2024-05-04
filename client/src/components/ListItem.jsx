@@ -26,13 +26,13 @@ const ListCard = ({ item }) => {
     // Helper function to check if the current date is past the item's end date.
     const hasSurpassedTime = () => {
       const endDateUnix = item.endDate; 
-      const currentUnix = Math.floor(Date.now() / 1000); 
+      const currentUnix = Date.now(); 
       return currentUnix > endDateUnix; 
     };
 
     const hasStartedTime = () => {
       const startDateUnix = item.startDate;
-      const currentUnix = Math.floor(Date.now() / 1000);
+      const currentUnix = Date.now();
       return currentUnix >= startDateUnix;
     };
 
@@ -71,7 +71,7 @@ const ListCard = ({ item }) => {
         </ListGroup.Item>
       </ListGroup>
       <Card.Body className="text-center">
-        <Link to={`/AuctionPage/${item._id}`} className="btn btn-primary w-100 position-absolute start-0 bottom-0">View</Link>
+      <Link to={`/AuctionPage/${item._id}`} className="btn btn-primary w-100 position-absolute start-0 bottom-0 d-flex justify-content-center">View</Link>
       </Card.Body>
     </Card>
   </>);

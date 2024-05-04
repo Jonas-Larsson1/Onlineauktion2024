@@ -1,21 +1,23 @@
 import { createContext, useEffect, useState } from "react";
-import { redirect } from "react-router";
 
 const GlobalContext = createContext();
 
-function GlobalProvider({children}){
+function GlobalProvider({ children }) {
+  const [showLogoutAlert, setShowLogoutAlert] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [socket, setSocket] = useState(null);
+  const [ displayLoginAlert, setDisplayLoginAlert ] = useState(false);
+  const [isCreator, setIsCreator] = useState(false);
 
-  const[showLogoutAlert, setShowLogoutAlert] = useState(null)
-  const[loggedIn, setLoggedIn] = useState(null)
-  const[isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const getSession = async () => {
-      setIsLoading(true)
-      const response = await fetch('/api/login')
+      setIsLoading(true);
+      const response = await fetch("/api/login");
+      const result = await response.json()
 
-      if (response.status === 200) {
-        const result = await response.json();
+      if (result.loggedIn != false) {
         setLoggedIn(result.loggedIn);
       } else {
         setLoggedIn(null);
@@ -24,8 +26,8 @@ function GlobalProvider({children}){
       setIsLoading(false);
     };
 
-    getSession()
-  }, [])
+    getSession();
+  }, []);
 
   const [show, setShow] = useState(() => {
     return sessionStorage.getItem("showAlert" === "true" || "false");
@@ -44,33 +46,35 @@ function GlobalProvider({children}){
   };
 
   const login = async (userData) => {
-    const response = await fetch('/api/login', {
-      method: 'POST',
+    const response = await fetch("/api/login", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(userData),
-    })
+    });
 
-    const result = await response.json()
+    const result = await response.json();
 
     if (response.status == 201) {
       setLoggedIn(result.loggedIn);
-    } 
-    
-    return response
+    } else{
+      setDisplayLoginAlert(true)
+    }
+
+    return response;
   };
 
   const logout = async () => {
-
-    await fetch('/api/login', {
-      method: 'DELETE',
+    await fetch("/api/login", {
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-    })
+    });
 
     setLoggedIn(null);
+   window.location.reload()
   };
 
   return (
@@ -84,8 +88,14 @@ function GlobalProvider({children}){
         setShow,
         hideAlert,
         displayAlert,
-      showLogoutAlert,
-      setShowLogoutAlert
+        showLogoutAlert,
+        setShowLogoutAlert,
+         socket,
+         setSocket,
+         displayLoginAlert,
+         setDisplayLoginAlert,
+         isCreator,
+         setIsCreator
       }}
     >
       {children}

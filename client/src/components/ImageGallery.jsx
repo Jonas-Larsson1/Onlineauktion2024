@@ -3,7 +3,7 @@ import { Carousel, Image } from "react-bootstrap"
 export default function ImageGallery(props) {
   const { images } = props.auction
 
-  // console.log(images)
+
   return <>
     <Carousel className="ImageGalleryCarousel">
       {images.map((image, index) => {

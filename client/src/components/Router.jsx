@@ -20,6 +20,7 @@ import AccountPageOngoingBids from "../pages/AccountPageOngoingBids.jsx";
 import AccountPageOngoingAuctions from "../pages/AccountPageOngoingAuctions.jsx";
 import AccountPageClosedAuctions from "../pages/AccountPageClosedAuctions.jsx";
 import AccountPageSavedAuctions from "../pages/AccountPageSavedAuctions.jsx";
+import NotificationPage from "../pages/NotificationPage.jsx";
 
 import Checkout from "../pages/Checkout.jsx"
 import EditAuction from "../pages/EditAuction.jsx";
@@ -27,7 +28,7 @@ import EditAuction from "../pages/EditAuction.jsx";
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
 import PageNotFound from "../pages/PageNotFound.jsx";
-
+import SocketListener from "./SocketListener.jsx";
 
 export default function Router() {
 
@@ -37,6 +38,9 @@ export default function Router() {
         <div className="App">
           <div>
             <Navbar />
+         
+              <SocketListener />
+           
             <div className="content">
               <Routes>
                 <Route path="/" element={
@@ -94,6 +98,11 @@ export default function Router() {
                     <EditAuction />
                   </ProtectedRoute>
                 } />
+                  <Route path="/notifications" element={
+                    <ProtectedRoute>
+                      <NotificationPage /> 
+                    </ProtectedRoute>
+                  } />
                 <Route path="*" element={
                   <ProtectedRoute>
                     <PageNotFound />

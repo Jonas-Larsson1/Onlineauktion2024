@@ -4,30 +4,10 @@ import ListCard from "../components/ListItem";
 import { GlobalContext } from "../GlobalContext";
 import BackButton from "../components/BackButton";
 
-
 export default function AccountPage() {
     const { loggedIn } = useContext(GlobalContext)
-    const [user, setUser] = useState(null);
     const [bids, setBids] = useState(null);
-
-    const currentDate = Math.floor(Date.now() / 1000);
-
-    function sortBids(bidHistory) {
-        bidHistory.sort((a, b) => b.amount - a.amount)
-        return bidHistory
-    }
-
-    // Fetches the logged in user
-    useEffect(() => {
-        const getUserData = async () => {
-            const response = await fetch(`/api/user/${loggedIn}`);
-            const result = await response.json();
-            setUser(result);
-        };
-
-        getUserData();
-    }, []);
-
+    const currentDate = Date.now();
 
     // Fetches auctions where logged in user has placed a bid
     useEffect(() => {
@@ -45,15 +25,13 @@ export default function AccountPage() {
                 for (let j = 0; j < currentBid.bidHistory.length; j++) {
                     let currentBidding = currentBid.bidHistory[j]
 
-
                     if (currentBidding.userId === loggedIn) {
                         userPlacedBid = true
-                        break
+                        break;
                     }
                 }
 
                 if (userPlacedBid && auctionEndDate > currentDate) {
-                    currentBid.bidHistory = sortBids(currentBid.bidHistory)
                     userBids.push(currentBid)
                 }
             }
@@ -62,54 +40,33 @@ export default function AccountPage() {
         };
 
         getBidsData();
-    }, [user]);
+    }, []);
 
     // Printing out info
-    return (<>
+    return (
+        <>
+            <BackButton to="/AccountPage" />
 
-        <BackButton to="/AccountPage" />
+            <div style={{ backgroundColor: "#41B3A3", minHeight: '100vh' }}>
+                <div className="d-flex justify-content-center" style={{ width: '100%' }}>
+                    <div className="w-25">
+                        <StyleCard><h4 className="fst-italic fw-bold">Your ongoing bids.</h4></StyleCard>
+                    </div>
+                </div>
 
-        <div style={{ backgroundColor: "#41B3A3", minHeight: '100vh' }}>
-
-            <div className="d-flex justify-content-center" style={{ width: '100%' }}>
-                <div className="w-25">
-                    <StyleCard><h4 className="fst-italic fw-bold">Your ongoing bids.</h4></StyleCard>
+                <div className="d-flex justify-content-center mt-5 pb-5">
+                    <div className="d-flex justify-content-center flex-row mx-3 px-3" style={{ maxWidth: '100', flexWrap: 'wrap' }}>
+                        {bids ? bids.map((bid, index) => (
+                            <div key={index} className="mx-3 mt-3">
+                                <StyleCard>
+                                    <div className="d-flex flex-column">
+                                        <ListCard item={bid}></ListCard>
+                                    </div>
+                                </StyleCard>
+                            </div>
+                        )) : <p>Ain't no auction here, Mr. Auctioneer.</p>}
+                    </div>
                 </div>
             </div>
-
-            <div className="d-flex justify-content-center mt-5 pb-5">
-                <div className="d-flex justify-content-center flex-row mx-3 px-3" style={{ maxWidth: '100', flexWrap: 'wrap' }}>
-                    {bids ? bids.map((bid, index) => (
-                        <div key={index} className="mx-3 mt-3">
-                            <StyleCard>
-                                <div className="d-flex flex-column">
-                                    <ListCard item={bid}></ListCard>
-                                </div>
-                            </StyleCard>
-                        </div>
-                    ))
-                        : <p>Ain't no auction here, Mr. Auctioneer.</p>}
-                </div>
-            </div>
-        </div>
-    </>);
-}
-
-export function formatDateTime(dateTimeString) {
-    const options = {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        hour12: false,
-        timeZone: "UTC"
-    };
-
-    const formattedDate = new Date(dateTimeString).toLocaleDateString(
-        "sv-SE",
-        options
-    );
-
-    return formattedDate;
+        </>);
 }

@@ -13,9 +13,11 @@ export default function AuctionPage() {
   const { loggedIn } = useContext(GlobalContext);
   let { id } = useParams();
   const [auction, setAuction] = useState(null);
-  const [isCreator, setIsCreator] = useState(false);
+  const {isCreator, setIsCreator} = useContext(GlobalContext);
   const [loading, setLoading] = useState(true);
- const [fetchError, setFetchError] = useState(false);
+  const [fetchError, setFetchError] = useState(false);
+  const today = new Date();
+  const unixTimestamp = today.getTime();
 
 
   const updateAuction = (updatedAuction) => {
@@ -42,21 +44,8 @@ export default function AuctionPage() {
               amount: Number(result.startingPrice),
             },
           ];
-        } else {
-  
-        let cloneBidHistory = result.bidHistory;
-          for (let i = 0; i <= cloneBidHistory.length - 1; i++) {
-            if (cloneBidHistory[i].userId == "Auction start") {
-              result.bidHistory[i]["username"] = "Auction start";
-            } else {
-              const res = await fetch(
-                `/api/user/getUsername/${cloneBidHistory[i].userId}`
-              );
-              const username = await res.json();
-              result.bidHistory[i]["username"] = username;
-            }
-          }
-        }
+        } 
+        
         setAuction(result);
         setLoading(false);
       } catch (error) {
@@ -70,7 +59,7 @@ export default function AuctionPage() {
 
   return (
     <>
-     <Loading loading={loading} />
+      <Loading loading={loading} />
       {auction ? (
         <div className="m-3">
           <h1 className="mx-2">{auction.title}</h1>
@@ -81,8 +70,7 @@ export default function AuctionPage() {
                   className="d-flex align-items-center justify-content-end"
                   style={{ paddingBottom: "0" }}
                 >
-                  {/* Render the "Edit auction" button only if the logged-in user is the creator */}
-                  {isCreator && (
+                  {isCreator && auction.endDate > unixTimestamp && (
                     <>
                       <div className="d-flex align-items-center">
                         <h3 style={{ margin: "-25px 10px 0 10px" }}>
@@ -94,7 +82,14 @@ export default function AuctionPage() {
                   )}
                 </Card.Body>
                 <div style={{ marginBottom: "10px" }}>
-                  <ImageGallery auction={auction} />
+                  {auction.images.length === 1 ? (
+                    <img
+                      src={auction.images[0]}
+                      style={{ width: "100%" }}
+                    />
+                  ) : (
+                    <ImageGallery auction={auction} />
+                  )}
                 </div>
                 <Card.Title>{auction.title}</Card.Title>
                 <Card.Text>{auction.description}</Card.Text>
@@ -129,7 +124,7 @@ export default function AuctionPage() {
 }
 
 export function formatDateTime(unixTimestamp) {
-  const date = new Date(unixTimestamp * 1000);
+  const date = new Date(unixTimestamp);
   const options = {
     year: "numeric",
     month: "short",
