@@ -168,7 +168,7 @@
   - Place bid on auctions
   - View auction bid history
   - Save auctions
-  - Redirect when url is wrong or user not logged in
+  - Redirect when url is wrong or user not logged inD
 - **Components Built:**
   - ImageGallery
   - LimitBidHistory
